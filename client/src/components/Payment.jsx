@@ -16,7 +16,7 @@ const Payment = ({order}) => {
 
   const placeOrder = async() =>{
     try{
-      const res = await fetch('http://localhost:8000/checkout', {
+      const res = await fetch('https://vercel.com/api/toolbar/link/ecommerce-backend-mauve-rho.vercel.app?via=project-dashboard-alias-list&p=1&page=/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
