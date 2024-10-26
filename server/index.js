@@ -10,6 +10,10 @@ const app = express()
 app.use(express.json())
 app.use(cors({origin: 'http://localhost:3000'}))
 
+app.get('/', (req, res)=>{
+    res.json('Server Running')
+})
+
 app.post('/checkout', async(req, res)=>{
     try{
         const line_items = req.body.items.map((item)=>{
