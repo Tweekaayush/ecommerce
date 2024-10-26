@@ -16,7 +16,7 @@ const Payment = ({order}) => {
 
   const placeOrder = async() =>{
     try{
-      const res = await fetch('https://vercel.com/api/toolbar/link/ecommerce-backend-mauve-rho.vercel.app?via=project-dashboard-alias-list&p=1&page=/checkout', {
+      const res = await fetch('https://ecommerce-backend-mauve-rho.vercel.app/?vercelToolbarCode=9MZ9LUBNfl9Iwzi/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,8 +55,6 @@ const Payment = ({order}) => {
       setUpdatedOrder(newOrder)
       dispatch(setCurrentOrder(newOrder))
     }
-    
-    console.log('hi')
     updateOrder()
   }, [order])
 
