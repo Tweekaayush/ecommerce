@@ -42,6 +42,6 @@ app.post('/checkout', async(req, res)=>{
 })
 
 
-app.listen(8000, ()=>{
+app.listen(process.env.BACKEND_PORT, ()=>{
     console.log('Server Running')
 })
