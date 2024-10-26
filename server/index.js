@@ -8,7 +8,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const app = express()
 
 app.use(express.json())
-app.use(cors({origin: 'http://localhost:3000'}))
+app.use(cors({origin: 'https://ecommerce-chi-navy.vercel.app'}))
 
 app.get('/', (req, res)=>{
     res.json('Server Running')
