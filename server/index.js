@@ -8,7 +8,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const app = express()
 
 app.use(express.json())
-app.use(cors({origin: 'https://ecommerce-chi-navy.vercel.app'}))
+app.use(cors({origin: 'https://ecommercead.vercel.app'}))
 
 app.get('/', (req, res)=>{
     res.json('Server Running')
@@ -33,8 +33,8 @@ app.post('/checkout', async(req, res)=>{
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
             ui_mode: 'hosted',
-            success_url: `https://ecommerce-chi-navy.vercel.app/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `https://ecommerce-chi-navy.vercel.app/checkout/failed?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `https://ecommercead.vercel.app/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `https://ecommercead.vercel.app/checkout/failed?session_id={CHECKOUT_SESSION_ID}`,
             line_items: line_items,
             payment_method_types: ['card'],
             customer_email: req.body.email,
