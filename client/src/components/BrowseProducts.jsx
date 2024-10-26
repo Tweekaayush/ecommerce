@@ -8,6 +8,7 @@ const BrowseProducts = ({page, setPage}) => {
   const paginate = 6
   const [totalPages, settotalPages] = useState(1)
   const {loading, data: {filteredProducts, productsLength}} = useSelector(state=>state.products)
+  const [paginationSize, setPaginationSize] = useState('large')
 
   const handlePageChange = (e, p) =>{
     setPage(p)
@@ -16,6 +17,22 @@ const BrowseProducts = ({page, setPage}) => {
   useEffect(()=>{
     settotalPages(Math.ceil(productsLength/paginate))
   }, [productsLength])
+
+  useEffect(()=>{
+    const handleResize = () =>{
+      if(window.innerWidth <= 480){
+        setPaginationSize('')
+      }
+      if(window.innerWidth > 480){
+        setPaginationSize('large')
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return ()=>{
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
     <section id="browseProducts">
@@ -34,7 +51,7 @@ const BrowseProducts = ({page, setPage}) => {
                 }
             </div>
             <div className="pagination-container">
-                <Pagination count={totalPages} onChange={handlePageChange} page={page} size='large'/>
+                <Pagination count={totalPages} onChange={handlePageChange} page={page} siblingCount={1} size={paginationSize}/>
             </div>
         </div>
     </section>

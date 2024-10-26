@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Pagination } from '@mui/material'
 import OrderItem from './OrderItem'
@@ -14,12 +14,16 @@ const OrderHistoryPrev = () => {
     setPage(p)
   }
 
+  console.log(orders)
+
   return (
     <div className="order-history-container">
       <div className="profile-headings">
         <h1>Order History</h1>
       </div>
       <div className="order-history-table">
+      {
+        orders.length?(
         <div className="order-history-table-headers">
           <h4>
             Order Item
@@ -37,6 +41,8 @@ const OrderHistoryPrev = () => {
             Payed On
           </h4>
         </div>
+        ):<></>
+      }
         <div className="order-history-list">
           {
           orders && orders?.slice((page-1)* paginate, page * paginate).map((order)=> {
@@ -50,7 +56,9 @@ const OrderHistoryPrev = () => {
                     count={Math.ceil(orders?.length/paginate)} 
                     onChange={handlePageChange} 
                     page={page} 
-                    size='medium'
+                    defaultPage={1}
+                    siblingCount={1}
+                    boundaryCount={1}
                   />
       }
     </div>
