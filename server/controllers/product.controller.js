@@ -3,18 +3,17 @@ const Product = require("../models/product.model");
 const cloudinary = require("cloudinary");
 
 exports.getProducts = asyncHandler(async (req, res) => {
-  
   const page = Number(req.query.page) || 1;
   const category = req.query.category ? { category: req.query.category } : {};
   const paginate = 6;
 
   const count = await Product.countDocuments(category);
-  
+
   const products = await Product.find(category)
-  .limit(paginate)
-  .skip((page - 1) * paginate);
-  
-  console.log(products)
+    .limit(paginate)
+    .skip((page - 1) * paginate);
+
+  console.log(products);
 
   res.json({
     success: true,
@@ -44,6 +43,18 @@ exports.getFeaturedProducts = asyncHandler(async (req, res) => {
   res.json({
     success: true,
     featuredProducts,
+  });
+});
+
+exports.getBestSellingProducts = asyncHandler(async (req, res) => {
+  const paginate = 8;
+  const products = await Product.find({})
+    .sort({ numReviews: 1 })
+    .limit(paginate);
+
+  res.json({
+    success: true,
+    products,
   });
 });
 

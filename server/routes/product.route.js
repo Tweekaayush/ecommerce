@@ -10,6 +10,7 @@ const {
   getRecommendedProducts,
   getFeaturedProducts,
   getAllCategories,
+  getBestSellingProducts,
 } = require("../controllers/product.controller");
 
 const router = express.Router();
@@ -17,6 +18,7 @@ const router = express.Router();
 router.route("/").get(getProducts).post(protected, admin, createProduct);
 router.get("/recommended", getRecommendedProducts);
 router.get("/featured", getFeaturedProducts);
+router.get("/bestseller", getBestSellingProducts);
 router.get('/categories', getAllCategories)
 router
   .route("/:id")

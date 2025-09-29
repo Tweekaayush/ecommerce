@@ -72,6 +72,18 @@ export const getRecommendedProducts = createAsyncThunk(
   }
 );
 
+export const getBestSellingProducts = createAsyncThunk(
+  "getBestSellingProducts",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${BASE_URL}/product/bestSeller`);
+      return res.data.products;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const createProduct = createAsyncThunk(
   "createProduct",
   async (payload, { rejectWithValue }) => {
@@ -223,6 +235,17 @@ const productSlice = createSlice({
       state.data.recommendedProducts = action.payload;
     });
     builder.addCase(getRecommendedProducts.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getBestSellingProducts.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getBestSellingProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.bestSellingProducts = action.payload;
+    });
+    builder.addCase(getBestSellingProducts.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

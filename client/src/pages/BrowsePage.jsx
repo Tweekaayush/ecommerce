@@ -60,7 +60,7 @@ const BrowsePage = () => {
             })}
           </div>
         </div>
-        <div className="grid grid-cols-4 py-4 gap-4">
+        <div className="py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
           {products?.map((product) => {
             return <ProductCard {...product} key={product?._id} slider={false} />;
           })}
