@@ -4,7 +4,7 @@ import { Menu, Heart, ShoppingCart, User } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/user.slice";
 
-const Navbar = () => {
+const Navbar = ({setCartOpen}) => {
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -63,7 +63,7 @@ const Navbar = () => {
           <li>
             <Heart />
           </li>
-          <li>
+          <li onClick={()=>setCartOpen(true)}>
             <ShoppingCart />
           </li>
           <li>
