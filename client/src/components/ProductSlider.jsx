@@ -1,7 +1,8 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 
-const FeaturedProducts = ({ title, products }) => {
+const ProductSlider = ({ title, products }) => {
+  console.log(products);
   const slideLeft = () => {
     let slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft - slider.offsetWidth - 16;
@@ -25,7 +26,10 @@ const FeaturedProducts = ({ title, products }) => {
             </button>
           </div>
         </div>
-        <div className="overflow-x-hidden py-4 scroll-smooth w-full"  id="slider">
+        <div
+          className="overflow-x-hidden py-5 scroll-smooth w-full"
+          id="slider"
+        >
           <div className="flex gap-4 w-fit">
             {products?.map((product) => {
               return (
@@ -39,4 +43,4 @@ const FeaturedProducts = ({ title, products }) => {
   );
 };
 
-export default FeaturedProducts;
+export default ProductSlider;

@@ -7,6 +7,7 @@ const initialState = {
   data: {
     products: [],
     featuredProducts: [],
+    recommendedProducts: [],
     bestSellingProducts: [],
     productDetails: {},
     categories: [],
@@ -25,7 +26,7 @@ export const getProducts = createAsyncThunk(
         `${BASE_URL}/product?page=${page}&category=${category}`,
         { withCredentials: true }
       );
-      console.log(res)
+      console.log(res);
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -52,8 +53,19 @@ export const getFeaturedProducts = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await axios.get(`${BASE_URL}/product/featured`);
-      console.log(res.data)
-      return res.data.featuredProducts
+      console.log(res.data);
+      return res.data.featuredProducts;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+export const getRecommendedProducts = createAsyncThunk(
+  "getRecommendedProducts",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${BASE_URL}/product/recommended`);
+      return res.data.recommendedProducts;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -200,6 +212,17 @@ const productSlice = createSlice({
       state.data.featuredProducts = action.payload;
     });
     builder.addCase(getFeaturedProducts.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getRecommendedProducts.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getRecommendedProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.recommendedProducts = action.payload;
+    });
+    builder.addCase(getRecommendedProducts.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

@@ -50,7 +50,7 @@ exports.getFeaturedProducts = asyncHandler(async (req, res) => {
 exports.getRecommendedProducts = asyncHandler(async (req, res) => {
   const products = await Product.aggregate([
     {
-      $sample: { size: 3 },
+      $sample: { size: 4 },
     },
     {
       $project: {

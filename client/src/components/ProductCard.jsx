@@ -2,9 +2,11 @@ import React from "react";
 import { ShoppingCart, Heart } from "lucide-react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const ProductCard = ({ name, price, image, slider = false }) => {
+const ProductCard = ({ _id, name, price, image, slider = false }) => {
   const [width, setWidth] = useState(0);
+  const navigate = useNavigate()
 
   const handleResize = () => {
     if (!slider) return;
@@ -34,10 +36,11 @@ const ProductCard = ({ name, price, image, slider = false }) => {
     <div
       style={slider ? { width: width } : {}}
       className={
-        "flex flex-col shadow-md hover:shadow-xl transition-all ease-in-out duration-300 cursor-pointer group"
+        "flex flex-col shadow-md hover:shadow-lg transition-all ease-in-out duration-300 cursor-pointer group"
       }
+      onClick={()=>navigate(`/product/${_id}`)}
     >
-      <div className="text-gray-100 w-full aspect-square">
+      <div className="text-gray-100 w-full aspect-square bg-gray-100">
         <img
           src={image}
           alt={name}

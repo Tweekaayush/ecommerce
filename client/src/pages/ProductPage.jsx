@@ -1,9 +1,116 @@
-import React from 'react'
+import React, { useState } from "react";
+import ProductSlider from "../components/ProductSlider";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getProductById,
+  getRecommendedProducts,
+} from "../slices/product.slice";
+import { Star } from "lucide-react";
+import Rating from "../components/Rating";
 
 const ProductPage = () => {
-  return (
-    <div>ProductPage</div>
-  )
-}
+  const dispatch = useDispatch();
+  const {
+    loading,
+    data: {
+      productDetails: {
+        name,
+        image,
+        description,
+        price,
+        countInStock,
+        rating,
+        numReviews,
+      },
+      recommendedProducts,
+    },
+  } = useSelector((state) => state.product);
+  const [quantity, setQuantity] = useState(1);
+  const product = {
+    title: "product",
+    description:
+      "        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore voluptates ut magnam ipsam modi quisquam quas nulla libero harum omnis.",
+    stock: 43,
+    price: 342,
+  };
 
-export default ProductPage
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getProductById(id));
+    dispatch(getRecommendedProducts());
+  }, [id]);
+
+  return (
+    <>
+      <section>
+        <div className="container flex flex-col">
+          <div className="grid grid-cols-2">
+            <div className="flex justify-center items-center bg-gray-100">
+              <img
+                src={image}
+                alt={name}
+                className="w-full mix-blend-multiply"
+              />
+            </div>
+            <div className="flex flex-col p-8">
+              <h1 className="heading-4 mb-2.5">{name}</h1>
+              <div className="flex gap-4">
+                <Rating rating={rating} />
+                <h1 clsa>{numReviews} Reviews</h1>
+              </div>
+              <h1 className="text-sm uppercase font-bold tracking-[2px] mb-4 text-black">
+                description
+              </h1>
+              <p className="body-text text-gray-1000 mb-7">{description}</p>
+              <div className="flex items-center mb-4 gap-4">
+                <div className="flex items-center bg-gray-100">
+                  <button
+                    className="text-black px-3.5 py-2 cursor-pointer font-bold text-xl"
+                    onClick={() =>
+                      setQuantity((prev) => {
+                        return prev === 1 ? 1 : prev - 1;
+                      })
+                    }
+                  >
+                    -
+                  </button>
+                  <span className="text-black px-3.5 py-2 cursor-pointer">
+                    {quantity}
+                  </span>
+                  <button
+                    className="text-black px-3.5 py-2 cursor-pointer font-bold text-xl"
+                    onClick={() =>
+                      setQuantity((prev) => {
+                        return prev === countInStock ? prev : prev + 1;
+                      })
+                    }
+                  >
+                    +
+                  </button>
+                </div>
+                <p
+                  className={`${
+                    countInStock ? "text-green-500" : "text-red-500"
+                  } text-xl`}
+                >
+                  {countInStock ? "In Stock" : "Out of Stock"}
+                </p>
+              </div>
+              <h1 className="mb-4 font-bold text-xl">${price}</h1>
+              <div className="flex items-center gap-4">
+                <button className="button-1">Add to cart</button>
+                <button className="button-2">wishlist</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <ProductSlider title={"Recommended"} products={recommendedProducts} />
+    </>
+  );
+};
+
+export default ProductPage;
