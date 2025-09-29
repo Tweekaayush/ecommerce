@@ -3,7 +3,8 @@ dotenv.config()
 const express = require('express');
 const connectDB = require('./config/db')
 const cors = require('cors')
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const { notFound, errorHandler } = require('./middleware/error.middleware');
 
 const app = express();
 
@@ -18,6 +19,11 @@ app.use(
         credentials: true
     })
 )
+
+// Error Middleware
+
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(process.env.PORT, (req, res) => {
     console.log('Server running on port:', process.env.PORT);
