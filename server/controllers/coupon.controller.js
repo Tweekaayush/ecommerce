@@ -1,0 +1,40 @@
+const asyncHandler = require("../middleware/asyncHandler");
+const Coupon = require("../models/coupon.model");
+
+exports.getCoupon = asyncHandler(async (req, res) => {
+  const coupon = await Coupon.findOne({ userId: req.user._id, isActive: true });
+
+  res.json({
+    success: true,
+    coupon,
+  });
+});
+
+exports.validateCoupon = asyncHandler(async (req, res) => {
+  const { code } = req.body;
+
+  const coupon = await Coupon.findOne({
+    code: code,
+    userId: req.user._id,
+    isActive: true,
+  });
+
+  if(!coupon) {
+    res.status(404)
+    throw new Error('Coupon not found')
+  }
+
+  if(coupon.expirationDate < new Date()){
+    coupon.isActive = false
+    await coupon.save()
+    res.status(404)
+    throw new Error('Coupon expired')
+  }
+
+  res.json({
+    success: true,
+    code: coupon.code,
+    discountPercentage: coupon.discountPercentage
+  })
+
+});
