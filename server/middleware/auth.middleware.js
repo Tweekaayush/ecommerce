@@ -1,5 +1,5 @@
 const asyncHandler = require("./asyncHandler");
-// const User = require("../models/user.model");
+const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 
 exports.protected = asyncHandler(async (req, res, next) => {
@@ -11,7 +11,7 @@ exports.protected = asyncHandler(async (req, res, next) => {
 
   const decodeData = jwt.verify(token, process.env.JWT_SECRET);
 
-//   req.user = await User.findById(decodeData._id).select("-password");
+  req.user = await User.findById(decodeData._id).select("-password");
 
   next();
 });

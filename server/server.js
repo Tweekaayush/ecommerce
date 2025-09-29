@@ -6,7 +6,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const { notFound, errorHandler } = require('./middleware/error.middleware');
 const authRoute = require('./routes/auth.route')
-const userRoute = require('./routes/auth.route')
+const userRoute = require('./routes/user.route')
 const app = express();
 
 connectDB()

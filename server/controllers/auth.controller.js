@@ -26,7 +26,7 @@ exports.signup = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    image: uploadResult?.secure_url
+    image: uploadResult?.secure_url || ''
   });
 
   if (newUser) {

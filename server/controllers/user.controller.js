@@ -1,6 +1,5 @@
-import Product from "../../../ecommerce-adv/server/models/product.model";
-import asyncHandler from "../middleware/asyncHandler";
-import User from "../models/user.model";
+const asyncHandler = require("../middleware/asyncHandler");
+const User = require("../models/user.model");
 
 exports.profile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -19,8 +18,8 @@ exports.updateProfile = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  user.name = name;
-  user.email = email;
+  user.name = name || user.name;
+  user.email = email || user.email;
 
   if (password) {
     user.password = password;
