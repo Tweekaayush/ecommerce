@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const { notFound, errorHandler } = require('./middleware/error.middleware');
 const authRoute = require('./routes/auth.route')
 const userRoute = require('./routes/user.route')
+const productRoute = require('./routes/product.route')
 const app = express();
 
 connectDB()
@@ -23,6 +24,7 @@ app.use(
 
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/user', userRoute)
+app.use('/api/v1/product', productRoute)
 
 // Error Middleware
 
