@@ -9,9 +9,9 @@ import ProductPage from "./pages/ProductPage";
 import BrowsePage from "./pages/BrowsePage";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./slices/user.slice";
+import PrivateRoutes from "./components/PrivateRoutes";
 
 const App = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,8 +27,10 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/dashboard" element={<HomePage />} />
-          <Route path="/profile" element={<HomePage />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/profile" element={<HomePage />} />
+            <Route path="/dashboard" element={<HomePage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
