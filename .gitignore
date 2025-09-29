@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+server/products.js
+server/users.js
+server/seeder.js
