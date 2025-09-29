@@ -9,6 +9,8 @@ const authRoute = require('./routes/auth.route')
 const userRoute = require('./routes/user.route')
 const productRoute = require('./routes/product.route')
 const couponRoute = require('./routes/coupon.route')
+const cartRoute = require('./routes/cart.route')
+
 const app = express();
 
 connectDB()
@@ -27,6 +29,7 @@ app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/user', userRoute)
 app.use('/api/v1/product', productRoute)
 app.use('/api/v1/coupon', couponRoute)
+app.use('/api/v1/cart', cartRoute)
 
 // Error Middleware
 
