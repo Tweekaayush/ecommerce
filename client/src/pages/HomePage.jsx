@@ -1,9 +1,29 @@
-import React from 'react'
+import { useEffect } from "react";
+import Hero from "../components/Hero";
+import HomeCategories from "../components/HomeCategories";
+import ProductSlider from "../components/ProductSlider";
+import PromotionBanner from "../components/PromotionBanner";
+import { useDispatch, useSelector } from "react-redux";
+import { getFeaturedProducts } from "../slices/product.slice";
 
 const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+  const dispatch = useDispatch();
+  const {
+    data: { featuredProducts },
+  } = useSelector((state) => state.product);
 
-export default HomePage
+  useEffect(() => {
+    dispatch(getFeaturedProducts());
+  }, []);
+  return (
+    <>
+      <Hero />
+      <ProductSlider title={"Featured"} products={featuredProducts} />
+      <HomeCategories />
+      <PromotionBanner />
+      <section></section>
+    </>
+  );
+};
+
+export default HomePage;

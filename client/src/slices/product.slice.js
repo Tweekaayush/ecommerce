@@ -22,7 +22,7 @@ export const getProducts = createAsyncThunk(
     try {
       const { page, category } = payload;
       const res = await axios.get(
-        `${BASE_URL}/api/v1/product?page=${page}&category=${category}`,
+        `${BASE_URL}/product?page=${page}&category=${category}`,
         { withCredentials: true }
       );
       console.log(res)
@@ -37,7 +37,7 @@ export const getProductById = createAsyncThunk(
   "getProductById",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/v1/product/${payload}`, {
+      const res = await axios.get(`${BASE_URL}/product/${payload}`, {
         withCredentials: true,
       });
       return res.data.product;
@@ -51,7 +51,8 @@ export const getFeaturedProducts = createAsyncThunk(
   "getFeaturedProducts",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/v1/product/featured`);
+      const res = await axios.get(`${BASE_URL}/product/featured`);
+      console.log(res.data)
       return res.data.featuredProducts
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -63,7 +64,7 @@ export const createProduct = createAsyncThunk(
   "createProduct",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/api/v1/product`, payload, {
+      const res = await axios.post(`${BASE_URL}/product`, payload, {
         headers: { "Content-Type": "multipart/form-data" },
         withCredentials: true,
       });
@@ -80,7 +81,7 @@ export const updateProduct = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await axios.put(
-        `${BASE_URL}/api/v1/product/${payload.id}`,
+        `${BASE_URL}/product/${payload.id}`,
         payload,
         {
           withCredentials: true,
@@ -98,7 +99,7 @@ export const deleteProduct = createAsyncThunk(
   "deleteProduct",
   async (payload, { dispatch, rejectWithValue }) => {
     try {
-      const res = await axios.delete(`${BASE_URL}/api/v1/product/${payload}`, {
+      const res = await axios.delete(`${BASE_URL}/product/${payload}`, {
         withCredentials: true,
       });
 
@@ -115,7 +116,7 @@ export const getAllCategories = createAsyncThunk(
   "getAllCategories",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/v1/product/categories`, {
+      const res = await axios.get(`${BASE_URL}/product/categories`, {
         withCredentials: true,
       });
 
@@ -131,7 +132,7 @@ export const addReview = createAsyncThunk(
   async (payload, { dispatch, rejectWithValue }) => {
     try {
       const res = await axios.post(
-        `${BASE_URL}/api/v1/product/${payload._id}/reviews`,
+        `${BASE_URL}/product/${payload._id}/reviews`,
         payload,
         {
           withCredentials: true,
@@ -151,7 +152,7 @@ export const getProductsCount = createAsyncThunk(
   "getProductsCount",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/v1/product/count`, {
+      const res = await axios.get(`${BASE_URL}/product/count`, {
         withCredentials: true,
       });
 

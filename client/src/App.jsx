@@ -7,16 +7,16 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProductPage from "./pages/ProductPage";
 import BrowsePage from "./pages/BrowsePage";
-// import { useDispatch, useSelector } from "react-redux";
-// import { loadUser } from "./slices/user.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "./slices/user.slice";
 
 const App = () => {
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(loadUser());
-  // }, []);
+  useEffect(() => {
+    // dispatch(loadUser());
+  }, []);
 
   return (
     <Router>
