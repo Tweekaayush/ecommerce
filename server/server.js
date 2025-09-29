@@ -5,7 +5,8 @@ const connectDB = require('./config/db')
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const { notFound, errorHandler } = require('./middleware/error.middleware');
-
+const authRoute = require('./routes/auth.route')
+const userRoute = require('./routes/auth.route')
 const app = express();
 
 connectDB()
@@ -19,6 +20,9 @@ app.use(
         credentials: true
     })
 )
+
+app.use('/api/v1/auth', authRoute)
+app.use('/api/v1/user', userRoute)
 
 // Error Middleware
 
