@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-nunito: "Nunito Sans", sans-serif;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply font-nunito;
+  }
+
+  section {
+    @apply w-full py-20 first-of-type:pt-24;
+  }
+
+  a {
+    @apply inline-block;
+  }
+
+  nav svg {
+    @apply w-5 h-5;
+  }
+
+  nav li {
+    @apply flex items-center m-2 relative cursor-pointer;
+  }
+
+  nav li a {
+    @apply relative flex items-center text-sm uppercase py-1 overflow-hidden;
+  }
+
+  footer li {
+    @apply text-gray-300;
+  }
+
+  footer li a {
+    @apply my-1 text-sm;
+  }
+
+  footer svg {
+    @apply text-gray-300 w-4 h-4;
+  }
+}
+
+@layer utlities {
+  .container {
+    @apply min-w-full w-full xl:w-7xl xl:min-w-7xl px-4 mx-auto;
+  }
+
+  /* Headings */
+
+  .heading-1 {
+    @apply text-red-500 text-sm uppercase font-bold tracking-[2px];
+  }
+
+  .heading-2 {
+    @apply text-2xl relative font-extrabold tracking-[1px];
+  }
+
+  .heading-3 {
+    @apply text-5xl font-bold;
+  }
+
+  .heading-4 {
+    @apply text-2xl relative font-extrabold capitalize;
+  }
+
+  .heading-5 {
+    @apply text-black text-sm uppercase font-bold tracking-[2px];
+  }
+
+  /* body text */
+
+  .body-text {
+    @apply text-sm tracking-[1px];
+  }
+
+  /* butttons */
+
+  .button-1 {
+    @apply text-sm font-bold uppercase py-3.5 px-7 text-white bg-black tracking-[3px] cursor-pointer;
+  }
+
+  .button-2 {
+    @apply text-sm font-bold uppercase py-3.5 px-7 tracking-[4px] cursor-pointer bg-red-500 text-white;
+  }
+
+  .button-3 {
+    @apply bg-black text-white px-3.5 py-2 cursor-pointer font-black;
+  }
+
+  /* Navbar */
+
+  .nav-link {
+    @apply after:absolute after:content-[""] after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-red-500 after:translate-x-[-101%] hover:after:translate-x-[0%] after:transition-transform after:duration-300 after:ease-in-out;
+  }
+
+  .active-nav-link {
+    @apply before:absolute before:content-[""] before:bottom-0 before:left-0 before:w-full before:h-1 before:bg-red-500;
+  }
+
+  .home-category-title {
+    @apply absolute bottom-2 left-2 capitalize text-white font-bold text-2xl;
+  }
+
+  .category-overlay {
+    @apply absolute top-0 left-0 w-full h-full opacity-25 bg-black hover:opacity-50 transition-all duration-300 ease-in-out;
+  }
+
+  .form-label {
+    @apply flex flex-col relative;
+  }
+
+  .form-input {
+    @apply outline-0 rounded-sm w-full border px-4 py-2.5 text-sm;
+  }
+
+  .form-label > .form-input + span {
+    @apply absolute top-2.5 left-6 text-black bg-white font-semibold capitalize transition-all duration-300 ease-in-out;
+  }
+
+  .form-label > .form-input:user-valid + span,
+  .form-label > .form-input:user-invalid + span,
+  .form-label > .form-input:focus + span,
+  .form-label > .form-input:user-valid + span {
+    @apply -top-1.5 left-4 px-1 text-xs;
+  }
+
+  .form-error-msg {
+    @apply text-red-500 pl-0.5 text-sm font-semibold;
+  }
+}
