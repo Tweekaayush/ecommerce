@@ -2,7 +2,7 @@ import React from "react";
 import ProductCard from "./ProductCard";
 
 const ProductSlider = ({ title, products }) => {
-  console.log(products);
+  
   const slideLeft = () => {
     let slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft - slider.offsetWidth - 16;

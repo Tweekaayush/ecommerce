@@ -61,11 +61,13 @@ exports.getUserById = asyncHandler(async (req, res) => {
 });
 
 exports.getUserListAdmin = asyncHandler(async (req, res) => {
-  console.log('hi')
-  const page = Number(req.query.page) || 1
-  const paginate = 6
-  const userList = await User.find().skip(paginate * (page-1)).limit(paginate);
-console.log(userList)
+  console.log("hi");
+  const page = Number(req.query.page) || 1;
+  const paginate = 6;
+  const userList = await User.find()
+    .skip(paginate * (page - 1))
+    .limit(paginate);
+
   res.json({
     success: true,
     userList,

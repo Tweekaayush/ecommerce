@@ -53,7 +53,7 @@ export const getFeaturedProducts = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await axios.get(`${BASE_URL}/product/featured`);
-      console.log(res.data);
+      ``
       return res.data.featuredProducts;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
