@@ -7,9 +7,11 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProductPage from "./pages/ProductPage";
 import BrowsePage from "./pages/BrowsePage";
+import ProfilePage from "./pages/ProfilePage";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./slices/user.slice";
 import PrivateRoutes from "./components/PrivateRoutes";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,10 +29,9 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route element={<PrivateRoutes />}>
-            <Route path="/profile" element={<HomePage />} />
-            <Route path="/dashboard" element={<HomePage />} />
-          </Route>
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/dashboard" element={<AdminDashboardPage />} />
+          <Route element={<PrivateRoutes />}></Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

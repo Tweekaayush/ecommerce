@@ -73,7 +73,7 @@
   }
 
   .heading-5 {
-    @apply text-black text-sm uppercase font-bold tracking-[2px];
+    @apply text-sm uppercase font-bold tracking-[2px];
   }
 
   /* body text */
@@ -106,6 +106,8 @@
     @apply before:absolute before:content-[""] before:bottom-0 before:left-0 before:w-full before:h-1 before:bg-red-500;
   }
 
+  /* Home */
+
   .home-category-title {
     @apply absolute bottom-2 left-2 capitalize text-white font-bold text-2xl;
   }
@@ -113,6 +115,8 @@
   .category-overlay {
     @apply absolute top-0 left-0 w-full h-full opacity-25 bg-black hover:opacity-50 transition-all duration-300 ease-in-out;
   }
+
+  /* Form */
 
   .form-label {
     @apply flex flex-col relative;
@@ -135,5 +139,11 @@
 
   .form-error-msg {
     @apply text-red-500 pl-0.5 text-sm font-semibold;
+  }
+
+  /* Dashboard */
+
+  .dashboard-card {
+    @apply col-span-1 shadow-lg p-4 grid grid-cols-3 hover:shadow-xl cursor-pointer transition-all duration-300 ease-in-out rounded-sm;
   }
 }

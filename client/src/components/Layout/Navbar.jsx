@@ -4,17 +4,17 @@ import { Menu, Heart, ShoppingCart, User } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/user.slice";
 
-const Navbar = ({setCartOpen}) => {
+const Navbar = ({ setCartOpen }) => {
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = useState(false);
 
   const {
     data: {
-      user: { _id },
+      user: { _id, name, image },
     },
   } = useSelector((state) => state.user);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <nav className="w-full fixed top-0 left-0  z-50 bg-white shadow-xl">
@@ -63,7 +63,7 @@ const Navbar = ({setCartOpen}) => {
           <li>
             <Heart />
           </li>
-          <li onClick={()=>setCartOpen(true)}>
+          <li onClick={() => setCartOpen(true)}>
             <ShoppingCart />
           </li>
           <li>
@@ -79,8 +79,8 @@ const Navbar = ({setCartOpen}) => {
               >
                 <div className="w-5 h-5 rounded-full bg-red-500 overflow-hidden cursor-pointer">
                   <img
-                    src=""
-                    alt=""
+                    src={image}
+                    alt={name}
                     className="w-full h-full object-cover object-center"
                   />
                 </div>
@@ -90,11 +90,14 @@ const Navbar = ({setCartOpen}) => {
                   } absolute top-5 -right-2 flex flex-col items-center pt-7 transition-opacity duration-300 ease-in-out`}
                 >
                   <li className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl">
-                    <Link to="/">
+                    <Link to="/profile">
                       <User className="w-4 h-4" />
                     </Link>
                   </li>
-                  <li onClick={()=>dispatch(logout())} className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl">
+                  <li
+                    onClick={() => dispatch(logout())}
+                    className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl"
+                  >
                     <User className="w-4 h-4" />
                   </li>
                 </ul>

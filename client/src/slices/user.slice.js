@@ -6,8 +6,6 @@ const initialState = {
   loading: false,
   data: {
     user: {},
-    usersListAdmin: [],
-    userDetailsAdmin: {},
     wishList: [],
     cart: [],
   },
