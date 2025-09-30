@@ -1,6 +1,7 @@
 import { DollarSign, ToolCase, User } from "lucide-react";
 import React from "react";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   ResponsiveContainer,
   BarChart,
@@ -10,19 +11,20 @@ import {
   Legend,
   Bar,
 } from "recharts";
+import { getAnalytics } from "../slices/admin.slice";
 
 const AdminDashboardPage = () => {
-  const { totalRevenue, totalSales, users, product } = {
-    totalRevenue: 5,
-    totalSales: 3,
-    users: 3,
-    product: 23,
-  };
-  useEffect(() => {}, []);
+  const dispatch = useDispatch();
+  const {
+    data: { totalRevenue, totalSales, totalUsers, totalProducts, revenueChart },
+  } = useSelector((state) => state.admin);
+  useEffect(() => {
+    dispatch(getAnalytics());
+  }, []);
   return (
     <section>
       <div className="container">
-        <h1>Dashboard</h1>
+        <h1 className="heading-4 text-red-500 uppercase mb-7">Dashboard</h1>
         <div className="grid grid-cols-4 gap-4">
           <div className="dashboard-card">
             <div className="col-span-2">
@@ -49,7 +51,7 @@ const AdminDashboardPage = () => {
           <div className="dashboard-card">
             <div className="col-span-2">
               <h1 className="text-blue-500 heading-5 mb-2 font-bold">Users</h1>
-              <p>{users}</p>
+              <p>{totalUsers}</p>
             </div>
             <div className="col-span-1 flex items-center justify-center">
               <User className="text-white bg-blue-500 w-8 h-8 rounded-full p-1.5" />
@@ -60,22 +62,23 @@ const AdminDashboardPage = () => {
               <h1 className="text-yellow-500 heading-5 mb-2 font-bold">
                 Product
               </h1>
-              <p>{product}</p>
+              <p>{totalProducts}</p>
             </div>
             <div className="col-span-1 flex items-center justify-center">
               <DollarSign className="text-white bg-yellow-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="col-span-3 shadow-lg p-4 rounded-sm">
+          <div className="col-span-3 shadow-lg p-4 rounded-sm hover:shadow-xl cursor-pointer">
             <h1 className="heading-1">Revenue</h1>
             <p className="body-text mb-4">(last 7 days)</p>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart style={{ fontSize: "14px" }}>
-                <XAxis dataKey="_id" />
+              <BarChart style={{ fontSize: "14px" }} data={revenueChart}>
+                <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="revenue" fill="purple" />
+                <Bar dataKey="revenue" fill="magenta" />
+                <Bar dataKey="sales" fill="blue" />
               </BarChart>
             </ResponsiveContainer>
           </div>

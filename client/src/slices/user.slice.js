@@ -17,7 +17,7 @@ export const loadUser = createAsyncThunk(
   "loadUser",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/v1/auth/profile`, {
+      const res = await axios.get(`${BASE_URL}auth/profile`, {
         withCredentials: true,
       });
       return res.data.user;
@@ -31,7 +31,7 @@ export const login = createAsyncThunk(
   "login",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/api/v1/auth/login`, payload, {
+      const res = await axios.post(`${BASE_URL}/auth/login`, payload, {
         withCredentials: true,
       });
 
@@ -46,7 +46,7 @@ export const signup = createAsyncThunk(
   "signup",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/api/v1/auth/signup`, payload, {
+      const res = await axios.post(`${BASE_URL}/auth/signup`, payload, {
         // headers: { "Content-Type": "multipart/form-data" },
         withCredentials: true,
       });
@@ -62,7 +62,7 @@ export const logout = createAsyncThunk(
   "logout",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/api/v1/auth/logout`, payload, {
+      const res = await axios.post(`${BASE_URL}/auth/logout`, payload, {
         withCredentials: true,
       });
 

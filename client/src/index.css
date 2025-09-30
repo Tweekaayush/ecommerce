@@ -57,11 +57,11 @@
   /* Headings */
 
   .heading-1 {
-    @apply text-red-500 text-sm uppercase font-bold tracking-[2px];
+    @apply text-red-500 text-sm uppercase font-bold tracking-widest;
   }
 
   .heading-2 {
-    @apply text-2xl relative font-extrabold tracking-[1px];
+    @apply text-2xl relative font-extrabold tracking-wide;
   }
 
   .heading-3 {
@@ -69,11 +69,11 @@
   }
 
   .heading-4 {
-    @apply text-2xl relative font-extrabold capitalize;
+    @apply text-2xl relative font-bold tracking-wide;
   }
 
   .heading-5 {
-    @apply text-sm uppercase font-bold tracking-[2px];
+    @apply text-sm uppercase font-bold tracking-widest;
   }
 
   /* body text */

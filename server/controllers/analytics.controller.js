@@ -1,11 +1,11 @@
 const asyncHandler = require("../middleware/asyncHandler");
 const Product = require("../models/product.model");
 const User = require("../models/user.model");
+const Order = require("../models/order.model");
 
 exports.getAnalytics = asyncHandler(async (req, res) => {
   const totalUsers = await User.countDocuments();
   const totalProducts = await Product.countDocuments();
-
   const salesData = await Order.aggregate([
     {
       $group: {
@@ -18,13 +18,13 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
 
   // chart
 
-  const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 100);
+  const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
   const endDate = new Date();
 
   const salesDataChart = await Order.aggregate([
     {
       $match: {
-        $createdAt: {
+        createdAt: {
           $gte: startDate,
           $lte: endDate,
         },
@@ -32,9 +32,9 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
     },
     {
       $group: {
-        id: { $dateToString: { $format: "%y-%m-%d", date: "$createdAt" } },
+        _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
         sales: { $sum: 1 },
-        revenue: { $sume: "$totalAmount" },
+        revenue: { $sum: "$totalAmount" },
       },
     },
     {
@@ -59,9 +59,9 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
     analytics: {
       totalUsers,
       totalProducts,
-      totalSales: salesData[0].totalSales || 0,
-      totalRevenue: salesData[0].totalRevenue || 0,
-      chartData,
+      totalSales: salesData[0]?.totalSales || 0,
+      totalRevenue: salesData[0]?.totalRevenue || 0,
+      revenueChart: chartData,
     },
   });
 });
