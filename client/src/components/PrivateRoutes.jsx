@@ -8,7 +8,8 @@ const PrivateRoutes = () => {
       user: { _id },
     },
   } = useSelector((state) => state.user);
-  return _id ? <Outlet /> : <Navigate to="/login" />;
+
+  return _id ? <Outlet /> : <Navigate to="/login" replace={true} />;
 };
 
 export default PrivateRoutes;

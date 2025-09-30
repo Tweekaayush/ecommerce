@@ -12,9 +12,11 @@ import {
   Bar,
 } from "recharts";
 import { getAnalytics } from "../slices/admin.slice";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboardPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const {
     data: { totalRevenue, totalSales, totalUsers, totalProducts, revenueChart },
   } = useSelector((state) => state.admin);
@@ -48,7 +50,7 @@ const AdminDashboardPage = () => {
               <DollarSign className="text-white bg-red-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="dashboard-card">
+          <div className="dashboard-card" onClick={()=>navigate('/dashboard/user/list')}>
             <div className="col-span-2">
               <h1 className="text-blue-500 heading-5 mb-2 font-bold">Users</h1>
               <p>{totalUsers}</p>

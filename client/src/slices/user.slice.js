@@ -17,7 +17,7 @@ export const loadUser = createAsyncThunk(
   "loadUser",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}auth/profile`, {
+      const res = await axios.get(`${BASE_URL}/user/profile`, {
         withCredentials: true,
       });
       return res.data.user;

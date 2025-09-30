@@ -94,6 +94,11 @@ const Navbar = ({ setCartOpen }) => {
                       <User className="w-4 h-4" />
                     </Link>
                   </li>
+                  <li className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl">
+                    <Link to="/dashboard">
+                      <User className="w-4 h-4" />
+                    </Link>
+                  </li>
                   <li
                     onClick={() => dispatch(logout())}
                     className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl"

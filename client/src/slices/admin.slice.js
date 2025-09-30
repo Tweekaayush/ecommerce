@@ -29,6 +29,29 @@ export const getAnalytics = createAsyncThunk('getAnalytics', async(payload, {rej
     }
 })
 
+export const getUsersList = createAsyncThunk('getUsersList', async(payload, {rejectWithValue})=>{
+    try {
+    
+        const res = await axios.get(`${BASE_URL}/user/list?page=${payload}`, {
+            withCredentials: true
+        })
+        return res.data.userList
+    } catch (error) {
+        return rejectWithValue(error.response.data.message)
+    }
+})
+
+export const getProductsList = createAsyncThunk('getProductsList', async(payload, {rejectWithValue})=>{
+    try {
+        const res = await axios.get(`${BASE_URL}/product/list?page=${payload}`, {
+            withCredentials: true
+        })
+        return res.data.list
+    } catch (error) {
+        return rejectWithValue(error.response.data.message)
+    }
+})
+
 const adminSlice = createSlice({
     name: 'admin',
     initialState,
@@ -45,6 +68,17 @@ const adminSlice = createSlice({
             state.data.revenueChart = action.payload.revenueChart
         })
         builder.addCase(getAnalytics.rejected , (state, action)=>{
+            state.loading = false
+            state.error = action.payload
+        })
+        builder.addCase(getUsersList.pending , (state, action)=>{
+            state.loading = true
+        })
+        builder.addCase(getUsersList.fulfilled , (state, action)=>{
+            state.loading = false
+            state.data.userList = action.payload
+        })
+        builder.addCase(getUsersList.rejected , (state, action)=>{
             state.loading = false
             state.error = action.payload
         })

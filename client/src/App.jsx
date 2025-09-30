@@ -12,12 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./slices/user.slice";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
+import UserListPage from "./pages/UserListPage";
+
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(loadUser());
+    dispatch(loadUser());
   }, []);
 
   return (
@@ -29,9 +31,11 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/dashboard" element={<AdminDashboardPage />} />
-          <Route element={<PrivateRoutes />}></Route>
+          <Route element={<PrivateRoutes />}>
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/dashboard" element={<AdminDashboardPage />} />
+            <Route path="/dashboard/user/list" element={<UserListPage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
