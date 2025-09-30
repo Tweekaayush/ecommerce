@@ -59,7 +59,7 @@ const AdminDashboardPage = () => {
               <User className="text-white bg-blue-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="dashboard-card">
+          <div className="dashboard-card"  onClick={()=>navigate('/dashboard/product/list')}>  
             <div className="col-span-2">
               <h1 className="text-yellow-500 heading-5 mb-2 font-bold">
                 Product

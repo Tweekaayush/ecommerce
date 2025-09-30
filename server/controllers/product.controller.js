@@ -34,6 +34,18 @@ exports.getProductById = asyncHandler(async (req, res) => {
   });
 });
 
+exports.getProductListAdmin = asyncHandler(async (req, res) => {
+  const page = Number(req.query.page) || 1;
+  const paginate = 6;
+  const productList = await Product.find()
+    .skip(paginate * (page - 1))
+    .limit(paginate);
+  res.json({
+    success: true,
+    productList,
+  });
+});
+
 exports.getFeaturedProducts = asyncHandler(async (req, res) => {
   const paginate = 8;
   const featuredProducts = await Product.find({ isFeatured: true }).limit(

@@ -2,19 +2,19 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getUsersList } from "../slices/admin.slice";
+import { getProductsList } from "../slices/admin.slice";
 import { useState } from "react";
-import { Trash } from "lucide-react";
+import { Trash, SquareArrowOutUpRight } from "lucide-react";
 
-const UserListPage = () => {
+const ProductListPage = () => {
   const dispatch = useDispatch();
   const {
-    data: { userList },
+    data: { productList },
   } = useSelector((state) => state.admin);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getUsersList(page));
+    dispatch(getProductsList(page));
   }, [page]);
   return (
     <section>
@@ -22,27 +22,33 @@ const UserListPage = () => {
         <Link to="/dashboard" className="heading-5 text-gray-500 mb-4">
           DASHBOARD /
         </Link>
-        <h1 className="heading-4 text-red-500 uppercase mb-7">User List</h1>
+        <h1 className="heading-4 text-red-500 uppercase mb-7">Product List</h1>
         <div className="flex flex-col">
           <div className="grid grid-cols-12 gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
             <span className="admin-list-head col-span-3">ID</span>
             <span className="admin-list-head col-span-3">Name</span>
-            <span className="admin-list-head col-span-3">email</span>
-            <span className="admin-list-head col-span-2">admin</span>
+            <span className="admin-list-head col-span-2">brand</span>
+            <span className="admin-list-head col-span-1">category</span>
+            <span className="admin-list-head col-span-1">price</span>
+            <span className="admin-list-head col-span-1"></span>
             <span className="admin-list-head col-span-1"></span>
           </div>
           <div className="">
-            {userList?.map((user) => {
+            {productList?.map((product) => {
               return (
                 <div
-                  key={user._id}
+                  key={product?._id}
                   className="grid grid-cols-12 gap-4 items-center text-center py-7 bg-white nth-[even]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
                 >
-                  <p className="admin-list-item col-span-3">{user?._id}</p>
-                  <p className="admin-list-item col-span-3"> {user?.name}</p>
-                  <p className="admin-list-item col-span-3">{user?.email}</p>
-                  <p className="admin-list-item col-span-2">{user?.role}</p>
-                  <Trash className="w-4 h-4 text-red-500 mx-auto" />
+                  <p className="admin-list-item col-span-3">{product?._id}</p>
+                  <p className="admin-list-item col-span-3"> {product?.name}</p>
+                  <p className="admin-list-item col-span-2">{product?.brand}</p>
+                  <p className="admin-list-item col-span-1">
+                    {product?.category}
+                  </p>
+                  <p className="admin-list-item col-span-1">{product?.price}</p>
+                  <SquareArrowOutUpRight className="w-4 h-4 mx-auto col-span-1" />
+                  <Trash className="w-4 h-4 text-red-500 mx-auto col-span-1" />
                 </div>
               );
             })}
@@ -53,4 +59,4 @@ const UserListPage = () => {
   );
 };
 
-export default UserListPage;
+export default ProductListPage;

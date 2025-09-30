@@ -13,6 +13,7 @@ import { loadUser } from "./slices/user.slice";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import UserListPage from "./pages/UserListPage";
+import ProductListPage from "./pages/ProductListPage";
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/dashboard" element={<AdminDashboardPage />} />
             <Route path="/dashboard/user/list" element={<UserListPage />} />
+            <Route path="/dashboard/product/list" element={<ProductListPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
