@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, Heart, ShoppingCart, User, LogOut, LayoutDashboard } from "lucide-react";
+import {
+  Menu,
+  Heart,
+  ShoppingCart,
+  User,
+  LogOut,
+  LayoutDashboard,
+} from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/user.slice";
 import { useEffect } from "react";
@@ -15,6 +22,9 @@ const Navbar = ({ setCartOpen }) => {
       user: { _id, name, image },
     },
   } = useSelector((state) => state.user);
+  const {
+    data: { cart },
+  } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
@@ -71,6 +81,13 @@ const Navbar = ({ setCartOpen }) => {
           </li>
           <li onClick={() => setCartOpen(true)}>
             <ShoppingCart />
+            {cart?.length ? (
+              <div className="absolute -top-2.5 -right-2.5 bg-red-500 text-white text-center text-xs w-5 h-5 p-0.5 rounded-full">
+                {cart?.length}
+              </div>
+            ) : (
+              <></>
+            )}
           </li>
           <li>
             {!_id ? (
@@ -107,7 +124,7 @@ const Navbar = ({ setCartOpen }) => {
                   </li>
                   <li
                     onClick={() => dispatch(logout())}
-                    className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl hover:bg-gray-200"  
+                    className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl hover:bg-gray-200"
                   >
                     <LogOut className="w-4 h-4" />
                   </li>

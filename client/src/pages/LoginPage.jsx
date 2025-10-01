@@ -1,9 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../slices/user.slice";
+import { useEffect } from "react";
 
 const LoginPage = () => {
+  const { state } = useLocation();
+  const {
+    data: { user: {_id} },
+  } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,7 +17,8 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,8 +33,14 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({...formData}))
+    dispatch(login({ ...formData }));
   };
+
+  useEffect(() => {
+    if (_id) {
+      state ? navigate(state.previousURL) :navigate('/profile');
+    }
+  }, [_id]);
   return (
     <section className="h-screen bg-gray-100">
       <div className="container flex justify-center items-center h-full">

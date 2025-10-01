@@ -1,4 +1,5 @@
 const asyncHandler = require("../middleware/asyncHandler");
+const Product = require("../models/product.model");
 const User = require("../models/user.model");
 
 exports.getCartItems = asyncHandler(async (req, res) => {
@@ -12,64 +13,39 @@ exports.getCartItems = asyncHandler(async (req, res) => {
   });
 });
 
-exports.addToCart = asyncHandler(async (req, res) => {
-  const { id: productId, quantity } = req.body;
+exports.updateCart = asyncHandler(async (req, res) => {
+  const { data } = req.body;
   const user = await User.findById(req.user._id);
 
-  const existingItem = user.cartItems.find(
-    (item) => item.product === productId
-  );
+  let message = "";
 
-  if (existingItem) {
-    existingItem.quantity += quantity;
-  } else {
-    user.cartItems.push({ product: productId, quantity });
-  }
+  let updatedCart = { ...data };
 
-  res.json({
-    success: true,
-    cartItems: user.cartItems,
+  user.cartItems.forEach((x) => {
+    updatedCart[x._id].quantity += x.quantity;
   });
-});
 
-exports.removeFromCart = asyncHandler(async (req, res) => {
-  const { id: productId } = req.body;
-
-  const user = await User.findById(req.user._id);
-
-  user.cartItems = user.cartItems.filter((item) => item.product !== productId);
-
-  await user.save();
-
-  res.json({
-    success: true,
-    cartItems: user.cartItems,
+  updatedCart = Array.from(updatedCart);
+  updatedCart = updatedCart.map(async (x) => {
+    const product = await Product.findById(x._id);
+    let quantity;
+    if (x.quantity > product.countInStock) {
+      quantity = x.qunatity;
+      message = "Some of the item(s) have been removed or their quantity has changed due to their inavailability.";
+    } else {
+      quantity = product.countInStock;
+    }
+    return quantity
   });
-});
 
-exports.updateQuantity = asyncHandler(async (req, res) => {
-  const { id: productId } = req.params;
-  const { quantity } = req.body;
-  const user = await User.findById(req.user._id);
-  const existingItem = user.cartItems.find(item.product === productId);
-
-  if (!existingItem) {
-    res.status(404);
-    throw new Error("Product not found");
-  }
-
-  if (quantity === 0) {
-    user.cartItems = user.cartItems.filter(
-      (item) => item.product !== productId
-    );
-  } else {
-    existingItem.quantity = quantity;
-  }
-  await user.save();
+  user.cartItems = updatedCart
+  let subTotal = addDecimals(user.cartItems.reduce((acc, item)=>acc+(item.price*item.quantity), 0))
+  await user.save()
 
   res.json({
     success: true,
-    cartItems: user.cartItems,
+    cart: updatedCart,
+    subTotal
   });
 });
 

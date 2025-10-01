@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { signup } from "../slices/user.slice";
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 const SignUpPage = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const {
+    data: {
+      user: { _id },
+    },
+  } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,23 +24,29 @@ const SignUpPage = () => {
     password: "",
     confirmPassword: "",
   });
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-      const { name, value } = e.target;
-  
-      setFormData((prev) => {
-        return {
-          ...prev,
-          [name]: value,
-        };
-      });
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      dispatch(signup({...formData}))
-    };
+    const { name, value } = e.target;
+
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signup({ ...formData }));
+  };
+
+  useEffect(() => {
+    if (_id) {
+      state ? navigate(state.previousURL) : navigate("/profile");
+    }
+  }, [_id]);
   return (
     <section className="h-screen bg-gray-100">
       <div className="container flex justify-center items-center h-full">
@@ -91,13 +104,15 @@ const SignUpPage = () => {
                 <p className="form-error-msg"> error </p>
               )}
             </label>
-            <button type="submit" className="button-2">Register</button>
-              <p className="body-text">
-                Already have an account?{" "}
-                <Link to='/login' className="text-blue-500">
-                  Login
-                </Link>
-              </p>
+            <button type="submit" className="button-2">
+              Register
+            </button>
+            <p className="body-text">
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-500">
+                Login
+              </Link>
+            </p>
           </form>
         </div>
       </div>

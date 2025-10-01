@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "../constants/constants";
+// import { getCart } from "./cart.slice";
 
 const initialState = {
   loading: false,
@@ -15,11 +16,14 @@ const initialState = {
 
 export const loadUser = createAsyncThunk(
   "loadUser",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, dispatch }) => {
     try {
       const res = await axios.get(`${BASE_URL}/user/profile`, {
         withCredentials: true,
       });
+
+      // dispatch(getCart());
+
       return res.data.user;
     } catch (error) {
       return rejectWithValue(error.response.data.message);

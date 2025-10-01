@@ -12,7 +12,7 @@ const Rating = ({ rating }) => {
         ) : index - rating >= 1 ? (
           <Star key={i} color="gold" size={"20px"} />
         ) : (
-          <span className="relative">
+          <span key={i} className="relative">
             <Star color="gold" size={"20px"} />
             <StarHalfIcon
               color="gold"

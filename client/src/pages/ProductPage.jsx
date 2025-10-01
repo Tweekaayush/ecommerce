@@ -9,6 +9,7 @@ import {
 } from "../slices/product.slice";
 import { Star } from "lucide-react";
 import Rating from "../components/Rating";
+import { addToCart } from "../slices/cart.slice";
 
 const ProductPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const ProductPage = () => {
     loading,
     data: {
       productDetails: {
+        _id,
         name,
         image,
         description,
@@ -101,7 +103,23 @@ const ProductPage = () => {
               </div>
               <h1 className="mb-4 font-bold text-xl">${price}</h1>
               <div className="flex items-center gap-4">
-                <button className="button-1">Add to cart</button>
+                <button
+                  className="button-1"
+                  onClick={() =>
+                    dispatch(
+                      addToCart({
+                        name,
+                        image,
+                        price,
+                        _id,
+
+                        quantity,
+                      })
+                    )
+                  }
+                >
+                  Add to cart
+                </button>
                 <button className="button-2">wishlist</button>
               </div>
             </div>
