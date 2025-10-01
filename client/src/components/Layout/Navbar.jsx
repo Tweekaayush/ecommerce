@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Menu, Heart, ShoppingCart, User } from "lucide-react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Menu, Heart, ShoppingCart, User, LogOut, LayoutDashboard } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/user.slice";
+import { useEffect } from "react";
 
 const Navbar = ({ setCartOpen }) => {
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
 
   const {
     data: {
@@ -15,6 +17,10 @@ const Navbar = ({ setCartOpen }) => {
   } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <nav className="w-full fixed top-0 left-0  z-50 bg-white shadow-xl">
@@ -89,21 +95,21 @@ const Navbar = ({ setCartOpen }) => {
                     open ? "visible opacity-100" : "invisible opacity-0"
                   } absolute top-5 -right-2 flex flex-col items-center pt-7 transition-opacity duration-300 ease-in-out`}
                 >
-                  <li className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl">
+                  <li className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl hover:bg-gray-200">
                     <Link to="/profile">
                       <User className="w-4 h-4" />
                     </Link>
                   </li>
-                  <li className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl">
+                  <li className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl hover:bg-gray-200">
                     <Link to="/dashboard">
-                      <User className="w-4 h-4" />
+                      <LayoutDashboard className="w-4 h-4" />
                     </Link>
                   </li>
                   <li
                     onClick={() => dispatch(logout())}
-                    className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl"
+                    className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl hover:bg-gray-200"  
                   >
-                    <User className="w-4 h-4" />
+                    <LogOut className="w-4 h-4" />
                   </li>
                 </ul>
               </div>

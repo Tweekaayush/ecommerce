@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories, getProducts } from "../slices/product.slice";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 const BrowsePage = () => {
   const {
-    data: { categories, products },
+    data: { categories, products, totalPages },
   } = useSelector((state) => state.product);
   const cat = new URLSearchParams(location.search).get("category");
   const [activeCategory, setActiveCategory] = useState(cat || "");
@@ -65,6 +66,7 @@ const BrowsePage = () => {
             return <ProductCard {...product} key={product?._id} slider={false} />;
           })}
         </div>
+        <Pagination totalPages={totalPages} page ={page} setPage={setPage}/>
       </div>
     </section>
   );
