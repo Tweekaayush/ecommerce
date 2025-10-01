@@ -25,11 +25,11 @@ const UserListPage = () => {
         <h1 className="heading-4 text-red-500 uppercase mb-7">User List</h1>
         <div className="flex flex-col">
           <div className="grid grid-cols-12 gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
-            <span className="admin-list-head col-span-3">ID</span>
-            <span className="admin-list-head col-span-3">Name</span>
-            <span className="admin-list-head col-span-3">email</span>
-            <span className="admin-list-head col-span-2">admin</span>
-            <span className="admin-list-head col-span-1"></span>
+            <span className="list-head col-span-3">ID</span>
+            <span className="list-head col-span-3">Name</span>
+            <span className="list-head col-span-3">email</span>
+            <span className="list-head col-span-2">admin</span>
+            <span className="list-head col-span-1"></span>
           </div>
           <div className="">
             {userList?.map((user) => {
@@ -38,10 +38,10 @@ const UserListPage = () => {
                   key={user._id}
                   className="grid grid-cols-12 gap-4 items-center text-center py-7 bg-white nth-[even]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
                 >
-                  <p className="admin-list-item col-span-3">{user?._id}</p>
-                  <p className="admin-list-item col-span-3"> {user?.name}</p>
-                  <p className="admin-list-item col-span-3">{user?.email}</p>
-                  <p className="admin-list-item col-span-2">{user?.role}</p>
+                  <p className="list-body col-span-3">{user?._id}</p>
+                  <p className="list-body col-span-3"> {user?.name}</p>
+                  <p className="list-body col-span-3">{user?.email}</p>
+                  <p className="list-body col-span-2">{user?.role}</p>
                   <Trash className="w-4 h-4 text-red-500 mx-auto" />
                 </div>
               );

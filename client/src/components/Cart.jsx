@@ -2,11 +2,13 @@ import React from "react";
 import { X } from "lucide-react";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ cartOpen, setCartOpen }) => {
   const {
     data: { cart, subTotal },
   } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
   return (
     <div
       className={`${
@@ -14,7 +16,7 @@ const Cart = ({ cartOpen, setCartOpen }) => {
       } fixed top-0 right-0 h-full w-[400px] z-[100] bg-white flex flex-col transition-all duration-300 ease-in-out`}
     >
       <div className="flex items-center bg-black px-4 h-16">
-        <h1 className="text-white text-md uppercase font-semibold w-full tracking-wide">
+        <h1 className="text-white uppercase font-semibold w-full tracking-wide">
           Cart ({cart?.length} items)
         </h1>
         <X
@@ -38,7 +40,12 @@ const Cart = ({ cartOpen, setCartOpen }) => {
           <div className="grid grid-cols-2 p-4 border-dotted border-t-2">
             <h1 className="font-bold text-lg">Subtotal:</h1>
             <p className="text-green-500 font-bold text-right">${subTotal}</p>
-            <button className="button-1 col-span-2 mt-4">Checkout</button>
+            <button
+              className="button-1 col-span-2 mt-4"
+              onClick={() => navigate("/checkout")}
+            >
+              Checkout
+            </button>
           </div>
         </>
       )}

@@ -76,6 +76,10 @@
     @apply text-sm uppercase font-bold tracking-widest;
   }
 
+  .heading-6 {
+    @apply text-sm relative font-extrabold tracking-wide;
+  }
+
   /* body text */
 
   .body-text {
@@ -126,17 +130,15 @@
     @apply outline-0 rounded-sm w-full border px-4 py-2.5 text-sm;
   }
 
-
   .form-label > .form-input:user-valid + span,
   .form-label > .form-input:user-invalid + span,
-  .form-label > .form-input:focus + span{
+  .form-label > .form-input:focus + span {
     @apply -top-1.5 left-4 px-1 text-xs;
   }
 
   .form-label > .form-input + span {
     @apply absolute top-2.5 left-6 text-black bg-white font-semibold capitalize transition-all duration-300 ease-in-out;
   }
-
 
   .form-error-msg {
     @apply text-red-500 pl-0.5 text-sm font-semibold;
@@ -148,11 +150,15 @@
     @apply col-span-1 shadow-lg p-4 grid grid-cols-3 hover:shadow-xl cursor-pointer transition-all duration-300 ease-in-out rounded-sm;
   }
 
-  .admin-list-head{
+  .list-head {
     @apply text-sm text-gray-500 uppercase;
   }
 
-  .admin-list-item{
+  .list-body {
+    @apply text-sm text-black text-center;
+  }
+
+   .list-item {
     @apply text-sm text-black text-center;
   }
 }

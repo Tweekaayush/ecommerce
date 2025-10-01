@@ -25,6 +25,7 @@ const ProductPage = () => {
         countInStock,
         rating,
         numReviews,
+        brand,
       },
       recommendedProducts,
     },
@@ -112,7 +113,7 @@ const ProductPage = () => {
                         image,
                         price,
                         _id,
-
+                        brand,
                         quantity,
                       })
                     )

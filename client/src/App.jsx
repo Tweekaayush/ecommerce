@@ -14,6 +14,7 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import UserListPage from "./pages/UserListPage";
 import ProductListPage from "./pages/ProductListPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/dashboard" element={<AdminDashboardPage />} />
             <Route path="/dashboard/user/list" element={<UserListPage />} />
             <Route path="/dashboard/product/list" element={<ProductListPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
