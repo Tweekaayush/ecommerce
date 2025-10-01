@@ -36,7 +36,7 @@ const AddressForm = ({ submitFunction }) => {
     <form action="" className="grid grid-cols-2 overflow-hidden transition-all 0.3s ease-in-out duration-300 gap-4 pt-4" onSubmit={handleSubmit}>
       <label htmlFor="address" className="form-label col-span-2">
         <input
-          className="form-input"
+          className="form-input-2"
           type="text"
           name="address"
           id="address"
@@ -47,7 +47,7 @@ const AddressForm = ({ submitFunction }) => {
       </label>
       <label htmlFor="postalCode" className="form-label col-span-2">
         <input
-          className="form-input"
+          className="form-input-2"
           type="text"
           name="postalCode"
           id="postalCode"
@@ -58,7 +58,7 @@ const AddressForm = ({ submitFunction }) => {
       </label>
       <label htmlFor="city" className="form-label col-span-1">
         <input
-          className="form-input"
+          className="form-input-2"
           type="text"
           name="city"
           id="city"
@@ -69,7 +69,7 @@ const AddressForm = ({ submitFunction }) => {
       </label>
       <label htmlFor="country" className="form-label col-span-1">
         <input
-          className="form-input"
+          className="form-input-2"
           type="text"
           name="country"
           id="country"

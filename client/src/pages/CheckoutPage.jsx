@@ -63,38 +63,36 @@ const CheckoutPage = () => {
   }, [step]);
 
   return cart?.length !== 0 ? (
-    <>
+    <section>
       <CheckoutSteps
         stepNo={step}
         checkoutSteps={checkoutSteps}
         setStep={setStep}
       />
-      <section>
-        <div className="container grid grid-cols-12 gap-4 h-screen">
-          <ActiveComponent />
-          <div className="flex flex-col py-8 px-4 h-fit shadow-lg col-span-4">
-            <h1 className="heading-1 mb-4">cart summary</h1>
-            <div className="flex justify-between mb-4">
-              <h4 className="heading-6">Items Price</h4>
-              <p className="text-sm capitalize">${total}</p>
-            </div>
-
-            <div className="flex justify-between mb-4 border-t pt-4 border-dashed">
-              <h4 className="heading-6">Total Price</h4>
-              <p className="text-sm capitalize">${subtotal}</p>
-            </div>
-
-            <button
-              className="button-1"
-              onClick={handleNextStep}
-              disabled={false}
-            >
-              {checkoutSteps[step - 1]?.button}
-            </button>
+      <div className="container grid grid-cols-12 gap-4 h-screen mt-20">
+        <ActiveComponent />
+        <div className="flex flex-col py-8 px-4 h-fit shadow-card col-span-4">
+          <h1 className="heading-1 mb-4">cart summary</h1>
+          <div className="flex justify-between mb-4">
+            <h4 className="heading-6">Items Price</h4>
+            <p className="text-sm capitalize">${total}</p>
           </div>
+
+          <div className="flex justify-between mb-4 border-t pt-4 border-dashed">
+            <h4 className="heading-6">Total Price</h4>
+            <p className="text-sm capitalize">${subtotal}</p>
+          </div>
+
+          <button
+            className="button-1"
+            onClick={handleNextStep}
+            disabled={false}
+          >
+            {checkoutSteps[step - 1]?.button}
+          </button>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   ) : (
     <section>
       <div className="container w-full h-[90vh] flex justify-center items-center">

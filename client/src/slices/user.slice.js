@@ -77,6 +77,21 @@ export const logout = createAsyncThunk(
   }
 );
 
+export const updateProfile = createAsyncThunk(
+  "updateProfile",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/user/profile`, payload, {
+        withCredentials: true,
+      });
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -131,6 +146,18 @@ const userSlice = createSlice({
       state.successMessage = "Logged Out Successfully";
     });
     builder.addCase(logout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+     builder.addCase(updateProfile.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.user = action.payload.user;
+      state.successMessage = action.payload.message;
+    });
+    builder.addCase(updateProfile.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

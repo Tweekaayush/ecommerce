@@ -36,7 +36,7 @@ const ProductCard = ({ _id, name, price, image, slider = false }) => {
     <div
       style={slider ? { width: width } : {}}
       className={
-        "flex flex-col shadow-md hover:shadow-lg transition-all ease-in-out duration-300 cursor-pointer group"
+        "flex flex-col shadow-card hover:shadow-card-hover transition-all ease-in-out duration-300 cursor-pointer group"
       }
       onClick={()=>navigate(`/product/${_id}`)}
     >

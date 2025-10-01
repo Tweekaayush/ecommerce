@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   Menu,
   Heart,
@@ -16,10 +16,10 @@ const Navbar = ({ setCartOpen }) => {
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
-
+  const navigate = useNavigate();
   const {
     data: {
-      user: { _id, name, image },
+      user: { _id, name, image, role },
     },
   } = useSelector((state) => state.user);
   const {
@@ -110,21 +110,25 @@ const Navbar = ({ setCartOpen }) => {
                 <ul
                   className={`${
                     open ? "visible opacity-100" : "invisible opacity-0"
-                  } absolute top-5 -right-2 flex flex-col items-center pt-7 transition-opacity duration-300 ease-in-out`}
+                  } absolute top-5 -right-3.5 flex flex-col items-center pt-7 transition-opacity duration-300 ease-in-out`}
                 >
-                  <li className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl hover:bg-gray-200">
-                    <Link to="/profile">
-                      <User className="w-4 h-4" />
-                    </Link>
+                  <li
+                    onClick={() => navigate("/profile")}
+                    className="flex items-center capitalize justify-center gap-1 bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
+                  >
+                    <User className="w-4 h-4" />
                   </li>
-                  <li className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl hover:bg-gray-200">
-                    <Link to="/dashboard">
+                  {role === "admin" && (
+                    <li
+                      onClick={() => navigate("/dashboard")}
+                      className="flex items-center justify-center gap-1 bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
+                    >
                       <LayoutDashboard className="w-4 h-4" />
-                    </Link>
-                  </li>
+                    </li>
+                  )}
                   <li
                     onClick={() => dispatch(logout())}
-                    className="rounded-full bg-white w-5 h-5 items-center justify-center shadow-2xl hover:bg-gray-200"
+                    className="flex items-center justify-center gap-1 bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
                   >
                     <LogOut className="w-4 h-4" />
                   </li>

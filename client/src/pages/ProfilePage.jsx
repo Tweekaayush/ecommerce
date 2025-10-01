@@ -9,7 +9,8 @@ import {
   LogOut,
 } from "lucide-react";
 
-import { logout } from "../slices/user.slice";
+import { logout, updateProfile } from "../slices/user.slice";
+import AddressForm from "../components/AddressForm";
 
 const UpdateProfile = () => {
   const {
@@ -29,7 +30,7 @@ const UpdateProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(updateUserProfile(formData));
+    dispatch(updateProfile(formData));
   };
 
   const handleChange = (e) => {
@@ -39,11 +40,11 @@ const UpdateProfile = () => {
 
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 mb-7">Privacy</h1>
+      <h1 className="heading-1 mb-12.5">Privacy</h1>
       <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
         <label htmlFor="name" className="form-label">
           <input
-            className="form-input"
+            className="form-input-2"
             type="text"
             name="name"
             id="name"
@@ -54,7 +55,7 @@ const UpdateProfile = () => {
         </label>
         <label htmlFor="email" className="form-label">
           <input
-            className="form-input"
+            className="form-input-2"
             type="email"
             name="email"
             id="email"
@@ -65,7 +66,7 @@ const UpdateProfile = () => {
         </label>
         <label htmlFor="password" className="form-label">
           <input
-            className="form-input"
+            className="form-input-2"
             type="password"
             name="password"
             id="password"
@@ -84,20 +85,24 @@ const UpdateProfile = () => {
 };
 
 const MyOrders = () => {
-  return <div> Orders</div>;
+  return (
+    <div className="flex flex-col">
+      <h1 className="heading-1 mb-12 5">My Orders</h1>
+    </div>
+  );
 };
 
 const UpdateAddress = () => {
   const dispatch = useDispatch();
-  // const updateForm = (data) => {
-  //   console.log(data);
-  //   dispatch(updateUserProfile({ fullAddress: { ...data } }));
-  // };
+  const updateForm = (data) => {
+    console.log(data);
+    dispatch(updateProfile({ fullAddress: { ...data } }));
+  };
   return (
-    <div className="">
-      <h1 className="">Address</h1>
+    <div className="flex flex-col">
+      <h1 className="heading-1 mb-12.5">Address</h1>
       <div className="">
-        {/* <AddressForm submitFunction={updateForm} /> */}
+        <AddressForm submitFunction={updateForm} />
       </div>
     </div>
   );
@@ -111,20 +116,20 @@ const AccountInfo = () => {
     },
   } = useSelector((state) => state.user);
   return (
-    <div className="">
-      <h1 className="">Account</h1>
-      <div className="">
-        <div className="">
-          <h5 className="">Name</h5>
-          <p className="3">{name}</p>
+    <div className="flex flex-col">
+      <h1 className="heading-1 mb-12.5">Account</h1>
+      <div className="flex flex-col">
+        <div className="grid grid-cols-12 gap-4 p-4">
+          <h5 className="heading-5 col-span-2">Name</h5>
+          <p className="col-span-10 body-text">{name}</p>
         </div>
-        <div className="">
-          <h5 className="">Email</h5>
-          <p className=""> {email}</p>
+        <div className="grid grid-cols-12 gap-4 p-4 bg-gray-100">
+          <h5 className="heading-5 col-span-2">Email</h5>
+          <p className="col-span-10 body-text"> {email}</p>
         </div>
-        <div className="">
-          <h5 className="">Address</h5>
-          <p className="">
+        <div className="grid grid-cols-12 gap-4 p-4">
+          <h5 className="heading-5 col-span-2">Address</h5>
+          <p className="col-span-10 body-text">
             {fullAddress?.address && (
               <>
                 {fullAddress?.address}, {fullAddress?.postalCode}
@@ -134,9 +139,9 @@ const AccountInfo = () => {
             )}
           </p>
         </div>
-        <div className="">
-          <h5 className="">Joined On</h5>
-          <p className="">{createdAt.substring(0, 10)}</p>
+        <div className="grid grid-cols-12 gap-4 p-4 bg-gray-100">
+          <h5 className="heading-5 col-span-2">Joined On</h5>
+          <p className="col-span-10 body-text">{createdAt.substring(0, 10)}</p>
         </div>
       </div>
     </div>
@@ -187,7 +192,7 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <section className="min-h-screen">
+    <section className="min-h-screen flex justify-center items-center">
       <div className="container grid grid-cols-12 gap-4">
         <div className="h-fit col-span-3">
           <div className="flex items-center py-8 px-4 w-full gap-2.5">
@@ -233,7 +238,7 @@ const ProfilePage = () => {
             </li>
           </ul>
         </div>
-        <div className="col-span-9 p-4 shadow-xl h-[500px] rounded-sm">
+        <div className="col-span-9 p-4 shadow-card h-[500px] rounded-sm">
           <ActiveComponent />
         </div>
       </div>

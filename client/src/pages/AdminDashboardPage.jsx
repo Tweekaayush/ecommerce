@@ -70,7 +70,7 @@ const AdminDashboardPage = () => {
               <DollarSign className="text-white bg-yellow-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="col-span-3 shadow-lg p-4 rounded-sm hover:shadow-xl cursor-pointer">
+          <div className="col-span-3 shadow-card p-4 rounded-sm hover:shadow-hover cursor-pointer">
             <h1 className="heading-1">Revenue</h1>
             <p className="body-text mb-4">(last 7 days)</p>
             <ResponsiveContainer width="100%" height={300}>
