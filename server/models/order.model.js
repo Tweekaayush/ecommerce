@@ -35,6 +35,22 @@ const orderSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
+    shippingAddress: {
+        address: {type: String, required: true},
+        city: {type: String, required: true},
+        postalCode: {type: String, required: true},
+        country: {type: String, required: true}
+    },
+    deliveredAt: {
+      type: Date,
+    },
+    cancelledAt: {
+      type: Date,
+    },
+    orderStatus: {
+      enum: ["processing", "delivered", "cancelled"],
+      default: "processing",
+    },
   },
   {
     timestamps: true,
