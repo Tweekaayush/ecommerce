@@ -6,6 +6,7 @@ import {loadStripe} from '@stripe/stripe-js'
 const initialState = {
   loading: false,
   data: {
+    orderId: null,
     orderList: [],
     orderDetails: {},
   },
@@ -75,6 +76,7 @@ const orderSlice = createSlice({
     });
     builder.addCase(validateOrder.fulfilled, (state, action) => {
       state.loading = false;
+      state.data.orderDetails = action.payload.order
     });
     builder.addCase(validateOrder.rejected, (state, action) => {
       state.loading = false;
