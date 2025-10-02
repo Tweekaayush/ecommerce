@@ -1,12 +1,12 @@
 const asyncHandler = require("../middleware/asyncHandler");
 const Coupon = require("../models/coupon.model");
 
-exports.getCoupon = asyncHandler(async (req, res) => {
-  const coupon = await Coupon.findOne({ userId: req.user._id, isActive: true });
+exports.getCoupons = asyncHandler(async (req, res) => {
+  const coupon = await Coupon.find({ userId: req.user._id, isActive: true });
 
   res.json({
     success: true,
-    coupon,
+    coupons,
   });
 });
 

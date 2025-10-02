@@ -25,14 +25,14 @@ exports.updateProfile = asyncHandler(async (req, res) => {
     user.password = password;
   }
 
-  if (fullAddress?.address) {
+  if (fullAddress && fullAddress?.address) {
     user.fullAddress.address = fullAddress.address;
     user.fullAddress.city = fullAddress.city;
     user.fullAddress.postalCode = fullAddress.postalCode;
     user.fullAddress.country = fullAddress.country;
   }
-
   const updatedUser = await user.save();
+  console.log(updatedUser) ;
 
   res.json({
     success: true,

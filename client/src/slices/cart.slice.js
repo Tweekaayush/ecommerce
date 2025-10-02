@@ -12,6 +12,7 @@ const initialState = {
     total: 0,
     subTotal: 0,
     discount: 0,
+    shippingAddress: {},
   },
   successMessage: "",
   error: "",

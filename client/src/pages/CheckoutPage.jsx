@@ -32,19 +32,41 @@ const CheckoutPage = () => {
       name: "Cart",
       component: <CheckoutCart />,
       button: "Continue",
+      func: function () {
+        return true;
+      },
       icon: <ShoppingCart />,
     },
     {
       name: "Shipping Address",
       component: <ShippingAddress />,
-
       button: "Continue",
+      func: function () {
+        if (fullAddress) {
+          dispatch(saveShippingAddress({ ...fullAddress }));
+          return true;
+        }
+        toast.error("Please enter your shipping address");
+        return false;
+      },
       icon: <NotebookTabs />,
     },
     {
       name: "Payment",
       component: <Payment open={open} setOpen={setOpen} />,
-
+      func: function () {
+        const order = {
+          orderItems: cart,
+          shippingAddress,
+          paymentMethod,
+          itemsPrice,
+          taxPrice,
+          shippingPrice,
+          totalPrice,
+        };
+        // dispatch(createOrder(order));
+        return false;
+      },
       button: "place order",
       icon: <CreditCard />,
     },
