@@ -212,6 +212,7 @@ const ProfilePage = () => {
             {profileComponents.map((p, i) => {
               return (
                 <li
+                  key={p.name}
                   className="flex items-center w-full p-4 border-b last-of-type:border-b-0 border-gray-300 text-sm  gap-4 hover:bg-gray-300 cursor-pointer"
                   onClick={() => setProfileLink(i)}
                 >

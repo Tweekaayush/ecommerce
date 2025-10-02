@@ -15,7 +15,7 @@ const Cart = ({ cartOpen, setCartOpen }) => {
         cartOpen ? "translate-x-0" : "translate-x-full"
       } fixed top-0 right-0 h-full w-[400px] z-[100] bg-white flex flex-col transition-all duration-300 ease-in-out`}
     >
-      <div className="flex items-center bg-black px-4 h-16">
+      <div className="flex items-center bg-black p-4">
         <h1 className="text-white uppercase font-semibold w-full tracking-wide">
           Cart ({cart?.length} items)
         </h1>
@@ -30,11 +30,12 @@ const Cart = ({ cartOpen, setCartOpen }) => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col p-4 h-full">
-            <div className="flex flex-col g-4 h-full overflow-y-auto">
+          <div className="h-full overflow-y-auto mb-4">
+            <div className="flex flex-col gap-4 p-4">
               {cart?.map((x) => {
                 return <CartItem key={x._id} {...x} />;
               })}
+                        
             </div>
           </div>
           <div className="grid grid-cols-2 p-4 border-dotted border-t-2">

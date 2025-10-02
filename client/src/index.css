@@ -7,6 +7,7 @@
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   --shadow-card-hover: rgba(60, 64, 67, 0.3) 0px 1px 8px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  --color-overlay: rgba(0, 0, 0, 0.5);
 }
 
 @layer base {
@@ -56,7 +57,6 @@
   }
 
   /* Checkout Steps */
-
 }
 
 @layer utlities {
@@ -136,7 +136,8 @@
     @apply flex flex-col relative;
   }
 
-  .form-input, .form-input-2 {
+  .form-input,
+  .form-input-2 {
     @apply outline-0 rounded-sm w-full border px-4 py-2.5 text-sm;
   }
 

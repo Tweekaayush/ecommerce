@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/user.slice";
 import { useEffect } from "react";
 
-const Navbar = ({ setCartOpen }) => {
+const Navbar = ({ cartOpen, setCartOpen }) => {
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
@@ -31,6 +31,12 @@ const Navbar = ({ setCartOpen }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+  
+  useEffect(() => {
+    cartOpen
+      ? document.body.classList.add("overflow-hidden")
+      : document.body.classList.remove("overflow-hidden");
+  }, [cartOpen]);
 
   return (
     <nav className="w-full fixed top-0 left-0  z-50 bg-white shadow-xl">

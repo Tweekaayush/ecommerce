@@ -6,11 +6,12 @@ import { updateCart } from "../utils/cartUtils";
 const initialState = {
   loading: false,
   data: JSON.parse(localStorage.getItem("cart")) || {
-    cart:  [],
+    cart: [],
     wishlist: [],
     coupon: null,
     total: 0,
     subTotal: 0,
+    discount: 0,
   },
   successMessage: "",
   error: "",

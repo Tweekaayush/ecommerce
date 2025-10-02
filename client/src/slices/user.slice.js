@@ -9,6 +9,7 @@ const initialState = {
     user: {},
     wishList: [],
     cart: [],
+    coupons: [],
   },
   successMessage: "",
   error: "",
@@ -81,11 +82,26 @@ export const updateProfile = createAsyncThunk(
   "updateProfile",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/user/profile`, payload, {
+      const res = await axios.put(`${BASE_URL}/user/profile`, payload, {
         withCredentials: true,
       });
 
       return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const getCoupons = createAsyncThunk(
+  "getCoupons",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${BASE_URL}/coupon`, {
+        withCredentials: true,
+      });
+
+      return res.data.coupons;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -149,7 +165,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
-     builder.addCase(updateProfile.pending, (state) => {
+    builder.addCase(updateProfile.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(updateProfile.fulfilled, (state, action) => {
@@ -158,6 +174,18 @@ const userSlice = createSlice({
       state.successMessage = action.payload.message;
     });
     builder.addCase(updateProfile.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getCoupons.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getCoupons.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.user = action.payload.user;
+      state.successMessage = action.payload.message;
+    });
+    builder.addCase(getCoupons.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

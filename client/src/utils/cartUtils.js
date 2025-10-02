@@ -6,5 +6,11 @@ export const updateCart = (state) => {
   state.data.subTotal = addDecimals(
     state.data.cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
   );
+  if (state.data.coupon) {
+    state.data.discount =
+      subtotal * (state.data.coupon?.discountPercentage / 100) || 0;
+  }
+  state.data.total = addDecimals(state.data.subTotal - state.data.discount);
+
   localStorage.setItem("cart", JSON.stringify(state.data));
 };

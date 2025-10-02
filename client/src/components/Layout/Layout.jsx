@@ -9,14 +9,14 @@ const Layout = () => {
   const [cartOpen, setCartOpen] = useState(false);
   return (
     <>
-      <Navbar setCartOpen={setCartOpen} />
+      <Navbar setCartOpen={setCartOpen} cartOpen={cartOpen} />
       <div
         className={`${
           cartOpen ? "block" : "hidden"
         } w-full h-screen fixed top-0 left-0 bg-black z-[99] opacity-50`}
         onClick={() => setCartOpen(false)}
       ></div>
-      <Cart cartOpen={cartOpen} setCartOpen={setCartOpen}/>
+      <Cart cartOpen={cartOpen} setCartOpen={setCartOpen} />
       <Outlet />
       <Footer />
     </>
