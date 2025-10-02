@@ -36,10 +36,10 @@ const orderSchema = new mongoose.Schema(
       unique: true,
     },
     shippingAddress: {
-        address: {type: String, required: true},
-        city: {type: String, required: true},
-        postalCode: {type: String, required: true},
-        country: {type: String, required: true}
+      address: { type: String, required: true },
+      city: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
     },
     deliveredAt: {
       type: Date,
@@ -48,6 +48,7 @@ const orderSchema = new mongoose.Schema(
       type: Date,
     },
     orderStatus: {
+      type: String,
       enum: ["processing", "delivered", "cancelled"],
       default: "processing",
     },
