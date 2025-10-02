@@ -10,6 +10,7 @@ import { ShoppingCart, NotebookTabs, CreditCard } from "lucide-react";
 import CheckoutCart from "../components/CheckoutCart";
 import Payment from "../components/Payment";
 import ShippingAddress from "../components/ShippingAddress";
+import { placeOrder } from "../slices/order.slice";
 
 const CheckoutPage = () => {
   const {
@@ -18,7 +19,7 @@ const CheckoutPage = () => {
   const {
     loading: userLoading,
     data: {
-      user: { fullAddress },
+      user: { fullAddress, email },
       coupons,
     },
   } = useSelector((state) => state.user);
@@ -56,11 +57,12 @@ const CheckoutPage = () => {
       component: <Payment open={open} setOpen={setOpen} />,
       func: function () {
         const order = {
-          cart,
+          products: cart,
           shippingAddress,
-          coupon,
+          couponCode: coupon,
+          email
         };
-        // dispatch(createOrder(order));
+        dispatch(placeOrder(order));
         return false;
       },
       button: "place order",
@@ -74,9 +76,8 @@ const CheckoutPage = () => {
 
   const handleNextStep = () => {
     if (step > checkoutSteps.length) return;
-    // const res = checkoutSteps[step - 1].func();
-    // if (res)
-    setStep((p) => p + 1);
+    const res = checkoutSteps[step - 1].func();
+    if (res) setStep((p) => p + 1);
   };
 
   const handleClickOutside = (e) => {

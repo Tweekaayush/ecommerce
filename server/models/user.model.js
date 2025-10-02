@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
     fullAddress: {
       address: { type: String },
       city: { type: String },
-      postalCode: { type: String },
+      postalCode: { type: Number },
       country: { type: String },
     },
     cartItems: [

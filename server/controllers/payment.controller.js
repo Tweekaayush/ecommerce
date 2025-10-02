@@ -8,7 +8,7 @@ const {
 } = require("../utils/payment.util");
 
 exports.createCheckoutSession = asyncHandler(async (req, res) => {
-  const { products, couponCode } = req.body;
+  const { products, couponCode, email, shippingAddress } = req.body;
 
   if (!Array.isArray(products) && products.length === 0) {
     res.status(400);
@@ -19,7 +19,7 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
   let totalAmount = 0;
 
   const lineItems = products.map((product) => {
-    const amount = Math.round(product.price * 100);
+    const amount = product.price * 100;
     totalAmount += amount * product.quantity;
 
     return {
@@ -27,10 +27,11 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
         currency: "usd",
         product_data: {
           name: product.name,
-          images: product.image,
+          // image: product.image,
         },
         unit_amount: amount,
       },
+      quantity: product.quantity,
     };
   });
 
@@ -48,13 +49,13 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
     }
   }
 
-  const session = await Stripe.checkout.session.create({
-    line_items: lineItems,
-    payment_method_types: ["card"],
+  const session = await stripe.checkout.sessions.create({
     mode: "payment",
-    // ui_mode: "hosted",
     success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.CLIENT_URL}/failed`,
+    line_items: lineItems,
+    customer_email: email,
+    payment_method_types: ["card"],
     discounts: coupon
       ? [
           {
@@ -65,6 +66,7 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
     metadata: {
       userId: req.user._id.toString(),
       couponCode: couponCode || "",
+      shippingAddress: JSON.stringify(shippingAddress),
       products: JSON.stringify(
         products.map((p) => ({
           product: p._id,
@@ -74,10 +76,6 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
       ),
     },
   });
-
-  if (totalAmount >= 20000) {
-    await createNewCoupon(req.user._id);
-  }
 
   res.status(200).json({
     id: session.id,
@@ -103,18 +101,47 @@ exports.checkoutSuccess = asyncHandler(async (req, res) => {
     }
 
     const products = JSON.parse(session.metadata.products);
+    const shippingAddress = JSON.parse(session.metadata.shippingAddress);
+
+    const totalAmount = session.amount_total / 100;
 
     const order = await Order.create({
       user: session.metadata.userId,
       products: products,
-      totalAmount: session.amount_total / 100,
+      totalAmount: totalAmount,
       stripeSessionId: sessionId,
+      shippingAddress: shippingAddress,
     });
-  }
 
-  res.json({
+    if (totalAmount > 200) {
+      const code =
+        "GIFT" + Math.random().toString(36).substring(2, 8).toUpperCase();
+
+      const date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+      const coupon = await Coupon.create({
+        code: code,
+        discountPercentage: 10,
+        expirationDate: date,
+        userId: session.metadata.userId,
+        isActive: true,
+      });
+    }
+
+    res.json({
+      success: true,
+      orderId: order._id,
+      message: "Payment Successful, order placed.",
+    });
+  } else {
+    res.status(404);
+    throw new Error("Payment session not found");
+  }
+});
+
+exports.stripeKey = asyncHandler(async (req, res) => {
+  res.status(200).json({
     success: true,
-    orderId: order._id,
-    message: "Payment Successful, order placed.",
+    stripeKey: process.env.REACT_APP_STRIPE_KEY,
   });
 });

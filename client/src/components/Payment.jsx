@@ -8,6 +8,7 @@ const Payment = ({setOpen}) => {
       user: { fullAddress, name },
     },
   } = useSelector((state) => state.user);
+
   return (
     <div className="flex flex-col gap-4 col-span-8">
       <div className="flex flex-col pb-8 border-b border-dashed">

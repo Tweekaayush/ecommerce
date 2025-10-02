@@ -100,6 +100,7 @@ const cartSlice = createSlice({
     },
     saveShippingAddress: (state, action) => {
       state.data.shippingAddress = action.payload;
+      return updateCart(state)
     },
     clearCartItems: (state, action) => {
       state.data.cart = [];

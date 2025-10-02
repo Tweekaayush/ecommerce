@@ -30,8 +30,9 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setCartOpen(false)
   }, [pathname]);
-  
+
   useEffect(() => {
     cartOpen
       ? document.body.classList.add("overflow-hidden")

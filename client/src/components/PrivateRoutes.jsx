@@ -16,7 +16,7 @@ const PrivateRoutes = () => {
     <Navigate
       to="/login"
       replace={true}
-      // state={{ previousURL: location.pathname }}
+      state={{ previousURL: location.pathname }}
     />
   );
 };

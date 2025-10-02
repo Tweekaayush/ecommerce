@@ -15,6 +15,8 @@ import AdminDashboardPage from "./pages/AdminDashboardPage";
 import UserListPage from "./pages/UserListPage";
 import ProductListPage from "./pages/ProductListPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import SuccessPage from "./pages/SuccessPage";
+import FailedPage from "./pages/FailedPage";
 
 
 const App = () => {
@@ -39,7 +41,9 @@ const App = () => {
             <Route path="/dashboard/user/list" element={<UserListPage />} />
             <Route path="/dashboard/product/list" element={<ProductListPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/failed" element={<FailedPage />} />
           </Route>
+            <Route path="/success" element={<SuccessPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

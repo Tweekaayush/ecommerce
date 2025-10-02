@@ -34,12 +34,13 @@ const orderSchema = new mongoose.Schema(
     stripeSessionId: {
       type: String,
       unique: true,
+      required:true
     },
     shippingAddress: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
+      address: { type: String  },
+      city: { type: String},
+      postalCode: { type: Number },
+      country: { type: String },
     },
     deliveredAt: {
       type: Date,

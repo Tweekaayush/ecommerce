@@ -12,6 +12,8 @@ exports.createStripeCoupon = asyncHandler(async (discountPercentage) => {
 });
 
 exports.createNewCoupon = asyncHandler(async (userId) => {
+  const code = "GIFT" + Math.random().toString(36).substring(2, 8).toUpperCase()
+  
   const newCoupon = await Coupon.create({
     code: "GIFT" + Math.random().toString(36).substring(2, 8).toUpperCase(),
     discountPercentage: 10,
