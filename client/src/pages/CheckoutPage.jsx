@@ -13,7 +13,7 @@ import ShippingAddress from "../components/ShippingAddress";
 
 const CheckoutPage = () => {
   const {
-    data: { cart, total, subTotal, discount },
+    data: { cart, total, subTotal, discount, shippingAddress, coupon },
   } = useSelector((state) => state.cart);
   const {
     loading: userLoading,
@@ -56,13 +56,9 @@ const CheckoutPage = () => {
       component: <Payment open={open} setOpen={setOpen} />,
       func: function () {
         const order = {
-          orderItems: cart,
+          cart,
           shippingAddress,
-          paymentMethod,
-          itemsPrice,
-          taxPrice,
-          shippingPrice,
-          totalPrice,
+          coupon,
         };
         // dispatch(createOrder(order));
         return false;
