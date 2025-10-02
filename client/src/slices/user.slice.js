@@ -182,7 +182,7 @@ const userSlice = createSlice({
     });
     builder.addCase(getCoupons.fulfilled, (state, action) => {
       state.loading = false;
-      state.data.user = action.payload.user;
+      state.data.coupons = action.payload;
       state.successMessage = action.payload.message;
     });
     builder.addCase(getCoupons.rejected, (state, action) => {

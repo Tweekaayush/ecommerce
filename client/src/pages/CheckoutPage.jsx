@@ -1,16 +1,14 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useDispatch, useSelector } from "react-redux";
-// import ShippingAddress from "../components/ShippingAddress";
-// import CheckoutCart from "../components/CheckoutCart";
-// import Payment from "../components/Payment";
-import { saveShippingAddress } from "../slices/cart.slice";
+import { saveShippingAddress, setCoupon } from "../slices/cart.slice";
 import img from "/assets/cart/empty-cart.png";
 import { ShoppingCart, NotebookTabs, CreditCard } from "lucide-react";
 import CheckoutCart from "../components/CheckoutCart";
 import Payment from "../components/Payment";
 import ShippingAddress from "../components/ShippingAddress";
 import { placeOrder } from "../slices/order.slice";
+import { getCoupons } from "../slices/user.slice";
 
 const CheckoutPage = () => {
   const {
@@ -60,7 +58,7 @@ const CheckoutPage = () => {
           products: cart,
           shippingAddress,
           couponCode: coupon,
-          email
+          email,
         };
         dispatch(placeOrder(order));
         return false;
@@ -91,6 +89,7 @@ const CheckoutPage = () => {
   }, [step]);
 
   useEffect(() => {
+    dispatch(getCoupons());
     window.addEventListener("click", handleClickOutside, true);
     return () => window.removeEventListener("click", handleClickOutside, true);
   }, []);
@@ -106,21 +105,43 @@ const CheckoutPage = () => {
           ref={ref}
           className="w-[400px] h-fit shadow-card bg-white flex flex-col p-4 rounded-lg"
         >
-          <h1 className="heading-1">My Coupons</h1>
+          <h1 className="heading-1 mb-8">My Coupons</h1>
           {coupons.length ? (
             <div className="flex flex-col">
               {coupons.map((c, i) => {
                 return (
                   <div
-                    className="p-4 border bg-gray-200"
+                    className="rounded-lg overflow-hidden bg-gray-100 shadow-card flex h-25"
                     key={c.expirationDate}
                   >
-                    <div>
-                      <h1>{c.code}</h1>
-                      <h1>{c.discountPercentage}</h1>
-                      <p>{c.expirationDate}</p>
+                    <div className="bg-red-500 text-white p-2 text-vertical uppercase h-f">
+                      {c.discountPercentage}% off
                     </div>
-                    <button>Apply</button>
+                    <div className="flex flex-col flex-1 p-2">
+                      <div className="flex border-b border-dashed pb-2">
+                        <div className="flex flex-col flex-1">
+                          <h1 className="font-extrabold">{c.code}</h1>
+                          <p className="body-text font-bold text-green-500">
+                            Save ${(subTotal * c.discountPercentage) / 100} on
+                            the order!
+                          </p>
+                        </div>
+                        <button
+                          className="heading-1 cursor-pointer"
+                          onClick={() => [
+                            dispatch(setCoupon(c)),
+                            setOpen(false),
+                          ]}
+                        >
+                          Apply
+                        </button>
+                      </div>
+                      <div className="pt-1">
+                        <p className="text-xs">
+                          Expires on: {c.expirationDate.split("T")[0]}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 );
               })}

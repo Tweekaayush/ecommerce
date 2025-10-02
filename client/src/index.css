@@ -95,6 +95,10 @@
   .body-text {
     @apply text-sm tracking-[1px];
   }
+  .text-vertical {
+    writing-mode: vertical-rl;
+    transform: rotateZ(180deg)
+  }
 
   /* butttons */
 

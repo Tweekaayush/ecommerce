@@ -32,27 +32,24 @@ const initialState = {
 //   }
 // );
 
-// export const updateCart = createAsyncThunk(
-//   "update",
-//   async (payload, { rejectWithValue }) => {
-//     try {
-//       const cart = payload.data.cart.map((x) => {
-//         return { _id: x._id, quantity: x.quantity };
-//       });
-//       const res = await axios.post(
-//         `${BASE_URL}/cart/`,
-//         { data: cart },
-//         {
-//           withCredentials: true,
-//         }
-//       );
+export const validateCoupon = createAsyncThunk(
+  "validateCoupon",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/coupon/validate`,
+        { code: payload },
+        {
+          withCredentials: true,
+        }
+      );
 
-//       return res.data;
-//     } catch (error) {
-//       return rejectWithValue(error.response.data.message);
-//     }
-//   }
-// );
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 const cartSlice = createSlice({
   name: "cart",
@@ -100,7 +97,11 @@ const cartSlice = createSlice({
     },
     saveShippingAddress: (state, action) => {
       state.data.shippingAddress = action.payload;
-      return updateCart(state)
+      return updateCart(state);
+    },
+    setCoupon: (state, action) => {
+      state.data.coupon = action.payload;
+      return updateCart(state);
     },
     clearCartItems: (state, action) => {
       state.data.cart = [];
@@ -110,19 +111,19 @@ const cartSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder.addCase(updateCart.pending, (state, action) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(updateCart.fulfilled, (state, action) => {
-    //   state.loading = true;
-    //   state.data.cart = action.payload.updatedCart;
-    //   state.data.cartMessage = action.payload.cartMessage;
-    //   state.data.subTotal = action.payload.subTotal;
-    // });
-    // builder.addCase(updateCart.rejected, (state, action) => {
-    //   state.loading = true;
-    //   state.error = action.payload;
-    // });
+    builder.addCase(validateCoupon.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(validateCoupon.fulfilled, (state, action) => {
+      state.loading = true;
+      state.data.coupon = action.payload.coupon;
+      state.successMessage = action.payload.message;
+      return updateCart(state)
+    });
+    builder.addCase(validateCoupon.rejected, (state, action) => {
+      state.loading = true;
+      state.error = action.payload;
+    });
   },
 });
 
@@ -132,6 +133,7 @@ export const {
   updateQuantity,
   saveShippingAddress,
   clearCartItems,
+  setCoupon,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
