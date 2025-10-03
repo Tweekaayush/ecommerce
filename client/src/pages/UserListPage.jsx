@@ -18,7 +18,7 @@ const UserListPage = () => {
     dispatch(getUsersList(page));
   }, [page]);
   return (
-    <section>
+    <section className="h-screen">
       <div className="container">
         <Link to="/dashboard" className="heading-5 text-gray-500 mb-4">
           DASHBOARD /

@@ -103,10 +103,10 @@ const MyOrders = () => {
       <h1 className="heading-1 mb-12.5">My Orders</h1>
       <div className="flex-1">
         <div className="grid grid-cols-12 gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
-          <span className="list-head col-span-6">ID</span>
-          <span className="list-head col-span-2">total</span>
+          <span className="list-head col-span-5">ID</span>
           <span className="list-head col-span-2">status</span>
-          <span className="list-head col-span-2"></span>
+          <span className="list-head col-span-2">total</span>
+          <span className="list-head col-span-3">Placed On</span>
         </div>
         <div className="flex flex-col">
           {orderList?.map((order, i) => {
@@ -116,10 +116,12 @@ const MyOrders = () => {
                 className="grid grid-cols-12 gap-4 items-center text-center py-7 bg-white nth-[odd]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
                 onClick={() => navigate(`/order/${order?._id}`)}
               >
-                <p className="list-body col-span-6">{order?._id}</p>
-                <p className="list-body col-span-2">${order?.totalAmount}</p>
+                <p className="list-body col-span-5">{order?._id}</p>
                 <p className="list-body col-span-2">{order?.orderStatus}</p>
-                <Trash className="w-4 h-4 text-red-500 mx-auto" />
+                <p className="list-body col-span-2">${order?.totalAmount}</p>
+                <p className="list-body col-span-3">
+                  ${order?.createdAt.split("T")[0]}
+                </p>
               </div>
             );
           })}

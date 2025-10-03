@@ -30,8 +30,7 @@ const OrderListPage = () => {
             <span className="list-head col-span-5">ID</span>
             <span className="list-head col-span-2">Status</span>
             <span className="list-head col-span-2">Amount</span>
-            <span className="list-head col-span-2">Placed On</span>
-            <span className="list-head col-span-1"></span>
+            <span className="list-head col-span-3">Placed On</span>
           </div>
           <div className="">
             {orderList?.map((order) => {
@@ -44,10 +43,9 @@ const OrderListPage = () => {
                   <p className="list-body col-span-5">{order?._id}</p>
                   <p className="list-body col-span-2"> {order?.orderStatus}</p>
                   <p className="list-body col-span-2">{order?.totalAmount}</p>
-                  <p className="list-body col-span-2">
+                  <p className="list-body col-span-3">
                     {order?.createdAt.split("T")[0]}
                   </p>
-                  <Trash className="w-4 h-4 text-red-500 mx-auto" />
                 </div>
               );
             })}
