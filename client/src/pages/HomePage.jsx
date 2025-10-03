@@ -26,7 +26,7 @@ const HomePage = () => {
       <section>
         <div className="container flex flex-col items-center">
           <h1 className="heading-2 mb-7">Best Sellers</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {
               bestSellingProducts.map((product)=>{
                 return <ProductCard key={product._id} {...product}/>
