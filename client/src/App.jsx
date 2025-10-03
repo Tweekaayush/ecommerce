@@ -19,6 +19,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import SuccessPage from "./pages/SuccessPage";
 import FailedPage from "./pages/FailedPage";
 import AdminRoute from "./components/AdminRoute";
+import OrderPage from "./pages/OrderPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/failed" element={<FailedPage />} />
+            <Route path="/order/:id" element={<OrderPage />} />
           </Route>
           <Route element={<AdminRoute />}>
             <Route path="/dashboard" element={<AdminDashboardPage />} />

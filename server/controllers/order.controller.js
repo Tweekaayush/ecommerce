@@ -32,12 +32,16 @@ exports.getMyOrders = asyncHandler(async (req, res) => {
 exports.getOrderById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  const order = await Order.findById(id);
+  const order = await Order.findById(id).populate({
+    path: "products.product",
+    select: "",
+  });
 
   if (!order) {
     res.status(404);
     throw new Error("Order not found!");
   }
+  console.log(order);
 
   res.json({
     success: true,
@@ -47,9 +51,25 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 
 exports.updateOrder = asyncHandler(async (req, res) => {
   const { id } = req.params;
+
+  const { orderStatus } = req.body;
+
   const order = await Order.findById(id);
 
-  const updatedOrder = order.save();
+  order.orderStatus = orderStatus;
+
+  if (orderStatus === "cancel") {
+    order.cancelledAt = new Date();
+  }
+  if (orderStatus === "delivered") {
+    order.deliveredAt = new Date();
+  }
+
+  await order.save();
+
+  const updatedOrder = await Order.findById(id).populate({
+    path: "products.product",
+  });
 
   res.json({
     success: true,

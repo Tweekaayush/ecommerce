@@ -34,11 +34,11 @@ const orderSchema = new mongoose.Schema(
     stripeSessionId: {
       type: String,
       unique: true,
-      required:true
+      required: true,
     },
     shippingAddress: {
-      address: { type: String  },
-      city: { type: String},
+      address: { type: String },
+      city: { type: String },
       postalCode: { type: Number },
       country: { type: String },
     },
@@ -50,8 +50,12 @@ const orderSchema = new mongoose.Schema(
     },
     orderStatus: {
       type: String,
-      enum: ["processing", "delivered", "cancelled"],
+      enum: ["processing", "delivered", "cancel"],
       default: "processing",
+    },
+    discountPercentage: {
+      type: Number,
+      default: 0,
     },
   },
   {

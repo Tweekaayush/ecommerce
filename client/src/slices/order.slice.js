@@ -9,7 +9,7 @@ const initialState = {
     orderId: null,
     orderList: [],
     orderDetails: {},
-    totalPages: 0
+    totalPages: 0,
   },
   successMessage: "",
   error: "",
@@ -19,7 +19,41 @@ export const getMyOrders = createAsyncThunk(
   "getMyOrders",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/order/my-orders?page=${payload}`, {
+      const res = await axios.get(
+        `${BASE_URL}/order/my-orders?page=${payload}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.messsage);
+    }
+  }
+);
+
+export const getOrderById = createAsyncThunk(
+  "getOrderById",
+  async (payload, { rejectWithValue }) => {
+    try {
+      console.log(payload);
+      const res = await axios.get(`${BASE_URL}/order/${payload}`, {
+        withCredentials: true,
+      });
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.messsage);
+    }
+  }
+);
+
+export const updateOrder = createAsyncThunk(
+  "updateOrder",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.put(`${BASE_URL}/order/${payload.id}`, payload, {
         withCredentials: true,
       });
 
@@ -114,6 +148,28 @@ const orderSlice = createSlice({
       state.data.totalPages = action.payload.totalPages;
     });
     builder.addCase(getMyOrders.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getOrderById.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getOrderById.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.orderDetails = action.payload.order;
+    });
+    builder.addCase(getOrderById.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(updateOrder.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(updateOrder.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.orderDetails = action.payload.order;
+    });
+    builder.addCase(updateOrder.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
