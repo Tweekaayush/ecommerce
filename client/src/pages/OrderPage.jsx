@@ -12,23 +12,23 @@ const OrderItem = (props) => {
   } = props;
 
   return (
-    <div className="grid grid-cols-12 border border-gray-400 min-h-36">
-      <div className="flex items-center h-full bg-gray-100 col-span-2">
+    <div className="grid grid-cols-[5fr_2fr_3fr_2fr]  sm:grid-cols-[2fr_3fr_2fr_3fr_2fr] border border-gray-400 min-h-20">
+      <div className="hidden md:flex items-center h-full bg-gray-100">
         <img
           src={image}
           alt={name}
           className="w-full object-cover object-[50%_50%] mix-blend-multiply"
         />
       </div>
-      <div className="p-2 col-span-4">
+      <div className="p-2">
         <h4 className="text-sm text-black">{name}</h4>
         <p className="text-sm text-gray-600">Brand: {brand}</p>
       </div>
-      <p className="text-sm font-extrabold col-span-2 py-2 text-center">
+      <p className="text-sm font-extrabold py-2 text-center">
         ${price}
       </p>
-      <div className="h-7 text-sm text-center p-2 col-span-2 ">{quantity}</div>
-      <p className="text-sm font-extrabold col-span-2 text-center py-2 pr-2">
+      <div className="h-7 text-sm text-center p-2">{quantity}</div>
+      <p className="text-sm font-extrabold text-center py-2 pr-2">
         ${price * quantity}
       </p>
     </div>
@@ -92,9 +92,9 @@ const OrderPage = () => {
   }, [products]);
 
   return (
-    <section className="h-screen flex justify-center items-center">
-      <div className="container grid grid-cols-12 gap-4">
-        <div className="flex flex-col col-span-8 gap-4">
+    <section className="min-h-screen flex justify-center items-center">
+      <div className="container grid grid-cols-[1fr] lg:grid-cols-[8fr_4fr] gap-4">
+        <div className="flex flex-col gap-4">
           <div className="flex flex-col">
             <h1 className="heading-1 mb-6">Shipping Address</h1>
 
@@ -118,11 +118,11 @@ const OrderPage = () => {
 
           <div className="flex flex-col">
             <h1 className="heading-1 mb-8">Order Items</h1>
-            <div className="grid grid-cols-12 gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
-              <span className="list-head col-span-6">Product</span>
-              <span className="list-head col-span-2">price</span>
-              <span className="list-head col-span-2">Quantity</span>
-              <span className="list-head col-span-2">total</span>
+            <div className="grid grid-cols-[5fr_2fr_3fr_2fr] gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
+              <span className="list-head">Product</span>
+              <span className="list-head">price</span>
+              <span className="list-head">Quantity</span>
+              <span className="list-head">total</span>
             </div>
             <div className="flex flex-col gap-4">
               {products?.map((item) => {
@@ -131,8 +131,8 @@ const OrderPage = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-4 flex flex-col gap-4">
-          <div className="flex flex-col py-8 px-4 h-fit shadow-card">
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
             <h1 className="heading-1 mb-4">Order summary</h1>
             <div className="flex justify-between mb-4">
               <h4 className="heading-6">Subtotal</h4>
@@ -148,7 +148,7 @@ const OrderPage = () => {
             </div>
           </div>
           {role === "admin" && (
-            <div className="flex flex-col py-8 px-4 h-fit shadow-card">
+            <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
               <h1 className="heading-1 mb-4">Order Status</h1>
               {cancelledAt && (
                 <p className="text-sm capitalize tracking-wider">
