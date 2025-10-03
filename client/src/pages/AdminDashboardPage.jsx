@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminDashboardPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     data: { totalRevenue, totalSales, totalUsers, totalProducts, revenueChart },
   } = useSelector((state) => state.admin);
@@ -33,13 +33,16 @@ const AdminDashboardPage = () => {
               <h1 className="text-green-500 heading-5 mb-2 font-bold">
                 Total Revenue
               </h1>
-              <p>{totalRevenue}</p>
+              <p>${totalRevenue}</p>
             </div>
             <div className="col-span-1 flex items-center justify-center">
               <DollarSign className="text-white bg-green-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="dashboard-card" onClick={()=>navigate('/dashboard/order/list')}>
+          <div
+            className="dashboard-card"
+            onClick={() => navigate("/dashboard/order/list")}
+          >
             <div className="col-span-2">
               <h1 className="text-red-500 heading-5 mb-2 font-bold">
                 Total Sales
@@ -50,7 +53,10 @@ const AdminDashboardPage = () => {
               <DollarSign className="text-white bg-red-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="dashboard-card" onClick={()=>navigate('/dashboard/user/list')}>
+          <div
+            className="dashboard-card"
+            onClick={() => navigate("/dashboard/user/list")}
+          >
             <div className="col-span-2">
               <h1 className="text-blue-500 heading-5 mb-2 font-bold">Users</h1>
               <p>{totalUsers}</p>
@@ -59,7 +65,10 @@ const AdminDashboardPage = () => {
               <User className="text-white bg-blue-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="dashboard-card"  onClick={()=>navigate('/dashboard/product/list')}>  
+          <div
+            className="dashboard-card"
+            onClick={() => navigate("/dashboard/product/list")}
+          >
             <div className="col-span-2">
               <h1 className="text-yellow-500 heading-5 mb-2 font-bold">
                 Product
@@ -70,7 +79,7 @@ const AdminDashboardPage = () => {
               <DollarSign className="text-white bg-yellow-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="col-span-3 shadow-card p-4 rounded-sm hover:shadow-hover cursor-pointer">
+          <div className="col-span-4 md:col-span-3 shadow-card p-4 rounded-sm hover:shadow-hover cursor-pointer">
             <h1 className="heading-1">Revenue</h1>
             <p className="body-text mb-4">(last 7 days)</p>
             <ResponsiveContainer width="100%" height={300}>

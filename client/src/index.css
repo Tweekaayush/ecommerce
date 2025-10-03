@@ -13,6 +13,7 @@
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
   --color-overlay: rgba(0, 0, 0, 0.5);
+
 }
 
 @layer base {
@@ -69,6 +70,15 @@
     @apply min-w-full w-full xl:w-7xl xl:min-w-7xl px-4 mx-auto;
   }
 
+  .ellipses {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
   /* Headings */
 
   .heading-1 {
@@ -92,7 +102,7 @@
   }
 
   .heading-6 {
-    @apply  relative font-extrabold tracking-wide ;
+    @apply relative font-extrabold tracking-wide;
   }
 
   /* body text */
@@ -102,7 +112,7 @@
   }
   .text-vertical {
     writing-mode: vertical-rl;
-    transform: rotateZ(180deg)
+    transform: rotateZ(180deg);
   }
 
   /* butttons */
@@ -171,15 +181,14 @@
   /* Dashboard */
 
   .dashboard-card {
-    @apply col-span-1 shadow-card p-4 grid grid-cols-3 hover:shadow-card-hover cursor-pointer transition-all duration-300 ease-in-out rounded-sm;
+    @apply col-span-2 md:col-span-1 shadow-card p-4 grid grid-cols-3 hover:shadow-card-hover cursor-pointer transition-all duration-300 ease-in-out rounded-sm;
   }
 
   .list-head {
-    @apply text-sm text-gray-500 uppercase;
+    @apply text-xs sm:text-sm text-gray-500 uppercase;
   }
 
   .list-body {
-    @apply text-sm text-black;
+    @apply text-xs md:text-sm text-black;
   }
-
 }

@@ -37,12 +37,12 @@ const UserListPage = () => {
               return (
                 <div
                   key={user._id}
-                  className="grid grid-cols-12 gap-4 items-center text-center py-7 bg-white nth-[even]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                  className="grid grid-cols-12 gap-4 items-center px-2 text-center py-7 bg-white nth-[even]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
                 >
-                  <p className="list-body col-span-3">{user?._id}</p>
-                  <p className="list-body col-span-3"> {user?.name}</p>
-                  <p className="list-body col-span-3">{user?.email}</p>
-                  <p className="list-body col-span-2">{user?.role}</p>
+                  <p className="list-body col-span-3 ellipses">{user?._id}</p>
+                  <p className="list-body col-span-3 ellipses"> {user?.name}</p>
+                  <p className="list-body col-span-3 ellipses">{user?.email}</p>
+                  <p className="list-body col-span-2 ellipses">{user?.role}</p>
                   <Trash className="w-4 h-4 text-red-500 mx-auto" />
                 </div>
               );

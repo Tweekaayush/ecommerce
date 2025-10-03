@@ -27,9 +27,9 @@ const OrderListPage = () => {
         <h1 className="heading-4 text-red-500 uppercase mb-7">Order List</h1>
         <div className="flex flex-col">
           <div className="grid grid-cols-12 gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
-            <span className="list-head col-span-5">ID</span>
-            <span className="list-head col-span-2">Status</span>
-            <span className="list-head col-span-2">Amount</span>
+            <span className="list-head col-span-3">ID</span>
+            <span className="list-head col-span-3">Status</span>
+            <span className="list-head col-span-3">Amount</span>
             <span className="list-head col-span-3">Placed On</span>
           </div>
           <div className="">
@@ -38,12 +38,12 @@ const OrderListPage = () => {
                 <div
                   key={order?._id}
                   onClick={() => navigate(`/order/${order?._id}`)}
-                  className="grid grid-cols-12 gap-4 items-center text-center py-7 bg-white nth-[odd]:bg-gray-100 nth-[odd]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                  className="grid grid-cols-12 gap-4 items-center text-center py-7 px-2 bg-white nth-[odd]:bg-gray-100 nth-[odd]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
                 >
-                  <p className="list-body col-span-5">{order?._id}</p>
-                  <p className="list-body col-span-2"> {order?.orderStatus}</p>
-                  <p className="list-body col-span-2">{order?.totalAmount}</p>
-                  <p className="list-body col-span-3">
+                  <p className="list-body col-span-3 ellipses">{order?._id}</p>
+                  <p className="list-body col-span-3 capitalize ellipses"> {order?.orderStatus}</p>
+                  <p className="list-body col-span-3 ellipses">${order?.totalAmount}</p>
+                  <p className="list-body col-span-3 ellipses">
                     {order?.createdAt.split("T")[0]}
                   </p>
                 </div>
