@@ -153,15 +153,15 @@
   .form-label > .form-input:user-valid + span,
   .form-label > .form-input:user-invalid + span,
   .form-label > .form-input:focus + span {
-    @apply -top-2 left-4 px-1 text-sm;
+    @apply -top-2 left-4 px-1 text-xs text-black;
   }
 
   .form-label > .form-input + span {
-    @apply absolute top-2 left-6 text-black bg-white font-bold capitalize transition-all duration-300 ease-in-out;
+    @apply absolute top-2 left-6 text-gray-400 bg-white font-semibold capitalize transition-all duration-300 ease-in-out;
   }
 
   .form-label > .form-input-2 + span {
-    @apply text-sm absolute -top-2 left-4 text-black bg-white font-bold capitalize transition-all duration-300 ease-in-out;
+    @apply text-xs absolute -top-2 left-4 text-black bg-white font-bold capitalize transition-all duration-300 ease-in-out;
   }
 
   .form-error-msg {
@@ -179,10 +179,7 @@
   }
 
   .list-body {
-    @apply text-sm text-black text-center;
+    @apply text-sm text-black;
   }
 
-  .list-item {
-    @apply text-sm text-black text-center;
-  }
 }
