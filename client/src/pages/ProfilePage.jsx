@@ -102,24 +102,26 @@ const MyOrders = () => {
     <div className="flex flex-col">
       <h1 className="heading-1 mb-12.5">My Orders</h1>
       <div className="flex-1">
-        <div className="grid grid-cols-12 gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
-          <span className="list-head col-span-5">ID</span>
-          <span className="list-head col-span-2">status</span>
-          <span className="list-head col-span-2">total</span>
-          <span className="list-head col-span-3">Placed On</span>
+        <div className="grid grid-cols-[5fr_2fr_2fr_3fr] gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
+          <span className="list-head">ID</span>
+          <span className="list-head">status</span>
+          <span className="list-head">total</span>
+          <span className="list-head">Placed On</span>
         </div>
         <div className="flex flex-col">
           {orderList?.map((order, i) => {
             return (
               <div
                 key={order?._id}
-                className="grid grid-cols-12 gap-4 items-center text-center py-7 bg-white nth-[odd]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                className="grid grid-cols-[5fr_2fr_2fr_3fr] gap-4 items-center text-center py-7 px-2 bg-white nth-[odd]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
                 onClick={() => navigate(`/order/${order?._id}`)}
               >
-                <p className="list-body col-span-5">{order?._id}</p>
-                <p className="list-body col-span-2">{order?.orderStatus}</p>
-                <p className="list-body col-span-2">${order?.totalAmount}</p>
-                <p className="list-body col-span-3">
+                <p className="list-body ellipses">{order?._id}</p>
+                <p className="list-body capitalize ellipses">
+                  {order?.orderStatus}
+                </p>
+                <p className="list-body ellipses">${order?.totalAmount}</p>
+                <p className="list-body ellipses">
                   ${order?.createdAt.split("T")[0]}
                 </p>
               </div>
@@ -159,17 +161,17 @@ const AccountInfo = () => {
     <div className="flex flex-col">
       <h1 className="heading-1 mb-12.5">Account</h1>
       <div className="flex flex-col">
-        <div className="grid grid-cols-12 gap-4 p-4">
-          <h5 className="heading-5 col-span-2">Name</h5>
-          <p className="col-span-10 body-text">{name}</p>
+        <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">
+          <h5 className="heading-5">Name</h5>
+          <p className="body-text">{name}</p>
         </div>
-        <div className="grid grid-cols-12 gap-4 p-4 bg-gray-100">
-          <h5 className="heading-5 col-span-2">Email</h5>
-          <p className="col-span-10 body-text"> {email}</p>
+        <div className="grid grid-cols-[2fr_10fr] gap-4 p-4 bg-gray-100">
+          <h5 className="heading-5 ">Email</h5>
+          <p className="body-text"> {email}</p>
         </div>
-        <div className="grid grid-cols-12 gap-4 p-4">
-          <h5 className="heading-5 col-span-2">Address</h5>
-          <p className="col-span-10 body-text">
+        <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">
+          <h5 className="heading-5 ">Address</h5>
+          <p className="body-text">
             {fullAddress?.address && (
               <>
                 {fullAddress?.address}, {fullAddress?.postalCode}
@@ -179,9 +181,9 @@ const AccountInfo = () => {
             )}
           </p>
         </div>
-        <div className="grid grid-cols-12 gap-4 p-4 bg-gray-100">
-          <h5 className="heading-5 col-span-2">Joined On</h5>
-          <p className="col-span-10 body-text">{createdAt.substring(0, 10)}</p>
+        <div className="grid grid-cols-[2fr_10fr] gap-4 p-4 bg-gray-100">
+          <h5 className="heading-5 ">Joined On</h5>
+          <p className="body-text">{createdAt.substring(0, 10)}</p>
         </div>
       </div>
     </div>
@@ -203,22 +205,22 @@ const ProfilePage = () => {
     {
       name: "account",
       component: <AccountInfo />,
-      icon: <User />,
+      icon: <User className="w-5 h-5" />,
     },
     {
       name: "privacy",
       component: <UpdateProfile />,
-      icon: <Lock />,
+      icon: <Lock className="w-5 h-5" />,
     },
     {
       name: "address",
       component: <UpdateAddress />,
-      icon: <Lock />,
+      icon: <Lock className="w-5 h-5" />,
     },
     {
       name: "orders",
       component: <MyOrders />,
-      icon: <ShoppingCart />,
+      icon: <ShoppingCart className="w-5 h-5" />,
     },
   ];
 
@@ -233,9 +235,9 @@ const ProfilePage = () => {
 
   return (
     <section className="min-h-screen flex justify-center items-center">
-      <div className="container grid grid-cols-12 gap-4">
-        <div className="h-fit col-span-3">
-          <div className="flex items-center py-8 px-4 w-full gap-2.5">
+      <div className="container grid grid-cols-[1fr] md:grid-cols-[3fr_9fr] gap-4">
+        <div className="h-fit">
+          <div className="flex items-center py-8  w-full gap-2.5">
             <div className="h-14 w-14 rounded-full overflow-hidden">
               <img
                 className="w-full h-full object-fit object-[50%_50%]"
@@ -248,38 +250,38 @@ const ProfilePage = () => {
               <p className="body-text text-gray-700">{email}</p>
             </div>
           </div>
-          <ul className="w-full h-full flex flex-col items-center overflow-hidden bg-gray-100">
+          <ul className="w-full h-full flex flex-row md:flex-col items-center overflow-hidden bg-gray-100">
             {profileComponents.map((p, i) => {
               return (
                 <li
                   key={p.name}
-                  className="flex items-center w-full p-4 border-b last-of-type:border-b-0 border-gray-300 text-sm  gap-4 hover:bg-gray-300 cursor-pointer"
+                  className="flex justify-center md:justify-start items-center w-full p-4 border-b last-of-type:border-b-0 border-gray-300 text-sm  gap-4 hover:bg-gray-300 cursor-pointer"
                   onClick={() => setProfileLink(i)}
                 >
                   {p.icon}
-                  <span className="capitalize">{p.name}</span>
+                  <span className="capitalize hidden md:block">{p.name}</span>
                 </li>
               );
             })}
             {role === "admin" && (
               <li
-                className="flex items-center w-full p-4 border-b last-of-type:border-b-0 border-gray-300 text-sm  gap-4 hover:bg-gray-300 cursor-pointer"
+                className="flex justify-center md:justify-start items-center w-full p-4 border-b last-of-type:border-b-0 border-gray-300 text-sm  gap-4 hover:bg-gray-300 cursor-pointer"
                 onClick={() => navigate("/dashboard")}
               >
-                <LayoutDashboard />
-                <span className="capitalize">dashboard</span>
+                <LayoutDashboard className="w-5 h-5" />
+                <span className="capitalize hidden md:block">dashboard</span>
               </li>
             )}
             <li
-              className="flex items-center w-full p-4 border-b last-of-type:border-b-0 border-gray-300 text-sm  gap-4 hover:bg-gray-300 cursor-pointer"
+              className="flex justify-center md:justify-start items-center w-full p-4 border-b last-of-type:border-b-0 border-gray-300 text-sm  gap-4 hover:bg-gray-300 cursor-pointer"
               onClick={() => dispatch(logout())}
             >
-              <LogOut />
-              <span className="capitalize">logout</span>
+              <LogOut className="w-5 h-5" />
+              <span className="capitalize hidden md:block">logout</span>
             </li>
           </ul>
         </div>
-        <div className="col-span-9 p-4 shadow-card h-[500px] rounded-sm">
+        <div className="p-4 shadow-card h-[500px] rounded-sm">
           <ActiveComponent />
         </div>
       </div>

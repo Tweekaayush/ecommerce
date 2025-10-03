@@ -108,7 +108,7 @@
   /* body text */
 
   .body-text {
-    @apply text-sm tracking-widest;
+    @apply text-xs sm:text-sm tracking-widest;
   }
   .text-vertical {
     writing-mode: vertical-rl;
