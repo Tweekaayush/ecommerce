@@ -18,7 +18,7 @@ const Payment = ({ setOpen }) => {
   const [formData, setFormData] = useState(coupon?.code || "");
 
   return (
-    <div className="flex flex-col gap-4 col-span-12 lg:col-span-8">
+    <div className="flex flex-col gap-4">
       <div className="flex flex-col pb-8 border-b border-dashed">
         <h1 className="heading-1 mb-8">Shipping Address</h1>
         <div className="">

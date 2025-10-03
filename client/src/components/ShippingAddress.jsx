@@ -24,7 +24,7 @@ const ShippingAddress = () => {
   }, [fullAddress?.address]);
 
   return (
-    <div className="col-span-12 lg:col-span-8">
+    <div className="flex flex-col">
       <h1 className="heading-1 mb-7">Shipping Adress</h1>
       {fullAddress && fullAddress?.address && (
         <div className="mb-4">
