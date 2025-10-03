@@ -161,28 +161,30 @@ const CheckoutPage = () => {
         />
         <div className="grid grid-cols-12 gap-4 mt-20 h-full">
           <ActiveComponent />
-          <div className="flex flex-col py-8 px-4 h-fit shadow-card col-span-4">
-            <h1 className="heading-1 mb-4">cart summary</h1>
-            <div className="flex justify-between mb-4">
-              <h4 className="heading-6">Subtotal</h4>
-              <p className="text-sm capitalize">${subTotal}</p>
-            </div>
-            <div className="flex justify-between mb-4">
-              <h4 className="heading-6">Discount</h4>
-              <p className="text-sm capitalize">${discount}</p>
-            </div>
-            <div className="flex justify-between mb-4 border-t pt-4 border-dashed">
-              <h4 className="heading-6">Total</h4>
-              <p className="text-sm capitalize">${total}</p>
-            </div>
+          <div className="col-span-12 lg:col-span-4">
+            <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
+              <h1 className="heading-1 mb-4">cart summary</h1>
+              <div className="flex justify-between mb-4">
+                <h4 className="heading-6">Subtotal</h4>
+                <p className="text-sm capitalize">${subTotal}</p>
+              </div>
+              <div className="flex justify-between mb-4">
+                <h4 className="heading-6">Discount</h4>
+                <p className="text-sm capitalize">${discount}</p>
+              </div>
+              <div className="flex justify-between mb-4 border-t pt-4 border-dashed">
+                <h4 className="heading-6">Total</h4>
+                <p className="text-sm capitalize">${total}</p>
+              </div>
 
-            <button
-              className="button-1"
-              onClick={handleNextStep}
-              disabled={false}
-            >
-              {checkoutSteps[step - 1]?.button}
-            </button>
+              <button
+                className="button-1"
+                onClick={handleNextStep}
+                disabled={false}
+              >
+                {checkoutSteps[step - 1]?.button}
+              </button>
+            </div>
           </div>
         </div>
         <div></div>

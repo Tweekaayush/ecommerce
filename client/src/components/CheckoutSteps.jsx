@@ -8,7 +8,7 @@ const CheckoutSteps = ({ stepNo, checkoutSteps, setStep }) => {
         style={{
           width: `calc(${
             (stepNo - 1) / (checkoutSteps.length - 1)
-          }*100% - 55px)`,
+          }*100% - 60px)`,
         }}
       ></span>
       {checkoutSteps.map((step, i) => {
@@ -16,7 +16,7 @@ const CheckoutSteps = ({ stepNo, checkoutSteps, setStep }) => {
           <div className="flex flex-col items-center gap-2">
             <button
               key={i}
-              className={`w-10 h-10 rounded-full flex items-center justify-center ${
+              className={`w-8 h-8 md:w-10 md:h-10 p-2 rounded-full flex items-center justify-center ${
                 stepNo === i + 1
                   ? "bg-blue-500 text-white"
                   : stepNo > i + 1
@@ -28,7 +28,9 @@ const CheckoutSteps = ({ stepNo, checkoutSteps, setStep }) => {
             >
               {checkoutSteps[i].icon}
             </button>
-            <h1 className="heading-5 text-gray-500">{checkoutSteps[i].name}</h1>
+            <h1 className="heading-5 text-gray-500 text-center">
+              {checkoutSteps[i].name}
+            </h1>
           </div>
         );
       })}

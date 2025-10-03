@@ -18,7 +18,7 @@ const Payment = ({ setOpen }) => {
   const [formData, setFormData] = useState(coupon?.code || "");
 
   return (
-    <div className="flex flex-col gap-4 col-span-8">
+    <div className="flex flex-col gap-4 col-span-12 lg:col-span-8">
       <div className="flex flex-col pb-8 border-b border-dashed">
         <h1 className="heading-1 mb-8">Shipping Address</h1>
         <div className="">
@@ -29,7 +29,7 @@ const Payment = ({ setOpen }) => {
           </p>
         </div>
       </div>
-      <div className="flex pb-8 border-b border-dashed gap-8">
+      <div className="flex pb-8 border-b border-dashed gap-8 flex-col md:flex-row">
         <div className="flex flex-col">
           <h1 className="heading-1 mb-8">Coupon</h1>
           <form
@@ -62,7 +62,7 @@ const Payment = ({ setOpen }) => {
           </p>
         </div>
         {coupon ? (
-          <div className="flex justify-center items-center">
+          <div className="flex items-center">
             <div
               className="rounded-lg overflow-hidden bg-gray-100 shadow-card flex h-25"
               key={coupon?.expirationDate}
