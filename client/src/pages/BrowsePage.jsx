@@ -31,7 +31,7 @@ const BrowsePage = () => {
   return (
     <section>
       <div className="container min-h-screen">
-        <div className="flex flex-col bg-gray-100 p-4">
+        <div className="flex flex-col bg-gray-100 p-4 mb-8">
           <h1 className="heading-1 mb-4">Categories</h1>
           <div className="flex flex-wrap gap-4 mb-4">
             <span
@@ -61,7 +61,7 @@ const BrowsePage = () => {
             })}
           </div>
         </div>
-        <div className="py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+        <div className="py-4 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
           {products?.map((product) => {
             return <ProductCard {...product} key={product?._id} slider={false} />;
           })}
