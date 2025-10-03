@@ -13,11 +13,11 @@ import { loadUser } from "./slices/user.slice";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import UserListPage from "./pages/UserListPage";
+import OrderListPage from "./pages/OrderListPage";
 import ProductListPage from "./pages/ProductListPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import SuccessPage from "./pages/SuccessPage";
 import FailedPage from "./pages/FailedPage";
-
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,11 +39,15 @@ const App = () => {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/dashboard" element={<AdminDashboardPage />} />
             <Route path="/dashboard/user/list" element={<UserListPage />} />
-            <Route path="/dashboard/product/list" element={<ProductListPage />} />
+            <Route path="/dashboard/order/list" element={<OrderListPage />} />
+            <Route
+              path="/dashboard/product/list"
+              element={<ProductListPage />}
+            />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/failed" element={<FailedPage />} />
           </Route>
-            <Route path="/success" element={<SuccessPage />} />
+          <Route path="/success" element={<SuccessPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

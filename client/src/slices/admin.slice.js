@@ -10,8 +10,10 @@ const initialState = {
     totalSales: 0,
     totalProducts: 0,
     userList: [],
+    orderList: [],
     productList: [],
     revenueChart: [],
+    totalPages: 0,
   },
   successMessage: "",
   error: "",
@@ -38,7 +40,7 @@ export const getUsersList = createAsyncThunk(
       const res = await axios.get(`${BASE_URL}/user/list?page=${payload}`, {
         withCredentials: true,
       });
-      return res.data.userList;
+      return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -52,7 +54,21 @@ export const getProductsList = createAsyncThunk(
       const res = await axios.get(`${BASE_URL}/product/list?page=${payload}`, {
         withCredentials: true,
       });
-      return res.data.productList;
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const getOrdersList = createAsyncThunk(
+  "getOrdersList",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${BASE_URL}/order/list?page=${payload}`, {
+        withCredentials: true,
+      });
+      return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -83,7 +99,8 @@ const adminSlice = createSlice({
     });
     builder.addCase(getUsersList.fulfilled, (state, action) => {
       state.loading = false;
-      state.data.userList = action.payload;
+      state.data.userList = action.payload.userList;
+      state.data.totalPages = action.payload.totalPages;
     });
     builder.addCase(getUsersList.rejected, (state, action) => {
       state.loading = false;
@@ -94,9 +111,22 @@ const adminSlice = createSlice({
     });
     builder.addCase(getProductsList.fulfilled, (state, action) => {
       state.loading = false;
-      state.data.productList = action.payload;
+      state.data.productList = action.payload.productList;
+      state.data.totalPages = action.payload.totalPages;
     });
     builder.addCase(getProductsList.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getOrdersList.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getOrdersList.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.orderList = action.payload.orderList;
+      state.data.totalPages = action.payload.totalPages;
+    });
+    builder.addCase(getOrdersList.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

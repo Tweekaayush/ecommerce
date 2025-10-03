@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { getProductsList } from "../slices/admin.slice";
 import { useState } from "react";
 import { Trash, SquareArrowOutUpRight } from "lucide-react";
+import Pagination from "../components/Pagination";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
   const {
-    data: { productList },
+    data: { productList, totalPages },
   } = useSelector((state) => state.admin);
   const [page, setPage] = useState(1);
 
@@ -54,6 +55,7 @@ const ProductListPage = () => {
             })}
           </div>
         </div>
+        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       </div>
     </section>
   );

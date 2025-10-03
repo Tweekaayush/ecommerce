@@ -1,0 +1,60 @@
+import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getOrdersList } from "../slices/admin.slice";
+import { useState } from "react";
+import { Trash } from "lucide-react";
+import Pagination from "../components/Pagination";
+
+const OrderListPage = () => {
+  const dispatch = useDispatch();
+  const {
+    data: { orderList, totalPages },
+  } = useSelector((state) => state.admin);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    dispatch(getOrdersList(page));
+  }, [page]);
+  return (
+    <section className="h-screen">
+      <div className="container">
+        <Link to="/dashboard" className="heading-5 text-gray-500 mb-4">
+          DASHBOARD /
+        </Link>
+        <h1 className="heading-4 text-red-500 uppercase mb-7">User List</h1>
+        <div className="flex flex-col">
+          <div className="grid grid-cols-12 gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
+            <span className="list-head col-span-5">ID</span>
+            <span className="list-head col-span-2">Status</span>
+            <span className="list-head col-span-2">Amount</span>
+            <span className="list-head col-span-2">Placed On</span>
+            <span className="list-head col-span-1"></span>
+          </div>
+          <div className="">
+            {orderList?.map((order) => {
+              return (
+                <div
+                  key={order?._id}
+                  className="grid grid-cols-12 gap-4 items-center text-center py-7 bg-white nth-[odd]:bg-gray-100 nth-[odd]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                >
+                  <p className="list-body col-span-5">{order?._id}</p>
+                  <p className="list-body col-span-2"> {order?.orderStatus}</p>
+                  <p className="list-body col-span-2">{order?.totalAmount}</p>
+                  <p className="list-body col-span-2">
+                    {order?.createdAt.split("T")[0]}
+                  </p>
+                  <Trash className="w-4 h-4 text-red-500 mx-auto" />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <Pagination page={page} setPage={setPage} totalPages={totalPages}/>
+      </div>
+    </section>
+  );
+};
+
+export default OrderListPage;

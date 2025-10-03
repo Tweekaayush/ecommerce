@@ -32,7 +32,7 @@ exports.updateProfile = asyncHandler(async (req, res) => {
     user.fullAddress.country = fullAddress.country;
   }
   const updatedUser = await user.save();
-  console.log(updatedUser) ;
+  console.log(updatedUser);
 
   res.json({
     success: true,
@@ -67,10 +67,11 @@ exports.getUserListAdmin = asyncHandler(async (req, res) => {
   const userList = await User.find()
     .skip(paginate * (page - 1))
     .limit(paginate);
-
+  const count = await User.countDocuments();
   res.json({
     success: true,
     userList,
+    totalPages: Math.ceil(count / paginate),
   });
 });
 

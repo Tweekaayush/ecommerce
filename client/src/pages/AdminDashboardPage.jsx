@@ -39,7 +39,7 @@ const AdminDashboardPage = () => {
               <DollarSign className="text-white bg-green-500 w-8 h-8 rounded-full p-1.5" />
             </div>
           </div>
-          <div className="dashboard-card">
+          <div className="dashboard-card" onClick={()=>navigate('/dashboard/order/list')}>
             <div className="col-span-2">
               <h1 className="text-red-500 heading-5 mb-2 font-bold">
                 Total Sales
