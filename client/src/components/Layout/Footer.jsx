@@ -6,13 +6,13 @@ const Footer = () => {
   return (
     <footer className="pt-20 bg-black w-full">
       <div className="container">
-        <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-4">
+        <div className="grid grid-cols-12 gap-6 mb-10">
+          <div className="col-span-12 lg:col-span-4">
             <Link to="/" className="mb-6 text-white text-4xl">
               Primart
               <span className="text-red-500">.</span>
             </Link>
-            <p className="mb-6 body-text text-gray-300">
+            <p className="mb-6 body-text text-gray-400">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia
               eaque cumque, deleniti suscipit, quae deserunt ullam similique nam
               hic totam blanditiis accusantium libero amet ad. Necessitatibus
@@ -43,67 +43,64 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="grid grid-cols-4 gap-4 col-span-8">
-            <ul className="mt-14">
+          <div className="grid grid-cols-12 gap-4 col-span-12 lg:col-span-8">
+            <ul className="lg:mt-14 col-span-6 md:col-span-3">
               <li>
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/about">About</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/faq">FAQ</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
-              </li>
-            </ul>
-            <ul className="mt-14">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/">Home</Link>
+                <Link to="/contact">Contact</Link>
               </li>
             </ul>
-            <ul className="mt-14">
+            <ul className="lg:mt-14 col-span-6 md:col-span-3">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/promotions">Promotions</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/partners">partners</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/career">Careers</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/blog">Blog</Link>
               </li>
             </ul>
-            <ul className="mt-14">
+            <ul className="mt-2 lg:mt-14 col-span-6 md:col-span-3">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/browse?category=electronic">Electronic</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/browse?category=furniture">Furniture</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/browse?category=lamp">Lamp</Link>
               </li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/browse?category=skin-care">Skin Care</Link>
+              </li>
+            </ul>
+            <ul className="mt-2 lg:mt-14 col-span-6 md:col-span-3">
+              <li>
+                <Link to="/terms">Terms</Link>
+              </li>
+              <li>
+                <Link to="/privacy">Privacy</Link>
+              </li>
+              <li>
+                <Link to="/accesibility">Accesibility</Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className="py-5 text-sm">
-          <p className="text-center text-gray-300">
+        <div className="py-5">
+          <p className="text-center text-gray-400 text-sm tracking-wider">
             Copyright @ 2025. All Rights Reserved. -
             <a
               href="https://aayushdobriyal.vercel.app"

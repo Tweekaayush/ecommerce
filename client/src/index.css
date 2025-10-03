@@ -50,7 +50,7 @@
   /* Footer */
 
   footer li {
-    @apply text-gray-300;
+    @apply text-gray-400;
   }
 
   footer li a {
@@ -58,7 +58,7 @@
   }
 
   footer svg {
-    @apply text-gray-300 w-4 h-4;
+    @apply text-gray-400 w-4 h-4;
   }
 
   /* Checkout Steps */
@@ -98,7 +98,7 @@
   /* body text */
 
   .body-text {
-    @apply text-sm tracking-[1px];
+    @apply text-sm tracking-widest;
   }
   .text-vertical {
     writing-mode: vertical-rl;
