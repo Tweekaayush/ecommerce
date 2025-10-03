@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "../constants/constants";
-import {loadStripe} from '@stripe/stripe-js'
+import { loadStripe } from "@stripe/stripe-js";
 
 const initialState = {
   loading: false,
@@ -14,6 +14,21 @@ const initialState = {
   error: "",
 };
 
+export const getMyOrders = createAsyncThunk(
+  "getMyOrders",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${BASE_URL}/order/my-orders`, {
+        withCredentials: true,
+      });
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.messsage);
+    }
+  }
+);
+
 export const placeOrder = createAsyncThunk(
   "placeOrder",
   async (payload, { rejectWithValue }) => {
@@ -24,11 +39,15 @@ export const placeOrder = createAsyncThunk(
 
       const stripe = await loadStripe(key.data.stripeKey);
 
-      const res = await axios.post(`${BASE_URL}/payment/create-checkout-session`, payload, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${BASE_URL}/payment/create-checkout-session`,
+        payload,
+        {
+          withCredentials: true,
+        }
+      );
 
-      console.log(payload, res.data)
+      console.log(payload, res.data);
 
       const result = stripe.redirectToCheckout({
         sessionId: res.data.id,
@@ -45,12 +64,15 @@ export const validateOrder = createAsyncThunk(
   "validateOrder",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/payment/checkout-success`, payload, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${BASE_URL}/payment/checkout-success`,
+        payload,
+        {
+          withCredentials: true,
+        }
+      );
 
       return res.data;
-
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -76,9 +98,20 @@ const orderSlice = createSlice({
     });
     builder.addCase(validateOrder.fulfilled, (state, action) => {
       state.loading = false;
-      state.data.orderDetails = action.payload.order
+      state.data.orderId = action.payload.orderId;
     });
     builder.addCase(validateOrder.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getMyOrders.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getMyOrders.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.orderList = action.payload.orderList;
+    });
+    builder.addCase(getMyOrders.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

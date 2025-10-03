@@ -12,6 +12,7 @@ const couponRoute = require('./routes/coupon.route')
 const cartRoute = require('./routes/cart.route')
 const paymentRoute = require('./routes/payment.route')
 const analyticsRoute = require('./routes/analytics.route')
+const orderRoute = require('./routes/order.route')
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use('/api/v1/product', productRoute)
 app.use('/api/v1/coupon', couponRoute)
 app.use('/api/v1/cart', cartRoute)
 app.use('/api/v1/payment', paymentRoute)
+app.use('/api/v1/order', orderRoute)
 app.use('/api/v1/analytics', analyticsRoute)
 
 
