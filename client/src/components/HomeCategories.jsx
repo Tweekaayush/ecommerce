@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 const HomeCategories = () => {
   const navigate = useNavigate();
   return (
-    <section>
+    <section className="h-fit">
       <div className="container h-[60vh] grid grid-cols-4 grid-rows-2 gap-2">
         <div
-          className="col-span-2 row-span-2 relative overflow-hidden cursor-pointer"
+          className="col-span-2 row-span-1 md:col-span-2 md:row-span-2 relative overflow-hidden cursor-pointer"
           onClick={() => navigate("/browse")}
         >
           <div className="category-overlay"></div>
@@ -23,7 +23,7 @@ const HomeCategories = () => {
           />
         </div>
         <div
-          className="col-span-1 row-span-2 relative overflow-hidden cursor-pointer"
+          className="col-span-2 row-span-1 md:col-span-1 md:row-span-2 relative overflow-hidden cursor-pointer"
           onClick={() => navigate("/browse")}
         >
           <div className="category-overlay"></div>
@@ -35,7 +35,7 @@ const HomeCategories = () => {
           />
         </div>
         <div
-          className="col-span-1 row-span-1 relative overflow-hidden cursor-pointer"
+          className="col-span-2 row-span-1 md:col-span-1 relative overflow-hidden cursor-pointer"
           onClick={() => navigate("/browse")}
         >
           <div className="category-overlay"></div>
@@ -47,7 +47,7 @@ const HomeCategories = () => {
           />
         </div>
         <div
-          className="col-span-1 row-span-1 relative overflow-hidden cursor-pointer"
+          className="col-span-2 row-span-1 md:col-span-1 relative overflow-hidden cursor-pointer"
           onClick={() => navigate("/browse")}
         >
           <div className="category-overlay"></div>
