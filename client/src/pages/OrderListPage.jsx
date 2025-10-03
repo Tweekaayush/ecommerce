@@ -19,7 +19,7 @@ const OrderListPage = () => {
     dispatch(getOrdersList(page));
   }, [page]);
   return (
-    <section className="h-screen">
+    <section className="min-h-screen">
       <div className="container">
         <Link to="/dashboard" className="heading-5 text-gray-500 mb-4">
           DASHBOARD /

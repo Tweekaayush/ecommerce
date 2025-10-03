@@ -12,7 +12,7 @@ const FailedPage = () => {
     document.title = "Payment Failed";
   }, []);
   return (
-    <section className="h-screen">
+    <section className="min-h-screen">
       <div className="container flex flex-col items-center justify-center h-full">
         <CircleAlert className="text-red-600 w-15 h-15" />
         <h1 className="text-red-600 text-5xl tracking-wider font-extrabold mb-2">

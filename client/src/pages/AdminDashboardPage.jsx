@@ -24,7 +24,7 @@ const AdminDashboardPage = () => {
     dispatch(getAnalytics());
   }, []);
   return (
-    <section>
+    <section className="min-h-screen">
       <div className="container">
         <h1 className="heading-4 text-red-500 uppercase mb-7">Dashboard</h1>
         <div className="grid grid-cols-4 gap-4">

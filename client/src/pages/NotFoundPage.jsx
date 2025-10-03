@@ -7,7 +7,7 @@ const NotFoundPage = () => {
   return (
     <section
       
-      className="flex justify-center align-center h-screen"
+      className="flex justify-center align-center min-h-screen"
     >
       <div className="container flex flex-col justify-center items-center">
         <Frown className="mb-4 h-24 w-24" />

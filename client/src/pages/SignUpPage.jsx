@@ -48,7 +48,7 @@ const SignUpPage = () => {
     }
   }, [_id]);
   return (
-    <section className="h-screen bg-gray-100">
+    <section className="min-h-screen bg-gray-100">
       <div className="container flex justify-center items-center h-full">
         <div className="flex flex-col justify-center items-center bg-white w-fit min-w-[400px] py-8 px-4 rounded-sm shadow-md">
           <h1 className="heading-2 mb-3.5">Sign Up</h1>
