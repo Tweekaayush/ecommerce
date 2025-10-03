@@ -11,6 +11,9 @@ import {
 
 import { logout, updateProfile } from "../slices/user.slice";
 import AddressForm from "../components/AddressForm";
+import { getMyOrders } from "../slices/order.slice";
+import { Trash } from "lucide-react";
+import Pagination from "../components/Pagination";
 
 const UpdateProfile = () => {
   const {
@@ -85,9 +88,44 @@ const UpdateProfile = () => {
 };
 
 const MyOrders = () => {
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    data: { orderList, totalPages },
+  } = useSelector((state) => state.order);
+  console.log(orderList);
+  useEffect(() => {
+    dispatch(getMyOrders(page));
+  }, []);
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 mb-12 5">My Orders</h1>
+      <h1 className="heading-1 mb-12.5">My Orders</h1>
+      <div className="flex-1">
+        <div className="grid grid-cols-12 gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
+          <span className="list-head col-span-6">ID</span>
+          <span className="list-head col-span-2">total</span>
+          <span className="list-head col-span-2">status</span>
+          <span className="list-head col-span-2"></span>
+        </div>
+        <div className="flex flex-col">
+          {orderList?.map((order, i) => {
+            return (
+              <div
+                key={order?._id}
+                className="grid grid-cols-12 gap-4 items-center text-center py-7 bg-white nth-[odd]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                onClick={() => navigate(`/order/${order?._id}`)}
+              >
+                <p className="list-body col-span-6">{order?._id}</p>
+                <p className="list-body col-span-2">${order?.totalAmount}</p>
+                <p className="list-body col-span-2">{order?.orderStatus}</p>
+                <Trash className="w-4 h-4 text-red-500 mx-auto" />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <Pagination page={page} totalPages={totalPages} setPage={setPage} />
     </div>
   );
 };

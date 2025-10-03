@@ -9,6 +9,7 @@ const initialState = {
     orderId: null,
     orderList: [],
     orderDetails: {},
+    totalPages: 0
   },
   successMessage: "",
   error: "",
@@ -18,7 +19,7 @@ export const getMyOrders = createAsyncThunk(
   "getMyOrders",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/order/my-orders`, {
+      const res = await axios.get(`${BASE_URL}/order/my-orders?page=${payload}`, {
         withCredentials: true,
       });
 
@@ -110,6 +111,7 @@ const orderSlice = createSlice({
     builder.addCase(getMyOrders.fulfilled, (state, action) => {
       state.loading = false;
       state.data.orderList = action.payload.orderList;
+      state.data.totalPages = action.payload.totalPages;
     });
     builder.addCase(getMyOrders.rejected, (state, action) => {
       state.loading = false;
