@@ -18,6 +18,7 @@ import ProductListPage from "./pages/ProductListPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import SuccessPage from "./pages/SuccessPage";
 import FailedPage from "./pages/FailedPage";
+import AdminRoute from "./components/AdminRoute";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,17 +38,16 @@ const App = () => {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/failed" element={<FailedPage />} />
+          </Route>
+          <Route element={<AdminRoute />}>
             <Route path="/dashboard" element={<AdminDashboardPage />} />
             <Route path="/dashboard/user/list" element={<UserListPage />} />
             <Route path="/dashboard/order/list" element={<OrderListPage />} />
-            <Route
-              path="/dashboard/product/list"
-              element={<ProductListPage />}
-            />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/failed" element={<FailedPage />} />
+            <Route path="/dashboard/product/list" element={<ProductListPage />} />
           </Route>
-          <Route path="/success" element={<SuccessPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
