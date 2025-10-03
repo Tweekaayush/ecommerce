@@ -4,7 +4,10 @@ import HomeCategories from "../components/HomeCategories";
 import ProductSlider from "../components/ProductSlider";
 import PromotionBanner from "../components/PromotionBanner";
 import { useDispatch, useSelector } from "react-redux";
-import { getBestSellingProducts, getFeaturedProducts } from "../slices/product.slice";
+import {
+  getBestSellingProducts,
+  getFeaturedProducts,
+} from "../slices/product.slice";
 import ProductCard from "../components/ProductCard";
 
 const HomePage = () => {
@@ -15,7 +18,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(getFeaturedProducts());
-    dispatch(getBestSellingProducts())
+    dispatch(getBestSellingProducts());
   }, []);
   return (
     <>
@@ -26,12 +29,10 @@ const HomePage = () => {
       <section>
         <div className="container flex flex-col items-center">
           <h1 className="heading-2 mb-7">Best Sellers</h1>
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {
-              bestSellingProducts.map((product)=>{
-                return <ProductCard key={product._id} {...product}/>
-              })
-            }
+          <div className="grid grid-cols-[1fr] xs:grid-cols-[1fr_1fr] sm:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4">
+            {bestSellingProducts.map((product) => {
+              return <ProductCard key={product._id} {...product} />;
+            })}
           </div>
         </div>
       </section>

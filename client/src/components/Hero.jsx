@@ -6,8 +6,8 @@ const Hero = () => {
       style={{ backgroundImage: `url(${backgroundImage})` }}
       className="bg-center bg-cover h-[65vh] bg-gray-100"
     >
-      <div className="container h-full grid grid-cols-12 items-center">
-        <div className="col-span-12 md:col-span-6 flex flex-col items-start">
+      <div className="container h-full grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] items-center">
+        <div className="flex flex-col items-start">
           <h1 className="heading-1 mb-3.5">Technology</h1>
           <h1 className="heading-3 mb-7">for your convenience</h1>
           <p className="body-text text-gray-800 mb-7">
@@ -17,7 +17,7 @@ const Hero = () => {
           </p>
           <button className="button-1">shop now</button>
         </div>
-        <div className="md:col-span-6"></div>
+        <div className=""></div>
       </div>
     </section>
   );

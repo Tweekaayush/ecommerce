@@ -6,9 +6,9 @@ const PromotionBanner = () => {
       style={{ backgroundImage: `url(${backgroundImage})`}}
       className="bg-[30%_80%] bg-cover bg-no-repeat h-[55vh] bg-gray-100"
     >
-      <div className="container grid grid-cols-12 items-center">
-        <div className="md:col-span-6"></div>
-        <div className="col-span-12 md:col-span-6 flex flex-col items-start">
+      <div className="container grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] items-center">
+        <div className=""></div>
+        <div className="flex flex-col items-start">
           <div className="heading-1 mb-3.5">Minimalist Decor</div>
           <div className="heading-3 mb-7">that suits every style</div>
           <p className="body-text mb-7">
