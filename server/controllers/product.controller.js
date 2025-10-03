@@ -137,7 +137,6 @@ exports.createProduct = asyncHandler(async (req, res) => {
 
 exports.deleteProductById = asyncHandler(async (req, res) => {
   const { id } = req.params;
-
   const product = await Product.findById(id);
 
   if (!product) {
@@ -145,10 +144,11 @@ exports.deleteProductById = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 
-  if (product?.image) {
-    const public_id = product.image.split("/").pop().split(".")[0];
-    await cloudinary.uploader.destroy(`products/${public_id}`);
-  }
+  // if (product?.image) {
+  //   const public_id = product.image.split("/").pop().split(".")[0];
+    
+  //   if (public_id) await cloudinary.uploader.destroy(`products/${public_id}`);
+  // }
 
   await Product.findByIdAndDelete(id);
 

@@ -6,6 +6,7 @@ import { getProductsList } from "../slices/admin.slice";
 import { useState } from "react";
 import { Trash, SquareArrowOutUpRight } from "lucide-react";
 import Pagination from "../components/Pagination";
+import { deleteProduct } from "../slices/product.slice";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,10 @@ const ProductListPage = () => {
                   </p>
                   <p className="admin-list-item col-span-1">{product?.price}</p>
                   <SquareArrowOutUpRight className="w-4 h-4 mx-auto col-span-1" />
-                  <Trash className="w-4 h-4 text-red-500 mx-auto col-span-1" />
+                  <Trash
+                    className="w-4 h-4 text-red-500 mx-auto col-span-1"
+                    onClick={() => dispatch(deleteProduct({id: product?._id, page: page}))}
+                  />
                 </div>
               );
             })}

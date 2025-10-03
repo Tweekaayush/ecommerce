@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, isAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "../constants/constants";
+import { getProductsList } from "./admin.slice";
 
 const initialState = {
   loading: "",
@@ -53,7 +54,7 @@ export const getFeaturedProducts = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await axios.get(`${BASE_URL}/product/featured`);
-      ``
+      ``;
       return res.data.featuredProducts;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -123,11 +124,11 @@ export const deleteProduct = createAsyncThunk(
   "deleteProduct",
   async (payload, { dispatch, rejectWithValue }) => {
     try {
-      const res = await axios.delete(`${BASE_URL}/product/${payload}`, {
+      const res = await axios.delete(`${BASE_URL}/product/${payload.id}`, {
         withCredentials: true,
       });
 
-      dispatch(getProducts({ page: 1, category: "" }));
+      dispatch(getProductsList({ page: payload.page, category: "" }));
 
       return res.data.message;
     } catch (error) {
@@ -257,6 +258,17 @@ const productSlice = createSlice({
       state.data.productDetails = action.payload;
     });
     builder.addCase(getProductById.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(deleteProduct.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.successMessage = action.payload.message;
+    });
+    builder.addCase(deleteProduct.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
