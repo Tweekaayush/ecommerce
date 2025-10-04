@@ -42,7 +42,11 @@ exports.updateProfile = asyncHandler(async (req, res) => {
 });
 
 exports.getWishlist = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user._id).populate({
+    path: 'wishlist.product'
+  });
+  
+  console.log(user)
 
   res.json({
     success: true,
@@ -113,14 +117,40 @@ exports.deleteUser = asyncHandler(async (req, res) => {
 });
 
 exports.addToWishlist = asyncHandler(async (req, res) => {
+  const { product } = req.body;
+
+  console.log(product)
+
+  const user = await User.findById(req.user._id);
+
+  const existItem = user.wishlist.find((item) => item.product === product);
+
+  if (existItem) {
+    res.status(400);
+    throw new Error("");
+  }
+
+  user.wishlist.push({product: product});
+
+  await user.save();
+
   res.json({
     success: true,
   });
 });
 
 exports.removeFromWishlist = asyncHandler(async (req, res) => {
+  const { product } = req.body;
+
+  const user = await User.findById(req.user._id);
+
+  user.wishlist = user.wishlist.filter((item) => item._id.toString() !== product);
+
+  const updatedUser = await user.save();
+
   res.json({
     success: true,
+    user: updatedUser,
   });
 });
 

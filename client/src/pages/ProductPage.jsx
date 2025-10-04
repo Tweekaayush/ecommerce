@@ -10,6 +10,7 @@ import {
 import { Star } from "lucide-react";
 import Rating from "../components/Rating";
 import { addToCart } from "../slices/cart.slice";
+import { addToWishlist } from "../slices/user.slice";
 
 const ProductPage = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const ProductPage = () => {
             <div className="flex flex-col p-8">
               <h1 className="heading-4 mb-2.5">{name}</h1>
               <div className="flex gap-4">
-                <Rating rating={rating} />
+                <Rating rating={rating} size={20} className='mb-8' />
                 <h1 clsa>{numReviews} Reviews</h1>
               </div>
               <h1 className="text-sm uppercase font-bold tracking-[2px] mb-4 text-black">
@@ -121,7 +122,14 @@ const ProductPage = () => {
                 >
                   Add to cart
                 </button>
-                <button className="button-2">wishlist</button>
+                <button
+                  className="button-2"
+                  onClick={() => {
+                    dispatch(addToWishlist(id));
+                  }}
+                >
+                  wishlist
+                </button>
               </div>
             </div>
           </div>

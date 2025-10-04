@@ -7,7 +7,7 @@ const initialState = {
   loading: false,
   data: {
     user: {},
-    wishList: [],
+    wishlist: [],
     cart: [],
     coupons: [],
   },
@@ -108,6 +108,51 @@ export const getCoupons = createAsyncThunk(
   }
 );
 
+export const getWishlist = createAsyncThunk(
+  "getWishlist",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${BASE_URL}/wishlist`, {
+        withCredentials: true,
+      });
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const addToWishlist = createAsyncThunk(
+  "addToWishlist",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/wishlist/add`, {product: payload}, {
+        withCredentials: true,
+      });
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const removeFromWishlist = createAsyncThunk(
+  "removeFromWishlist",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/wishlist/remove`, {product: payload}, {
+        withCredentials: true,
+      });
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -186,6 +231,36 @@ const userSlice = createSlice({
       state.successMessage = action.payload.message;
     });
     builder.addCase(getCoupons.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getWishlist.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getWishlist.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.wishlist = action.payload.wishlist;
+    });
+    builder.addCase(getWishlist.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(addToWishlist.fulfilled, (state, action) => {
+      state.loading = false;
+      state.successMessage = "Added To Wishlist!";
+    });
+    builder.addCase(addToWishlist.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(removeFromWishlist.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(removeFromWishlist.fulfilled, (state, action) => {
+      state.loading = false;
+      state.successMessage = "Removed From Wishlist!";
+    });
+    builder.addCase(removeFromWishlist.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

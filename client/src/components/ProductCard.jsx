@@ -1,12 +1,24 @@
 import React from "react";
-import { ShoppingCart, Heart } from "lucide-react";
+import { ShoppingCart, Heart, Trash } from "lucide-react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeFromWishlist, addToWishlist } from "../slices/user.slice";
+import Rating from "./Rating";
 
-const ProductCard = ({ _id, name, price, image, slider = false }) => {
+const ProductCard = ({
+  _id,
+  name,
+  price,
+  image,
+  rating,
+  slider = false,
+  wishlist = false,
+}) => {
   const [width, setWidth] = useState(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleResize = () => {
     if (!slider) return;
@@ -38,7 +50,7 @@ const ProductCard = ({ _id, name, price, image, slider = false }) => {
       className={
         "flex flex-col shadow-card hover:shadow-card-hover transition-all ease-in-out duration-300 cursor-pointer group"
       }
-      onClick={()=>navigate(`/product/${_id}`)}
+      onClick={() => navigate(`/product/${_id}`)}
     >
       <div className="text-gray-100 w-full aspect-square bg-gray-100">
         <img
@@ -49,9 +61,26 @@ const ProductCard = ({ _id, name, price, image, slider = false }) => {
       </div>
       <div className="flex flex-col p-2 overflow-hidden relative">
         <h1 className="text-sm mb-2">{name}</h1>
-        <p className="text-md mt-4 font-bold">{price}</p>
+        <Rating rating={rating} size={16}/>
+        <p className="text-md mt-4 font-bold">${price}</p>
         <div className="absolute bottom-0 right-0 flex gap-2 p-2 translate-y-[100%] group-hover:translate-y-[0%] transition-all duration-300 ease-in-out">
-          <Heart className="w-5 h-5" />
+          {wishlist ? (
+            <Trash
+              className="w-5 h-5"
+              onClick={(e) => [
+                e.stopPropagation(),
+                dispatch(removeFromWishlist(_id)),
+              ]}
+            />
+          ) : (
+            <Heart
+              className="w-5 h-5"
+              onClick={(e) => [
+                e.stopPropagation(),
+                dispatch(addToWishlist(_id)),
+              ]}
+            />
+          )}
           <ShoppingCart className="w-5 h-5" />
         </div>
       </div>

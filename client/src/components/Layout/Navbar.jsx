@@ -84,7 +84,7 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
         </div>
         <ul className="flex items-center">
           <li>
-            <Heart />
+            <Heart onClick={()=>navigate('/wishlist')}/>
           </li>
           <li onClick={() => setCartOpen(true)}>
             <ShoppingCart />
