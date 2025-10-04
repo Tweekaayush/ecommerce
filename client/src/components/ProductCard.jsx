@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeFromWishlist, addToWishlist } from "../slices/user.slice";
 import Rating from "./Rating";
+import { addToCart } from "../slices/cart.slice";
 
 const ProductCard = ({
   _id,
@@ -13,6 +14,7 @@ const ProductCard = ({
   price,
   image,
   rating,
+  brand,
   slider = false,
   wishlist = false,
 }) => {
@@ -61,7 +63,7 @@ const ProductCard = ({
       </div>
       <div className="flex flex-col p-2 overflow-hidden relative">
         <h1 className="text-sm mb-2">{name}</h1>
-        <Rating rating={rating} size={16}/>
+        <Rating rating={rating} size={16} />
         <p className="text-md mt-4 font-bold">${price}</p>
         <div className="absolute bottom-0 right-0 flex gap-2 p-2 translate-y-[100%] group-hover:translate-y-[0%] transition-all duration-300 ease-in-out">
           {wishlist ? (
@@ -81,7 +83,22 @@ const ProductCard = ({
               ]}
             />
           )}
-          <ShoppingCart className="w-5 h-5" />
+          <ShoppingCart
+            className="w-5 h-5"
+            onClick={(e) => [
+              e.stopPropagation(),
+              dispatch(
+                addToCart({
+                  name,
+                  image,
+                  price,
+                  _id,
+                  brand,
+                  quantity: 1,
+                })
+              ),
+            ]}
+          />
         </div>
       </div>
     </div>
