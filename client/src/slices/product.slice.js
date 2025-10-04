@@ -106,7 +106,7 @@ export const updateProduct = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await axios.put(
-        `${BASE_URL}/product/${payload.id}`,
+        `${BASE_URL}/product/${payload._id}`,
         payload,
         {
           withCredentials: true,
@@ -258,6 +258,28 @@ const productSlice = createSlice({
       state.data.productDetails = action.payload;
     });
     builder.addCase(getProductById.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(createProduct.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createProduct.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.productDetails = action.payload.product
+    });
+    builder.addCase(createProduct.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(updateProduct.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateProduct.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.productDetails = action.payload.product
+    });
+    builder.addCase(updateProduct.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

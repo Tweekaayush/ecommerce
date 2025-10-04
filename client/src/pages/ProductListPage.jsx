@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getProductsList } from "../slices/admin.slice";
 import { useState } from "react";
 import { Trash, SquareArrowOutUpRight } from "lucide-react";
@@ -10,6 +10,7 @@ import { deleteProduct } from "../slices/product.slice";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     data: { productList, totalPages },
   } = useSelector((state) => state.admin);
@@ -45,7 +46,12 @@ const ProductListPage = () => {
                   <p className="list-body ellipses">{product?.brand}</p>
                   <p className="list-body ellipses">{product?.category}</p>
                   <p className="list-body ellipses">${product?.price}</p>
-                  <SquareArrowOutUpRight className="w-4 h-4 mx-auto" />
+                  <SquareArrowOutUpRight
+                    className="w-4 h-4 mx-auto"
+                    onClick={() =>
+                      navigate(`/dashboard/product/update/${product?._id}`)
+                    }
+                  />
                   <Trash
                     className="w-4 h-4 text-red-500 mx-auto"
                     onClick={() =>

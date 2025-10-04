@@ -101,17 +101,17 @@ exports.createProduct = asyncHandler(async (req, res) => {
     brand,
     category,
     countInStock,
-    image,
+    // image,
     isFeatured,
   } = req.body;
 
-  let cloudinaryResponse = null;
+  // let cloudinaryResponse = null;
 
-  if (image) {
-    cloudinaryResponse = await cloudinary.uploader.upload(image, {
-      folder: "products",
-    });
-  }
+  // if (image) {
+  //   cloudinaryResponse = await cloudinary.uploader.upload(image, {
+  //     folder: "products",
+  //   });
+  // }
 
   if (cloudinaryResponse) {
     const product = await Product.create({
@@ -163,7 +163,6 @@ exports.updateProductById = asyncHandler(async (req, res) => {
     name,
     description,
     price,
-    image,
     brand,
     countInStock,
     category,
@@ -181,13 +180,13 @@ exports.updateProductById = asyncHandler(async (req, res) => {
     throw new Error("Product Not Found");
   }
 
-  if (image) {
-    cloudinaryResponse = cloudinary.uploader.upload(image, {
-      folder: "products",
-    });
+  // if (image) {
+  //   cloudinaryResponse = cloudinary.uploader.upload(image, {
+  //     folder: "products",
+  //   });
 
-    product.image = cloudinaryResponse?.secure_url;
-  }
+  //   product.image = cloudinaryResponse?.secure_url;
+  // }
 
   product.name = name;
   product.description = description;
