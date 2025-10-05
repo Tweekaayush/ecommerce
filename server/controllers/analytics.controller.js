@@ -54,6 +54,8 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
     };
   });
 
+  console.log(startDate, endDate, salesDataChart, datesArray)
+
   const orderStatus = await Order.aggregate([
     {
       $group: {
@@ -63,7 +65,6 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
     },
   ]);
 
-  console.log(orderStatus)
 
   res.json({
     success: true,
@@ -84,7 +85,7 @@ const getDatesInRange = (startDate, endDate) => {
 
   while (currentDate <= endDate) {
     dates.push(currentDate.toISOString().split("T")[0]);
-    currentDate.setDate(currentDate.setDate() + 1);
+    currentDate.setDate(currentDate.getDate() + 1);
   }
   return dates;
 };

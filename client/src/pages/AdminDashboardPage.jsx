@@ -12,6 +12,7 @@ import {
   Legend,
   Bar,
   Pie,
+  Cell,
 } from "recharts";
 import { getAnalytics } from "../slices/admin.slice";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +30,9 @@ const AdminDashboardPage = () => {
       orderStatus,
     },
   } = useSelector((state) => state.admin);
+
+  const colors = ["green", "#e0ac00",  "red" ];
+
   useEffect(() => {
     dispatch(getAnalytics());
   }, []);
@@ -114,9 +118,13 @@ const AdminDashboardPage = () => {
                   cy="50%"
                   innerRadius={50}
                   outerRadius={70}
-                />
+                >
+                  {orderStatus?.map((e, i) => (
+                    <Cell key={e._id} fill={colors[i]} />
+                  ))}
+                </Pie>
                 <Tooltip />
-                <Legend />
+                <Legend wrapperStyle={{textTransform: 'capitalize'}}/>
               </PieChart>
             </ResponsiveContainer>
           </div>

@@ -151,13 +151,13 @@ const OrderPage = () => {
             <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
               <h1 className="heading-1 mb-4">Order Status</h1>
               {cancelledAt && (
-                <p className="text-sm capitalize tracking-wider">
-                  {orderStatus} on {cancelledAt.split("T")[0]}
+                <p className="text-sm tracking-wider">
+                  Cancelled on {cancelledAt.split("T")[0]}
                 </p>
               )}
               {deliveredAt && (
-                <p className="text-sm capitalize tracking-wider">
-                  {orderStatus} on {deliveredAt.split("T")[0]}
+                <p className="text-sm tracking-wider">
+                  Delivered on {deliveredAt.split("T")[0]}
                 </p>
               )}
               {orderStatus === "processing" && role === "customer" && (
