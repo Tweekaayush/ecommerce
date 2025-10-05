@@ -14,6 +14,7 @@ const paymentRoute = require('./routes/payment.route')
 const analyticsRoute = require('./routes/analytics.route')
 const orderRoute = require('./routes/order.route')
 const wishlistRoute = require('./routes/wishlist.route')
+const reviewRoute = require('./routes/review.route')
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/api/v1/payment', paymentRoute)
 app.use('/api/v1/order', orderRoute)
 app.use('/api/v1/analytics', analyticsRoute)
 app.use('/api/v1/wishlist', wishlistRoute)
+app.use('/api/v1/review', reviewRoute)
 
 
 // Error Middleware

@@ -26,7 +26,10 @@ exports.getProducts = asyncHandler(async (req, res) => {
 exports.getProductById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  const product = await Product.findById(id);
+  const product = await Product.findById(id).populate({
+    path: "reviews.user",
+    select: "-password",
+  });
 
   res.json({
     success: true,
@@ -146,7 +149,7 @@ exports.deleteProductById = asyncHandler(async (req, res) => {
 
   // if (product?.image) {
   //   const public_id = product.image.split("/").pop().split(".")[0];
-    
+
   //   if (public_id) await cloudinary.uploader.destroy(`products/${public_id}`);
   // }
 

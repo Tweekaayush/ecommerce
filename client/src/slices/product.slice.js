@@ -157,7 +157,7 @@ export const addReview = createAsyncThunk(
   async (payload, { dispatch, rejectWithValue }) => {
     try {
       const res = await axios.post(
-        `${BASE_URL}/product/${payload._id}/reviews`,
+        `${BASE_URL}/review/${payload._id}`,
         payload,
         {
           withCredentials: true,
@@ -291,6 +291,17 @@ const productSlice = createSlice({
       state.data.successMessage = action.payload.message;
     });
     builder.addCase(deleteProduct.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(addReview.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addReview.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.successMessage = action.payload.message;
+    });
+    builder.addCase(addReview.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

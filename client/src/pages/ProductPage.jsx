@@ -11,6 +11,7 @@ import { Star } from "lucide-react";
 import Rating from "../components/Rating";
 import { addToCart } from "../slices/cart.slice";
 import { addToWishlist } from "../slices/user.slice";
+import Reviews from "../components/Reviews";
 
 const ProductPage = () => {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ const ProductPage = () => {
             <div className="flex flex-col p-8">
               <h1 className="heading-4 mb-2.5">{name}</h1>
               <div className="flex gap-4">
-                <Rating rating={rating} size={20} className='mb-8' />
+                <Rating rating={rating} size={20} className="mb-8" />
                 <h1 clsa>{numReviews} Reviews</h1>
               </div>
               <h1 className="text-sm uppercase font-bold tracking-[2px] mb-4 text-black">
@@ -134,8 +135,19 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
+        <ProductSlider title={"Recommended"} products={recommendedProducts} />
+        <div className="container">
+          <h1 className="heading-2 mb-8">Customer Reviews</h1>
+          <div className="w-full grid grid-cols-[1fr] md:grid-cols-[4fr_8fr] gap-4">
+            <div className="shadow-card flex flex-col p-4 h-fit">
+              <Rating rating={rating} size={16} className="mb-1" />
+              <h1 className="mb-4 font-bold text-sm">{rating} out of 5</h1>
+              <p>{numReviews} total rating(s)</p>
+            </div>
+            <Reviews />
+          </div>
+        </div>
       </section>
-      <ProductSlider title={"Recommended"} products={recommendedProducts} />
     </>
   );
 };

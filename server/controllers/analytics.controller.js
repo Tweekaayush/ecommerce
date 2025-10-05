@@ -54,8 +54,6 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
     };
   });
 
-  console.log(startDate, endDate, salesDataChart, datesArray)
-
   const orderStatus = await Order.aggregate([
     {
       $group: {
