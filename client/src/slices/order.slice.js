@@ -94,6 +94,36 @@ export const placeOrder = createAsyncThunk(
   }
 );
 
+export const retryPayment = createAsyncThunk(
+  "retryPayment",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const key = await axios.get(`${BASE_URL}/payment/key`, {
+        withCredentials: true,
+      });
+
+      const stripe = await loadStripe(key.data.stripeKey);
+
+      const res = await axios.post(
+        `${BASE_URL}/payment/retry-payment`,
+        payload,
+        {
+          withCredentials: true,
+        }
+      );
+
+      const result = stripe.redirectToCheckout({
+        sessionId: res.data.id,
+      });
+
+      return true;
+    } catch (error) {
+      console.log(error.response.data.message)
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const validateOrder = createAsyncThunk(
   "validateOrder",
   async (payload, { dispatch, rejectWithValue }) => {
@@ -125,6 +155,16 @@ const orderSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(placeOrder.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(retryPayment.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(retryPayment.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(retryPayment.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

@@ -36,8 +36,6 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     path: 'products.product'
   });
 
-  console.log(order)
-
   if (!order) {
     res.status(404);
     throw new Error("Order not found!");

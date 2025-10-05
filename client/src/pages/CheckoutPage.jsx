@@ -73,7 +73,7 @@ const CheckoutPage = () => {
   }, [step]);
 
   const handleNextStep = () => {
-    if (step > checkoutSteps.length) return;
+    if (step > checkoutSteps?.length) return;
     const res = checkoutSteps[step - 1].func();
     if (res) setStep((p) => p + 1);
   };
@@ -106,7 +106,7 @@ const CheckoutPage = () => {
           className="w-[400px] h-fit shadow-card bg-white flex flex-col p-4 rounded-lg"
         >
           <h1 className="heading-1 mb-8">My Coupons</h1>
-          {coupons.length ? (
+          {coupons?.length ? (
             <div className="flex flex-col">
               {coupons.map((c, i) => {
                 return (

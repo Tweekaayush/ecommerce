@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getOrderById, updateOrder } from "../slices/order.slice";
+import { getOrderById, retryPayment, updateOrder } from "../slices/order.slice";
 import { ChevronDown } from "lucide-react";
 
 const OrderItem = (props) => {
@@ -48,13 +48,16 @@ const OrderPage = () => {
         orderStatus,
         discountPercentage,
         paymentStatus,
+        stripeSessionId,
+        user:orderUser,
       },
     },
   } = useSelector((state) => state.order);
 
   const {
     data: {
-      user: { role },
+      user: { _id: userId, role, email },
+      user
     },
   } = useSelector((state) => state.user);
 
@@ -71,6 +74,7 @@ const OrderPage = () => {
   }, [id]);
 
   const handleUpdate = (status) => {
+    console.log(orderStatus);
     if (orderStatus === status) return;
     dispatch(updateOrder({ id: id, orderStatus: status }));
     setOpen(false);
@@ -93,6 +97,7 @@ const OrderPage = () => {
     <section className="min-h-screen flex justify-center items-center">
       <div className="container grid grid-cols-[1fr] lg:grid-cols-[8fr_4fr] gap-4">
         <div className="flex flex-col gap-4">
+          <div></div>
           <div className="flex flex-col">
             <h1 className="heading-1 mb-6">Shipping Address</h1>
 
@@ -145,64 +150,87 @@ const OrderPage = () => {
               <p className="text-sm capitalize">${totalAmount}</p>
             </div>
           </div>
-          {role === "admin" && (
-            <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
-              <h1 className="heading-1 mb-4">Order Status</h1>
-              {cancelledAt && (
-                <p className="text-sm tracking-wider">
-                  Cancelled on {cancelledAt.split("T")[0]}
-                </p>
-              )}
-              {deliveredAt && (
-                <p className="text-sm tracking-wider">
-                  Delivered on {deliveredAt.split("T")[0]}
-                </p>
-              )}
-              {orderStatus === "processing" && role === "customer" && (
-                <p className="text-sm capitalize tracking-wider">In Transit.</p>
-              )}
-              {!cancelledAt && !deliveredAt && (
-                <div className="relative">
-                  <div
-                    className="w-full heading-5 flex items-center justify-center p-2 border border-gray-500 cursor-pointer"
-                    onClick={() => setOpen((prev) => !prev)}
-                    ref={ref}
-                  >
-                    {orderStatus}
-                  </div>
-                  <div
-                    className={`${open ? "flex flex-col" : "hidden"}
-                absolute w-full bg-white border-x border-b border-gray-400`}
-                  >
-                    {orderStatus !== "processing" && (
-                      <div
-                        onClick={() => handleUpdate("processing")}
-                        className="heading-5 p-2 flex justify-center items-center border-b border-gray-400 hover:bg-gray-200 cursor-pointer"
-                      >
-                        processing
-                      </div>
-                    )}
-                    {orderStatus !== "delivered" && (
-                      <div
-                        onClick={() => handleUpdate("delivered")}
-                        className="heading-5 p-2 flex justify-center items-center border-b border-gray-400 hover:bg-gray-200 cursor-pointer"
-                      >
-                        delivered
-                      </div>
-                    )}
-                    {orderStatus !== "cancel" && (
-                      <div
-                        onClick={() => handleUpdate("cancel")}
-                        className="heading-5 p-2 flex justify-center items-center hover:bg-gray-200 cursor-pointer"
-                      >
-                        cancel
-                      </div>
-                    )}
-                  </div>
+
+          <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
+            <h1 className="heading-1 mb-4">Order Status</h1>
+            {cancelledAt && (
+              <p className="text-sm tracking-wider">
+                Cancelled on {cancelledAt.split("T")[0]}
+              </p>
+            )}
+            {deliveredAt && (
+              <p className="text-sm tracking-wider">
+                Delivered on {deliveredAt.split("T")[0]}
+              </p>
+            )}
+            {orderStatus === "processing" && user?.role === "customer" && (
+              <p className="text-sm capitalize tracking-wider">In Transit.</p>
+            )}
+            {!cancelledAt && !deliveredAt && user?.roll === "admin" && (
+              <div className="relative">
+                <div
+                  className="w-full heading-5 flex items-center justify-center p-2 border border-gray-500 cursor-pointer"
+                  onClick={() => setOpen((prev) => !prev)}
+                  ref={ref}
+                >
+                  {orderStatus}
                 </div>
-              )}
-            </div>
-          )}
+                <div
+                  className={`${open ? "flex flex-col" : "hidden"}
+                absolute w-full bg-white border-x border-b border-gray-400`}
+                >
+                  {orderStatus !== "processing" && (
+                    <div
+                      onClick={() => handleUpdate("processing")}
+                      className="heading-5 p-2 flex justify-center items-center border-b border-gray-400 hover:bg-gray-200 cursor-pointer"
+                    >
+                      processing
+                    </div>
+                  )}
+                  {orderStatus !== "delivered" && (
+                    <div
+                      onClick={() => handleUpdate("delivered")}
+                      className="heading-5 p-2 flex justify-center items-center border-b border-gray-400 hover:bg-gray-200 cursor-pointer"
+                    >
+                      delivered
+                    </div>
+                  )}
+                  {orderStatus !== "cancel" && (
+                    <div
+                      onClick={() => handleUpdate("cancel")}
+                      className="heading-5 p-2 flex justify-center items-center hover:bg-gray-200 cursor-pointer"
+                    >
+                      cancel
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {user?.toString() === userId?.toString() &&
+            !cancelledAt &&
+            !deliveredAt &&
+            paymentStatus === "unpaid" && (
+              <button
+                onClick={() => {
+                  dispatch(retryPayment({ sessionId: stripeSessionId, email }));
+                }}
+                className="button-1"
+              >
+                Retry Payment
+              </button>
+            )}
+          {orderUser?.toString() === userId?.toString() &&
+            !cancelledAt &&
+            !deliveredAt && (
+              <button
+                onClick={() => handleUpdate("cancel")}
+                className="button-2"
+              >
+                Cancel Order
+              </button>
+            )}
         </div>
       </div>
     </section>

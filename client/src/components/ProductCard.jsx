@@ -61,6 +61,7 @@ const ProductCard = ({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   return (
     <div
       style={slider ? { width: width } : {}}
@@ -77,8 +78,8 @@ const ProductCard = ({
         />
       </div>
       <div className="flex flex-col p-2 overflow-hidden relative">
-        <h1 className="text-sm mb-2">{name}</h1>
-        <Rating rating={rating} size={16} />
+        <h1 className="text-sm mb-2 font-bold ellipses">{name}</h1>
+        <Rating rating={rating} size={16} className='mb-1'/>
         <p className="text-md mt-4 font-bold">${price}</p>
         <div className="absolute bottom-0 right-0 flex gap-2 p-2 translate-y-[100%] group-hover:translate-y-[0%] transition-all duration-300 ease-in-out">
           {wishlist ? (

@@ -119,11 +119,11 @@
   /* butttons */
 
   .button-1 {
-    @apply text-sm font-bold uppercase py-3.5 px-7 text-white bg-black tracking-[3px] cursor-pointer;
+    @apply text-sm font-bold uppercase py-3.5 px-7 text-white bg-black tracking-widest cursor-pointer;
   }
 
   .button-2 {
-    @apply text-sm font-bold uppercase py-3.5 px-7 tracking-[4px] cursor-pointer bg-red-500 text-white;
+    @apply text-sm font-bold uppercase py-3.5 px-7 tracking-widest cursor-pointer bg-red-500 text-white;
   }
 
   .button-3 {
