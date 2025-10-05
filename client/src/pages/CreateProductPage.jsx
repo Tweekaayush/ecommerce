@@ -29,7 +29,7 @@ const CreateProductPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createProduct({...formData }));
+    dispatch(createProduct({ ...formData }));
   };
 
   const handleChange = (e) => {
@@ -42,7 +42,6 @@ const CreateProductPage = () => {
       };
     });
   };
-
 
   return (
     <section className="min-h-screen">

@@ -41,7 +41,10 @@ const OrderListPage = () => {
                   className="grid grid-cols-[4fr_2fr_2fr_4fr] gap-4 items-center text-center py-7 px-2 bg-white nth-[odd]:bg-gray-100 nth-[odd]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
                 >
                   <p className="list-body ellipses">{order?._id}</p>
-                  <p className="list-body capitalize ellipses"> {order?.orderStatus}</p>
+                  <p className="list-body capitalize ellipses">
+                    {" "}
+                    {order?.orderStatus}
+                  </p>
                   <p className="list-body ellipses">${order?.totalAmount}</p>
                   <p className="list-body ellipses">
                     {order?.createdAt.split("T")[0]}

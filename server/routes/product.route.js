@@ -20,8 +20,8 @@ router.route("/").get(getProducts).post(protected, admin, createProduct);
 router.get("/recommended", getRecommendedProducts);
 router.get("/featured", getFeaturedProducts);
 router.get("/bestseller", getBestSellingProducts);
-router.get('/categories', getAllCategories)
-router.get('/list',protected, admin, getProductListAdmin)
+router.get("/categories", getAllCategories);
+router.get("/list", protected, admin, getProductListAdmin);
 router
   .route("/:id")
   .get(getProductById)

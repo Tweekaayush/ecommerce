@@ -48,7 +48,10 @@ const CartItem = (props) => {
         <p>${price}</p>
       </div>
       <div className="col-span-1 py-2">
-        <X onClick={() => dispatch(removeFromCart(_id))} className="cursor-pointer w-5 h-5"/>
+        <X
+          onClick={() => dispatch(removeFromCart(_id))}
+          className="cursor-pointer w-5 h-5"
+        />
       </div>
     </div>
   );

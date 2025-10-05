@@ -17,7 +17,13 @@ const WishlistPage = () => {
         <h1 className="heading-4 uppercase text-red-500 mb-8">Wishlist</h1>
         <div className="grid grid-cols-[1fr]  xs:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4">
           {wishlist?.map((product) => {
-            return <ProductCard key={product?._id} {...product.product} wishlist={true}/>;
+            return (
+              <ProductCard
+                key={product?._id}
+                {...product.product}
+                wishlist={true}
+              />
+            );
           })}
         </div>
       </div>

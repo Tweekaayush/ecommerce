@@ -53,7 +53,10 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
   return (
-    <nav className="w-full fixed top-0 left-0  z-50 bg-white shadow-xl" ref={ref}>
+    <nav
+      className="w-full fixed top-0 left-0  z-50 bg-white shadow-xl"
+      ref={ref}
+    >
       <div className="container relative flex items-center bg-white h-16 gap-6">
         <Link to="/" className="text-4xl">
           Primart<span className="text-red-500">.</span>

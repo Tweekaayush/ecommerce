@@ -41,7 +41,6 @@ exports.getOrderById = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Order not found!");
   }
-  console.log(order);
 
   res.json({
     success: true,

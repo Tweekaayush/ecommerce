@@ -1,52 +1,51 @@
-const dotenv = require('dotenv')
-dotenv.config()
-const express = require('express');
-const connectDB = require('./config/db')
-const cors = require('cors')
-const cookieParser = require('cookie-parser');
-const { notFound, errorHandler } = require('./middleware/error.middleware');
-const authRoute = require('./routes/auth.route')
-const userRoute = require('./routes/user.route')
-const productRoute = require('./routes/product.route')
-const couponRoute = require('./routes/coupon.route')
-const cartRoute = require('./routes/cart.route')
-const paymentRoute = require('./routes/payment.route')
-const analyticsRoute = require('./routes/analytics.route')
-const orderRoute = require('./routes/order.route')
-const wishlistRoute = require('./routes/wishlist.route')
-const reviewRoute = require('./routes/review.route')
+const dotenv = require("dotenv");
+dotenv.config();
+const express = require("express");
+const connectDB = require("./config/db");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const { notFound, errorHandler } = require("./middleware/error.middleware");
+const authRoute = require("./routes/auth.route");
+const userRoute = require("./routes/user.route");
+const productRoute = require("./routes/product.route");
+const couponRoute = require("./routes/coupon.route");
+const cartRoute = require("./routes/cart.route");
+const paymentRoute = require("./routes/payment.route");
+const analyticsRoute = require("./routes/analytics.route");
+const orderRoute = require("./routes/order.route");
+const wishlistRoute = require("./routes/wishlist.route");
+const reviewRoute = require("./routes/review.route");
 
 const app = express();
 
-connectDB()
+connectDB();
 
-app.use(express.json())
-app.use(cookieParser())
-app.use(express.urlencoded({extended: true}))
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 app.use(
-    cors({
-        origin: process.env.CLIENT_URL,
-        credentials: true
-    })
-)
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 
-app.use('/api/v1/auth', authRoute)
-app.use('/api/v1/user', userRoute)
-app.use('/api/v1/product', productRoute)
-app.use('/api/v1/coupon', couponRoute)
-app.use('/api/v1/cart', cartRoute)
-app.use('/api/v1/payment', paymentRoute)
-app.use('/api/v1/order', orderRoute)
-app.use('/api/v1/analytics', analyticsRoute)
-app.use('/api/v1/wishlist', wishlistRoute)
-app.use('/api/v1/review', reviewRoute)
-
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/product", productRoute);
+app.use("/api/v1/coupon", couponRoute);
+app.use("/api/v1/cart", cartRoute);
+app.use("/api/v1/payment", paymentRoute);
+app.use("/api/v1/order", orderRoute);
+app.use("/api/v1/analytics", analyticsRoute);
+app.use("/api/v1/wishlist", wishlistRoute);
+app.use("/api/v1/review", reviewRoute);
 
 // Error Middleware
 
-app.use(notFound)
-app.use(errorHandler)
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(process.env.PORT, (req, res) => {
-    console.log('Server running on port:', process.env.PORT);
-})
+  console.log("Server running on port:", process.env.PORT);
+});

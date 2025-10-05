@@ -12,7 +12,7 @@ exports.getCoupons = asyncHandler(async (req, res) => {
 
 exports.validateCoupon = asyncHandler(async (req, res) => {
   const { code } = req.body;
-  console.log(code)
+
   const coupon = await Coupon.findOne({
     code: code,
     userId: req.user._id,
@@ -34,6 +34,6 @@ exports.validateCoupon = asyncHandler(async (req, res) => {
   res.json({
     success: true,
     coupon: coupon,
-    message: 'Coupon Valid'
+    message: "Coupon Valid",
   });
 });

@@ -76,7 +76,7 @@ const UpdateProfile = () => {
             onChange={handleChange}
             value={formData.password}
           />
-          <span>Update Password</span>
+          <span>Password</span>
         </label>
         <button type="submit" disabled={loading} className="button-1">
           save Changes
@@ -94,7 +94,7 @@ const MyOrders = () => {
   const {
     data: { orderList, totalPages },
   } = useSelector((state) => state.order);
-  console.log(orderList);
+
   useEffect(() => {
     dispatch(getMyOrders(page));
   }, []);
@@ -137,7 +137,6 @@ const MyOrders = () => {
 const UpdateAddress = () => {
   const dispatch = useDispatch();
   const updateForm = (data) => {
-    console.log(data);
     dispatch(updateProfile({ fullAddress: { ...data } }));
   };
   return (

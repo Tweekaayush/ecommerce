@@ -18,5 +18,5 @@ router
   .get(protected, admin, getUserById)
   .delete(protected, admin, deleteUser)
   .put(protected, admin, updateUser);
-  
+
 module.exports = router;

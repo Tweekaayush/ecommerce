@@ -63,7 +63,6 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
     },
   ]);
 
-
   res.json({
     success: true,
     analytics: {
@@ -72,7 +71,7 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
       totalSales: salesData[0]?.totalSales || 0,
       totalRevenue: salesData[0]?.totalRevenue || 0,
       revenueChart: chartData,
-      orderStatus
+      orderStatus,
     },
   });
 });

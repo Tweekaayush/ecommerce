@@ -35,7 +35,6 @@ const Cart = ({ cartOpen, setCartOpen }) => {
               {cart?.map((x) => {
                 return <CartItem key={x._id} {...x} />;
               })}
-                        
             </div>
           </div>
           <div className="grid grid-cols-2 p-4 border-dotted border-t-2">

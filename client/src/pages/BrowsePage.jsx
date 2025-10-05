@@ -63,10 +63,12 @@ const BrowsePage = () => {
         </div>
         <div className="py-4 grid grid-cols-[1fr] xs:grid-cols-[1fr_1fr] sm:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4 ">
           {products?.map((product) => {
-            return <ProductCard {...product} key={product?._id} slider={false} />;
+            return (
+              <ProductCard {...product} key={product?._id} slider={false} />
+            );
           })}
         </div>
-        <Pagination totalPages={totalPages} page ={page} setPage={setPage}/>
+        <Pagination totalPages={totalPages} page={page} setPage={setPage} />
       </div>
     </section>
   );

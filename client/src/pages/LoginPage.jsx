@@ -7,7 +7,9 @@ import { useEffect } from "react";
 const LoginPage = () => {
   const { state } = useLocation();
   const {
-    data: { user: {_id} },
+    data: {
+      user: { _id },
+    },
   } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     email: "",
@@ -38,7 +40,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (_id) {
-      state ? navigate(state.previousURL) :navigate('/profile');
+      state ? navigate(state.previousURL) : navigate("/profile");
     }
   }, [_id]);
   return (

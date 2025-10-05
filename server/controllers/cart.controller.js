@@ -31,21 +31,24 @@ exports.updateCart = asyncHandler(async (req, res) => {
     let quantity;
     if (x.quantity > product.countInStock) {
       quantity = x.qunatity;
-      message = "Some of the item(s) have been removed or their quantity has changed due to their inavailability.";
+      message =
+        "Some of the item(s) have been removed or their quantity has changed due to their inavailability.";
     } else {
       quantity = product.countInStock;
     }
-    return quantity
+    return quantity;
   });
 
-  user.cartItems = updatedCart
-  let subTotal = addDecimals(user.cartItems.reduce((acc, item)=>acc+(item.price*item.quantity), 0))
-  await user.save()
+  user.cartItems = updatedCart;
+  let subTotal = addDecimals(
+    user.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
+  );
+  await user.save();
 
   res.json({
     success: true,
     cart: updatedCart,
-    subTotal
+    subTotal,
   });
 });
 

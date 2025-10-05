@@ -34,9 +34,7 @@ const CheckoutCartItem = (props) => {
         <h1 className="text-sm text-black">{name}</h1>
         <p className="text-sm text-gray-600">Brand: {brand}</p>
       </div>
-      <p className="body-text font-extrabold py-2">
-        ${price}
-      </p>
+      <p className="body-text font-extrabold py-2">${price}</p>
       <div className="p-2">
         <div className="flex w-fit bg-gray-100 ">
           {update && (
@@ -47,7 +45,9 @@ const CheckoutCartItem = (props) => {
               -
             </button>
           )}
-          <span className="w-5 h-5 sm:w-7 sm:h-7 text-xs md:text-sm text-center sm:p-1">{qty}</span>
+          <span className="w-5 h-5 sm:w-7 sm:h-7 text-xs md:text-sm text-center sm:p-1">
+            {qty}
+          </span>
           {update && (
             <button
               className="w-5 h-5 sm:w-7 sm:h-7 text-xs md:text-sm text-center"

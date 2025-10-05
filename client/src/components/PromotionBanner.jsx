@@ -3,7 +3,7 @@ import backgroundImage from "/assets/promotion/promotion1.jpg";
 const PromotionBanner = () => {
   return (
     <section
-      style={{ backgroundImage: `url(${backgroundImage})`}}
+      style={{ backgroundImage: `url(${backgroundImage})` }}
       className="bg-[30%_80%] bg-cover bg-no-repeat h-[55vh] bg-gray-100"
     >
       <div className="container grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] items-center">

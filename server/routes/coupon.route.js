@@ -2,7 +2,7 @@ const express = require("express");
 const { protected } = require("../middleware/auth.middleware");
 const {
   validateCoupon,
-  
+
   getCoupons,
 } = require("../controllers/coupon.controller");
 

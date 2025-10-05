@@ -127,11 +127,15 @@ export const addToWishlist = createAsyncThunk(
   "addToWishlist",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/wishlist/add`, {product: payload}, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${BASE_URL}/wishlist/add`,
+        { product: payload },
+        {
+          withCredentials: true,
+        }
+      );
 
-      return res.data;
+      return res.data.wishlist;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -142,11 +146,15 @@ export const removeFromWishlist = createAsyncThunk(
   "removeFromWishlist",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${BASE_URL}/wishlist/remove`, {product: payload}, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${BASE_URL}/wishlist/remove`,
+        { product: payload },
+        {
+          withCredentials: true,
+        }
+      );
 
-      return res.data;
+      return res.data.wishlist;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -248,6 +256,7 @@ const userSlice = createSlice({
     builder.addCase(addToWishlist.fulfilled, (state, action) => {
       state.loading = false;
       state.successMessage = "Added To Wishlist!";
+      state.data.wishlist = action.payload;
     });
     builder.addCase(addToWishlist.rejected, (state, action) => {
       state.loading = false;
@@ -259,6 +268,7 @@ const userSlice = createSlice({
     builder.addCase(removeFromWishlist.fulfilled, (state, action) => {
       state.loading = false;
       state.successMessage = "Removed From Wishlist!";
+      state.data.wishlist = action.payload;
     });
     builder.addCase(removeFromWishlist.rejected, (state, action) => {
       state.loading = false;

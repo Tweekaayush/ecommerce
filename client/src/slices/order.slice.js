@@ -38,7 +38,6 @@ export const getOrderById = createAsyncThunk(
   "getOrderById",
   async (payload, { rejectWithValue }) => {
     try {
-      console.log(payload);
       const res = await axios.get(`${BASE_URL}/order/${payload}`, {
         withCredentials: true,
       });
@@ -83,15 +82,12 @@ export const placeOrder = createAsyncThunk(
         }
       );
 
-      console.log(payload, res.data);
-
       const result = stripe.redirectToCheckout({
         sessionId: res.data.id,
       });
 
       return true;
     } catch (error) {
-      console.log(error.response.data.message)
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -108,8 +104,8 @@ export const validateOrder = createAsyncThunk(
           withCredentials: true,
         }
       );
-      dispatch(clearCartItems())
-      
+      dispatch(clearCartItems());
+
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);

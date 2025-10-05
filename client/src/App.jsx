@@ -52,9 +52,18 @@ const App = () => {
             <Route path="/dashboard" element={<AdminDashboardPage />} />
             <Route path="/dashboard/user/list" element={<UserListPage />} />
             <Route path="/dashboard/order/list" element={<OrderListPage />} />
-            <Route path="/dashboard/product/list" element={<ProductListPage />} />
-            <Route path="/dashboard/product/update/:id" element={<UpdateProductPage />} />
-            <Route path="/dashboard/product/create" element={<CreateProductPage />} />
+            <Route
+              path="/dashboard/product/list"
+              element={<ProductListPage />}
+            />
+            <Route
+              path="/dashboard/product/update/:id"
+              element={<UpdateProductPage />}
+            />
+            <Route
+              path="/dashboard/product/create"
+              element={<CreateProductPage />}
+            />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>

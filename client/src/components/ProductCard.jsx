@@ -41,6 +41,21 @@ const ProductCard = ({
     }
   };
 
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    if (wishlist) dispatch(removeFromWishlist(_id));
+    dispatch(
+      addToCart({
+        name,
+        image,
+        price,
+        _id,
+        brand,
+        quantity: 1,
+      })
+    );
+  };
+
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -68,7 +83,7 @@ const ProductCard = ({
         <div className="absolute bottom-0 right-0 flex gap-2 p-2 translate-y-[100%] group-hover:translate-y-[0%] transition-all duration-300 ease-in-out">
           {wishlist ? (
             <Trash
-              className="w-5 h-5"
+              className="w-5 h-5 text-red-500"
               onClick={(e) => [
                 e.stopPropagation(),
                 dispatch(removeFromWishlist(_id)),
@@ -83,22 +98,7 @@ const ProductCard = ({
               ]}
             />
           )}
-          <ShoppingCart
-            className="w-5 h-5"
-            onClick={(e) => [
-              e.stopPropagation(),
-              dispatch(
-                addToCart({
-                  name,
-                  image,
-                  price,
-                  _id,
-                  brand,
-                  quantity: 1,
-                })
-              ),
-            ]}
-          />
+          <ShoppingCart className="w-5 h-5" onClick={handleAddToCart} />
         </div>
       </div>
     </div>

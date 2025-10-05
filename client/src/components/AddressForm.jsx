@@ -33,7 +33,11 @@ const AddressForm = ({ submitFunction }) => {
   }, [fullAddress]);
 
   return (
-    <form action="" className="grid grid-cols-2 overflow-hidden transition-all 0.3s ease-in-out duration-300 gap-4 pt-4" onSubmit={handleSubmit}>
+    <form
+      action=""
+      className="grid grid-cols-2 overflow-hidden transition-all 0.3s ease-in-out duration-300 gap-4 pt-4"
+      onSubmit={handleSubmit}
+    >
       <label htmlFor="address" className="form-label col-span-2">
         <input
           className="form-input-2"

@@ -5,8 +5,6 @@ const { generateToken } = require("../utils/generateToken");
 exports.signup = asyncHandler(async (req, res) => {
   const { name, email, password, image } = req.body;
 
-  console.log(req.body);
-
   const user = await User.findOne({ email });
 
   if (user) {
@@ -14,7 +12,7 @@ exports.signup = asyncHandler(async (req, res) => {
     throw new Error("User already exists with given email.");
   }
 
-  let uploadResult = ''
+  let uploadResult = "";
 
   if (image) {
     uploadResult = await cloudinary.uploader.upload(image, {
@@ -26,7 +24,7 @@ exports.signup = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    image: uploadResult?.secure_url || ''
+    image: uploadResult?.secure_url || "",
   });
 
   if (newUser) {

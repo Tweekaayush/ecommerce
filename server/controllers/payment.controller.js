@@ -128,7 +128,6 @@ exports.checkoutSuccess = asyncHandler(async (req, res) => {
       });
 
       await coupon.save();
-
     }
 
     res.json({

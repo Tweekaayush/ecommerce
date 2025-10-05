@@ -5,10 +5,7 @@ import { useNavigate } from "react-router-dom";
 const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
-    <section
-      
-      className="flex justify-center align-center min-h-screen"
-    >
+    <section className="flex justify-center align-center min-h-screen">
       <div className="container flex flex-col justify-center items-center">
         <Frown className="mb-4 h-24 w-24" />
         <h1 className="heading-2 mb-4">404 - Page Not Found</h1>

@@ -31,7 +31,7 @@ const AdminDashboardPage = () => {
     },
   } = useSelector((state) => state.admin);
 
-  const colors = ["green", "#e0ac00",  "red" ];
+  const colors = ["green", "#e0ac00", "red"];
 
   useEffect(() => {
     dispatch(getAnalytics());
@@ -124,7 +124,7 @@ const AdminDashboardPage = () => {
                   ))}
                 </Pie>
                 <Tooltip />
-                <Legend wrapperStyle={{textTransform: 'capitalize'}}/>
+                <Legend wrapperStyle={{ textTransform: "capitalize" }} />
               </PieChart>
             </ResponsiveContainer>
           </div>

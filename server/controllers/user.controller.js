@@ -32,7 +32,6 @@ exports.updateProfile = asyncHandler(async (req, res) => {
     user.fullAddress.country = fullAddress.country;
   }
   const updatedUser = await user.save();
-  console.log(updatedUser);
 
   res.json({
     success: true,
@@ -43,10 +42,8 @@ exports.updateProfile = asyncHandler(async (req, res) => {
 
 exports.getWishlist = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).populate({
-    path: 'wishlist.product'
+    path: "wishlist.product",
   });
-  
-  console.log(user)
 
   res.json({
     success: true,
@@ -65,7 +62,6 @@ exports.getUserById = asyncHandler(async (req, res) => {
 });
 
 exports.getUserListAdmin = asyncHandler(async (req, res) => {
-  console.log("hi");
   const page = Number(req.query.page) || 1;
   const paginate = 6;
   const userList = await User.find()
@@ -119,8 +115,6 @@ exports.deleteUser = asyncHandler(async (req, res) => {
 exports.addToWishlist = asyncHandler(async (req, res) => {
   const { product } = req.body;
 
-  console.log(product)
-
   const user = await User.findById(req.user._id);
 
   const existItem = user.wishlist.find((item) => item.product === product);
@@ -130,12 +124,13 @@ exports.addToWishlist = asyncHandler(async (req, res) => {
     throw new Error("");
   }
 
-  user.wishlist.push({product: product});
+  user.wishlist.push({ product: product });
 
-  await user.save();
+  const updatedUser = await user.save();
 
   res.json({
     success: true,
+    wishlist: updatedUser.wishlist,
   });
 });
 
@@ -144,13 +139,15 @@ exports.removeFromWishlist = asyncHandler(async (req, res) => {
 
   const user = await User.findById(req.user._id);
 
-  user.wishlist = user.wishlist.filter((item) => item._id.toString() !== product);
+  user.wishlist = user.wishlist.filter(
+    (item) => item.product.toString() !== product
+  );
 
   const updatedUser = await user.save();
 
   res.json({
     success: true,
-    user: updatedUser,
+    wishlist: updatedUser.wishlist,
   });
 });
 

@@ -25,7 +25,7 @@ const UpdateProductPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData((prev) => {
       return {
         ...prev,
@@ -46,7 +46,7 @@ const UpdateProductPage = () => {
         brand: productDetails?.brand,
         category: productDetails?.category,
         price: productDetails?.price,
-        countInStock:productDetails?.countInStock,
+        countInStock: productDetails?.countInStock,
         isFeatured: productDetails?.isFeatured,
       });
     }

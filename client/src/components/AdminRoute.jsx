@@ -10,7 +10,7 @@ const AdminRoute = () => {
     },
   } = useSelector((state) => state.user);
 
-  return _id && role === 'admin' ? (
+  return _id && role === "admin" ? (
     <Outlet />
   ) : (
     <Navigate

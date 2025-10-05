@@ -17,7 +17,7 @@ const Reviews = () => {
   } = useSelector((state) => state.product);
   const {
     data: {
-      user: {  _id: userId },
+      user: { _id: userId },
     },
   } = useSelector((state) => state.user);
 

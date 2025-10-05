@@ -13,8 +13,6 @@ exports.getProducts = asyncHandler(async (req, res) => {
     .limit(paginate)
     .skip((page - 1) * paginate);
 
-  console.log(products);
-
   res.json({
     success: true,
     products,

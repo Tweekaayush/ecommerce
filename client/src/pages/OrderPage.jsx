@@ -24,9 +24,7 @@ const OrderItem = (props) => {
         <h4 className="text-sm text-black">{name}</h4>
         <p className="text-sm text-gray-600">Brand: {brand}</p>
       </div>
-      <p className="text-sm font-extrabold py-2 text-center">
-        ${price}
-      </p>
+      <p className="text-sm font-extrabold py-2 text-center">${price}</p>
       <div className="h-7 text-sm text-center p-2">{quantity}</div>
       <p className="text-sm font-extrabold text-center py-2 pr-2">
         ${price * quantity}

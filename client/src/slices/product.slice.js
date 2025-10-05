@@ -27,7 +27,7 @@ export const getProducts = createAsyncThunk(
         `${BASE_URL}/product?page=${page}&category=${category}`,
         { withCredentials: true }
       );
-      console.log(res);
+
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -266,7 +266,7 @@ const productSlice = createSlice({
     });
     builder.addCase(createProduct.fulfilled, (state, action) => {
       state.loading = false;
-      state.data.productDetails = action.payload.product
+      state.data.productDetails = action.payload.product;
     });
     builder.addCase(createProduct.rejected, (state, action) => {
       state.loading = false;
@@ -277,7 +277,7 @@ const productSlice = createSlice({
     });
     builder.addCase(updateProduct.fulfilled, (state, action) => {
       state.loading = false;
-      state.data.productDetails = action.payload.product
+      state.data.productDetails = action.payload.product;
     });
     builder.addCase(updateProduct.rejected, (state, action) => {
       state.loading = false;

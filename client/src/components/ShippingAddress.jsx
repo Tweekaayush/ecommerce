@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
+import { updateProfile } from "../slices/user.slice";
 
 const ShippingAddress = () => {
   const {
@@ -15,7 +16,7 @@ const ShippingAddress = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (data) => {
-    // dispatch()
+    dispatch(updateProfile(data))
   };
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const ShippingAddress = () => {
           className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
           style={{ maxHeight: open ? "300px" : 0 }}
         >
-          <AddressForm />
+          <AddressForm submitFunction={handleSubmit}/>
         </div>
       </div>
     </div>
