@@ -88,6 +88,7 @@ export const placeOrder = createAsyncThunk(
 
       return true;
     } catch (error) {
+      console.log(error.response.data.message)
       return rejectWithValue(error.response.data.message);
     }
   }

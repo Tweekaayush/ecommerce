@@ -34,7 +34,6 @@ const orderSchema = new mongoose.Schema(
     stripeSessionId: {
       type: String,
       unique: true,
-      required: true,
     },
     shippingAddress: {
       address: { type: String },
@@ -47,6 +46,11 @@ const orderSchema = new mongoose.Schema(
     },
     cancelledAt: {
       type: Date,
+    },
+    paymentStatus: {
+      type: String,
+      enum: ['paid', 'unpaid'],
+      default: 'unpaid'
     },
     orderStatus: {
       type: String,

@@ -41,7 +41,7 @@ const CheckoutPage = () => {
       component: <ShippingAddress />,
       button: "Continue",
       func: function () {
-        if (fullAddress) {
+        if (fullAddress.address  && fullAddress.postalCode && fullAddress.city && fullAddress.country ) {
           dispatch(saveShippingAddress({ ...fullAddress }));
           return true;
         }

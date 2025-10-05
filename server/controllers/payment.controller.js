@@ -17,6 +17,7 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
 
   let coupon = null;
   let totalAmount = 0;
+  const order = new Order();
 
   const lineItems = products.map((product) => {
     const amount = product.price * 100;
@@ -46,6 +47,7 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
       totalAmount -= Math.round(
         (totalAmount * coupon.discountPercentage) / 100
       );
+      order.discountPercentage = coupon.discountPercentage;
     }
   }
 
@@ -64,6 +66,7 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
         ]
       : [],
     metadata: {
+      orderId: order._id.toString(),
       userId: req.user._id.toString(),
       couponCode: couponCode || "",
       shippingAddress: JSON.stringify(shippingAddress),
@@ -77,9 +80,23 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
     },
   });
 
+  order.user = req.user._id.toString();
+  order.products = products.map((p) => ({
+    product: p._id,
+    quantity: p.quantity,
+    price: p.price,
+  }));
+  order.totalAmount = totalAmount / 100;
+  order.shippingAddress = shippingAddress;
+  order.stripeSessionId = session.id;
+
+  await order.save()
+
+  console.log(order.products, products)
+
   res.status(200).json({
+    success: true,
     id: session.id,
-    totalAmount: totalAmount / 100,
   });
 });
 
@@ -100,18 +117,17 @@ exports.checkoutSuccess = asyncHandler(async (req, res) => {
       );
     }
 
+    const order = await Order.findById(session.metadata.orderId);
+    
+    order.paymentStatus = "paid";
+
+    
+    const updatedOrder = await order.save();
+
     const products = JSON.parse(session.metadata.products);
     const shippingAddress = JSON.parse(session.metadata.shippingAddress);
 
     const totalAmount = session.amount_total / 100;
-
-    const order = await Order.create({
-      user: session.metadata.userId,
-      products: products,
-      totalAmount: totalAmount,
-      stripeSessionId: sessionId,
-      shippingAddress: shippingAddress,
-    });
 
     if (totalAmount > 200) {
       const code =
@@ -125,6 +141,7 @@ exports.checkoutSuccess = asyncHandler(async (req, res) => {
         expirationDate: date,
         isActive: true,
         userId: session.metadata.userId,
+        stripeSessionId: sessionId,
       });
 
       await coupon.save();

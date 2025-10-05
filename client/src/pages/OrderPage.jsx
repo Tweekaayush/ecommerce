@@ -47,6 +47,7 @@ const OrderPage = () => {
         cancelledAt,
         orderStatus,
         discountPercentage,
+        paymentStatus,
       },
     },
   } = useSelector((state) => state.order);
@@ -57,9 +58,6 @@ const OrderPage = () => {
     },
   } = useSelector((state) => state.user);
 
-  const deliverOrder = () => {
-    // dispatch((id));
-  };
   const ref = useRef(0);
 
   const handleClickOutside = (e) => {
@@ -80,6 +78,8 @@ const OrderPage = () => {
 
   useEffect(() => {
     document.title = "Order Details";
+    window.addEventListener("click", handleClickOutside);
+    return () => window.removeEventListener("click", handleClickOutside);
   }, []);
   let subtotal = 0;
   useEffect(() => {
@@ -166,6 +166,7 @@ const OrderPage = () => {
                   <div
                     className="w-full heading-5 flex items-center justify-center p-2 border border-gray-500 cursor-pointer"
                     onClick={() => setOpen((prev) => !prev)}
+                    ref={ref}
                   >
                     {orderStatus}
                   </div>

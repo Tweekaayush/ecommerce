@@ -23,7 +23,7 @@ const AddressForm = ({ submitFunction }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitFunction(formData);
+    submitFunction({fullAddress: formData});
   };
 
   useEffect(() => {

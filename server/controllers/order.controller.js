@@ -33,9 +33,10 @@ exports.getOrderById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   const order = await Order.findById(id).populate({
-    path: "products.product",
-    select: "",
+    path: 'products.product'
   });
+
+  console.log(order)
 
   if (!order) {
     res.status(404);
