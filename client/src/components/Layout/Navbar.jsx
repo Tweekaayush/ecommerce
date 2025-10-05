@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   Menu,
@@ -17,6 +17,8 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const ref = useRef(0);
+
   const {
     data: {
       user: { _id, name, image, role },
@@ -28,9 +30,16 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
 
   const dispatch = useDispatch();
 
+  const handleClickOutside = (e) => {
+    if (ref.current && !ref.current.contains(e.target)) {
+      setToggle(false);
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    setCartOpen(false)
+    setCartOpen(false);
+    setToggle(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -39,8 +48,12 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
       : document.body.classList.remove("overflow-hidden");
   }, [cartOpen]);
 
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => window.removeEventListener("click", handleClickOutside);
+  }, []);
   return (
-    <nav className="w-full fixed top-0 left-0  z-50 bg-white shadow-xl">
+    <nav className="w-full fixed top-0 left-0  z-50 bg-white shadow-xl" ref={ref}>
       <div className="container relative flex items-center bg-white h-16 gap-6">
         <Link to="/" className="text-4xl">
           Primart<span className="text-red-500">.</span>
@@ -54,7 +67,7 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
         {/* className={`navbar-collapse ${toggle ? "" : "collapse"}`} */}
         <div
           className={`${
-            toggle ? "top-16" : "- top-16"
+            toggle ? "top-16" : "-top-16"
           } absolute w-full bg-white left-0 -z-10 transition-all md:relative md:top-0 md:z-0`}
         >
           <ul className="flex flex-col md:items-center md:flex-row">
@@ -84,7 +97,7 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
         </div>
         <ul className="flex items-center">
           <li>
-            <Heart onClick={()=>navigate('/wishlist')}/>
+            <Heart onClick={() => navigate("/wishlist")} />
           </li>
           <li onClick={() => setCartOpen(true)}>
             <ShoppingCart />
