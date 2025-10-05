@@ -54,6 +54,17 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
     };
   });
 
+  const orderStatus = await Order.aggregate([
+    {
+      $group: {
+        _id: "$orderStatus",
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  console.log(orderStatus)
+
   res.json({
     success: true,
     analytics: {
@@ -62,6 +73,7 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
       totalSales: salesData[0]?.totalSales || 0,
       totalRevenue: salesData[0]?.totalRevenue || 0,
       revenueChart: chartData,
+      orderStatus
     },
   });
 });

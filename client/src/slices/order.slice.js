@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "../constants/constants";
 import { loadStripe } from "@stripe/stripe-js";
+import { clearCartItems } from "./cart.slice";
 
 const initialState = {
   loading: false,
@@ -90,6 +91,7 @@ export const placeOrder = createAsyncThunk(
 
       return true;
     } catch (error) {
+      console.log(error.response.data.message)
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -97,7 +99,7 @@ export const placeOrder = createAsyncThunk(
 
 export const validateOrder = createAsyncThunk(
   "validateOrder",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { dispatch, rejectWithValue }) => {
     try {
       const res = await axios.post(
         `${BASE_URL}/payment/checkout-success`,
@@ -106,7 +108,8 @@ export const validateOrder = createAsyncThunk(
           withCredentials: true,
         }
       );
-
+      dispatch(clearCartItems())
+      
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);

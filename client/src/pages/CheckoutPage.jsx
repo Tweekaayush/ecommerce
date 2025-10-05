@@ -57,7 +57,7 @@ const CheckoutPage = () => {
         const order = {
           products: cart,
           shippingAddress,
-          couponCode: coupon,
+          couponCode: coupon?.code || '',
           email,
         };
         dispatch(placeOrder(order));

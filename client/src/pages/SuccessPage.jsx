@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { validateOrder } from "../slices/order.slice";
 import { CircleCheckBig } from "lucide-react";
 
 const SuccessPage = () => {
-  //   const { search } = useLocation();
-  const sessionId = new URLSearchParams(location.search).get("session_id");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { sessionId } = useParams();
+
   const {
     data: { orderId },
   } = useSelector((state) => state.order);
+
   useEffect(() => {
-    dispatch(validateOrder({ sessionId }));
+    if (sessionId) dispatch(validateOrder({ sessionId }));
   }, [sessionId]);
   return (
-    <section className="min-h-screen">
+    <section className="min-h-screen flex justify-center items-center">
       <div className="container flex flex-col items-center justify-center h-full">
         <CircleCheckBig className="text-green-600 w-15 h-15" />
         <h1 className="text-green-600 text-5xl tracking-wider font-extrabold mb-2">
@@ -25,11 +26,14 @@ const SuccessPage = () => {
         <p className="text-xl tracking-wider text-gray-700 mb-4">
           Your order has been placed successfully.
         </p>
-        <div className="p-4 bg-gray-200 mb-4 rounded-sm">
+        <div className="p-4 bg-gray-200 mb-4 rounded-sm flex gap-4">
           <h1 className="heading-5">Order Id:</h1>
           <p className="body-text">{orderId}</p>
         </div>
-        <button className="button-1 mb-4" onClick={() => navigate("/profile")}>
+        <button
+          className="button-1 mb-4"
+          onClick={() => navigate(`/order/${orderId}`)}
+        >
           go to your order
         </button>
       </div>

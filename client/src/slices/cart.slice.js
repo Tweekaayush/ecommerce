@@ -105,8 +105,12 @@ const cartSlice = createSlice({
     },
     clearCartItems: (state, action) => {
       state.data.cart = [];
+      state.data.wishlist = [];
+      state.data.coupon = null;
+      state.data.total = 0;
+      state.data.subTotal = 0;
+      state.data.discount = 0;
       state.data.shippingAddress = {};
-      state.data.paymentMethod = "Card";
       return updateCart(state);
     },
   },
@@ -118,7 +122,7 @@ const cartSlice = createSlice({
       state.loading = true;
       state.data.coupon = action.payload.coupon;
       state.successMessage = action.payload.message;
-      return updateCart(state)
+      return updateCart(state);
     });
     builder.addCase(validateCoupon.rejected, (state, action) => {
       state.loading = true;

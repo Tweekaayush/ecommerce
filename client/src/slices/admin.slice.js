@@ -13,6 +13,7 @@ const initialState = {
     orderList: [],
     productList: [],
     revenueChart: [],
+    orderStatus: [],
     totalPages: 0,
   },
   successMessage: "",
@@ -89,6 +90,7 @@ const adminSlice = createSlice({
       state.data.totalRevenue = action.payload.totalRevenue;
       state.data.totalProducts = action.payload.totalProducts;
       state.data.revenueChart = action.payload.revenueChart;
+      state.data.orderStatus = action.payload.orderStatus;
     });
     builder.addCase(getAnalytics.rejected, (state, action) => {
       state.loading = false;

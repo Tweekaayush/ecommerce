@@ -51,7 +51,7 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
-    success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `${process.env.CLIENT_URL}/success/{CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.CLIENT_URL}/failed`,
     line_items: lineItems,
     customer_email: email,
@@ -119,13 +119,16 @@ exports.checkoutSuccess = asyncHandler(async (req, res) => {
 
       const date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
 
-      const coupon = await Coupon.create({
+      const coupon = new Coupon({
         code: code,
         discountPercentage: 10,
         expirationDate: date,
-        userId: session.metadata.userId,
         isActive: true,
+        userId: session.metadata.userId,
       });
+
+      await coupon.save();
+
     }
 
     res.json({

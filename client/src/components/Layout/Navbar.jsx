@@ -54,10 +54,10 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
         {/* className={`navbar-collapse ${toggle ? "" : "collapse"}`} */}
         <div
           className={`${
-            toggle ? "top-16" : "top-0"
+            toggle ? "top-16" : "- top-16"
           } absolute w-full bg-white left-0 -z-10 transition-all md:relative md:top-0 md:z-0`}
         >
-          <ul className="flex items-center">
+          <ul className="flex flex-col md:items-center md:flex-row">
             <li>
               <NavLink
                 to="/"

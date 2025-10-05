@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ResponsiveContainer,
   BarChart,
+  PieChart,
   XAxis,
   YAxis,
   Tooltip,
   Legend,
   Bar,
+  Pie,
 } from "recharts";
 import { getAnalytics } from "../slices/admin.slice";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +20,14 @@ const AdminDashboardPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    data: { totalRevenue, totalSales, totalUsers, totalProducts, revenueChart },
+    data: {
+      totalRevenue,
+      totalSales,
+      totalUsers,
+      totalProducts,
+      revenueChart,
+      orderStatus,
+    },
   } = useSelector((state) => state.admin);
   useEffect(() => {
     dispatch(getAnalytics());
@@ -91,6 +100,24 @@ const AdminDashboardPage = () => {
                 <Bar dataKey="revenue" fill="magenta" />
                 <Bar dataKey="sales" fill="blue" />
               </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="col-span-4 md:col-span-1 shadow-card p-4 rounded-sm hover:shadow-hover cursor-pointer">
+            <h1 className="heading-1">Order Status</h1>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={orderStatus}
+                  dataKey="count"
+                  nameKey="_id"
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={70}
+                />
+                <Tooltip />
+                <Legend />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </div>

@@ -3,7 +3,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const asyncHandler = require("../middleware/asyncHandler");
 
 exports.createStripeCoupon = asyncHandler(async (discountPercentage) => {
-  const coupon = await stripe.coupon.create({
+
+  const coupon = await stripe.coupons.create({
     percent_off: discountPercentage,
     duration: "once",
   });

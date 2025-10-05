@@ -43,7 +43,7 @@ const App = () => {
           <Route element={<PrivateRoutes />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/success/:sessionId" element={<SuccessPage />} />
             <Route path="/failed" element={<FailedPage />} />
             <Route path="/order/:id" element={<OrderPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
