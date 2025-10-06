@@ -8,6 +8,13 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
   const totalProducts = await Product.countDocuments();
   const salesData = await Order.aggregate([
     {
+      $match: {
+        orderStatus: {
+          $ne: "cancel",
+        },
+      },
+    },
+    {
       $group: {
         _id: null,
         totalSales: { $sum: 1 },
@@ -21,9 +28,12 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
   const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
   const endDate = new Date();
 
-  const salesDataChart = await Order.aggregate([
+  let salesDataChart = await Order.aggregate([
     {
       $match: {
+        orderStatus: {
+          $ne: "cancel",
+        },
         createdAt: {
           $gte: startDate,
           $lte: endDate,

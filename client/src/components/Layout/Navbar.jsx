@@ -136,21 +136,21 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
                   } absolute top-3 -right-3.5 flex flex-col items-center pt-7 transition-opacity duration-300 ease-in-out`}
                 >
                   <li
-                    onClick={() => navigate("/profile")}
+                    onClick={() => [setOpen(false), navigate("/profile")]}
                     className="flex items-center capitalize justify-center bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
                   >
                     <User className="w-4 h-4" />
                   </li>
                   {role === "admin" && (
                     <li
-                      onClick={() => navigate("/dashboard")}
+                      onClick={() => [setOpen(false) ,navigate("/dashboard")]}
                       className="flex items-center justify-center bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
                     >
                       <LayoutDashboard className="w-4 h-4" />
                     </li>
                   )}
                   <li
-                    onClick={() => dispatch(logout())}
+                    onClick={() => [setOpen(false), dispatch(logout())]}
                     className="flex items-center justify-center bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
                   >
                     <LogOut className="w-4 h-4" />

@@ -33,8 +33,6 @@ const AdminDashboardPage = () => {
     },
   } = useSelector((state) => state.admin);
 
-  const colors = ["green", "#e0ac00", "red"];
-
   useEffect(() => {
     dispatch(getAnalytics());
   }, []);
@@ -124,9 +122,15 @@ const AdminDashboardPage = () => {
                     innerRadius={50}
                     outerRadius={70}
                   >
-                    {orderStatus?.map((e, i) => (
-                      <Cell key={e._id} fill={colors[i]} />
-                    ))}
+                    {orderStatus?.map((e, i) => {
+                      let color =
+                        e._id === "processing"
+                          ? "#e0ac00"
+                          : e._id === "cancel"
+                          ? "red"
+                          : "green";
+                      return <Cell key={e._id} fill={color} />;
+                    })}
                   </Pie>
                   <Tooltip />
                   <Legend wrapperStyle={{ textTransform: "capitalize" }} />
