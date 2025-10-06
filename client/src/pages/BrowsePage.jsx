@@ -21,10 +21,11 @@ const BrowsePage = () => {
     setActiveCategory(cat || "");
     setPage(1);
   }, [cat]);
-
+  
   useEffect(() => {
     dispatch(getProducts({ page: page, category: activeCategory }));
     document.title = `Browse ${activeCategory}`;
+    window.scrollTo(0, 0);
   }, [page, activeCategory]);
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const BrowsePage = () => {
             )}
           </div>
         </div>
-        <div className="py-4 grid grid-cols-[1fr] xs:grid-cols-[1fr_1fr] sm:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4 ">
+        <div className="py-4 grid grid-cols-[1fr] xs:grid-cols-[1fr_1fr] sm:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4 min-h-[872px]">
           {!loading
             ? products?.map((product) => {
                 return (

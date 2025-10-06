@@ -11,12 +11,16 @@ const Pagination = ({ totalPages, page, setPage }) => {
   };
 
   useEffect(() => {
-    const prevArray = Array.from({ length: 2 }, (_, i) => page - 1 - i)
+    const prevLength = totalPages >= page + 2 ? 2 : 5 - (totalPages - page + 1);
+    const prevArray = Array.from({ length: prevLength }, (_, i) => page - 1 - i)
       .filter((p) => p > 0)
       .reverse();
-    const nextArray = Array.from({ length: 3 }, (_, i) => page + i).filter(
-      (p) => p <= totalPages
-    );
+    const nextLength =
+      prevArray.length <= 2 ? 5 - prevArray.length : 5 - prevArray.length;
+    const nextArray = Array.from(
+      { length: nextLength },
+      (_, i) => page + i
+    ).filter((p) => p <= totalPages);
     setPaginationArray([...prevArray, ...nextArray]);
   }, [page, totalPages]);
 
@@ -25,7 +29,7 @@ const Pagination = ({ totalPages, page, setPage }) => {
       {totalPages !== 0 && paginationArray[0] !== 1 && (
         <button
           onClick={() => setPage(1)}
-          className="w-8 h-8 border-1 cursor-pointer"
+          className="pagination-btn"
         >
           {"<<"}
         </button>
@@ -33,7 +37,7 @@ const Pagination = ({ totalPages, page, setPage }) => {
       <button
         onClick={handlePrev}
         disabled={page <= 1}
-        className="w-8 h-8 border-1 cursor-pointer"
+        className="pagination-btn"
       >
         {"<"}
       </button>
@@ -44,14 +48,14 @@ const Pagination = ({ totalPages, page, setPage }) => {
             onClick={() => setPage(p)}
             className={`${
               page === p ? "bg-black text-white" : ""
-            } w-8 h-8 border-1 cursor-pointer`}
+            } pagination-btn`}
           >
             {p}
           </button>
         );
       })}
       <button
-        className="w-8 h-8 border-1 cursor-pointer"
+        className="pagination-btn"
         onClick={handleNext}
         disabled={page >= totalPages}
       >
@@ -60,7 +64,7 @@ const Pagination = ({ totalPages, page, setPage }) => {
       {totalPages !== 0 &&
         paginationArray[paginationArray.length - 1] !== totalPages && (
           <button
-            className="w-8 h-8 border-1 cursor-pointer"
+            className="pagination-btn"
             onClick={() => setPage(totalPages)}
           >
             {">>"}

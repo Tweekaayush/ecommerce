@@ -63,12 +63,12 @@
     @apply text-gray-400 w-4 h-4;
   }
 
-   @keyframes pulse {
+  @keyframes pulse {
     0% {
-      background-position: 0% 0%
+      background-position: 0% 0%;
     }
     100% {
-      background-position: -135% 0%
+      background-position: -135% 0%;
     }
   }
 }
@@ -78,8 +78,7 @@
     @apply min-w-full w-full xl:w-7xl xl:min-w-7xl px-4 mx-auto;
   }
 
-  .skeleton{
-    
+  .skeleton {
   }
 
   .ellipses {
@@ -202,5 +201,11 @@
 
   .list-body {
     @apply text-xs md:text-sm text-black;
+  }
+
+  /* Pagination */
+
+  .pagination-btn {
+    @apply py-0.5 px-2.5 border-1 cursor-pointer text-lg font-semibold;
   }
 }

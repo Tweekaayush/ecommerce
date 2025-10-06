@@ -34,7 +34,7 @@ const ProductSlider = ({ title, products }) => {
           id="slider"
         >
           {!loading ? (
-            <div className="flex gap-4 w-fit">
+            <div className="flex gap-4 w-fit px-1">
               {products?.map((product) => {
                 return (
                   <ProductCard {...product} key={product?._id} slider={true} />

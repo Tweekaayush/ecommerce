@@ -133,25 +133,25 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
                 <ul
                   className={`${
                     open ? "visible opacity-100" : "invisible opacity-0"
-                  } absolute top-5 -right-3.5 flex flex-col items-center pt-7 transition-opacity duration-300 ease-in-out`}
+                  } absolute top-3 -right-3.5 flex flex-col items-center pt-7 transition-opacity duration-300 ease-in-out`}
                 >
                   <li
                     onClick={() => navigate("/profile")}
-                    className="flex items-center capitalize justify-center gap-1 bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
+                    className="flex items-center capitalize justify-center bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
                   >
                     <User className="w-4 h-4" />
                   </li>
                   {role === "admin" && (
                     <li
                       onClick={() => navigate("/dashboard")}
-                      className="flex items-center justify-center gap-1 bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
+                      className="flex items-center justify-center bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
                     >
                       <LayoutDashboard className="w-4 h-4" />
                     </li>
                   )}
                   <li
                     onClick={() => dispatch(logout())}
-                    className="flex items-center justify-center gap-1 bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
+                    className="flex items-center justify-center bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
                   >
                     <LogOut className="w-4 h-4" />
                   </li>
