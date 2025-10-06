@@ -191,6 +191,6 @@
   /* Pagination */
 
   .pagination-btn {
-    @apply py-0.5 px-2.5 border-1 cursor-pointer text-lg font-semibold;
+    @apply py-1 lg:py-0.5 px-2.5 border-1 cursor-pointer text-sm lg:text-lg font-semibold;
   }
 }

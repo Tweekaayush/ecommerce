@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/user.slice";
 import { useEffect } from "react";
+import image from "/assets/category/img1.jpg";
 
 const Navbar = ({ cartOpen, setCartOpen }) => {
   const [toggle, setToggle] = useState(false);
@@ -21,7 +22,7 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
 
   const {
     data: {
-      user: { _id, name, image, role },
+      user: { _id, name, role },
     },
   } = useSelector((state) => state.user);
   const {
@@ -143,7 +144,7 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
                   </li>
                   {role === "admin" && (
                     <li
-                      onClick={() => [setOpen(false) ,navigate("/dashboard")]}
+                      onClick={() => [setOpen(false), navigate("/dashboard")]}
                       className="flex items-center justify-center bg-white rounded-full shadow-card p-2 hover:bg-gray-200"
                     >
                       <LayoutDashboard className="w-4 h-4" />

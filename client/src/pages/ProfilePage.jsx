@@ -15,6 +15,7 @@ import { Trash } from "lucide-react";
 import Pagination from "../components/Pagination";
 import Skeleton from "../components/Skeleton";
 import { LoaderCircle } from "lucide-react";
+import image from "/assets/category/img1.jpg";
 
 const UpdateProfile = () => {
   const {
@@ -163,7 +164,7 @@ const AccountInfo = () => {
   const {
     loading,
     data: {
-      user: { name, image, _id, email, isAdmin, createdAt, fullAddress },
+      user: { name, email, createdAt, fullAddress },
     },
   } = useSelector((state) => state.user);
   return (
@@ -211,7 +212,7 @@ const ProfilePage = () => {
   const {
     loading,
     data: {
-      user: { name, image, _id, email, role },
+      user: { name, email, role },
     },
   } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -298,7 +299,7 @@ const ProfilePage = () => {
             </li>
           </ul>
         </div>
-        <div className="p-4 shadow-card h-[500px] rounded-sm">
+        <div className="p-4 shadow-card h-[550px] rounded-sm">
           <ActiveComponent />
         </div>
       </div>

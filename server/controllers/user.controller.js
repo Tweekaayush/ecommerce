@@ -98,12 +98,7 @@ exports.updateUser = asyncHandler(async (req, res) => {
 exports.deleteUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
-
-  if (user?.image) {
-    const public_id = user.image.split("/").pop().split(".")[0];
-    await cloudinary.uploader.destroy(`users/${public_id}`);
-  }
-
+  
   await User.findByIdAndDelete(id);
 
   res.json({

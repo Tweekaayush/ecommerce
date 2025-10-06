@@ -19,9 +19,6 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       minlength: [6, "Your Password must be atleast 6 characters long"],
     },
-    image: {
-      type: String,
-    },
     role: {
       type: String,
       enum: ["customer", "admin"],
