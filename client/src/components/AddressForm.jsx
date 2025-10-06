@@ -1,3 +1,4 @@
+import { LoaderCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -83,7 +84,7 @@ const AddressForm = ({ submitFunction }) => {
         <span>country</span>
       </label>
       <button type="submit" disabled={loading} className="button-1 col-span-1">
-        Update
+        {loading? <LoaderCircle className="animate-spin mx-auto"/>:'Save Changes'}
       </button>
     </form>
   );

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { validateOrder } from "../slices/order.slice";
-import { CircleCheckBig } from "lucide-react";
+import { CircleCheckBig, LoaderCircle } from "lucide-react";
+import Skeleton from "../components/Skeleton";
 
 const SuccessPage = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const SuccessPage = () => {
   const { sessionId } = useParams();
 
   const {
+    loading,
     data: { orderId },
   } = useSelector((state) => state.order);
 
@@ -28,13 +30,15 @@ const SuccessPage = () => {
         </p>
         <div className="p-4 bg-gray-200 mb-4 rounded-sm flex gap-4">
           <h1 className="heading-5">Order Id:</h1>
-          <p className="body-text">{orderId}</p>
+
+          {!loading?<p className="body-text">{orderId}</p>: <Skeleton classname='h-6 w-60'/> }
         </div>
         <button
           className="button-1 mb-4"
           onClick={() => navigate(`/order/${orderId}`)}
+          disabled={loading}
         >
-          go to your order
+          {loading?<LoaderCircle className="animate-spin mx-auto"/>:'go to your order'}
         </button>
       </div>
     </section>

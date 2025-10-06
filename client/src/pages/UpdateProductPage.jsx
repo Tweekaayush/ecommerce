@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getProductById, updateProduct } from "../slices/product.slice";
+import { LoaderCircle } from "lucide-react";
 
 const UpdateProductPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const {
+    loading,
     data: { productDetails },
   } = useSelector((state) => state.product);
   const [formData, setFormData] = useState({
@@ -164,8 +166,8 @@ const UpdateProductPage = () => {
               <span>False</span>
             </label>
           </div>
-          <button type="submit" className="button-1">
-            Update
+          <button type="submit" className="button-1" disabled={loading}>
+            {loading?<LoaderCircle className="animate-spin mx-auto"/>:'Update'}
           </button>
         </form>
       </div>

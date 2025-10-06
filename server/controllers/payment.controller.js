@@ -93,8 +93,6 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
 
   await order.save();
 
-  console.log(order.products, products);
-
   res.status(200).json({
     success: true,
     id: session.id,
@@ -114,10 +112,8 @@ exports.retryPayment = asyncHandler(async (req, res) => {
   let products = JSON.parse(orderProducts);
 
   products = await Product.populate(products, {
-    path: 'product'
-  })
-
-  console.log(products)
+    path: "product",
+  });
 
   if (!Array.isArray(products) && products.length === 0) {
     res.status(400);
@@ -126,8 +122,6 @@ exports.retryPayment = asyncHandler(async (req, res) => {
 
   let coupon = null;
   let totalAmount = 0;
-
-  console.log(products)
 
   const lineItems = products.map((product) => {
     const amount = product.price * 100;
@@ -181,7 +175,7 @@ exports.retryPayment = asyncHandler(async (req, res) => {
       userId: req.user._id.toString(),
       couponCode: couponCode || "",
       shippingAddress: shippingAddress,
-      products: orderProducts
+      products: orderProducts,
     },
   });
 

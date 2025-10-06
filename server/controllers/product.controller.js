@@ -85,7 +85,7 @@ exports.getRecommendedProducts = asyncHandler(async (req, res) => {
         description: 1,
         image: 1,
         price: 1,
-        rating: 1
+        rating: 1,
       },
     },
   ]);

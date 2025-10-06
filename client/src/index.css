@@ -63,12 +63,23 @@
     @apply text-gray-400 w-4 h-4;
   }
 
-  /* Checkout Steps */
+   @keyframes pulse {
+    0% {
+      background-position: 0% 0%
+    }
+    100% {
+      background-position: -135% 0%
+    }
+  }
 }
 
 @layer utlities {
   .container {
     @apply min-w-full w-full xl:w-7xl xl:min-w-7xl px-4 mx-auto;
+  }
+
+  .skeleton{
+    
   }
 
   .ellipses {

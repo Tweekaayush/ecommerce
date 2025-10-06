@@ -6,11 +6,13 @@ import { getOrdersList } from "../slices/admin.slice";
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import Pagination from "../components/Pagination";
+import Skeleton from "../components/Skeleton";
 
 const OrderListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
+    loading,
     data: { orderList, totalPages },
   } = useSelector((state) => state.admin);
   const [page, setPage] = useState(1);
@@ -32,26 +34,32 @@ const OrderListPage = () => {
             <span className="list-head">Amount</span>
             <span className="list-head">Placed On</span>
           </div>
-          <div className="">
-            {orderList?.map((order) => {
-              return (
-                <div
-                  key={order?._id}
-                  onClick={() => navigate(`/order/${order?._id}`)}
-                  className="grid grid-cols-[4fr_2fr_2fr_4fr] gap-4 items-center text-center py-7 px-2 bg-white nth-[odd]:bg-gray-100 nth-[odd]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
-                >
-                  <p className="list-body ellipses">{order?._id}</p>
-                  <p className="list-body capitalize ellipses">
-                    {" "}
-                    {order?.orderStatus}
-                  </p>
-                  <p className="list-body ellipses">${order?.totalAmount}</p>
-                  <p className="list-body ellipses">
-                    {order?.createdAt.split("T")[0]}
-                  </p>
-                </div>
-              );
-            })}
+          <div className="flex flex-col">
+            {!loading
+              ? orderList?.map((order) => {
+                  return (
+                    <div
+                      key={order?._id}
+                      onClick={() => navigate(`/order/${order?._id}`)}
+                      className="grid grid-cols-[4fr_2fr_2fr_4fr] gap-4 items-center text-center py-7 px-2 bg-white nth-[odd]:bg-gray-100 nth-[odd]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                    >
+                      <p className="list-body ellipses">{order?._id}</p>
+                      <p className="list-body capitalize ellipses">
+                        {" "}
+                        {order?.orderStatus}
+                      </p>
+                      <p className="list-body ellipses">
+                        ${order?.totalAmount}
+                      </p>
+                      <p className="list-body ellipses">
+                        {order?.createdAt.split("T")[0]}
+                      </p>
+                    </div>
+                  );
+                })
+              : new Array(6).fill(0).map((_, i) => {
+                  return <Skeleton key={i} classname="w-full h-20 mb-2" />;
+                })}
           </div>
         </div>
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />

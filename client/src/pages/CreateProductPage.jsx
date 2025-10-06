@@ -50,7 +50,7 @@ const CreateProductPage = () => {
           DASHBOARD /
         </Link>
         <h1 className="heading-4 text-red-500 uppercase mb-8">
-          Update Product
+          Create new Product
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <label htmlFor="name" className="form-label">

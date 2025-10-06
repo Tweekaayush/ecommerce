@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
 import { updateProfile } from "../slices/user.slice";
+import Skeleton from "./Skeleton";
 
 const ShippingAddress = () => {
   const {
+    loading,
     data: {
       user: { name, fullAddress },
     },
@@ -26,16 +28,16 @@ const ShippingAddress = () => {
 
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 mb-7">Shipping Adress</h1>
-      {fullAddress && fullAddress?.address && (
+      <h1 className="heading-1 mb-7">Shipping Address</h1>
+     
         <div className="mb-4">
-          <p className="body-text">
+          {!loading?<p className="body-text">
             {fullAddress?.address}, {fullAddress?.postalCode},
             <br />
             {fullAddress?.city}, {fullAddress?.country}
-          </p>
+          </p>:<Skeleton classname='w-full h-20'/>}
         </div>
-      )}
+     
       <div className="flex flex-col">
         <button
           onClick={() => setOpen(!open)}

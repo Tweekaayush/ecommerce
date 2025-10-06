@@ -3,15 +3,18 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress, setCoupon } from "../slices/cart.slice";
 import img from "/assets/cart/empty-cart.png";
-import { ShoppingCart, NotebookTabs, CreditCard } from "lucide-react";
+import { ShoppingCart, NotebookTabs, CreditCard, LoaderCircle } from "lucide-react";
 import CheckoutCart from "../components/CheckoutCart";
 import Payment from "../components/Payment";
 import ShippingAddress from "../components/ShippingAddress";
 import { placeOrder } from "../slices/order.slice";
 import { getCoupons } from "../slices/user.slice";
+import { addDecimals } from "../utils/cartUtils";
+import Skeleton from "../components/Skeleton";
 
 const CheckoutPage = () => {
   const {
+    loading: cartLoading,
     data: { cart, total, subTotal, discount, shippingAddress, coupon },
   } = useSelector((state) => state.cart);
   const {
@@ -21,6 +24,7 @@ const CheckoutPage = () => {
       coupons,
     },
   } = useSelector((state) => state.user);
+  const { loading: orderLoading } = useSelector((state) => state.order);
   const [step, setStep] = useState(1);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -41,7 +45,12 @@ const CheckoutPage = () => {
       component: <ShippingAddress />,
       button: "Continue",
       func: function () {
-        if (fullAddress.address  && fullAddress.postalCode && fullAddress.city && fullAddress.country ) {
+        if (
+          fullAddress.address &&
+          fullAddress.postalCode &&
+          fullAddress.city &&
+          fullAddress.country
+        ) {
           dispatch(saveShippingAddress({ ...fullAddress }));
           return true;
         }
@@ -105,9 +114,9 @@ const CheckoutPage = () => {
           ref={ref}
           className="w-[400px] h-fit shadow-card bg-white flex flex-col p-4 rounded-lg"
         >
-          <h1 className="heading-1 mb-8">My Coupons</h1>
+          <h1 className="heading-1 mb-8">My Coupons ({coupons?.length})</h1>
           {coupons?.length ? (
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-4 h-60 overflow-y-scroll">
               {coupons.map((c, i) => {
                 return (
                   <div
@@ -122,8 +131,11 @@ const CheckoutPage = () => {
                         <div className="flex flex-col flex-1">
                           <h1 className="font-extrabold">{c.code}</h1>
                           <p className="body-text font-bold text-green-500">
-                            Save ${(subTotal * c.discountPercentage) / 100} on
-                            the order!
+                            Save $
+                            {addDecimals(
+                              (subTotal * c.discountPercentage) / 100
+                            )}{" "}
+                            on the order!
                           </p>
                         </div>
                         <button
@@ -180,9 +192,9 @@ const CheckoutPage = () => {
             <button
               className="button-1"
               onClick={handleNextStep}
-              disabled={false}
+              disabled={orderLoading || cartLoading || userLoading}
             >
-              {checkoutSteps[step - 1]?.button}
+              {orderLoading || cartLoading || userLoading ? <LoaderCircle className="animate-spin mx-auto"/>:checkoutSteps[step - 1]?.button}
             </button>
           </div>
         </div>

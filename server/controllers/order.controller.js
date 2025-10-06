@@ -33,7 +33,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   const order = await Order.findById(id).populate({
-    path: 'products.product'
+    path: "products.product",
   });
 
   if (!order) {

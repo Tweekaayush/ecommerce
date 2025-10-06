@@ -14,7 +14,7 @@ const AdminRoute = () => {
     <Outlet />
   ) : (
     <Navigate
-      to="/*"
+      to="/"
       replace={true}
       state={{ previousURL: location.pathname }}
     />

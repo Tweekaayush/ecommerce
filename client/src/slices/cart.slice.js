@@ -119,13 +119,13 @@ const cartSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(validateCoupon.fulfilled, (state, action) => {
-      state.loading = true;
+      state.loading = false;
       state.data.coupon = action.payload.coupon;
       state.successMessage = action.payload.message;
       return updateCart(state);
     });
     builder.addCase(validateCoupon.rejected, (state, action) => {
-      state.loading = true;
+      state.loading = false;
       state.error = action.payload;
     });
   },

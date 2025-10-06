@@ -6,10 +6,12 @@ import { getUsersList } from "../slices/admin.slice";
 import { useState } from "react";
 import { Trash } from "lucide-react";
 import Pagination from "../components/Pagination";
+import Skeleton from "../components/Skeleton";
 
 const UserListPage = () => {
   const dispatch = useDispatch();
   const {
+    loading,
     data: { userList, totalPages },
   } = useSelector((state) => state.admin);
   const [page, setPage] = useState(1);
@@ -31,21 +33,25 @@ const UserListPage = () => {
             <span className="list-head">email</span>
             <span className="list-head">admin</span>
           </div>
-          <div className="">
-            {userList?.map((user) => {
-              return (
-                <div
-                  key={user._id}
-                  className="grid grid-cols-[4fr_2fr_3fr_2fr_1fr] gap-4 items-center px-2 text-center py-7 bg-white nth-[even]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
-                >
-                  <p className="list-body ellipses">{user?._id}</p>
-                  <p className="list-body ellipses"> {user?.name}</p>
-                  <p className="list-body ellipses">{user?.email}</p>
-                  <p className="list-body ellipses">{user?.role}</p>
-                  <Trash className="w-4 h-4 text-red-500 mx-auto" />
-                </div>
-              );
-            })}
+          <div className="flex flex-col">
+            {!loading
+              ? userList?.map((user) => {
+                  return (
+                    <div
+                      key={user._id}
+                      className="grid grid-cols-[4fr_2fr_3fr_2fr_1fr] gap-4 items-center px-2 text-center py-7 bg-white nth-[even]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                    >
+                      <p className="list-body ellipses">{user?._id}</p>
+                      <p className="list-body ellipses"> {user?.name}</p>
+                      <p className="list-body ellipses">{user?.email}</p>
+                      <p className="list-body ellipses">{user?.role}</p>
+                      <Trash className="w-4 h-4 text-red-500 mx-auto" />
+                    </div>
+                  );
+                })
+              : new Array(6).fill(0).map((_, i) => {
+                  return <Skeleton key={i} classname="w-full h-20 mb-2" />;
+                })}
           </div>
         </div>
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />

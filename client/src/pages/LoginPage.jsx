@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../slices/user.slice";
 import { useEffect } from "react";
+import { LoaderCircle } from "lucide-react";
 
 const LoginPage = () => {
   const { state } = useLocation();
   const {
+    loading,
     data: {
       user: { _id },
     },
@@ -44,7 +46,7 @@ const LoginPage = () => {
     }
   }, [_id]);
   return (
-    <section className="min-h-screen bg-gray-100">
+    <section className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="container flex justify-center items-center h-full">
         <div className="flex flex-col justify-center items-center bg-white w-fit min-w-[400px] py-8 px-4 rounded-sm shadow-md">
           <h1 className="heading-2 mb-3.5">Login</h1>
@@ -74,7 +76,7 @@ const LoginPage = () => {
               <span>password</span>
               {formErrors.password && <p className="form-error-msg">error</p>}
             </label>
-            <button className="button-2">Login</button>
+            <button className="button-2" disabled={loading}>{loading?<LoaderCircle className="mx-auto animate-spin"/>:'Login'}</button>
             <p className="body-text">
               Don't have an account?{" "}
               <Link to="/signup" className="text-blue-500">

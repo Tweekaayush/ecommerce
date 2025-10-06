@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutCart from "./CheckoutCart";
 import { setCoupon, validateCoupon } from "../slices/cart.slice";
+import Skeleton from "./Skeleton";
+import { addDecimals } from "../utils/cartUtils";
 
 const Payment = ({ setOpen }) => {
   const {
+    loading: userLoading,
     data: {
       user: { fullAddress, name },
     },
   } = useSelector((state) => state.user);
 
   const {
+    loading: cartLoading,
     data: { coupon, subTotal },
   } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -22,11 +26,15 @@ const Payment = ({ setOpen }) => {
       <div className="flex flex-col pb-8 border-b border-dashed">
         <h1 className="heading-1 mb-8">Shipping Address</h1>
         <div className="">
-          <p className="body-text">
-            {fullAddress?.address}, {fullAddress?.postalCode},
-            <br />
-            {fullAddress?.city}, {fullAddress?.country}
-          </p>
+          {!userLoading ? (
+            <p className="body-text">
+              {fullAddress?.address}, {fullAddress?.postalCode},
+              <br />
+              {fullAddress?.city}, {fullAddress?.country}
+            </p>
+          ) : (
+            <Skeleton classname="w-full h-20" />
+          )}
         </div>
       </div>
       <div className="flex pb-8 border-b border-dashed gap-8 flex-col md:flex-row">
@@ -48,6 +56,7 @@ const Payment = ({ setOpen }) => {
             <button
               type="submit"
               className="px-4 py-2.5 bg-red-500 text-white rounded-sm cursor-pointer"
+              disabled={cartLoading}
             >
               Apply
             </button>
@@ -75,8 +84,11 @@ const Payment = ({ setOpen }) => {
                   <div className="flex flex-col flex-1">
                     <h1 className="font-extrabold">{coupon?.code}</h1>
                     <p className="body-text font-bold text-green-500">
-                      Save ${(subTotal * coupon?.discountPercentage) / 100} on
-                      the order!
+                      Save $
+                      {addDecimals(
+                        (subTotal * coupon?.discountPercentage) / 100
+                      )}{" "}
+                      on the order!
                     </p>
                   </div>
                   <button

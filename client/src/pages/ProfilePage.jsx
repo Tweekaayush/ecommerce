@@ -8,12 +8,13 @@ import {
   LayoutDashboard,
   LogOut,
 } from "lucide-react";
-
 import { logout, updateProfile } from "../slices/user.slice";
 import AddressForm from "../components/AddressForm";
 import { getMyOrders } from "../slices/order.slice";
 import { Trash } from "lucide-react";
 import Pagination from "../components/Pagination";
+import Skeleton from "../components/Skeleton";
+import { LoaderCircle } from "lucide-react";
 
 const UpdateProfile = () => {
   const {
@@ -79,8 +80,8 @@ const UpdateProfile = () => {
           <span>Password</span>
         </label>
         <button type="submit" disabled={loading} className="button-1">
-          save Changes
-          {/* {loading ? <ImSpinner2 className="fa-spin" /> : "Save Changes"} */}
+          
+          {loading ? <LoaderCircle className="animate-spin mx-auto"/> : "Save Changes"}
         </button>
       </form>
     </div>
@@ -92,6 +93,7 @@ const MyOrders = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
+    loading,
     data: { orderList, totalPages },
   } = useSelector((state) => state.order);
 
@@ -108,26 +110,34 @@ const MyOrders = () => {
           <span className="list-head">total</span>
           <span className="list-head">Placed On</span>
         </div>
-        <div className="flex flex-col">
-          {orderList?.map((order, i) => {
-            return (
-              <div
-                key={order?._id}
-                className="grid grid-cols-[5fr_2fr_2fr_3fr] gap-4 items-center text-center py-7 px-2 bg-white nth-[odd]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
-                onClick={() => navigate(`/order/${order?._id}`)}
-              >
-                <p className="list-body ellipses">{order?._id}</p>
-                <p className="list-body capitalize ellipses">
-                  {order?.orderStatus}
-                </p>
-                <p className="list-body ellipses">${order?.totalAmount}</p>
-                <p className="list-body ellipses">
-                  ${order?.createdAt.split("T")[0]}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+        {!loading ? (
+          <div className="flex flex-col">
+            {orderList?.map((order, i) => {
+              return (
+                <div
+                  key={order?._id}
+                  className="grid grid-cols-[5fr_2fr_2fr_3fr] gap-4 items-center text-center py-7 px-2 bg-white nth-[odd]:bg-gray-100 nth-[even]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                  onClick={() => navigate(`/order/${order?._id}`)}
+                >
+                  <p className="list-body ellipses">{order?._id}</p>
+                  <p className="list-body capitalize ellipses">
+                    {order?.orderStatus}
+                  </p>
+                  <p className="list-body ellipses">${order?.totalAmount}</p>
+                  <p className="list-body ellipses">
+                    ${order?.createdAt.split("T")[0]}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex flex-col gap-2">
+            {new Array(4).fill(0).map((_, i) => {
+              return <Skeleton key={i} classname="w-full h-[64px]" />;
+            })}
+          </div>
+        )}
       </div>
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
     </div>
@@ -159,32 +169,40 @@ const AccountInfo = () => {
   return (
     <div className="flex flex-col">
       <h1 className="heading-1 mb-12.5">Account</h1>
-      <div className="flex flex-col">
-        <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">
-          <h5 className="heading-5">Name</h5>
-          <p className="body-text">{name}</p>
+      {!loading ? (
+        <div className="flex flex-col">
+          <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">
+            <h5 className="heading-5">Name</h5>
+            <p className="body-text">{name}</p>
+          </div>
+          <div className="grid grid-cols-[2fr_10fr] gap-4 p-4 bg-gray-100">
+            <h5 className="heading-5 ">Email</h5>
+            <p className="body-text"> {email}</p>
+          </div>
+          <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">
+            <h5 className="heading-5 ">Address</h5>
+            <p className="body-text">
+              {fullAddress?.address && (
+                <>
+                  {fullAddress?.address}, {fullAddress?.postalCode}
+                  <br />
+                  {fullAddress?.city}, {fullAddress?.country}
+                </>
+              )}
+            </p>
+          </div>
+          <div className="grid grid-cols-[2fr_10fr] gap-4 p-4 bg-gray-100">
+            <h5 className="heading-5 ">Joined On</h5>
+            <p className="body-text">{createdAt.substring(0, 10)}</p>
+          </div>
         </div>
-        <div className="grid grid-cols-[2fr_10fr] gap-4 p-4 bg-gray-100">
-          <h5 className="heading-5 ">Email</h5>
-          <p className="body-text"> {email}</p>
+      ) : (
+        <div className="flex flex-col gap-2">
+          {new Array(4).fill(0).map((_, i) => {
+            return <Skeleton key={i} classname="w-full h-[64px]" />;
+          })}
         </div>
-        <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">
-          <h5 className="heading-5 ">Address</h5>
-          <p className="body-text">
-            {fullAddress?.address && (
-              <>
-                {fullAddress?.address}, {fullAddress?.postalCode}
-                <br />
-                {fullAddress?.city}, {fullAddress?.country}
-              </>
-            )}
-          </p>
-        </div>
-        <div className="grid grid-cols-[2fr_10fr] gap-4 p-4 bg-gray-100">
-          <h5 className="heading-5 ">Joined On</h5>
-          <p className="body-text">{createdAt.substring(0, 10)}</p>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

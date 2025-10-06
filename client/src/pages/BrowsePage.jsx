@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories, getProducts } from "../slices/product.slice";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../components/Pagination";
+import Skeleton from "../components/Skeleton";
 
 const BrowsePage = () => {
   const {
+    loading,
     data: { categories, products, totalPages },
   } = useSelector((state) => state.product);
   const cat = new URLSearchParams(location.search).get("category");
@@ -34,39 +36,51 @@ const BrowsePage = () => {
         <div className="flex flex-col bg-gray-100 p-4 mb-8">
           <h1 className="heading-1 mb-4">Categories</h1>
           <div className="flex flex-wrap gap-4 mb-4">
-            <span
-              onClick={() => navigate(`/browse`)}
-              className={`${
-                activeCategory === ""
-                  ? "text-black border-black"
-                  : "border-gray-400 text-gray-500"
-              } capitalize border-2 px-4 py-1 text-sm cursor-pointer`}
-            >
-              all
-            </span>
-            {categories?.map((category) => {
-              return (
+            {!loading ? (
+              <>
                 <span
-                  key={category}
-                  onClick={() => navigate(`/browse?category=${category}`)}
+                  onClick={() => navigate(`/browse`)}
                   className={`${
-                    activeCategory === category
+                    activeCategory === ""
                       ? "text-black border-black"
                       : "border-gray-400 text-gray-500"
                   } capitalize border-2 px-4 py-1 text-sm cursor-pointer`}
                 >
-                  {category}
+                  all
                 </span>
-              );
-            })}
+                {categories?.map((category) => {
+                  return (
+                    <span
+                      key={category}
+                      onClick={() => navigate(`/browse?category=${category}`)}
+                      className={`${
+                        activeCategory === category
+                          ? "text-black border-black"
+                          : "border-gray-400 text-gray-500"
+                      } capitalize border-2 px-4 py-1 text-sm cursor-pointer`}
+                    >
+                      {category}
+                    </span>
+                  );
+                })}
+              </>
+            ) : (
+              new Array(8).fill(0).map((_, i) => {
+                return <Skeleton key={i} classname="w-16 h-8" />;
+              })
+            )}
           </div>
         </div>
         <div className="py-4 grid grid-cols-[1fr] xs:grid-cols-[1fr_1fr] sm:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4 ">
-          {products?.map((product) => {
-            return (
-              <ProductCard {...product} key={product?._id} slider={false} />
-            );
-          })}
+          {!loading
+            ? products?.map((product) => {
+                return (
+                  <ProductCard {...product} key={product?._id} slider={false} />
+                );
+              })
+            : new Array(4).fill(0).map((_, i) => {
+                return <Skeleton key={i} classname="w-full h-96" />;
+              })}
         </div>
         <Pagination totalPages={totalPages} page={page} setPage={setPage} />
       </div>

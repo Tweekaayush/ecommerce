@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Rating from "./Rating";
 import { addReview } from "../slices/product.slice";
 import { Star, Trash } from "lucide-react";
+import Skeleton from "./Skeleton";
 
 const Reviews = () => {
   const [review, setReview] = useState("");
@@ -10,12 +11,13 @@ const Reviews = () => {
   const [hover, setHover] = useState(null);
   const [formErrors, setFormErrors] = useState("");
   const {
-    loading,
+    loading: productLoading,
     data: {
       productDetails: { _id, reviews },
     },
   } = useSelector((state) => state.product);
   const {
+    loading: userLoading,
     data: {
       user: { _id: userId },
     },
@@ -85,37 +87,41 @@ const Reviews = () => {
           type="submit"
           value="Submit"
           className="button-2 mt-2.5 self-start"
-          disabled={loading}
+          disabled={productLoading}
         />
       </form>
-      {reviews?.length !== 0 ? (
-        <ul className="user-reviews">
-          {reviews?.map((r) => {
-            return (
-              <div key={r?._id} className="p-4 bg-gray-100 mt-8">
-                <div className="flex justify-between">
-                  <div>
-                    <h1 className="heading-6">{r?.user?.name}</h1>
-                    <div className="flex items-center gap-4">
-                      <Rating rating={r?.rating} size={18} />
-                      <p className="font-bold text-sm">
-                        {r?.rating.toFixed(1)}
-                      </p>
+      {!productLoading ? (
+        reviews?.length !== 0 ? (
+          <ul className="user-reviews">
+            {reviews?.map((r) => {
+              return (
+                <div key={r?._id} className="p-4 bg-gray-100 mt-8">
+                  <div className="flex justify-between">
+                    <div>
+                      <h1 className="heading-6">{r?.user?.name}</h1>
+                      <div className="flex items-center gap-4">
+                        <Rating rating={r?.rating} size={18} />
+                        <p className="font-bold text-sm">
+                          {r?.rating.toFixed(1)}
+                        </p>
+                      </div>
                     </div>
+                    {r?.user?._id === userId && (
+                      <Trash className="w-4 h-4 text-red-500 cursor-pointer" />
+                    )}
                   </div>
-                  {r?.user?._id === userId && (
-                    <Trash className="w-4 h-4 text-red-500 cursor-pointer" />
-                  )}
+                  <p className="my-2.5 body-text">{r?.comment}</p>
                 </div>
-                <p className="my-2.5 body-text">{r?.comment}</p>
-              </div>
-            );
-          })}
-        </ul>
+              );
+            })}
+          </ul>
+        ) : (
+          <p className="body-text mt-8" style={{ textAlign: "center" }}>
+            No reviews yet
+          </p>
+        )
       ) : (
-        <p className="body-text mt-8" style={{ textAlign: "center" }}>
-          No reviews yet
-        </p>
+        <Skeleton classname="w-full h-30 mt-4" />
       )}
     </div>
   );

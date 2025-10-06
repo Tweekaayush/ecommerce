@@ -2,11 +2,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { signup } from "../slices/user.slice";
 import { useDispatch, useSelector } from "react-redux";
+import { LoaderCircle } from "lucide-react";
 
 const SignUpPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const {
+    loading,
     data: {
       user: { _id },
     },
@@ -48,7 +50,7 @@ const SignUpPage = () => {
     }
   }, [_id]);
   return (
-    <section className="min-h-screen bg-gray-100">
+    <section className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="container flex justify-center items-center h-full">
         <div className="flex flex-col justify-center items-center bg-white w-fit min-w-[400px] py-8 px-4 rounded-sm shadow-md">
           <h1 className="heading-2 mb-3.5">Sign Up</h1>
@@ -104,8 +106,12 @@ const SignUpPage = () => {
                 <p className="form-error-msg"> error </p>
               )}
             </label>
-            <button type="submit" className="button-2">
-              Register
+            <button type="submit" className="button-2" disabled={true}>
+              {loading ? (
+                <LoaderCircle className="mx-auto animate-spin" />
+              ) : (
+                "Register"
+              )}
             </button>
             <p className="body-text">
               Already have an account?{" "}
