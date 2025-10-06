@@ -23,12 +23,12 @@ const OrderItem = (props) => {
         />
       </div>
       <div className="p-2">
-        <h4 className="text-sm text-black">{name}</h4>
+        <h1 className="text-sm heading-2">{name}</h1>
         <p className="text-sm text-gray-600">Brand: {brand}</p>
       </div>
-      <p className="text-sm font-extrabold py-2 text-center">${price}</p>
+      <p className="text-sm font-semibold py-2 text-center">${price}</p>
       <div className="h-7 text-sm text-center p-2">{quantity}</div>
-      <p className="text-sm font-extrabold text-center py-2 pr-2">
+      <p className="text-sm font-semibold text-center py-2 pr-2">
         ${price * quantity}
       </p>
     </div>
@@ -77,7 +77,6 @@ const OrderPage = () => {
   }, [id]);
 
   const handleUpdate = (status) => {
-    
     if (orderStatus === status) return;
     dispatch(updateOrder({ id: id, orderStatus: status }));
     setOpen(false);
@@ -94,7 +93,9 @@ const OrderPage = () => {
       <div className="container grid grid-cols-[1fr] lg:grid-cols-[8fr_4fr] gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
-            <h1 className="heading-1 mb-6">Shipping Address</h1>
+            <h1 className="heading-1 text-red-500 text-sm mb-6">
+              Shipping Address
+            </h1>
 
             {!loading ? (
               <p className="body-text">
@@ -105,21 +106,10 @@ const OrderPage = () => {
             ) : (
               <Skeleton classname="w-full h-40" />
             )}
-            {/* <p className={`status ${isDelivered ? "true" : false}`}>
-              {isDelivered ? `Delivered on ${deliveredAt}` : "Not Delivered"}
-            </p> */}
           </div>
-          {/* <div className="order-payment">
-            <h1 className="heading-3">Payment Method</h1>
-
-            <h4>Method: {paymentMethod}</h4>
-            <p className={`status ${isPaid ? "true" : false}`}>
-              {isPaid ? `Paid on ${paidAt}` : "Not Paid"}
-            </p>
-          </div> */}
 
           <div className="flex flex-col">
-            <h1 className="heading-1 mb-8">Order Items</h1>
+            <h1 className="heading-1 text-red-500 text-sm mb-8">Order Items</h1>
             <div className="grid grid-cols-[5fr_2fr_3fr_2fr] gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
               <span className="list-head">Product</span>
               <span className="list-head">price</span>
@@ -139,31 +129,40 @@ const OrderPage = () => {
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
-            <h1 className="heading-1 mb-4">Order summary</h1>
+            <h1 className="heading-1 text-red-500 text-sm mb-4">
+              Order summary
+            </h1>
             <div className="flex justify-between mb-4">
-              <h4 className="heading-6">Subtotal</h4>
+              <h4 className="heading-2 text-sm">Subtotal</h4>
               {!loading ? (
                 <p className="text-sm capitalize">
-                  ${addDecimals((totalAmount * 100) / (100 - discountPercentage))}
+                  $
+                  {addDecimals(
+                    (totalAmount * 100) / (100 - discountPercentage)
+                  )}
                 </p>
               ) : (
                 <Skeleton classname="h-5 w-16" />
               )}
             </div>
             <div className="flex justify-between mb-4 border-b border-dashed pb-4">
-              <h4 className="heading-6">Discount</h4>
+              <h4 className="heading-2 text-sm">Discount</h4>
               {!loading ? (
                 <p className="text-sm capitalize">
                   $
-                  {Math.abs(addDecimals(totalAmount -
-                    (totalAmount * 100) / (100 - discountPercentage)))}
+                  {Math.abs(
+                    addDecimals(
+                      totalAmount -
+                        (totalAmount * 100) / (100 - discountPercentage)
+                    )
+                  )}
                 </p>
               ) : (
                 <Skeleton classname="h-5 w-16" />
               )}
             </div>
             <div className="flex justify-between mb-4">
-              <h4 className="heading-6">Total</h4>
+              <h4 className="heading-2 text-sm">Total</h4>
               {!loading ? (
                 <p className="text-sm capitalize">${totalAmount}</p>
               ) : (
@@ -173,7 +172,9 @@ const OrderPage = () => {
           </div>
 
           <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
-            <h1 className="heading-1 mb-4">Order Status</h1>
+            <h1 className="heading-1 text-red-500 text-sm mb-4">
+              Order Status
+            </h1>
             {cancelledAt && (
               <p className="text-sm tracking-wider">
                 Cancelled on {cancelledAt.split("T")[0]}
@@ -190,7 +191,7 @@ const OrderPage = () => {
             {!cancelledAt && !deliveredAt && user?.role === "admin" && (
               <div className="relative">
                 <div
-                  className="w-full heading-5 flex items-center justify-center p-2 border border-gray-500 cursor-pointer"
+                  className="w-full heading-1 text-sm flex items-center justify-center p-2 border border-gray-500 cursor-pointer"
                   onClick={() => setOpen((prev) => !prev)}
                   ref={ref}
                 >
@@ -207,7 +208,7 @@ const OrderPage = () => {
                   {orderStatus !== "processing" && (
                     <div
                       onClick={() => handleUpdate("processing")}
-                      className="heading-5 p-2 flex justify-center items-center border-b border-gray-400 hover:bg-gray-200 cursor-pointer"
+                      className="heading-1 text-sm p-2 flex justify-center items-center border-b border-gray-400 hover:bg-gray-200 cursor-pointer"
                     >
                       processing
                     </div>
@@ -215,7 +216,7 @@ const OrderPage = () => {
                   {orderStatus !== "delivered" && (
                     <div
                       onClick={() => handleUpdate("delivered")}
-                      className="heading-5 p-2 flex justify-center items-center border-b border-gray-400 hover:bg-gray-200 cursor-pointer"
+                      className="heading-1 text-sm p-2 flex justify-center items-center border-b border-gray-400 hover:bg-gray-200 cursor-pointer"
                     >
                       delivered
                     </div>
@@ -223,7 +224,7 @@ const OrderPage = () => {
                   {orderStatus !== "cancel" && (
                     <div
                       onClick={() => handleUpdate("cancel")}
-                      className="heading-5 p-2 flex justify-center items-center hover:bg-gray-200 cursor-pointer"
+                      className="heading-1 text-sm p-2 flex justify-center items-center hover:bg-gray-200 cursor-pointer"
                     >
                       cancel
                     </div>

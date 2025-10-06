@@ -28,7 +28,7 @@ const ShippingAddress = () => {
 
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 mb-7">Shipping Address</h1>
+      <h1 className="heading-1 text-red-500 text-sm mb-7">Shipping Address</h1>
      
         <div className="mb-4">
           {!loading?<p className="body-text">

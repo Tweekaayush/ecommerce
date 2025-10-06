@@ -69,7 +69,7 @@ const ProductPage = () => {
             </div>
             <div className="flex flex-col p-8">
               {!productLoading ? (
-                <h1 className="heading-4 mb-2.5">{name}</h1>
+                <h1 className="text-xl font-bold mb-2.5">{name}</h1>
               ) : (
                 <Skeleton classname="w-full h-8 mb-2" />
               )}
@@ -182,7 +182,7 @@ const ProductPage = () => {
         </div>
         <ProductSlider title={"Recommended"} products={recommendedProducts} />
         <div className="container">
-          <h1 className="heading-2 mb-8">Customer Reviews</h1>
+          <h1 className="heading-2 text-xl mb-8">Customer Reviews</h1>
           <div className="w-full grid grid-cols-[1fr] md:grid-cols-[4fr_8fr] gap-4">
             <div className="shadow-card flex flex-col p-4 h-fit">
               {!productLoading ? (

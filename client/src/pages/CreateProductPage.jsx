@@ -46,10 +46,13 @@ const CreateProductPage = () => {
   return (
     <section className="min-h-screen">
       <div className="container">
-        <Link to="/dashboard" className="heading-5 text-gray-500 mb-2">
+        <Link
+          to="/dashboard"
+          className="heading-1 text-xs md:text-sm hover:underline text-gray-500 mb-2"
+        >
           DASHBOARD /
         </Link>
-        <h1 className="heading-4 text-red-500 uppercase mb-8">
+        <h1 className="heading-1 text-red-500 uppercase mb-8">
           Create new Product
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -111,7 +114,7 @@ const CreateProductPage = () => {
           <label htmlFor="stock" className="form-label">
             <input
               type="number"
-              name="stock"
+              name="countInStock"
               id="stock"
               value={formData?.countInStock}
               className="form-input-2"
@@ -156,6 +159,15 @@ const CreateProductPage = () => {
               <span>False</span>
             </label>
           </div>
+          <label className="form-label">
+            <input
+              type="file"
+              className="form-input-2 focus:outline-none bg-gray-50"
+              aria-describedby="file_input_help"
+              onChange={handleImage}
+            />
+            <span>Image</span>
+          </label>
           <button type="submit" className="button-1">
             Update
           </button>

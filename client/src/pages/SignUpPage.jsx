@@ -53,7 +53,7 @@ const SignUpPage = () => {
     <section className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="container flex justify-center items-center h-full">
         <div className="flex flex-col justify-center items-center bg-white w-fit min-w-[400px] py-8 px-4 rounded-sm shadow-md">
-          <h1 className="heading-2 mb-3.5">Sign Up</h1>
+          <h1 className="heading-2 text-2xl mb-3.5">Sign Up</h1>
           <p className="body-text mb-7">Start your journey with us</p>
           <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
             <label htmlFor="" className="form-label">

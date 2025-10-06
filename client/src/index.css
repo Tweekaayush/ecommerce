@@ -78,9 +78,6 @@
     @apply min-w-full w-full xl:w-7xl xl:min-w-7xl px-4 mx-auto;
   }
 
-  .skeleton {
-  }
-
   .ellipses {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -93,33 +90,21 @@
   /* Headings */
 
   .heading-1 {
-    @apply text-red-500 text-sm uppercase font-bold tracking-widest;
+    @apply uppercase font-bold tracking-wider;
   }
 
   .heading-2 {
-    @apply text-2xl relative font-extrabold tracking-wide;
+    @apply relative font-bold tracking-wide;
   }
 
   .heading-3 {
-    @apply text-5xl font-bold;
-  }
-
-  .heading-4 {
-    @apply text-2xl relative font-bold tracking-wide;
-  }
-
-  .heading-5 {
-    @apply text-xs md:text-sm uppercase font-bold tracking-widest;
-  }
-
-  .heading-6 {
-    @apply relative font-extrabold tracking-wide;
+    @apply text-3xl md:text-5xl font-bold;
   }
 
   /* body text */
 
   .body-text {
-    @apply text-xs sm:text-sm tracking-widest;
+    @apply text-[13px] sm:text-sm tracking-widest;
   }
   .text-vertical {
     writing-mode: vertical-rl;
@@ -168,7 +153,7 @@
 
   .form-input,
   .form-input-2 {
-    @apply outline-0 rounded-sm w-full border px-4 py-2.5 text-sm;
+    @apply outline-0 rounded-sm w-full border px-4 py-2.5 text-sm cursor-pointer;
   }
 
   .form-label > .form-input:user-valid + span,

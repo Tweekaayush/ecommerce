@@ -1,4 +1,9 @@
-import { DollarSign, ToolCase, User } from "lucide-react";
+import {
+  DollarSign,
+  SquareArrowOutUpRight,
+  ToolCase,
+  User,
+} from "lucide-react";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,12 +44,14 @@ const AdminDashboardPage = () => {
   return (
     <section className="min-h-screen">
       <div className="container">
-        <h1 className="heading-4 text-red-500 uppercase mb-7">Dashboard</h1>
+        <h1 className="heading-1 text-xl text-red-500 uppercase mb-7">
+          Dashboard
+        </h1>
         {!loading ? (
           <div className="grid grid-cols-4 gap-4">
             <div className="dashboard-card">
               <div className="col-span-2">
-                <h1 className="text-green-500 heading-5 mb-2 font-bold">
+                <h1 className="text-green-500 heading-1 mb-2 text-sm">
                   Total Revenue
                 </h1>
                 <p>${totalRevenue.toFixed(2)}</p>
@@ -58,7 +65,7 @@ const AdminDashboardPage = () => {
               onClick={() => navigate("/dashboard/order/list")}
             >
               <div className="col-span-2">
-                <h1 className="text-red-500 heading-5 mb-2 font-bold">
+                <h1 className="text-red-500 heading-1 text-sm mb-2 font-bold">
                   Total Sales
                 </h1>
                 <p>{totalSales}</p>
@@ -72,7 +79,7 @@ const AdminDashboardPage = () => {
               onClick={() => navigate("/dashboard/user/list")}
             >
               <div className="col-span-2">
-                <h1 className="text-blue-500 heading-5 mb-2 font-bold">
+                <h1 className="text-blue-500 heading-1 text-sm mb-2 font-bold">
                   Users
                 </h1>
                 <p>{totalUsers}</p>
@@ -86,7 +93,7 @@ const AdminDashboardPage = () => {
               onClick={() => navigate("/dashboard/product/list")}
             >
               <div className="col-span-2">
-                <h1 className="text-yellow-500 heading-5 mb-2 font-bold">
+                <h1 className="text-yellow-500 heading-1 text-sm mb-2 font-bold">
                   Product
                 </h1>
                 <p>{totalProducts}</p>
@@ -96,7 +103,7 @@ const AdminDashboardPage = () => {
               </div>
             </div>
             <div className="col-span-4 md:col-span-3 shadow-card p-4 rounded-sm hover:shadow-hover cursor-pointer">
-              <h1 className="heading-1">Revenue</h1>
+              <h1 className="heading-1 text-red-500 text-sm">Revenue</h1>
               <p className="body-text mb-4">(last 7 days)</p>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart style={{ fontSize: "14px" }} data={revenueChart}>
@@ -110,7 +117,7 @@ const AdminDashboardPage = () => {
               </ResponsiveContainer>
             </div>
             <div className="col-span-4 md:col-span-1 shadow-card p-4 rounded-sm hover:shadow-hover cursor-pointer">
-              <h1 className="heading-1">Order Status</h1>
+              <h1 className="heading-1 text-red-500 text-sm">Order Status</h1>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie
@@ -136,6 +143,13 @@ const AdminDashboardPage = () => {
                   <Legend wrapperStyle={{ textTransform: "capitalize" }} />
                 </PieChart>
               </ResponsiveContainer>
+            </div>
+            <div
+              onClick={() => navigate('/dashboard/product/create')}
+              className="col-span-4 shadow-card hover:shadow-card-hover p-4 cursor-pointer flex gap-4 items-center"
+            >
+              <h1 className="heading-1 text-sm">Create new product</h1>
+              <SquareArrowOutUpRight className="w-3.5 h-3.5" />
             </div>
           </div>
         ) : (

@@ -15,12 +15,22 @@ const analyticsRoute = require("./routes/analytics.route");
 const orderRoute = require("./routes/order.route");
 const wishlistRoute = require("./routes/wishlist.route");
 const reviewRoute = require("./routes/review.route");
+const fileUpload = require("express-fileupload");
+const cloudinary = require('cloudinary')
 
 const app = express();
 
 connectDB();
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+
 app.use(express.json());
+app.use(fileUpload());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(

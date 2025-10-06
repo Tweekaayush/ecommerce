@@ -35,7 +35,7 @@ const BrowsePage = () => {
     <section className="min-h-screen">
       <div className="container min-h-screen">
         <div className="flex flex-col bg-gray-100 p-4 mb-8">
-          <h1 className="heading-1 mb-4">Categories</h1>
+          <h1 className="heading-1 text-red-500 text-sm mb-4">Categories</h1>
           <div className="flex flex-wrap gap-4 mb-4">
             {!loading ? (
               <>

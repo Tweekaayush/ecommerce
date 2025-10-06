@@ -22,7 +22,7 @@ const CheckoutCartItem = (props) => {
   }, [qty]);
 
   return (
-    <div className="grid grid-cols-[5fr_2fr_3fr_2fr]  sm:grid-cols-[2fr_3fr_2fr_3fr_2fr] border border-gray-400 max-h-36">
+    <div className="grid grid-cols-[5fr_2fr_3fr_2fr]  sm:grid-cols-[2fr_3fr_2fr_3fr_2fr] border border-gray-400 min-h-20">
       <div className="items-center w-full h-full bg-gray-100 hidden sm:flex">
         <img
           src={image}
@@ -31,10 +31,10 @@ const CheckoutCartItem = (props) => {
         />
       </div>
       <div className="p-2">
-        <h1 className="text-sm text-black">{name}</h1>
+        <h1 className="text-sm heading-2">{name}</h1>
         <p className="text-sm text-gray-600">Brand: {brand}</p>
       </div>
-      <p className="body-text font-extrabold py-2">${price}</p>
+      <p className="body-text font-semibold py-2">${price}</p>
       <div className="p-2">
         <div className="flex w-fit bg-gray-100 ">
           {update && (
@@ -60,7 +60,7 @@ const CheckoutCartItem = (props) => {
         </div>
       </div>
       <div className="py-2 pr-2 flex flex-col justify-between">
-        <p className="body-text font-extrabold">
+        <p className="body-text font-semibold">
           ${(price * quantity).toFixed(2)}
         </p>
         {update ? (
@@ -84,7 +84,7 @@ const CheckoutCart = ({ update = true }) => {
 
   return (
     <div className="flex flex-col w-full">
-      <h1 className="mb-8 heading-1">Cart Items</h1>
+      <h1 className="mb-8 heading-1 text-red-500 text-sm">Cart Items</h1>
       <div className="grid grid-cols-[5fr_2fr_3fr_2fr] mb-8">
         <span className="list-head">product</span>
         <span className="list-head">price</span>

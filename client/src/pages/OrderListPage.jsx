@@ -23,10 +23,10 @@ const OrderListPage = () => {
   return (
     <section className="min-h-screen">
       <div className="container">
-        <Link to="/dashboard" className="heading-5 text-gray-500 mb-4">
+        <Link to="/dashboard" className="heading-1 text-xs md:text-sm hover:underline text-gray-500 mb-4">
           DASHBOARD /
         </Link>
-        <h1 className="heading-4 text-red-500 uppercase mb-7">Order List</h1>
+        <h1 className="heading-1 text-xl text-red-500 uppercase mb-7">Order List</h1>
         <div className="flex flex-col">
           <div className="grid grid-cols-[4fr_2fr_2fr_4fr] gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
             <span className="list-head">ID</span>

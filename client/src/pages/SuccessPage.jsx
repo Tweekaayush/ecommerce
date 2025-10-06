@@ -29,7 +29,7 @@ const SuccessPage = () => {
           Your order has been placed successfully.
         </p>
         <div className="p-4 bg-gray-200 mb-4 rounded-sm flex gap-4">
-          <h1 className="heading-5">Order Id:</h1>
+          <h1 className="heading-1 text-sm">Order Id:</h1>
 
           {!loading?<p className="body-text">{orderId}</p>: <Skeleton classname='h-6 w-60'/> }
         </div>

@@ -114,7 +114,7 @@ const CheckoutPage = () => {
           ref={ref}
           className="w-[400px] h-fit shadow-card bg-white flex flex-col p-4 rounded-lg"
         >
-          <h1 className="heading-1 mb-8">My Coupons ({coupons?.length})</h1>
+          <h1 className="heading-1 text-red-500 text-sm mb-8">My Coupons ({coupons?.length})</h1>
           {coupons?.length ? (
             <div className="flex flex-col gap-4 h-60 overflow-y-scroll">
               {coupons.map((c, i) => {
@@ -139,7 +139,7 @@ const CheckoutPage = () => {
                           </p>
                         </div>
                         <button
-                          className="heading-1 cursor-pointer"
+                          className="heading-1 text-red-500 text-sm cursor-pointer"
                           onClick={() => [
                             dispatch(setCoupon(c)),
                             setOpen(false),
@@ -175,17 +175,17 @@ const CheckoutPage = () => {
           <ActiveComponent />
 
           <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
-            <h1 className="heading-1 mb-4">cart summary</h1>
+            <h1 className="heading-1 text-red-500 text-sm mb-4">cart summary</h1>
             <div className="flex justify-between mb-4">
-              <h4 className="heading-6">Subtotal</h4>
+              <h4 className="heading-2 text-sm">Subtotal</h4>
               <p className="text-sm capitalize">${subTotal}</p>
             </div>
             <div className="flex justify-between mb-4">
-              <h4 className="heading-6">Discount</h4>
+              <h4 className="heading-2 text-sm">Discount</h4>
               <p className="text-sm capitalize">${discount}</p>
             </div>
             <div className="flex justify-between mb-4 border-t pt-4 border-dashed">
-              <h4 className="heading-6">Total</h4>
+              <h4 className="heading-2 text-sm">Total</h4>
               <p className="text-sm capitalize">${total}</p>
             </div>
 

@@ -16,7 +16,7 @@ const WishlistPage = () => {
   return (
     <section className="min-h-screen">
       <div className="container flex flex-col gap-4">
-        <h1 className="heading-4 uppercase text-red-500 mb-8">Wishlist</h1>
+        <h1 className="heading-1 text-red-500 text-xl mb-8">Wishlist</h1>
         <div className="grid grid-cols-[1fr]  xs:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4">
           {!loading
             ? wishlist?.map((product) => {

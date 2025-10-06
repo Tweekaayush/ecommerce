@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container">
         <div className="grid grid-cols-12 gap-6 mb-10">
           <div className="col-span-12 lg:col-span-4">
-            <Link to="/" className="mb-6 text-white text-4xl">
+            <Link to="/" className="mb-6 text-white text-2xl md:text-4xl">
               Primart
               <span className="text-red-500">.</span>
             </Link>
@@ -22,24 +22,24 @@ const Footer = () => {
             </p>
             <ul className="flex mb-4 gap-2">
               <li>
-                <Link>
+                <a href="">
                   <Facebook />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link>
+                <a href="">
                   <Linkedin />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link>
+                <a href="">
                   <Instagram />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link>
+                <a href="">
                   <Github />
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

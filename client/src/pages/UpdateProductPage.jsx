@@ -56,10 +56,10 @@ const UpdateProductPage = () => {
   return (
     <section className="min-h-screen">
       <div className="container">
-        <Link to="/dashboard" className="heading-5 text-gray-500 mb-2">
+        <Link to="/dashboard" className="heading-1 text-xs md:text-sm hover:underline text-gray-500 mb-2">
           DASHBOARD /
         </Link>
-        <h1 className="heading-4 text-red-500 uppercase mb-8">
+        <h1 className="heading-1 text-lg text-red-500 uppercase mb-8">
           Update Product
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -130,7 +130,7 @@ const UpdateProductPage = () => {
             <span>Stock</span>
           </label>
           <div className="flex items-center gap-4">
-            <h1 className="heading-5">Is Featured: </h1>
+            <h1 className="heading-1 text-sm">Is Featured: </h1>
             <label className="flex gap-2">
               <input
                 type="checkbox"

@@ -48,7 +48,7 @@ const Reviews = () => {
 
   return (
     <div className="mt-4 md:mt-0">
-      <h1 className="heading-1">Write review</h1>
+      <h1 className="heading-1 text-red-500 text-sm">Write review</h1>
       <form className="flex flex-col" onSubmit={writeReview}>
         <div className="flex">
           {[...Array(5)].map((star, index) => {
@@ -96,9 +96,9 @@ const Reviews = () => {
             {reviews?.map((r) => {
               return (
                 <div key={r?._id} className="p-4 bg-gray-100 mt-8">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between mb-5">
                     <div>
-                      <h1 className="heading-6">{r?.user?.name}</h1>
+                      <h1 className="heading-2 text-base">{r?.user?.name}</h1>
                       <div className="flex items-center gap-4">
                         <Rating rating={r?.rating} size={18} />
                         <p className="font-bold text-sm">

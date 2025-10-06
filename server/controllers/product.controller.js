@@ -103,20 +103,22 @@ exports.createProduct = asyncHandler(async (req, res) => {
     brand,
     category,
     countInStock,
-    // image,
+    image,
     isFeatured,
   } = req.body;
 
-  // let cloudinaryResponse = null;
+  let cloudinaryResponse = null;
 
-  // if (image) {
-  //   cloudinaryResponse = await cloudinary.uploader.upload(image, {
-  //     folder: "products",
-  //   });
-  // }
+  if (image) {
+    cloudinaryResponse = await cloudinary.uploader.upload(image, {
+      folder: "products",
+    });
+  }
+
+  let product = null;
 
   if (cloudinaryResponse) {
-    const product = await Product.create({
+    product = await Product.create({
       name,
       price,
       description,

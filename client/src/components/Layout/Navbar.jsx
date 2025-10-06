@@ -58,7 +58,7 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
       ref={ref}
     >
       <div className="container relative flex items-center bg-white h-16 gap-6">
-        <Link to="/" className="text-4xl">
+        <Link to="/" className="text-2xl md:text-4xl">
           Primart<span className="text-red-500">.</span>
         </Link>
         <div className="md:hidden w-full">

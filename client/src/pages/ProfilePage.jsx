@@ -44,7 +44,7 @@ const UpdateProfile = () => {
 
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 mb-12.5">Privacy</h1>
+      <h1 className="heading-1 text-red-500 text-sm mb-12.5">Privacy</h1>
       <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
         <label htmlFor="name" className="form-label">
           <input
@@ -102,7 +102,7 @@ const MyOrders = () => {
   }, []);
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 mb-12.5">My Orders</h1>
+      <h1 className="heading-1 text-red-500 text-sm mb-12.5">My Orders</h1>
       <div className="flex-1">
         <div className="grid grid-cols-[5fr_2fr_2fr_3fr] gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
           <span className="list-head">ID</span>
@@ -151,7 +151,7 @@ const UpdateAddress = () => {
   };
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 mb-12.5">Address</h1>
+      <h1 className="heading-1 text-red-500 text-sm mb-12.5">Address</h1>
       <div className="">
         <AddressForm submitFunction={updateForm} />
       </div>
@@ -168,19 +168,19 @@ const AccountInfo = () => {
   } = useSelector((state) => state.user);
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 mb-12.5">Account</h1>
+      <h1 className="heading-1 text-red-500 text-sm mb-12.5">Account</h1>
       {!loading ? (
         <div className="flex flex-col">
           <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">
-            <h5 className="heading-5">Name</h5>
+            <h5 className="heading-1 text-sm">Name</h5>
             <p className="body-text">{name}</p>
           </div>
           <div className="grid grid-cols-[2fr_10fr] gap-4 p-4 bg-gray-100">
-            <h5 className="heading-5 ">Email</h5>
+            <h5 className="heading-1 text-sm ">Email</h5>
             <p className="body-text"> {email}</p>
           </div>
           <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">
-            <h5 className="heading-5 ">Address</h5>
+            <h5 className="heading-1 text-sm ">Address</h5>
             <p className="body-text">
               {fullAddress?.address && (
                 <>
@@ -192,7 +192,7 @@ const AccountInfo = () => {
             </p>
           </div>
           <div className="grid grid-cols-[2fr_10fr] gap-4 p-4 bg-gray-100">
-            <h5 className="heading-5 ">Joined On</h5>
+            <h5 className="heading-1 text-sm ">Joined On</h5>
             <p className="body-text">{createdAt.substring(0, 10)}</p>
           </div>
         </div>
@@ -263,7 +263,7 @@ const ProfilePage = () => {
               />
             </div>
             <div className="flex-1">
-              <h1 className="heading-5">{name}</h1>
+              <h1 className="heading-1 text-sm">{name}</h1>
               <p className="body-text text-gray-700">{email}</p>
             </div>
           </div>

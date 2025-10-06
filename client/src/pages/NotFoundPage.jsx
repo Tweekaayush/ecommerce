@@ -8,7 +8,7 @@ const NotFoundPage = () => {
     <section className="flex justify-center align-center min-h-screen">
       <div className="container flex flex-col justify-center items-center">
         <Frown className="mb-4 h-24 w-24" />
-        <h1 className="heading-2 mb-4">404 - Page Not Found</h1>
+        <h1 className="heading-2 text-2xl mb-4">404 - Page Not Found</h1>
         <p className="body-text mb-7">
           The page you are looking for might have been removed, had its name
           changed or is temporarily unavailable

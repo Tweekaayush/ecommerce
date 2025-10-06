@@ -24,7 +24,7 @@ const Payment = ({ setOpen }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col pb-8 border-b border-dashed">
-        <h1 className="heading-1 mb-8">Shipping Address</h1>
+        <h1 className="heading-1 text-red-500 text-sm mb-8">Shipping Address</h1>
         <div className="">
           {!userLoading ? (
             <p className="body-text">
@@ -39,7 +39,7 @@ const Payment = ({ setOpen }) => {
       </div>
       <div className="flex pb-8 border-b border-dashed gap-8 flex-col md:flex-row">
         <div className="flex flex-col">
-          <h1 className="heading-1 mb-8">Coupon</h1>
+          <h1 className="heading-1 text-red-500 text-sm mb-8">Coupon</h1>
           <form
             className="flex gap-4 w-fit mb-4"
             onSubmit={(e) => [
@@ -92,7 +92,7 @@ const Payment = ({ setOpen }) => {
                     </p>
                   </div>
                   <button
-                    className="heading-1 cursor-pointer"
+                    className="heading-1 text-red-500 text-sm cursor-pointer"
                     onClick={() => [dispatch(setCoupon(null)), setOpen(false)]}
                   >
                     remove
