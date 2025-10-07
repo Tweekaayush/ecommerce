@@ -27,10 +27,7 @@ const Pagination = ({ totalPages, page, setPage }) => {
   return (
     <div className="flex justify-center gap-1 mx-auto mt-7">
       {totalPages !== 0 && paginationArray[0] !== 1 && (
-        <button
-          onClick={() => setPage(1)}
-          className="pagination-btn"
-        >
+        <button onClick={() => setPage(1)} className="pagination-btn">
           {"<<"}
         </button>
       )}

@@ -81,8 +81,11 @@ const UpdateProfile = () => {
           <span>Password</span>
         </label>
         <button type="submit" disabled={loading} className="button-1">
-          
-          {loading ? <LoaderCircle className="animate-spin mx-auto"/> : "Save Changes"}
+          {loading ? (
+            <LoaderCircle className="animate-spin mx-auto" />
+          ) : (
+            "Save Changes"
+          )}
         </button>
       </form>
     </div>

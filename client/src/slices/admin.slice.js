@@ -79,6 +79,14 @@ export const getOrdersList = createAsyncThunk(
 const adminSlice = createSlice({
   name: "admin",
   initialState,
+  reducers: {
+    clearAdminError: (state, action) => {
+      state.error = "";
+    },
+    clearAdminSuccessMessage: (state, action) => {
+      state.successMessage = "";
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAnalytics.pending, (state, action) => {
       state.loading = true;
@@ -134,5 +142,7 @@ const adminSlice = createSlice({
     });
   },
 });
+
+export const { clearAdminError, clearAdminSuccessMessage } = adminSlice.actions;
 
 export default adminSlice.reducer;

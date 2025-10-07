@@ -21,7 +21,7 @@ const BrowsePage = () => {
     setActiveCategory(cat || "");
     setPage(1);
   }, [cat]);
-  
+
   useEffect(() => {
     dispatch(getProducts({ page: page, category: activeCategory }));
     document.title = `Browse ${activeCategory}`;

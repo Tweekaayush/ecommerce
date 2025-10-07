@@ -10,7 +10,7 @@ const FailedPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(clearCartItems())
+    dispatch(clearCartItems());
     document.title = "Payment Failed";
   }, []);
   return (

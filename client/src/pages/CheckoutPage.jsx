@@ -3,7 +3,12 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress, setCoupon } from "../slices/cart.slice";
 import img from "/assets/cart/empty-cart.png";
-import { ShoppingCart, NotebookTabs, CreditCard, LoaderCircle } from "lucide-react";
+import {
+  ShoppingCart,
+  NotebookTabs,
+  CreditCard,
+  LoaderCircle,
+} from "lucide-react";
 import CheckoutCart from "../components/CheckoutCart";
 import Payment from "../components/Payment";
 import ShippingAddress from "../components/ShippingAddress";
@@ -114,7 +119,9 @@ const CheckoutPage = () => {
           ref={ref}
           className="w-[400px] h-fit shadow-card bg-white flex flex-col p-4 rounded-lg"
         >
-          <h1 className="heading-1 text-red-500 text-sm mb-8">My Coupons ({coupons?.length})</h1>
+          <h1 className="heading-1 text-red-500 text-sm mb-8">
+            My Coupons ({coupons?.length})
+          </h1>
           {coupons?.length ? (
             <div className="flex flex-col gap-4 h-60 overflow-y-scroll">
               {coupons.map((c, i) => {
@@ -175,7 +182,9 @@ const CheckoutPage = () => {
           <ActiveComponent />
 
           <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
-            <h1 className="heading-1 text-red-500 text-sm mb-4">cart summary</h1>
+            <h1 className="heading-1 text-red-500 text-sm mb-4">
+              cart summary
+            </h1>
             <div className="flex justify-between mb-4">
               <h4 className="heading-2 text-sm">Subtotal</h4>
               <p className="text-sm capitalize">${subTotal}</p>
@@ -194,7 +203,11 @@ const CheckoutPage = () => {
               onClick={handleNextStep}
               disabled={orderLoading || cartLoading || userLoading}
             >
-              {orderLoading || cartLoading || userLoading ? <LoaderCircle className="animate-spin mx-auto"/>:checkoutSteps[step - 1]?.button}
+              {orderLoading || cartLoading || userLoading ? (
+                <LoaderCircle className="animate-spin mx-auto" />
+              ) : (
+                checkoutSteps[step - 1]?.button
+              )}
             </button>
           </div>
         </div>

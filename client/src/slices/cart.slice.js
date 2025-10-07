@@ -113,6 +113,12 @@ const cartSlice = createSlice({
       state.data.shippingAddress = {};
       return updateCart(state);
     },
+    clearCartSuccessMessage: (state, action) => {
+      state.successMessage = "";
+    },
+    clearCartErrors: (state, action) => {
+      state.error = "";
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(validateCoupon.pending, (state, action) => {
@@ -138,6 +144,8 @@ export const {
   saveShippingAddress,
   clearCartItems,
   setCoupon,
+  clearCartSuccessMessage,
+  clearCartErrors,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

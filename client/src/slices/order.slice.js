@@ -145,6 +145,14 @@ export const validateOrder = createAsyncThunk(
 const orderSlice = createSlice({
   name: "order",
   initialState,
+  reducers: {
+    clearOrderError: (state, action) => {
+      state.error = "";
+    },
+    clearOrderSuccessMessage: (state, action) => {
+      state.successMessage = "";
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(placeOrder.pending, (state, action) => {
       state.loading = true;
@@ -195,6 +203,7 @@ const orderSlice = createSlice({
     builder.addCase(getOrderById.fulfilled, (state, action) => {
       state.loading = false;
       state.data.orderDetails = action.payload.order;
+      state.successMessage = action.payload.message;
     });
     builder.addCase(getOrderById.rejected, (state, action) => {
       state.loading = false;
@@ -213,5 +222,7 @@ const orderSlice = createSlice({
     });
   },
 });
+
+export const { clearOrderError, clearOrderSuccessMessage } = orderSlice.actions;
 
 export default orderSlice.reducer;

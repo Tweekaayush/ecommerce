@@ -56,7 +56,10 @@ const UpdateProductPage = () => {
   return (
     <section className="min-h-screen">
       <div className="container">
-        <Link to="/dashboard" className="heading-1 text-xs md:text-sm hover:underline text-gray-500 mb-2">
+        <Link
+          to="/dashboard"
+          className="heading-1 text-xs md:text-sm hover:underline text-gray-500 mb-2"
+        >
           DASHBOARD /
         </Link>
         <h1 className="heading-1 text-lg text-red-500 uppercase mb-8">
@@ -167,7 +170,11 @@ const UpdateProductPage = () => {
             </label>
           </div>
           <button type="submit" className="button-1" disabled={loading}>
-            {loading?<LoaderCircle className="animate-spin mx-auto"/>:'Update'}
+            {loading ? (
+              <LoaderCircle className="animate-spin mx-auto" />
+            ) : (
+              "Update"
+            )}
           </button>
         </form>
       </div>

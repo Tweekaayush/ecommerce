@@ -24,7 +24,7 @@ const AddressForm = ({ submitFunction }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitFunction({fullAddress: formData});
+    submitFunction({ fullAddress: formData });
   };
 
   useEffect(() => {
@@ -84,7 +84,11 @@ const AddressForm = ({ submitFunction }) => {
         <span>country</span>
       </label>
       <button type="submit" disabled={loading} className="button-1 col-span-1">
-        {loading? <LoaderCircle className="animate-spin mx-auto"/>:'Save Changes'}
+        {loading ? (
+          <LoaderCircle className="animate-spin mx-auto" />
+        ) : (
+          "Save Changes"
+        )}
       </button>
     </form>
   );

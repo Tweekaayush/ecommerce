@@ -29,7 +29,7 @@
   }
 
   section {
-    @apply w-full py-20 first-of-type:pt-24;
+    @apply w-full py-20 first-of-type:pt-24 last-of-type:p-0;
   }
 
   a {

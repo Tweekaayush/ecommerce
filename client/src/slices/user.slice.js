@@ -148,13 +148,13 @@ export const removeFromWishlist = createAsyncThunk(
     try {
       const res = await axios.post(
         `${BASE_URL}/wishlist/remove`,
-        { product: payload },
+        { product: payload._id, message: payload.message },
         {
           withCredentials: true,
         }
       );
 
-      return res.data.wishlist;
+      return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -164,7 +164,14 @@ export const removeFromWishlist = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    clearUserError: (state, action) => {
+      state.error = ''
+    },
+    clearUserSuccessMessage: (state, action) => {
+      state.successMessage = ''
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(loadUser.pending, (state) => {
       state.loading = true;
@@ -207,10 +214,9 @@ const userSlice = createSlice({
       state.loading = false;
       state.data = {
         user: {},
-        usersListAdmin: [],
-        userDetailsAdmin: {},
         wishlist: [],
         cart: [],
+        coupon: null,
       };
       state.successMessage = "Logged Out Successfully";
     });
@@ -267,8 +273,8 @@ const userSlice = createSlice({
     });
     builder.addCase(removeFromWishlist.fulfilled, (state, action) => {
       state.loading = false;
-      state.successMessage = "Removed From Wishlist!";
-      state.data.wishlist = action.payload;
+      state.successMessage = action.payload.message;
+      state.data.wishlist = action.payload.wishlist;
     });
     builder.addCase(removeFromWishlist.rejected, (state, action) => {
       state.loading = false;
@@ -276,5 +282,7 @@ const userSlice = createSlice({
     });
   },
 });
+
+export const {clearUserError, clearUserSuccessMessage} = userSlice.actions
 
 export default userSlice.reducer;

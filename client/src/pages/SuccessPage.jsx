@@ -31,14 +31,22 @@ const SuccessPage = () => {
         <div className="p-4 bg-gray-200 mb-4 rounded-sm flex gap-4">
           <h1 className="heading-1 text-sm">Order Id:</h1>
 
-          {!loading?<p className="body-text">{orderId}</p>: <Skeleton classname='h-6 w-60'/> }
+          {!loading ? (
+            <p className="body-text">{orderId}</p>
+          ) : (
+            <Skeleton classname="h-6 w-60" />
+          )}
         </div>
         <button
           className="button-1 mb-4"
           onClick={() => navigate(`/order/${orderId}`)}
           disabled={loading}
         >
-          {loading?<LoaderCircle className="animate-spin mx-auto"/>:'go to your order'}
+          {loading ? (
+            <LoaderCircle className="animate-spin mx-auto" />
+          ) : (
+            "go to your order"
+          )}
         </button>
       </div>
     </section>

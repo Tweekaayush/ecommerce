@@ -24,7 +24,9 @@ const Payment = ({ setOpen }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col pb-8 border-b border-dashed">
-        <h1 className="heading-1 text-red-500 text-sm mb-8">Shipping Address</h1>
+        <h1 className="heading-1 text-red-500 text-sm mb-8">
+          Shipping Address
+        </h1>
         <div className="">
           {!userLoading ? (
             <p className="body-text">

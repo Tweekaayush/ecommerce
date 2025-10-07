@@ -76,7 +76,13 @@ const LoginPage = () => {
               <span>password</span>
               {formErrors.password && <p className="form-error-msg">error</p>}
             </label>
-            <button className="button-2" disabled={loading}>{loading?<LoaderCircle className="mx-auto animate-spin"/>:'Login'}</button>
+            <button className="button-2" disabled={loading}>
+              {loading ? (
+                <LoaderCircle className="mx-auto animate-spin" />
+              ) : (
+                "Login"
+              )}
+            </button>
             <p className="body-text">
               Don't have an account?{" "}
               <Link to="/signup" className="text-blue-500">

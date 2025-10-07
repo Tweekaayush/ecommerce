@@ -144,17 +144,13 @@ const AdminDashboardPage = () => {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            {!loading ? (
-              <div
-                onClick={() => navigate("/dashboard/product/create")}
-                className="col-span-4 shadow-card hover:shadow-card-hover p-4 cursor-pointer flex gap-4 items-center"
-              >
-                <h1 className="heading-1 text-sm">Create new product</h1>
-                <SquareArrowOutUpRight className="w-3.5 h-3.5" />
-              </div>
-            ) : (
-              <Skeleton classname="w-full h-15 col-span-4" />
-            )}
+            <div
+              onClick={() => navigate("/dashboard/product/create")}
+              className="col-span-4 shadow-card hover:shadow-card-hover p-4 cursor-pointer flex gap-4 items-center"
+            >
+              <h1 className="heading-1 text-sm">Create new product</h1>
+              <SquareArrowOutUpRight className="w-3.5 h-3.5" />
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-4 gap-4">
@@ -163,6 +159,7 @@ const AdminDashboardPage = () => {
             })}
             <Skeleton classname="col-span-3 h-96" />
             <Skeleton classname="col-span-1 h-96" />
+            <Skeleton classname="h-15 col-span-4" />
           </div>
         )}
       </div>

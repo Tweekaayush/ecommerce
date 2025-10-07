@@ -18,7 +18,7 @@ const ShippingAddress = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (data) => {
-    dispatch(updateProfile(data))
+    dispatch(updateProfile(data));
   };
 
   useEffect(() => {
@@ -29,15 +29,19 @@ const ShippingAddress = () => {
   return (
     <div className="flex flex-col">
       <h1 className="heading-1 text-red-500 text-sm mb-7">Shipping Address</h1>
-     
-        <div className="mb-4">
-          {!loading?<p className="body-text">
+
+      <div className="mb-4">
+        {!loading ? (
+          <p className="body-text">
             {fullAddress?.address}, {fullAddress?.postalCode},
             <br />
             {fullAddress?.city}, {fullAddress?.country}
-          </p>:<Skeleton classname='w-full h-20'/>}
-        </div>
-     
+          </p>
+        ) : (
+          <Skeleton classname="w-full h-20" />
+        )}
+      </div>
+
       <div className="flex flex-col">
         <button
           onClick={() => setOpen(!open)}
@@ -49,7 +53,7 @@ const ShippingAddress = () => {
           className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
           style={{ maxHeight: open ? "300px" : 0 }}
         >
-          <AddressForm submitFunction={handleSubmit}/>
+          <AddressForm submitFunction={handleSubmit} />
         </div>
       </div>
     </div>

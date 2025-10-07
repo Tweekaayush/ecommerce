@@ -37,7 +37,7 @@ const HomePage = () => {
                   return <ProductCard key={product._id} {...product} />;
                 })
               : new Array(4).fill(0).map((_, i) => {
-                  return <Skeleton key={i} classname='w-full h-96' />;
+                  return <Skeleton key={i} classname="w-full h-96" />;
                 })}
           </div>
         </div>
