@@ -98,12 +98,13 @@ exports.updateUser = asyncHandler(async (req, res) => {
 exports.deleteUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
-  
+
   await User.findByIdAndDelete(id);
 
   res.json({
     success: true,
     user,
+    message: "User deleted",
   });
 });
 
@@ -130,7 +131,7 @@ exports.addToWishlist = asyncHandler(async (req, res) => {
 });
 
 exports.removeFromWishlist = asyncHandler(async (req, res) => {
-  const { product } = req.body;
+  const { product, message } = req.body;
 
   const user = await User.findById(req.user._id);
 
@@ -143,11 +144,6 @@ exports.removeFromWishlist = asyncHandler(async (req, res) => {
   res.json({
     success: true,
     wishlist: updatedUser.wishlist,
-  });
-});
-
-exports.moveToWishlist = asyncHandler(async (req, res) => {
-  res.json({
-    success: true,
+    message,
   });
 });

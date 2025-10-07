@@ -34,6 +34,6 @@ exports.validateCoupon = asyncHandler(async (req, res) => {
   res.json({
     success: true,
     coupon: coupon,
-    message: "Coupon Valid",
+    message: "Coupon Applied",
   });
 });

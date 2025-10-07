@@ -72,5 +72,6 @@ exports.updateOrder = asyncHandler(async (req, res) => {
   res.json({
     success: true,
     order: updatedOrder,
+    message: 'Order Updated'
   });
 });
