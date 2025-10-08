@@ -13,6 +13,9 @@ const SignUpPage = () => {
       user: { _id },
     },
   } = useSelector((state) => state.user);
+  const {
+    data: { cart },
+  } = useSelector((state) => state.cart);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,7 +44,7 @@ const SignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signup({ ...formData }));
+    dispatch(signup({ ...formData, cart }));
   };
 
   useEffect(() => {
@@ -106,7 +109,7 @@ const SignUpPage = () => {
                 <p className="form-error-msg"> error </p>
               )}
             </label>
-            <button type="submit" className="button-2" disabled={true}>
+            <button type="submit" className="button-2" disabled={loading}>
               {loading ? (
                 <LoaderCircle className="mx-auto animate-spin" />
               ) : (

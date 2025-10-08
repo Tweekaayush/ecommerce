@@ -34,7 +34,12 @@ const ProductPage = () => {
     },
   } = useSelector((state) => state.product);
   const { loading: cartLoading } = useSelector((state) => state.cart);
-  const { loading: userLoading } = useSelector((state) => state.user);
+  const {
+    loading: userLoading,
+    data: {
+      user: { _id: userId },
+    },
+  } = useSelector((state) => state.user);
   const [quantity, setQuantity] = useState(1);
   const product = {
     title: "product",
@@ -147,12 +152,15 @@ const ProductPage = () => {
                     onClick={() =>
                       dispatch(
                         addToCart({
-                          name,
-                          image,
-                          price,
-                          _id,
-                          brand,
-                          quantity,
+                          userId: userId,
+                          item: {
+                            name,
+                            image,
+                            price,
+                            _id,
+                            brand,
+                            quantity,
+                          },
                         })
                       )
                     }

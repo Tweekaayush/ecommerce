@@ -3,18 +3,17 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { removeFromCart, updateQuantity } from "../slices/cart.slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartItem = (props) => {
   const { _id, name, price, image, countInStock, quantity } = props;
   const [qty, setQty] = useState(quantity);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (qty !== quantity) {
-      dispatch(updateQuantity({ ...props, quantity: qty }));
-    }
-  }, [qty]);
+  const {
+    data: {
+      user: { _id: userId },
+    },
+  } = useSelector((state) => state.user);
 
   useEffect(() => {
     setQty(quantity);
@@ -33,14 +32,30 @@ const CartItem = (props) => {
         <div className="flex w-fit bg-gray-100">
           <button
             className="py-1 px-2 text-sm cursor-pointer"
-            onClick={() => setQty((prev) => prev - 1)}
+            onClick={() =>
+              dispatch(
+                updateQuantity({
+                  userId: userId,
+                  productId: _id,
+                  quantity: qty - 1,
+                })
+              )
+            }
           >
             -
           </button>
           <span className="py-1 px-2 text-sm ">{qty}</span>
           <button
             className="py-1 px-2 text-sm cursor-pointer"
-            onClick={() => setQty((prev) => prev + 1)}
+            onClick={() =>
+              dispatch(
+                updateQuantity({
+                  userId: userId,
+                  productId: _id,
+                  quantity: qty + 1,
+                })
+              )
+            }
           >
             +
           </button>
@@ -49,7 +64,9 @@ const CartItem = (props) => {
       </div>
       <div className="col-span-1 py-2">
         <X
-          onClick={() => dispatch(removeFromCart(_id))}
+          onClick={() =>
+            dispatch(removeFromCart({ userId: userId, productId: _id }))
+          }
           className="cursor-pointer w-5 h-5"
         />
       </div>

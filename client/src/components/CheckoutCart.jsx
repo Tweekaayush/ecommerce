@@ -8,18 +8,28 @@ const CheckoutCartItem = (props) => {
   const { _id, name, brand, image, quantity, price, countInStock } = item;
   const [qty, setQty] = useState(quantity);
   const dispatch = useDispatch();
+  const {
+    data: {
+      user: { _id: userId },
+    },
+  } = useSelector((state) => state.user);
 
   const increaseQty = () => {
+    dispatch(
+      updateQuantity({ userId: userId, productId: _id, quantity: qty + 1 })
+    );
     setQty((prev) => prev + 1);
   };
 
   const decreateQty = () => {
-    setQty((prev) => prev - 1);
+    dispatch(
+      updateQuantity({ userId: userId, productId: _id, quantity: qty - 1 })
+    );
   };
 
   useEffect(() => {
-    dispatch(updateQuantity({ ...item, quantity: qty }));
-  }, [qty]);
+    setQty(quantity);
+  }, [quantity]);
 
   return (
     <div className="grid grid-cols-[5fr_2fr_3fr_2fr]  sm:grid-cols-[2fr_3fr_2fr_3fr_2fr] border border-gray-400 min-h-20">
@@ -93,7 +103,14 @@ const CheckoutCart = ({ update = true }) => {
       </div>
       <ul className="flex flex-col w-full gap-4">
         {cart?.map((item) => {
-          return <CheckoutCartItem key={item._id} {...item} update={update} />;
+          return (
+            <CheckoutCartItem
+              key={item._id}
+              {...item.product}
+              quantity={item.quantity}
+              update={update}
+            />
+          );
         })}
       </ul>
     </div>

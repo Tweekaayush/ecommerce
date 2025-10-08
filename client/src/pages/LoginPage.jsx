@@ -13,6 +13,9 @@ const LoginPage = () => {
       user: { _id },
     },
   } = useSelector((state) => state.user);
+  const {
+    data: { cart },
+  } = useSelector((state) => state.cart);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,7 +40,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ ...formData }));
+    dispatch(login({ ...formData, cart }));
   };
 
   useEffect(() => {

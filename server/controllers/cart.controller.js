@@ -5,11 +5,115 @@ const User = require("../models/user.model");
 exports.getCartItems = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).populate({
     path: "cartItems.product",
+    select: "name brand image brand price",
   });
 
   res.json({
     success: true,
     cartItems: user.cartItems,
+  });
+});
+
+exports.addToCart = asyncHandler(async (req, res) => {
+  const { userId, item } = req.body;
+
+  const product = await Product.findById(item._id);
+  const user = await User.findById(userId);
+
+  const existItem = user.cartItems.find(
+    (x) => x.product.toString() === item._id.toString()
+  );
+  let cartItems = user.cartItems;
+
+  if (existItem) {
+    user.cartItems = user.cartItems.map((x) =>
+      x.product.toString() === existItem.product.toString()
+        ? {
+            ...x,
+            quantity:
+              x.quantity + item.quantity > product.countInStock
+                ? product.countInStock
+                : x.quantity + item.quantity,
+          }
+        : x
+    );
+  } else {
+    let itemQuantity =
+      item.quantity >= product.countInStock ? product.countInStock : item;
+
+    user.cartItems = [...cartItems, { product: item._id, itemQuantity }];
+  }
+
+  await user.save();
+
+  const updatedUser = await User.findById(userId).populate({
+    path: "cartItems.product",
+    select: "name brand image brand price",
+  });
+
+  console.log();
+
+  res.json({
+    success: true,
+    cartItems: updatedUser.cartItems,
+  });
+});
+
+exports.removeFromCart = asyncHandler(async (req, res) => {
+  const { userId, productId } = req.body;
+
+  const user = await User.findById(userId);
+
+  user.cartItems = user.cartItems.filter(
+    (x) => x.product._id.toString() !== productId.toString()
+  );
+
+  await user.save();
+
+  const updatedUser = await User.findById(userId).populate({
+    path: "cartItems.product",
+    select: "name brand price image brand",
+  });
+
+  res.json({
+    success: true,
+    cartItems: updatedUser.cartItems,
+  });
+});
+
+exports.updateQuantity = asyncHandler(async (req, res) => {
+  const { userId, productId, quantity } = req.body;
+
+  const user = await User.findById(userId);
+
+  const product = await Product.findById(productId)
+  
+  if (quantity) {
+    if(quantity > product.countInStock){
+      res.status(400)
+      throw new Error('You cannot add more of this item in your cart')
+    }
+    user.cartItems = user.cartItems.map((x) =>
+      x.product._id.toString() === productId.toString()
+        ? { ...x, quantity: quantity }
+        : x
+    );
+  } else {
+    user.cartItems = user.cartItems.filter(
+      (x) => x.product._id.toString() !== productId.toString()
+    );
+  }
+
+  await user.save();
+
+  const updatedUser = await User.findById(userId).populate({
+    path: "cartItems.product",
+    select: "name brand price image brand",
+  });
+
+  res.json({
+    success: true,
+    cartItems: updatedUser.cartItems,
   });
 });
 

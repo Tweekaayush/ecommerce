@@ -3,7 +3,7 @@ import { ShoppingCart, Heart, Trash } from "lucide-react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeFromWishlist, addToWishlist } from "../slices/user.slice";
 import Rating from "./Rating";
 import { addToCart } from "../slices/cart.slice";
@@ -21,6 +21,11 @@ const ProductCard = ({
   const [width, setWidth] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {
+    data: {
+      user: { _id: userId },
+    },
+  } = useSelector((state) => state.user);
 
   const handleResize = () => {
     if (!slider) return;
@@ -47,12 +52,15 @@ const ProductCard = ({
       dispatch(removeFromWishlist({ _id, message: "Moved to cart" }));
     dispatch(
       addToCart({
-        name,
-        image,
-        price,
-        _id,
-        brand,
-        quantity: 1,
+        userId: userId,
+        item: {
+          name,
+          image,
+          price,
+          _id,
+          brand,
+          quantity: 1,
+        },
       })
     );
   };

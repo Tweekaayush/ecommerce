@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "../constants/constants";
+import { clearCartItems, getCartItems } from "./cart.slice";
 // import { getCart } from "./cart.slice";
 
 const initialState = {
@@ -23,7 +24,7 @@ export const loadUser = createAsyncThunk(
         withCredentials: true,
       });
 
-      // dispatch(getCart());
+      dispatch(getCartItems());
 
       return res.data.user;
     } catch (error) {
@@ -34,11 +35,13 @@ export const loadUser = createAsyncThunk(
 
 export const login = createAsyncThunk(
   "login",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, dispatch }) => {
     try {
       const res = await axios.post(`${BASE_URL}/auth/login`, payload, {
         withCredentials: true,
       });
+
+      dispatch(getCartItems());
 
       return res.data.user;
     } catch (error) {
@@ -49,12 +52,15 @@ export const login = createAsyncThunk(
 
 export const signup = createAsyncThunk(
   "signup",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, dispatch }) => {
     try {
+      console.log(payload);
       const res = await axios.post(`${BASE_URL}/auth/signup`, payload, {
         // headers: { "Content-Type": "multipart/form-data" },
         withCredentials: true,
       });
+
+      dispatch(getCartItems());
 
       return res.data.user;
     } catch (error) {
@@ -65,11 +71,13 @@ export const signup = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   "logout",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, dispatch }) => {
     try {
       const res = await axios.post(`${BASE_URL}/auth/logout`, payload, {
         withCredentials: true,
       });
+
+      dispatch(clearCartItems());
 
       return res.data.message;
     } catch (error) {
@@ -166,10 +174,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     clearUserError: (state, action) => {
-      state.error = ''
+      state.error = "";
     },
     clearUserSuccessMessage: (state, action) => {
-      state.successMessage = ''
+      state.successMessage = "";
     },
   },
   extraReducers: (builder) => {
@@ -283,6 +291,6 @@ const userSlice = createSlice({
   },
 });
 
-export const {clearUserError, clearUserSuccessMessage} = userSlice.actions
+export const { clearUserError, clearUserSuccessMessage } = userSlice.actions;
 
 export default userSlice.reducer;

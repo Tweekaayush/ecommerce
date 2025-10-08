@@ -1,9 +1,9 @@
 const asyncHandler = require("../middleware/asyncHandler");
 const User = require("../models/user.model");
-const { generateToken } = require("../utils/generateToken");
+const { generateToken, addToCart } = require("../utils/authUtil");
 
 exports.signup = asyncHandler(async (req, res) => {
-  const { name, email, password, image } = req.body;
+  const { name, email, password, cart } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -12,19 +12,18 @@ exports.signup = asyncHandler(async (req, res) => {
     throw new Error("User already exists with given email.");
   }
 
-  let uploadResult = "";
-
-  if (image) {
-    uploadResult = await cloudinary.uploader.upload(image, {
-      folder: "users",
-    });
-  }
+  const cartItems = cart.map((item) => {
+    return {
+      product: item.product._id,
+      quantity: item.quantity,
+    };
+  });
 
   const newUser = await User.create({
     name,
     email,
     password,
-    image: uploadResult?.secure_url || "",
+    cartItems,
   });
 
   if (newUser) {
@@ -36,10 +35,12 @@ exports.signup = asyncHandler(async (req, res) => {
 });
 
 exports.login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, cart } = req.body;
+
   const user = await User.findOne({ email });
 
   if (user && (await user.comparePassword(password))) {
+    await addToCart(user, cart);
     generateToken(user, 200, res);
   } else {
     res.status(401);

@@ -3,6 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const Coupon = require("../models/coupon.model");
 const Order = require("../models/order.model");
 const Product = require("../models/product.model");
+const User = require("../models/user.model");
 const {
   createStripeCoupon,
   createNewCoupon,
@@ -16,24 +17,29 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
     throw new Error("Invalid product list");
   }
 
+  const user = await User.findByIdAndUpdate(req.user._id, {
+    cartItems: []
+  })
+
+
   let coupon = null;
   let totalAmount = 0;
   const order = new Order();
 
-  const lineItems = products.map((product) => {
-    const amount = product.price * 100;
-    totalAmount += amount * product.quantity;
+  const lineItems = products.map((item) => {
+    const amount = item.product.price * 100;
+    totalAmount += amount * item.quantity;
 
     return {
       price_data: {
         currency: "usd",
         product_data: {
-          name: product.name,
+          name: item.product.name,
           // image: product.image,
         },
         unit_amount: amount,
       },
-      quantity: product.quantity,
+      quantity: item.quantity,
     };
   });
 
@@ -73,9 +79,9 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
       shippingAddress: JSON.stringify(shippingAddress),
       products: JSON.stringify(
         products.map((p) => ({
-          product: p._id,
+          product: p.product._id,
           quantity: p.quantity,
-          price: p.price,
+          price: p.product.price,
         }))
       ),
     },
@@ -83,9 +89,9 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
 
   order.user = req.user._id.toString();
   order.products = products.map((p) => ({
-    product: p._id,
+    product: p.product._id,
     quantity: p.quantity,
-    price: p.price,
+    price: p.product.price,
   }));
   order.totalAmount = totalAmount / 100;
   order.shippingAddress = shippingAddress;
@@ -192,6 +198,7 @@ exports.retryPayment = asyncHandler(async (req, res) => {
 exports.checkoutSuccess = asyncHandler(async (req, res) => {
   const { sessionId } = req.body;
   const session = await stripe.checkout.sessions.retrieve(sessionId);
+  const products = JSON.parse(session.metadata.products);
 
   if (session.payment_status === "paid") {
     if (session.metadata.couponCode) {
@@ -212,9 +219,6 @@ exports.checkoutSuccess = asyncHandler(async (req, res) => {
 
     const updatedOrder = await order.save();
 
-    const products = JSON.parse(session.metadata.products);
-    const shippingAddress = JSON.parse(session.metadata.shippingAddress);
-
     const totalAmount = session.amount_total / 100;
 
     if (totalAmount > 200) {
@@ -234,6 +238,12 @@ exports.checkoutSuccess = asyncHandler(async (req, res) => {
 
       await coupon.save();
     }
+
+    products.forEach(async (item) => {
+      const p = await Product.findById(item.product);
+      p.countInStock -= item.quantity;
+      await p.save();
+    });
 
     res.json({
       success: true,

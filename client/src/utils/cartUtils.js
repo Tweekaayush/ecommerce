@@ -4,7 +4,7 @@ export const addDecimals = (num) => {
 
 export const updateCart = (state) => {
   state.data.subTotal = addDecimals(
-    state.data.cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+    state.data.cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0)
   );
 
   if (state.data.coupon) {

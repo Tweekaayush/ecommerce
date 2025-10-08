@@ -113,7 +113,7 @@ const CheckoutPage = () => {
       <div
         className={`${
           open ? "flex" : "hidden"
-        } absolute top-0 left-0 w-full h-full bg-overlay justify-center items-center z-[50]`}
+        } fixed top-0 left-0 w-full h-full bg-overlay justify-center items-center z-[50]`}
       >
         <div
           ref={ref}

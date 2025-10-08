@@ -33,7 +33,9 @@ const Cart = ({ cartOpen, setCartOpen }) => {
           <div className="h-full overflow-y-auto mb-4">
             <div className="flex flex-col gap-4 p-4">
               {cart?.map((x) => {
-                return <CartItem key={x._id} {...x} />;
+                return (
+                  <CartItem key={x._id} {...x.product} quantity={x.quantity} />
+                );
               })}
             </div>
           </div>
