@@ -6,7 +6,8 @@ exports.getOrdersList = asyncHandler(async (req, res) => {
   const page = Number(req.query.page);
   const orderList = await Order.find()
     .limit(paginate)
-    .skip(paginate * (page - 1));
+    .skip(paginate * (page - 1))
+    .sort({ createdAt: -1 });
   const count = await Order.countDocuments();
   res.json({
     success: true,
@@ -72,6 +73,6 @@ exports.updateOrder = asyncHandler(async (req, res) => {
   res.json({
     success: true,
     order: updatedOrder,
-    message: 'Order Updated'
+    message: "Order Updated",
   });
 });

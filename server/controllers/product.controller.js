@@ -40,7 +40,8 @@ exports.getProductListAdmin = asyncHandler(async (req, res) => {
   const paginate = 6;
   const productList = await Product.find()
     .skip(paginate * (page - 1))
-    .limit(paginate);
+    .limit(paginate)
+    .sort({ createdAt: -1 });
   const count = await Product.countDocuments();
   res.json({
     success: true,

@@ -49,7 +49,7 @@ const ProductCard = ({
   const handleAddToCart = (e) => {
     e.stopPropagation();
     if (wishlist)
-      dispatch(removeFromWishlist({ _id, message: "Moved to cart" }));
+      dispatch(removeFromWishlist({ _id }));
     dispatch(
       addToCart({
         userId: userId,

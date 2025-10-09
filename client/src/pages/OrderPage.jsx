@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOrderById, retryPayment, updateOrder } from "../slices/order.slice";
-import { ChevronDown, LoaderCircle } from "lucide-react";
+import { ChevronDown, LoaderCircle, TriangleAlert } from "lucide-react";
 import Skeleton from "../components/Skeleton";
 import { addDecimals } from "../utils/cartUtils";
 
@@ -89,7 +89,19 @@ const OrderPage = () => {
   }, []);
 
   return (
-    <section className="min-h-screen flex justify-center items-center">
+    <section className="min-h-screen flex justify-center items-center flex-col">
+      {paymentStatus !== "paid" &&
+        userId?.toString() === orderUser?.toString() && (
+          <div className="container flex gap-4 mb-8 p-4 border rounded-lg">
+            <TriangleAlert className="w-10 h-10 text-yellow-500" />
+            <div className="flex flex-col">
+              <h1 className="heading-2">
+                Your payment was declined while placing your order!
+              </h1>
+              <p className="body-text">You can try to place the order again.</p>
+            </div>
+          </div>
+        )}
       <div className="container grid grid-cols-[1fr] lg:grid-cols-[8fr_4fr] gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">

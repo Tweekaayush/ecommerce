@@ -151,7 +151,7 @@ const MyOrders = () => {
 const UpdateAddress = () => {
   const dispatch = useDispatch();
   const updateForm = (data) => {
-    dispatch(updateProfile({ fullAddress: { ...data } }));
+    dispatch(updateProfile(data));
   };
   return (
     <div className="flex flex-col">

@@ -3,10 +3,29 @@ const Product = require("../models/product.model");
 const User = require("../models/user.model");
 
 exports.getCartItems = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id).populate({
+  let user = await User.findById(req.user._id);
+  user.cartItems = await Array.fromAsync(
+    user.cartItems.map(async (item) => {
+      const product = await Product.findById(item.product);
+      if (product.countInStock < item.quantity) {
+        if (product.countInStock > 0) {
+          message = "Some items in your cart have changed quantity";
+          return { ...item, quantity: product.countInStock };
+        }
+      } else {
+        return item;
+      }
+    })
+  );
+
+  user = await user.save();
+
+  user = await User.populate(user, {
     path: "cartItems.product",
     select: "name brand image brand price",
   });
+
+  console.log(user.cartItems);
 
   res.json({
     success: true,
@@ -86,12 +105,12 @@ exports.updateQuantity = asyncHandler(async (req, res) => {
 
   const user = await User.findById(userId);
 
-  const product = await Product.findById(productId)
-  
+  const product = await Product.findById(productId);
+
   if (quantity) {
-    if(quantity > product.countInStock){
-      res.status(400)
-      throw new Error('You cannot add more of this item in your cart')
+    if (quantity > product.countInStock) {
+      res.status(400);
+      throw new Error("You cannot add more of this item in your cart");
     }
     user.cartItems = user.cartItems.map((x) =>
       x.product._id.toString() === productId.toString()
