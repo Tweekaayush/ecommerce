@@ -16,7 +16,8 @@ const orderRoute = require("./routes/order.route");
 const wishlistRoute = require("./routes/wishlist.route");
 const reviewRoute = require("./routes/review.route");
 const fileUpload = require("express-fileupload");
-const cloudinary = require('cloudinary')
+const cloudinary = require("cloudinary");
+const path = require("path");
 
 const app = express();
 
@@ -27,7 +28,6 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-
 
 app.use(express.json());
 app.use(fileUpload());
@@ -50,6 +50,19 @@ app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/analytics", analyticsRoute);
 app.use("/api/v1/wishlist", wishlistRoute);
 app.use("/api/v1/review", reviewRoute);
+
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/client/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname1, "client", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.json("Server Running");
+  });
+}
 
 // Error Middleware
 

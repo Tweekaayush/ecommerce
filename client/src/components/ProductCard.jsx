@@ -87,7 +87,7 @@ const ProductCard = ({
       </div>
       <div className="flex flex-col p-2 overflow-hidden relative">
         <h1 className="text-sm xs:text-base font-bold ellipses">{brand}</h1>
-        <h1 className="text-xs xs:text-sm mb-1 ellipses">{name}</h1>
+        <h1 className="text-xs xs:text-sm mb-1 ellipses text-gray-700">{name}</h1>
         <Rating rating={rating} size={16} className="mb-3" />
         <div className="flex items-start">
           <span className="text-xs mt-0.5 xs:mt-1">$</span>
