@@ -53,9 +53,10 @@ const OrderListPage = () => {
                         {" "}
                         {order?.orderStatus}
                       </p>
-                      <p className="list-body ellipses">
-                        ${order?.totalAmount}
-                      </p>
+                      <div className="flex justify-center list-body">
+                        <span className="text-xs">$</span>
+                        <p>{order?.totalAmount}</p>
+                      </div>
                       <p className="list-body ellipses">
                         {order?.createdAt.split("T")[0]}
                       </p>

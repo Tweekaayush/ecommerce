@@ -53,7 +53,10 @@ const ProductListPage = () => {
                       <p className="list-body ellipses"> {product?.name}</p>
                       <p className="list-body ellipses">{product?.brand}</p>
                       <p className="list-body ellipses">{product?.category}</p>
-                      <p className="list-body ellipses">${product?.price}</p>
+                      <div className="flex justify-center list-body">
+                        <span className="text-xs">$</span>
+                        <p>{product?.price}</p>
+                      </div>
                       <SquareArrowOutUpRight
                         className="w-4 h-4 mx-auto"
                         onClick={() =>

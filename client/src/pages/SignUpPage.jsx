@@ -41,10 +41,40 @@ const SignUpPage = () => {
       };
     });
   };
+  const validate = () => {
+    const err = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    };
+
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!formData.name.length) {
+      err.firstName = "Please provide your Name!";
+    }
+    if (!formData.password.length) {
+      err.password = "Please enter your password!";
+    } else if (formData.password.length < 6) {
+      err.password = "Your password should be atleast 6 characters long!";
+    }
+    if (formData.password !== formData.confirmPassword) {
+      err.confirmPassword = "Password does not match!";
+    }
+    if (!pattern.test(formData.email)) {
+      err.email = "Please enter a valid Email ID!";
+    }
+
+    setFormErrors({ ...err });
+
+    return !err.password && !err.email && !err.name && !err.confirmPassword;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signup({ ...formData, cart }));
+    if (validate()) dispatch(signup({ ...formData, cart }));
   };
 
   useEffect(() => {
@@ -69,7 +99,9 @@ const SignUpPage = () => {
                 className="form-input"
               />
               <span>Name</span>
-              {formErrors.name && <p className="form-error-msg"> error </p>}
+              {formErrors.name && (
+                <p className="form-error-msg"> {formErrors.name} </p>
+              )}
             </label>
             <label htmlFor="" className="form-label">
               <input
@@ -81,7 +113,9 @@ const SignUpPage = () => {
                 className="form-input"
               />
               <span>email</span>
-              {formErrors.email && <p className="form-error-msg"> error </p>}
+              {formErrors.email && (
+                <p className="form-error-msg"> {formErrors.email} </p>
+              )}
             </label>
             <label htmlFor="" className="form-label">
               <input
@@ -93,7 +127,9 @@ const SignUpPage = () => {
                 className="form-input"
               />
               <span>password</span>
-              {formErrors.password && <p className="form-error-msg"> error </p>}
+              {formErrors.password && (
+                <p className="form-error-msg"> {formErrors.password} </p>
+              )}
             </label>
             <label htmlFor="" className="form-label">
               <input
@@ -106,7 +142,7 @@ const SignUpPage = () => {
               />
               <span>confirm password</span>
               {formErrors.confirmPassword && (
-                <p className="form-error-msg"> error </p>
+                <p className="form-error-msg"> {formErrors.confirmPassword} </p>
               )}
             </label>
             <button type="submit" className="button-2" disabled={loading}>

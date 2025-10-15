@@ -127,9 +127,12 @@ const MyOrders = () => {
                   <p className="list-body capitalize ellipses">
                     {order?.orderStatus}
                   </p>
-                  <p className="list-body ellipses">${order?.totalAmount}</p>
+                  <div className="flex justify-center">
+                    <span className="text-xs mt-0.5">$</span>
+                    <p classname="text-sm ellipses">{order?.totalAmount}</p>
+                  </div>
                   <p className="list-body ellipses">
-                    ${order?.createdAt.split("T")[0]}
+                    {order?.createdAt.split("T")[0]}
                   </p>
                 </div>
               );

@@ -38,9 +38,29 @@ const LoginPage = () => {
     });
   };
 
+  const validate = () => {
+    const err = {
+      password: "",
+      email: "",
+    };
+
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!formData.password.length) {
+      err.password = "Please enter your password!";
+    }
+    if (!pattern.test(formData.email)) {
+      err.email = "Please enter a valid Email ID!";
+    }
+
+    setFormErrors({ ...err });
+
+    return !err.password && !err.email;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ ...formData, cart }));
+    if (validate()) dispatch(login({ ...formData, cart }));
   };
 
   useEffect(() => {
@@ -65,7 +85,7 @@ const LoginPage = () => {
                 className="form-input"
               />
               <span>email</span>
-              {formErrors.email && <p className="form-error-msg">error</p>}
+              {formErrors.email && <p className="form-error-msg">{formErrors.email}</p>}
             </label>
             <label htmlFor="password" className="form-label">
               <input
@@ -77,7 +97,7 @@ const LoginPage = () => {
                 className="form-input"
               />
               <span>password</span>
-              {formErrors.password && <p className="form-error-msg">error</p>}
+              {formErrors.password && <p className="form-error-msg">{formErrors.password}</p>}
             </label>
             <button className="button-2" disabled={loading}>
               {loading ? (

@@ -19,6 +19,7 @@ const AddressForm = ({ submitFunction }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "postalCode" && !isFinite(Number(value))) return;
     setFormData({ ...formData, [name]: value });
   };
 
@@ -56,6 +57,7 @@ const AddressForm = ({ submitFunction }) => {
           type="text"
           name="postalCode"
           id="postalCode"
+          maxLength={6}
           onChange={handleChange}
           value={formData.postalCode}
         />

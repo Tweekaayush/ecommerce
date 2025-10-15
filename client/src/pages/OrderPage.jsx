@@ -23,14 +23,18 @@ const OrderItem = (props) => {
         />
       </div>
       <div className="p-2">
-        <h1 className="text-sm heading-2">{name}</h1>
-        <p className="text-sm text-gray-600">Brand: {brand}</p>
+        <h1 className="text-base font-bold">{brand}</h1>
+        <h1 className="text-sm text-gray-700">{name}</h1>
       </div>
-      <p className="text-sm font-semibold py-2 text-center">${price}</p>
-      <div className="h-7 text-sm text-center p-2">{quantity}</div>
-      <p className="text-sm font-semibold text-center py-2 pr-2">
-        ${price * quantity}
-      </p>
+      <div className="flex py-2">
+        <span className="text-xs ">$</span>
+        <p className="text-sm ml-0.5 font-medium">{price}</p>
+      </div>
+      <div className="h-7 text-sm p-2">{quantity}</div>
+      <div className="flex py-2 pr-2">
+        <span className="text-xs ">$</span>
+        <p className="text-sm ml-0.5 font-medium">{price * quantity}</p>
+      </div>
     </div>
   );
 };
@@ -122,7 +126,7 @@ const OrderPage = () => {
 
           <div className="flex flex-col">
             <h1 className="heading-1 text-red-500 text-sm mb-8">Order Items</h1>
-            <div className="grid grid-cols-[5fr_2fr_3fr_2fr] gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
+            <div className="grid grid-cols-[5fr_2fr_3fr_2fr] gap-4 mb-8 pb-2 border-b-1 border-gray-200">
               <span className="list-head">Product</span>
               <span className="list-head">price</span>
               <span className="list-head">Quantity</span>
@@ -147,12 +151,14 @@ const OrderPage = () => {
             <div className="flex justify-between mb-4">
               <h4 className="heading-2 text-sm">Subtotal</h4>
               {!loading ? (
-                <p className="text-sm capitalize">
-                  $
-                  {addDecimals(
-                    (totalAmount * 100) / (100 - discountPercentage)
-                  )}
-                </p>
+                <div className="flex">
+                  <span className="text-xs ">$</span>
+                  <p className="text-sm ml-0.5 font-medium">
+                    {addDecimals(
+                      (totalAmount * 100) / (100 - discountPercentage)
+                    )}
+                  </p>
+                </div>
               ) : (
                 <Skeleton classname="h-5 w-16" />
               )}
@@ -160,15 +166,17 @@ const OrderPage = () => {
             <div className="flex justify-between mb-4 border-b border-dashed pb-4">
               <h4 className="heading-2 text-sm">Discount</h4>
               {!loading ? (
-                <p className="text-sm capitalize">
-                  $
-                  {Math.abs(
-                    addDecimals(
-                      totalAmount -
-                        (totalAmount * 100) / (100 - discountPercentage)
-                    )
-                  )}
-                </p>
+                <div className="flex">
+                  <span className="text-xs ">$</span>
+                  <p className="text-sm ml-0.5 font-medium">
+                    {Math.abs(
+                      addDecimals(
+                        totalAmount -
+                          (totalAmount * 100) / (100 - discountPercentage)
+                      )
+                    )}
+                  </p>
+                </div>
               ) : (
                 <Skeleton classname="h-5 w-16" />
               )}
@@ -176,7 +184,10 @@ const OrderPage = () => {
             <div className="flex justify-between mb-4">
               <h4 className="heading-2 text-sm">Total</h4>
               {!loading ? (
-                <p className="text-sm capitalize">${totalAmount}</p>
+                <div className="flex">
+                  <span className="text-xs ">$</span>
+                  <p className="text-sm ml-0.5 font-medium">{totalAmount}</p>
+                </div>
               ) : (
                 <Skeleton classname="h-5 w-16" />
               )}
