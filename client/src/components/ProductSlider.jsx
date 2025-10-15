@@ -19,7 +19,7 @@ const ProductSlider = ({ title, products }) => {
     <section>
       <div className="container flex flex-col w-full">
         <div className="flex justify-between items-center">
-          <h1 className="heading-2 text-2xl">{title}</h1>
+          <h1 className="heading-2 text-xl">{title}</h1>
           <div className="flex gap-2">
             <button className="button-3" onClick={slideLeft}>
               {"<"}

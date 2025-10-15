@@ -59,7 +59,7 @@ const ProductPage = () => {
   return (
     <>
       <section>
-        <div className="container flex flex-col">
+        <div className="container flex flex-col mb-30">
           <div className="grid grid-cols-2">
             <div className="flex justify-center items-center bg-gray-100">
               {!productLoading ? (
@@ -80,7 +80,7 @@ const ProductPage = () => {
               )}
               <div className="flex gap-4 mb-8">
                 {!productLoading ? (
-                  <Rating rating={rating} size={20} className="mb-8" />
+                  <Rating rating={rating} size={20} />
                 ) : (
                   <Skeleton classname="w-40 h-6 mb-2" />
                 )}
@@ -141,7 +141,10 @@ const ProductPage = () => {
                 <Skeleton classname="w-50 h-10 mb-2" />
               )}
               {!productLoading ? (
-                <h1 className="mb-4 font-bold text-xl">${price}</h1>
+                <div className="flex mb-4 font-semibold">
+                  <span className="text-xs mt-1">$</span>
+                  <h1 className="text-2xl ml-0.5">{price}</h1>
+                </div>
               ) : (
                 <Skeleton classname="w-24 h-6 mb-2" />
               )}
@@ -189,7 +192,7 @@ const ProductPage = () => {
           </div>
         </div>
         <ProductSlider title={"Recommended"} products={recommendedProducts} />
-        <div className="container">
+        <div className="container mt-30">
           <h1 className="heading-2 text-xl mb-8">Customer Reviews</h1>
           <div className="w-full grid grid-cols-[1fr] md:grid-cols-[4fr_8fr] gap-4">
             <div className="shadow-card flex flex-col p-4 h-fit">
