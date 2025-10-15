@@ -72,16 +72,22 @@ const BrowsePage = () => {
             )}
           </div>
         </div>
-        <div className="py-4 grid grid-cols-[1fr] xs:grid-cols-[1fr_1fr] sm:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4 min-h-[872px]">
-          {!loading
-            ? products?.map((product) => {
-                return (
-                  <ProductCard {...product} key={product?._id} slider={false} />
-                );
-              })
-            : new Array(4).fill(0).map((_, i) => {
-                return <Skeleton key={i} classname="w-full h-96" />;
-              })}
+        <div className="min-h-[872px]">
+          <div className="py-4 grid grid-cols-[1fr_1fr] sm:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4 h-fit">
+            {!loading
+              ? products?.map((product) => {
+                  return (
+                    <ProductCard
+                      {...product}
+                      key={product?._id}
+                      slider={false}
+                    />
+                  );
+                })
+              : new Array(4).fill(0).map((_, i) => {
+                  return <Skeleton key={i} classname="w-full h-96" />;
+                })}
+          </div>
         </div>
         <Pagination totalPages={totalPages} page={page} setPage={setPage} />
       </div>

@@ -178,7 +178,7 @@ const CheckoutPage = () => {
           checkoutSteps={checkoutSteps}
           setStep={setStep}
         />
-        <div className="grid grid-cols-[1fr] md:grid-cols-[8fr_4fr] gap-4 mt-20 h-full">
+        <div className="grid grid-cols-[1fr] lg:grid-cols-[8fr_4fr] gap-4 mt-20 h-full">
           <ActiveComponent />
 
           <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
@@ -187,15 +187,24 @@ const CheckoutPage = () => {
             </h1>
             <div className="flex justify-between mb-4">
               <h4 className="heading-2 text-sm">Subtotal</h4>
-              <p className="text-sm capitalize">${subTotal}</p>
+              <div className="flex">
+                <span className="text-xs ">$</span>
+                <p className="text-sm ml-0.5 font-medium">{subTotal}</p>
+              </div>
             </div>
             <div className="flex justify-between mb-4">
               <h4 className="heading-2 text-sm">Discount</h4>
-              <p className="text-sm capitalize">${discount}</p>
+              <div className="flex">
+                <span className="text-xs ">$</span>
+                <p className="text-sm ml-0.5 font-medium">{discount}</p>
+              </div>
             </div>
             <div className="flex justify-between mb-4 border-t pt-4 border-dashed">
               <h4 className="heading-2 text-sm">Total</h4>
-              <p className="text-sm capitalize">${total}</p>
+              <div className="flex">
+                <span className="text-xs ">$</span>
+                <p className="text-sm ml-0.5 font-medium">{total}</p>
+              </div>
             </div>
 
             <button

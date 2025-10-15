@@ -41,7 +41,10 @@ const Cart = ({ cartOpen, setCartOpen }) => {
           </div>
           <div className="grid grid-cols-2 p-4 border-dotted border-t-2">
             <h1 className="font-bold text-lg">Subtotal:</h1>
-            <p className="text-green-500 font-bold text-right">${subTotal}</p>
+            <div className="text-right flex justify-end text-green-500 ">
+              <span className="text-xs mt-0.5">$</span>
+              <p className="font-bold">{subTotal}</p>
+            </div>
             <button
               className="button-1 col-span-2 mt-4"
               onClick={() => navigate("/checkout")}

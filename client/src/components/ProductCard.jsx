@@ -48,8 +48,7 @@ const ProductCard = ({
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
-    if (wishlist)
-      dispatch(removeFromWishlist({ _id }));
+    if (wishlist) dispatch(removeFromWishlist({ _id }));
     dispatch(
       addToCart({
         userId: userId,
@@ -87,9 +86,13 @@ const ProductCard = ({
         />
       </div>
       <div className="flex flex-col p-2 overflow-hidden relative">
-        <h1 className="text-sm mb-2 font-bold ellipses">{name}</h1>
-        <Rating rating={rating} size={16} className="mb-1" />
-        <p className="text-md mt-4 font-bold">${price}</p>
+        <h1 className="text-sm xs:text-base font-bold ellipses">{brand}</h1>
+        <h1 className="text-xs xs:text-sm mb-1 ellipses">{name}</h1>
+        <Rating rating={rating} size={16} className="mb-3" />
+        <div className="flex items-start">
+          <span className="text-xs mt-0.5 xs:mt-1">$</span>
+          <p className="text-md xs:text-lg font-semibold ml-0.5">{price}</p>
+        </div>
         <div className="absolute bottom-0 right-0 flex gap-2 p-2 translate-y-[100%] group-hover:translate-y-[0%] transition-all duration-300 ease-in-out">
           {wishlist ? (
             <Trash

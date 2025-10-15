@@ -41,10 +41,13 @@ const CheckoutCartItem = (props) => {
         />
       </div>
       <div className="p-2">
-        <h1 className="text-sm heading-2">{name}</h1>
-        <p className="text-sm text-gray-600">Brand: {brand}</p>
+        <h1 className="text-base font-bold">{brand}</h1>
+        <h1 className="text-sm text-gray-700">{name}</h1>
       </div>
-      <p className="body-text font-semibold py-2">${price}</p>
+      <div className="flex py-2">
+        <span className="text-xs mt-0.5">$</span>
+        <p className="text-base ml-0.5 font-medium">{price}</p>
+      </div>
       <div className="p-2">
         <div className="flex w-fit bg-gray-100 ">
           {update && (
@@ -55,7 +58,7 @@ const CheckoutCartItem = (props) => {
               -
             </button>
           )}
-          <span className="w-5 h-5 sm:w-7 sm:h-7 text-xs md:text-sm text-center sm:p-1">
+          <span className="w-5 h-5 sm:w-7 sm:h-7 text-xs md:text-sm text-center p-0.5 sm:p-1">
             {qty}
           </span>
           {update && (
@@ -70,9 +73,12 @@ const CheckoutCartItem = (props) => {
         </div>
       </div>
       <div className="py-2 pr-2 flex flex-col justify-between">
-        <p className="body-text font-semibold">
-          ${(price * quantity).toFixed(2)}
-        </p>
+        <div className="flex">
+          <span className="text-xs mt-0.5">$</span>
+          <p className="text-base ml-0.5 font-medium">
+            {(price * quantity).toFixed(2)}
+          </p>
+        </div>
         {update ? (
           <Trash
             title="Remove"

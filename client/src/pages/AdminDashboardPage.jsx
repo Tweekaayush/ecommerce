@@ -1,8 +1,10 @@
 import {
   DollarSign,
   SquareArrowOutUpRight,
+  ShoppingCart,
   ToolCase,
   User,
+  PackageSearch,
 } from "lucide-react";
 import React from "react";
 import { useEffect } from "react";
@@ -50,56 +52,59 @@ const AdminDashboardPage = () => {
         {!loading ? (
           <div className="grid grid-cols-4 gap-4">
             <div className="dashboard-card">
-              <div className="col-span-2">
+              <div className="flex-1">
                 <h1 className="text-green-500 heading-1 mb-2 text-sm">
                   Total Revenue
                 </h1>
-                <p>${totalRevenue.toFixed(2)}</p>
+                <div className="flex">
+                  <span className="text-xs mt-0.5">$</span>
+                  <p className="ml-0.5 font-semibold">{totalRevenue.toFixed(2)}</p>
+                </div>
               </div>
-              <div className="col-span-1 flex items-center justify-center">
-                <DollarSign className="text-white bg-green-500 w-8 h-8 rounded-full p-1.5" />
+              <div className="">
+                <DollarSign className="text-green-500 w-5 h-5" />
               </div>
             </div>
             <div
               className="dashboard-card"
               onClick={() => navigate("/dashboard/order/list")}
             >
-              <div className="col-span-2">
+              <div className="flex-1">
                 <h1 className="text-red-500 heading-1 text-sm mb-2 font-bold">
                   Total Sales
                 </h1>
                 <p>{totalSales}</p>
               </div>
-              <div className="col-span-1 flex items-center justify-center">
-                <DollarSign className="text-white bg-red-500 w-8 h-8 rounded-full p-1.5" />
+              <div className="">
+                <ShoppingCart className="text-red-500 w-5 h-5" />
               </div>
             </div>
             <div
               className="dashboard-card"
               onClick={() => navigate("/dashboard/user/list")}
             >
-              <div className="col-span-2">
+              <div className="flex-1">
                 <h1 className="text-blue-500 heading-1 text-sm mb-2 font-bold">
                   Users
                 </h1>
                 <p>{totalUsers}</p>
               </div>
-              <div className="col-span-1 flex items-center justify-center">
-                <User className="text-white bg-blue-500 w-8 h-8 rounded-full p-1.5" />
+              <div className="">
+                <User className="text-blue-500 w-5 h-5" />
               </div>
             </div>
             <div
               className="dashboard-card"
               onClick={() => navigate("/dashboard/product/list")}
             >
-              <div className="col-span-2">
+              <div className="flex-1">
                 <h1 className="text-yellow-500 heading-1 text-sm mb-2 font-bold">
                   Product
                 </h1>
                 <p>{totalProducts}</p>
               </div>
-              <div className="col-span-1 flex items-center justify-center">
-                <DollarSign className="text-white bg-yellow-500 w-8 h-8 rounded-full p-1.5" />
+              <div className="">
+                <PackageSearch className="text-yellow-500 w-5 h-5" />
               </div>
             </div>
             <div className="col-span-4 md:col-span-3 shadow-card p-4 rounded-sm hover:shadow-hover cursor-pointer">

@@ -6,7 +6,7 @@ import { removeFromCart, updateQuantity } from "../slices/cart.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 const CartItem = (props) => {
-  const { _id, name, price, image, countInStock, quantity } = props;
+  const { _id, name, price, image, countInStock, quantity, brand } = props;
   const [qty, setQty] = useState(quantity);
   const dispatch = useDispatch();
   const {
@@ -27,9 +27,10 @@ const CartItem = (props) => {
           className="w-full aspect-square object-cover object-[center_center] mix-blend-multiply"
         />
       </div>
-      <div className="col-span-7 p-2 flex flex-col justify-between">
+      <div className="col-span-7 p-2 flex flex-col">
+        <h1 className="text-md font-bold">{brand}</h1>
         <h1 className="text-sm">{name}</h1>
-        <div className="flex w-fit bg-gray-100">
+        <div className="flex w-fit bg-gray-100 mt-2 mb-1">
           <button
             className="py-1 px-2 text-sm cursor-pointer"
             onClick={() =>
@@ -60,7 +61,10 @@ const CartItem = (props) => {
             +
           </button>
         </div>
-        <p>${price}</p>
+        <div className="flex">
+          <span className="text-xs mt-0.5">$</span>
+          <p className="font-semibold ml-0.5">{price}</p>
+        </div>
       </div>
       <div className="col-span-1 py-2">
         <X
