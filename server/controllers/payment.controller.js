@@ -18,9 +18,8 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findByIdAndUpdate(req.user._id, {
-    cartItems: []
-  })
-
+    cartItems: [],
+  });
 
   let coupon = null;
   let totalAmount = 0;

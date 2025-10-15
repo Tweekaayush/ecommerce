@@ -54,7 +54,6 @@ export const signup = createAsyncThunk(
   "signup",
   async (payload, { rejectWithValue, dispatch }) => {
     try {
-      console.log(payload);
       const res = await axios.post(`${BASE_URL}/auth/signup`, payload, {
         // headers: { "Content-Type": "multipart/form-data" },
         withCredentials: true,

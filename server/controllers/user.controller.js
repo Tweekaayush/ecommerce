@@ -13,10 +13,6 @@ exports.updateProfile = asyncHandler(async (req, res) => {
   const { name, email, password, fullAddress } = req.body;
   const user = await User.findById(req.user._id);
 
-  console.log(fullAddress
-
-  )
-
   if (!user) {
     res.status(404);
     throw new Error("User not found");
@@ -30,7 +26,6 @@ exports.updateProfile = asyncHandler(async (req, res) => {
   }
 
   if (fullAddress?.address) {
-  
     user.fullAddress.address = fullAddress.address;
     user.fullAddress.city = fullAddress.city;
     user.fullAddress.postalCode = fullAddress.postalCode;

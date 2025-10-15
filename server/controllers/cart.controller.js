@@ -25,8 +25,6 @@ exports.getCartItems = asyncHandler(async (req, res) => {
     select: "name brand image brand price",
   });
 
-  console.log(user.cartItems);
-
   res.json({
     success: true,
     cartItems: user.cartItems,
@@ -69,8 +67,6 @@ exports.addToCart = asyncHandler(async (req, res) => {
     path: "cartItems.product",
     select: "name brand image brand price",
   });
-
-  console.log();
 
   res.json({
     success: true,
