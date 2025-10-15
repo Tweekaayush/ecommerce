@@ -15,7 +15,6 @@ import { Trash } from "lucide-react";
 import Pagination from "../components/Pagination";
 import Skeleton from "../components/Skeleton";
 import { LoaderCircle } from "lucide-react";
-import image from "/assets/category/img1.jpg";
 
 const UpdateProfile = () => {
   const {
@@ -265,7 +264,7 @@ const ProfilePage = () => {
             <div className="h-14 w-14 rounded-full overflow-hidden">
               <img
                 className="w-full h-full object-fit object-[50%_50%]"
-                src={image}
+                src='https://res.cloudinary.com/dukfglghw/image/upload/v1760549214/user_pzbqyz.png'
                 alt={name}
               />
             </div>

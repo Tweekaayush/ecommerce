@@ -7,6 +7,7 @@ import {
   User,
   LogOut,
   LayoutDashboard,
+  UserRound,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/user.slice";
@@ -124,9 +125,9 @@ const Navbar = ({ cartOpen, setCartOpen }) => {
                 onMouseOver={() => setOpen(true)}
                 onMouseOut={() => setOpen(false)}
               >
-                <div className="w-5 h-5 rounded-full bg-red-500 overflow-hidden cursor-pointer">
+                <div className="w-5 h-5 rounded-full bg-white overflow-hidden cursor-pointer">
                   <img
-                    src={image}
+                    src='https://res.cloudinary.com/dukfglghw/image/upload/v1760549214/user_pzbqyz.png'
                     alt={name}
                     className="w-full h-full object-cover object-center"
                   />
