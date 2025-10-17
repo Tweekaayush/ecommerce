@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const HomeCategories = () => {
   const navigate = useNavigate();
   return (
-    <section className="h-fit">
+    <section className="h-fit pt-0">
       <div className="container h-[60vh] grid grid-cols-4 grid-rows-2 gap-2">
         <div
           className="col-span-2 row-span-1 md:col-span-2 md:row-span-2 relative overflow-hidden cursor-pointer"
