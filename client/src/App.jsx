@@ -6,6 +6,8 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import AdminRoute from "./components/AdminRoute";
 import Layout from "./components/Layout/Layout";
 import Loader from "./components/Loader";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const BrowsePage = lazy(() => import("./pages/BrowsePage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -34,7 +36,7 @@ const App = () => {
 
   return (
     <Router>
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
@@ -42,6 +44,8 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/browse" element={<BrowsePage />} />
             <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/password/forget" element={<ForgotPasswordPage />} />
+            <Route path="/password/reset" element={<ResetPasswordPage />} />
             <Route element={<PrivateRoutes />}>
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/checkout" element={<CheckoutPage />} />

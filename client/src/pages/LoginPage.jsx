@@ -99,6 +99,7 @@ const LoginPage = () => {
               <span>password</span>
               {formErrors.password && <p className="form-error-msg">{formErrors.password}</p>}
             </label>
+            <Link to='/password/forget' className="body-text text-blue-500 underline text-right">Forget Password</Link>
             <button className="button-2" disabled={loading}>
               {loading ? (
                 <LoaderCircle className="mx-auto animate-spin" />

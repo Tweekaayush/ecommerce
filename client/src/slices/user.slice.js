@@ -84,6 +84,36 @@ export const logout = createAsyncThunk(
     }
   }
 );
+export const forgetPassword = createAsyncThunk(
+  "forgetPassword",
+  async (payload, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/auth/password/forget`, payload, {
+        withCredentials: true,
+      });
+
+      return res.data.message;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+export const resetPassword = createAsyncThunk(
+  "resetPassword",
+  async (payload, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/auth/password/reset`, payload, {
+        withCredentials: true,
+      });
+
+      return res.data.message;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+
 
 export const updateProfile = createAsyncThunk(
   "updateProfile",
@@ -228,6 +258,28 @@ const userSlice = createSlice({
       state.successMessage = "Logged Out Successfully";
     });
     builder.addCase(logout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(forgetPassword.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(forgetPassword.fulfilled, (state, action) => {
+      state.loading = false;
+      state.successMessage = action.payload;
+    });
+    builder.addCase(forgetPassword.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(resetPassword.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(resetPassword.fulfilled, (state, action) => {
+      state.loading = false;
+      state.successMessage = action.payload;
+    });
+    builder.addCase(resetPassword.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

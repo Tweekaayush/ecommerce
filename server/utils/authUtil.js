@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const Product = require("../models/product.model");
 const User = require("../models/user.model");
+const asyncHandler = require("../middleware/asyncHandler");
+const nodeMailer = require('nodemailer')
 
 exports.generateToken = (user, statusCode, res) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
@@ -57,3 +59,41 @@ exports.addToCart = async (user, cart) => {
     await user.save();
   });
 };
+
+exports.sendPasswordResetLink = (user) => {
+  const token = jwt.sign(
+    { id: user._id },
+    process.env.JWT_SECRET + user.password,
+    {
+      expiresIn: "10m",
+    }
+  );
+
+  return `${process.env.CLIENT_URL}/password/reset?token=${token}&user=${user._id}`;
+};
+
+exports.verifyReceivedToken = (user, token) => {
+  const verify = jwt.verify(token, process.env.JWT_SECRET + user.password);
+  return verify;
+};
+
+exports.sendEmail = asyncHandler(async(options)=>{
+    const transporter = nodeMailer.createTransport({
+        host:process.env.SMTP_HOST,
+        port:465,
+        service:process.env.SMTP_SERVICE,
+        auth:{
+            user:process.env.SMTP_MAIL,
+            pass:process.env.SMTP_PASSWORD
+        }
+    });
+
+    const mailOptions = {
+        from:process.env.SMTP_MAIL,
+        to:options.email,
+        subject:options.subject,
+        text:options.message,
+    }
+
+    await transporter.sendMail(mailOptions);
+})

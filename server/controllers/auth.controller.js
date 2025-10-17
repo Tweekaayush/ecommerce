@@ -1,6 +1,12 @@
 const asyncHandler = require("../middleware/asyncHandler");
 const User = require("../models/user.model");
-const { generateToken, addToCart } = require("../utils/authUtil");
+const {
+  generateToken,
+  addToCart,
+  sendPasswordResetLink,
+  verifyReceivedToken,
+  sendEmail,
+} = require("../utils/authUtil");
 
 exports.signup = asyncHandler(async (req, res) => {
   const { name, email, password, cart } = req.body;
@@ -60,4 +66,53 @@ exports.logout = asyncHandler(async (req, res) => {
     .json({
       success: true,
     });
+});
+
+exports.forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User does not exist");
+  }
+
+  const resetPasswordUrl = sendPasswordResetLink(user);
+
+  const message = `Your password reset link is \n\n ${resetPasswordUrl} \n\n, If you have not requested this Email then, please ignore it`;
+  await sendEmail({
+    email: user.email,
+    subject: "Primart Password Recovery",
+    message,
+  });
+  res.status(200).json({
+    success: true,
+    message: `Email sent to ${user.email} successfully`,
+  });
+});
+exports.resetPassword = asyncHandler(async (req, res) => {
+  const { password, user: id, token } = req.body;
+
+  const user = await User.findById(id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User does not exist");
+  }
+
+  const verify = verifyReceivedToken(user, token);
+
+  if (verify) {
+    user.password = password;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Password reset successfully.",
+    });
+  } else {
+    res.status(404);
+    throw new Error("Invalid request");
+  }
 });
