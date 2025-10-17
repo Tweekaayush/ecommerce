@@ -53,8 +53,10 @@ export const getFeaturedProducts = createAsyncThunk(
   "getFeaturedProducts",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/product/featured`);
-      ``;
+      const res = await axios.get(`${BASE_URL}/product/featured`, {
+        withCredentials: true,
+      });
+
       return res.data.featuredProducts;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -65,7 +67,12 @@ export const getRecommendedProducts = createAsyncThunk(
   "getRecommendedProducts",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/product/recommended`);
+      const res = await axios.get(
+        `${BASE_URL}/product/recommended?category=${payload}`,
+        {
+          withCredentials: true,
+        }
+      );
       return res.data.recommendedProducts;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -77,7 +84,9 @@ export const getBestSellingProducts = createAsyncThunk(
   "getBestSellingProducts",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${BASE_URL}/product/bestSeller`);
+      const res = await axios.get(`${BASE_URL}/product/bestSeller`, {
+        withCredentials: true,
+      });
       return res.data.products;
     } catch (error) {
       return rejectWithValue(error.response.data.message);

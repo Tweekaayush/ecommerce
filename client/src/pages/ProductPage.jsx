@@ -29,6 +29,7 @@ const ProductPage = () => {
         rating,
         numReviews,
         brand,
+        category,
       },
       recommendedProducts,
     },
@@ -53,7 +54,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(getProductById(id));
-    dispatch(getRecommendedProducts());
+    if (_id) dispatch(getRecommendedProducts(category));
     document.title = name;
   }, [id, name]);
 

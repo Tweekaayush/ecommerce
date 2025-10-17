@@ -75,21 +75,10 @@ exports.getBestSellingProducts = asyncHandler(async (req, res) => {
 });
 
 exports.getRecommendedProducts = asyncHandler(async (req, res) => {
-  const products = await Product.aggregate([
-    {
-      $sample: { size: 4 },
-    },
-    {
-      $project: {
-        _id: 1,
-        name: 1,
-        description: 1,
-        image: 1,
-        price: 1,
-        rating: 1,
-      },
-    },
-  ]);
+  const { category } = req.query;
+
+  const products = await Product.find({ category }).limit(6);
+
   res.json({
     success: true,
     recommendedProducts: products,
