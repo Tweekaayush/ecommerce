@@ -12,6 +12,9 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
         paymentStatus: {
           $ne: "unpaid",
         },
+        orderStatus: {
+          $ne: "cancel",
+        },
       },
     },
     {
@@ -27,7 +30,6 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
       $group: {
         _id: null,
         totalSales: { $sum: 1 },
-        totalRevenue: { $sum: "$totalAmount" },
       },
     },
   ]);
@@ -40,6 +42,9 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
   let salesDataChart = await Order.aggregate([
     {
       $match: {
+        paymentStatus: {
+          $ne: "unpaid",
+        },
         orderStatus: {
           $ne: "cancel",
         },
