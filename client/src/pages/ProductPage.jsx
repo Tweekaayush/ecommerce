@@ -62,7 +62,7 @@ const ProductPage = () => {
     <>
       <section>
         <div className="container flex flex-col mb-30">
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex justify-center items-center bg-gray-100">
               {!productLoading ? (
                 <img
@@ -74,7 +74,7 @@ const ProductPage = () => {
                 <Skeleton classname="w-full h-full" />
               )}
             </div>
-            <div className="flex flex-col p-8">
+            <div className="flex flex-col pt-8 md:p-8">
               {!productLoading ? (
                 <h1 className="text-xl font-bold mb-2.5">{name}</h1>
               ) : (
