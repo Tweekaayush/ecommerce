@@ -6,14 +6,23 @@ const Order = require("../models/order.model");
 exports.getAnalytics = asyncHandler(async (req, res) => {
   const totalUsers = await User.countDocuments();
   const totalProducts = await Product.countDocuments();
-  const salesData = await Order.aggregate([
+  const revenueData = await Order.aggregate([
     {
       $match: {
-        orderStatus: {
-          $ne: "cancel",
+        paymentStatus: {
+          $ne: "unpaid",
         },
       },
     },
+    {
+      $group: {
+        _id: null,
+        totalSales: { $sum: 1 },
+        totalRevenue: { $sum: "$totalAmount" },
+      },
+    },
+  ]);
+  const salesData = await Order.aggregate([
     {
       $group: {
         _id: null,
@@ -79,7 +88,7 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
       totalUsers,
       totalProducts,
       totalSales: salesData[0]?.totalSales || 0,
-      totalRevenue: salesData[0]?.totalRevenue || 0,
+      totalRevenue: revenueData[0]?.totalRevenue || 0,
       revenueChart: chartData,
       orderStatus,
     },

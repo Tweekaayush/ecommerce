@@ -22,22 +22,22 @@ const Footer = () => {
             </p>
             <ul className="flex mb-4 gap-2">
               <li>
-                <a href="">
+                <a target="_blank" href="https://www.facebook.com">
                   <Facebook />
                 </a>
               </li>
               <li>
-                <a href="">
+                <a target="_blank" href="https://in.linkedin.com">
                   <Linkedin />
                 </a>
               </li>
               <li>
-                <a href="">
+                <a target="_blank" href="https://www.instagram.com">
                   <Instagram />
                 </a>
               </li>
               <li>
-                <a href="">
+                <a target="_blank" href="https://github.com">
                   <Github />
                 </a>
               </li>
@@ -104,9 +104,8 @@ const Footer = () => {
             Copyright @ 2025. All Rights Reserved. -
             <a
               href="https://aayushdobriyal.vercel.app"
-              className="text-red-500"
+              className="text-red-500 ml-1"
             >
-              {" "}
               Aayush Dobriyal
             </a>
           </p>

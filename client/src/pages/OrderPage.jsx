@@ -92,6 +92,7 @@ const OrderPage = () => {
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
 
+
   return (
     <section className="min-h-screen flex justify-center items-center flex-col">
       {paymentStatus !== "paid" &&
@@ -257,7 +258,7 @@ const OrderPage = () => {
             )}
           </div>
 
-          {user?.toString() === userId?.toString() &&
+          {orderUser?.toString() === userId?.toString() &&
             !cancelledAt &&
             !deliveredAt &&
             paymentStatus === "unpaid" && (

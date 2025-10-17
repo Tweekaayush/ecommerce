@@ -224,7 +224,7 @@ const CheckoutPage = () => {
     </section>
   ) : (
     <section>
-      <div className="container h-full flex justify-center items-center">
+      <div className="container h-screen flex justify-center items-center">
         <img src={img} alt="empty-cart" />
       </div>
     </section>

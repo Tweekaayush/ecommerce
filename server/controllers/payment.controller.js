@@ -137,7 +137,7 @@ exports.retryPayment = asyncHandler(async (req, res) => {
         currency: "usd",
         product_data: {
           name: product.product.name,
-          // image: product.image,
+          image: product.image,
         },
         unit_amount: amount,
       },

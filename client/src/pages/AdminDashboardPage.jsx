@@ -71,7 +71,7 @@ const AdminDashboardPage = () => {
             >
               <div className="flex-1">
                 <h1 className="text-red-500 heading-1 text-sm mb-2 font-bold">
-                  Total Sales
+                  Orders
                 </h1>
                 <p>{totalSales}</p>
               </div>
