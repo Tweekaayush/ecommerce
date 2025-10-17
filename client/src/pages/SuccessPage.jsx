@@ -18,6 +18,11 @@ const SuccessPage = () => {
   useEffect(() => {
     if (sessionId) dispatch(validateOrder({ sessionId }));
   }, [sessionId]);
+
+  useEffect(()=>{
+    document.title = 'Order Placed'
+  },[])
+
   return (
     <section className="min-h-screen flex justify-center items-center">
       <div className="container flex flex-col items-center justify-center h-full">

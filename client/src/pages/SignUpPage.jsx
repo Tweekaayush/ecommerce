@@ -82,6 +82,11 @@ const SignUpPage = () => {
       state ? navigate(state.previousURL) : navigate("/profile");
     }
   }, [_id]);
+
+    useEffect(()=>{
+      document.title = 'Primart - Signup'
+    },[])
+
   return (
     <section className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="container flex justify-center items-center h-full">

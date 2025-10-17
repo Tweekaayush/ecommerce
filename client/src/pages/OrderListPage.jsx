@@ -20,6 +20,10 @@ const OrderListPage = () => {
   useEffect(() => {
     dispatch(getOrdersList(page));
   }, [page]);
+
+  useEffect(()=>{
+      document.title = 'Admin - Orders List'
+    }, [])
   return (
     <section className="min-h-screen">
       <div className="container">

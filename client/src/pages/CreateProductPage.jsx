@@ -43,6 +43,10 @@ const CreateProductPage = () => {
     });
   };
 
+  useEffect(()=>{
+    document.title = 'Admin - Create Product'
+  },[])
+
   return (
     <section className="min-h-screen">
       <div className="container">

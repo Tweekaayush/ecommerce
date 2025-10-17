@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Frown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
+  useEffect(()=>{
+    document.title = 'Page Not Found'
+  }, [])
   return (
     <section className="flex justify-center align-center min-h-screen">
       <div className="container flex flex-col justify-center items-center">

@@ -21,6 +21,9 @@ const ProductListPage = () => {
   useEffect(() => {
     dispatch(getProductsList(page));
   }, [page]);
+  useEffect(()=>{
+      document.title = 'Admin - Products List'
+    }, [])
   return (
     <section className="min-h-screen">
       <div className="container">

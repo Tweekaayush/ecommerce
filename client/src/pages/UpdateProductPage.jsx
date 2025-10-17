@@ -53,6 +53,12 @@ const UpdateProductPage = () => {
       });
     }
   }, [productDetails]);
+
+
+  useEffect(()=>{
+    document.title = 'Dashboard - Update Product'
+  }, [])
+
   return (
     <section className="min-h-screen">
       <div className="container">

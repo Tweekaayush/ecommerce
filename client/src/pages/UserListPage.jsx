@@ -19,6 +19,11 @@ const UserListPage = () => {
   useEffect(() => {
     dispatch(getUsersList(page));
   }, [page]);
+
+  useEffect(()=>{
+    document.title = 'Admin - Users List'
+  }, [])
+
   return (
     <section className="min-h-screen">
       <div className="container">

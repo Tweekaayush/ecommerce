@@ -12,6 +12,7 @@ const WishlistPage = () => {
   } = useSelector((state) => state.user);
   useEffect(() => {
     dispatch(getWishlist());
+    document.title = 'Your wishlist'
   }, []);
   return (
     <section className="min-h-screen">

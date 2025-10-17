@@ -21,6 +21,7 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(getFeaturedProducts());
     dispatch(getBestSellingProducts());
+    document.title = "Primart - Buy Electronics, Furniture, Skin Care etc.";
   }, []);
   return (
     <>

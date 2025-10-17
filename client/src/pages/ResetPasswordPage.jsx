@@ -75,7 +75,7 @@ const ResetPasswordPage = () => {
   }, [successMessage]);
 
   useEffect(() => {
-    document.title = "Reset Password";
+    document.title = "Primart - Reset Password";
   }, []);
 
   return (

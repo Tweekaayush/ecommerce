@@ -42,6 +42,7 @@ const AdminDashboardPage = () => {
 
   useEffect(() => {
     dispatch(getAnalytics());
+    document.title = 'Admin Dashboard'
   }, []);
   return (
     <section className="min-h-screen">

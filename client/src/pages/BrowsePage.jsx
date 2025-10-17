@@ -24,7 +24,7 @@ const BrowsePage = () => {
 
   useEffect(() => {
     dispatch(getProducts({ page: page, category: activeCategory }));
-    document.title = `Browse ${activeCategory}`;
+    document.title = `Browse ${activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}`;
     window.scrollTo(0, 0);
   }, [page, activeCategory]);
 

@@ -87,7 +87,7 @@ const OrderPage = () => {
   };
 
   useEffect(() => {
-    document.title = "Order Details";
+    document.title = `Order Id - ${id}`;
     window.addEventListener("click", handleClickOutside);
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);

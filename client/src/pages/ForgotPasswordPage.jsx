@@ -42,7 +42,7 @@ const ForgotPasswordPage = () => {
   }, [_id]);
 
   useEffect(() => {
-    document.title = "Forget Password";
+    document.title = "Primart - Forget Password";
   }, []);
 
   return (

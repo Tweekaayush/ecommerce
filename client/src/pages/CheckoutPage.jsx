@@ -99,7 +99,7 @@ const CheckoutPage = () => {
   };
 
   useEffect(() => {
-    document.title = checkoutSteps[step - 1].name;
+    document.title = `Checkout - ${checkoutSteps[step - 1].name}`;
   }, [step]);
 
   useEffect(() => {

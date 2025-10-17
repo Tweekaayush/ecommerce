@@ -54,7 +54,8 @@ const ProductPage = () => {
   useEffect(() => {
     dispatch(getProductById(id));
     dispatch(getRecommendedProducts());
-  }, [id]);
+    document.title = name;
+  }, [id, name]);
 
   return (
     <>
