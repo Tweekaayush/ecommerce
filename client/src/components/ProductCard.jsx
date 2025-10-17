@@ -37,11 +37,8 @@ const ProductCard = ({
     } else if (container > 768) {
       setWidth((container - 40) / 3);
       slide.scrollLeft = 0;
-    } else if (container > 480) {
-      setWidth((container - 24) / 2);
-      slide.scrollLeft = 0;
     } else {
-      setWidth(container - 8);
+      setWidth((container - 24) / 2);
       slide.scrollLeft = 0;
     }
   };
