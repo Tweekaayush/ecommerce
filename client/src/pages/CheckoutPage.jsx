@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useDispatch, useSelector } from "react-redux";
-import { saveShippingAddress, setCoupon } from "../slices/cart.slice";
+import {
+  getCartItems,
+  saveShippingAddress,
+  setCoupon,
+} from "../slices/cart.slice";
 import img from "/assets/cart/empty-cart.png";
 import {
   ShoppingCart,
@@ -104,6 +108,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     dispatch(getCoupons());
+    dispatch(getCartItems());
     window.addEventListener("click", handleClickOutside, true);
     return () => window.removeEventListener("click", handleClickOutside, true);
   }, []);
@@ -187,24 +192,36 @@ const CheckoutPage = () => {
             </h1>
             <div className="flex justify-between mb-4">
               <h4 className="heading-2 text-sm">Subtotal</h4>
-              <div className="flex">
-                <span className="text-xs ">$</span>
-                <p className="text-sm ml-0.5 font-medium">{subTotal}</p>
-              </div>
+              {!cartLoading ? (
+                <div className="flex">
+                  <span className="text-xs ">$</span>
+                  <p className="text-sm ml-0.5 font-medium">{subTotal}</p>
+                </div>
+              ) : (
+                <Skeleton classname="w-15 h-5" />
+              )}
             </div>
             <div className="flex justify-between mb-4">
               <h4 className="heading-2 text-sm">Discount</h4>
-              <div className="flex">
-                <span className="text-xs ">$</span>
-                <p className="text-sm ml-0.5 font-medium">{discount}</p>
-              </div>
+              {!cartLoading ? (
+                <div className="flex">
+                  <span className="text-xs ">$</span>
+                  <p className="text-sm ml-0.5 font-medium">{discount}</p>:
+                </div>
+              ) : (
+                <Skeleton classname="w-15 h-5" />
+              )}
             </div>
             <div className="flex justify-between mb-4 border-t pt-4 border-dashed">
               <h4 className="heading-2 text-sm">Total</h4>
-              <div className="flex">
-                <span className="text-xs ">$</span>
-                <p className="text-sm ml-0.5 font-medium">{total}</p>
-              </div>
+              {!cartLoading ? (
+                <div className="flex">
+                  <span className="text-xs ">$</span>
+                  <p className="text-sm ml-0.5 font-medium">{total}</p>
+                </div>
+              ) : (
+                <Skeleton classname="w-15 h-5" />
+              )}
             </div>
 
             <button

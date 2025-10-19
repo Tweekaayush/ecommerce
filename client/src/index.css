@@ -177,7 +177,7 @@
   /* Dashboard */
 
   .dashboard-card {
-    @apply col-span-4 xs:col-span-2 lg:col-span-1 shadow-card p-4 flex hover:shadow-card-hover cursor-pointer transition-all duration-300 ease-in-out rounded-sm;
+    @apply col-span-4 xs:col-span-2 lg:col-span-1 shadow-card p-4 flex hover:shadow-card-hover cursor-pointer transition-all duration-300 ease-in-out rounded-sm bg-white;
   }
 
   .list-head {

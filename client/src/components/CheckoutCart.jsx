@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, updateQuantity } from "../slices/cart.slice";
 import { Trash } from "lucide-react";
+import Skeleton from "./Skeleton";
 
 const CheckoutCartItem = (props) => {
   const { update, ...item } = props;
@@ -95,6 +96,7 @@ const CheckoutCartItem = (props) => {
 
 const CheckoutCart = ({ update = true }) => {
   const {
+    loading,
     data: { cart },
   } = useSelector((state) => state.cart);
 
@@ -108,16 +110,20 @@ const CheckoutCart = ({ update = true }) => {
         <span className="list-head">subtotal</span>
       </div>
       <ul className="flex flex-col w-full gap-4">
-        {cart?.map((item) => {
-          return (
-            <CheckoutCartItem
-              key={item._id}
-              {...item.product}
-              quantity={item.quantity}
-              update={update}
-            />
-          );
-        })}
+        {!loading
+          ? cart?.map((item) => {
+              return (
+                <CheckoutCartItem
+                  key={item._id}
+                  {...item.product}
+                  quantity={item.quantity}
+                  update={update}
+                />
+              );
+            })
+          : new Array(1).fill(0).map((_, i) => {
+              return <Skeleton key={i} classname="w-full h-30" />;
+            })}
       </ul>
     </div>
   );
