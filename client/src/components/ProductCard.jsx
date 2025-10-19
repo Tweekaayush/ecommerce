@@ -15,10 +15,8 @@ const ProductCard = ({
   image,
   rating,
   brand,
-  slider = false,
   wishlist = false,
 }) => {
-  const [width, setWidth] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
@@ -27,21 +25,6 @@ const ProductCard = ({
     },
   } = useSelector((state) => state.user);
 
-  const handleResize = () => {
-    if (!slider) return;
-    const container = document.getElementById("slider").offsetWidth;
-    const slide = document.getElementById("slider");
-    if (container > 992) {
-      setWidth((container - 56) / 4);
-      slide.scrollLeft = 0;
-    } else if (container > 768) {
-      setWidth((container - 40) / 3);
-      slide.scrollLeft = 0;
-    } else {
-      setWidth((container - 24) / 2);
-      slide.scrollLeft = 0;
-    }
-  };
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
@@ -61,17 +44,10 @@ const ProductCard = ({
     );
   };
 
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <div
-      style={slider ? { width: width } : {}}
       className={
-        "flex flex-col shadow-card hover:shadow-card-hover transition-all ease-in-out duration-300 cursor-pointer group h-fit"
+        "flex flex-col shadow-card hover:shadow-card-hover transition-all ease-in-out duration-300 cursor-pointer group h-fit w-full"
       }
       onClick={() => navigate(`/product/${_id}`)}
     >

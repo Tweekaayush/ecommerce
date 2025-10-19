@@ -1,18 +1,49 @@
-import React from "react";
+import React, { useRef } from "react";
 import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
 import Skeleton from "./Skeleton";
+import Slider from "react-slick";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const ProductSlider = ({ title, products }) => {
   const { loading } = useSelector((state) => state.product);
+  let sliderRef = useRef(null);
 
   const slideLeft = () => {
-    let slider = document.getElementById("slider");
-    slider.scrollLeft = slider.scrollLeft - slider.offsetWidth - 16;
+    sliderRef.slickPrev();
   };
   const slideRight = () => {
-    let slider = document.getElementById("slider");
-    slider.scrollLeft = slider.scrollLeft + slider.offsetWidth + 16;
+    sliderRef.slickNext();
+  };
+
+  var settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+    ],
   };
 
   return (
@@ -21,7 +52,7 @@ const ProductSlider = ({ title, products }) => {
         <div className="flex justify-between items-center">
           <h1 className="heading-2 text-xl">{title}</h1>
           <div className="flex gap-2">
-            <button className="button-3" onClick={slideLeft}>
+            <button className="button-3 sm:text-black" onClick={slideLeft}>
               {"<"}
             </button>
             <button className="button-3" onClick={slideRight}>
@@ -29,18 +60,18 @@ const ProductSlider = ({ title, products }) => {
             </button>
           </div>
         </div>
-        <div
-          className="overflow-x-hidden py-5 scroll-smooth w-full"
-          id="slider"
-        >
+        <div className="mt-5">
           {!loading ? (
-            <div className="flex gap-4 w-fit px-1">
+            <Slider
+              ref={(slider) => {
+                sliderRef = slider;
+              }}
+              {...settings}
+            >
               {products?.map((product) => {
-                return (
-                  <ProductCard {...product} key={product?._id} slider={true} />
-                );
+                return <ProductCard {...product} key={product?._id} />;
               })}
-            </div>
+            </Slider>
           ) : (
             <div className="grid grid-cols-4 gap-4">
               {new Array(4).fill(0).map((_, i) => {

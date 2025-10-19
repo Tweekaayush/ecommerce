@@ -193,4 +193,12 @@
   .pagination-btn {
     @apply py-1 lg:py-0.5 px-2.5 border-1 cursor-pointer text-sm lg:text-lg font-semibold;
   }
+
+  .slick-track {
+    display: flex !important;
+  }
+
+  .slick-slide{
+    margin: 16px 12px 16px 4px;
+  }
 }
