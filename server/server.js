@@ -51,18 +51,18 @@ app.use("/api/v1/analytics", analyticsRoute);
 app.use("/api/v1/wishlist", wishlistRoute);
 app.use("/api/v1/review", reviewRoute);
 
-const __dirname1 = path.resolve();
+// const __dirname1 = path.resolve();
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname1, "/client/dist")));
-  app.get(/.*/, (req, res) => {
-    res.sendFile(path.resolve(__dirname1, "client", "dist", "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("Server Running");
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname1, "/client/dist")));
+//   app.get(/.*/, (req, res) => {
+//     res.sendFile(path.resolve(__dirname1, "client", "dist", "index.html"));
+//   });
+// } else {
+//   app.get("/", (req, res) => {
+//     res.send("Server Running");
+//   });
+// }
 
 // Error Middleware
 
