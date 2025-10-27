@@ -64,6 +64,11 @@ app.use("/api/v1/review", reviewRoute);
 //   });
 // }
 
+app.get('/', (req, res)=>{
+  res.send('Server is Up and Running')
+})
+
+
 // Error Middleware
 
 app.use(notFound);
