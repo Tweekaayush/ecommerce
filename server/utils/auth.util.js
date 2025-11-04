@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Product = require("../models/product.model");
 const User = require("../models/user.model");
-const asyncHandler = require("../middleware/asyncHandler");
+const asyncHandler = require("../middleware/async.middleware");
 const nodeMailer = require('nodemailer')
 
 exports.generateToken = (user, statusCode, res) => {

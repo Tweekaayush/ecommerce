@@ -1,4 +1,4 @@
-const asyncHandler = require("../middleware/asyncHandler");
+const asyncHandler = require("../middleware/async.middleware");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const Coupon = require("../models/coupon.model");
 const Order = require("../models/order.model");

@@ -1,4 +1,4 @@
-const asyncHandler = require("../middleware/asyncHandler");
+const asyncHandler = require("../middleware/async.middleware");
 const User = require("../models/user.model");
 const {
   generateToken,
@@ -6,7 +6,7 @@ const {
   sendPasswordResetLink,
   verifyReceivedToken,
   sendEmail,
-} = require("../utils/authUtil");
+} = require("../utils/auth.util");
 
 exports.signup = asyncHandler(async (req, res) => {
   const { name, email, password, cart } = req.body;

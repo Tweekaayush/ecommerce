@@ -1,4 +1,4 @@
-const asyncHandler = require("../middleware/asyncHandler");
+const asyncHandler = require("../middleware/async.middleware");
 const Product = require("../models/product.model");
 const cloudinary = require("cloudinary");
 

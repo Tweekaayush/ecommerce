@@ -1,4 +1,4 @@
-const asyncHandler = require("../middleware/asyncHandler");
+const asyncHandler = require("../middleware/async.middleware");
 const User = require("../models/user.model");
 
 exports.profile = asyncHandler(async (req, res) => {

@@ -1,4 +1,4 @@
-const asyncHandler = require("../middleware/asyncHandler");
+const asyncHandler = require("../middleware/async.middleware");
 const Coupon = require("../models/coupon.model");
 
 exports.getCoupons = asyncHandler(async (req, res) => {

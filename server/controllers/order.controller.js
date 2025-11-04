@@ -1,4 +1,4 @@
-const asyncHandler = require("../middleware/asyncHandler");
+const asyncHandler = require("../middleware/async.middleware");
 const Order = require("../models/order.model");
 
 exports.getOrdersList = asyncHandler(async (req, res) => {
