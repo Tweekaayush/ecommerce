@@ -1,13 +1,13 @@
 const dotenv = require('dotenv')
 dotenv.config()
 const express = require('express');
-// const connectDB = require('./config/db')
+const connectDB = require('./config/db')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 
 const app = express();
 
-// connectDB()
+connectDB()
 
 app.use(express.json())
 app.use(cookieParser())
