@@ -6,17 +6,19 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import BrowsePage from "./pages/BrowsePage";
 
 const App = () => {
   return (
     <Suspense fallback={<></>}>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route path="/" element={<HomePage/>} />
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/signup" element={<SignUpPage/>} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/browse" element={<BrowsePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/password/forget" element={<ForgotPasswordPage />} />
-            <Route path="/password/reset" element={<ResetPasswordPage />} />
+          <Route path="/password/reset" element={<ResetPasswordPage />} />
         </Route>
       </Routes>
     </Suspense>
