@@ -19,6 +19,7 @@ import AccountLayout from "./layout/AccountLayout";
 import UpdateAddressPage from "./pages/UpdateAddressPage";
 import ProfilePage from "./pages/ProfilePage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
+import MyOrdersPage from "./pages/MyOrdersPage";
 
 const App = () => {
   return (
@@ -39,9 +40,9 @@ const App = () => {
             <Route path="/failed" element={<FailedPage />} />
             <Route element={<AccountLayout />}>
               <Route path="/account/profile" element={<ProfilePage />} />
-              <Route path="/account/privacy" element={<UpdateProfilePage/>} />
+              <Route path="/account/privacy" element={<UpdateProfilePage />} />
               <Route path="/account/address" element={<UpdateAddressPage />} />
-              <Route path="/account/orders" element={<></>} />
+              <Route path="/account/orders" element={<MyOrdersPage />} />
             </Route>
           </Route>
           <Route element={<AdminRoute />}></Route>
