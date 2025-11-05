@@ -20,6 +20,7 @@ import UpdateAddressPage from "./pages/UpdateAddressPage";
 import ProfilePage from "./pages/ProfilePage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import MyOrdersPage from "./pages/MyOrdersPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 
 const App = () => {
   return (
@@ -45,7 +46,9 @@ const App = () => {
               <Route path="/account/orders" element={<MyOrdersPage />} />
             </Route>
           </Route>
-          <Route element={<AdminRoute />}></Route>
+          <Route element={<AdminRoute />}>
+            <Route path="/dashboard" element={<AdminDashboardPage />} />
+          </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Route>
       </Routes>
