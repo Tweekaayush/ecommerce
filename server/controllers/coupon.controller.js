@@ -3,7 +3,6 @@ const Coupon = require("../models/coupon.model");
 
 exports.getCoupons = asyncHandler(async (req, res) => {
   const coupons = await Coupon.find({ userId: req.user._id, isActive: true });
-
   res.json({
     success: true,
     coupons,

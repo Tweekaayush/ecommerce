@@ -4,8 +4,10 @@ import { setCoupon, validateCoupon } from "../features/cart.slice";
 import Skeleton from "../components/Skeleton";
 import { addDecimals } from "../utils/cartUtils";
 import OrderItem from "../components/OrderItem";
+import { useOutletContext } from "react-router-dom";
 
-const CheckoutConfirmPage = ({ setOpen }) => {
+const CheckoutConfirmPage = () => {
+  const setOpen = useOutletContext();
   const {
     loading: userLoading,
     data: {
@@ -41,7 +43,9 @@ const CheckoutConfirmPage = ({ setOpen }) => {
       </div>
       <div className="flex pb-8 border-b border-dashed gap-8 flex-col md:flex-row">
         <div className="flex flex-col">
-          <h1 className="heading-1 text-red-500 text-sm md:text-base mb-8">Coupon</h1>
+          <h1 className="heading-1 text-red-500 text-sm md:text-base mb-8">
+            Coupon
+          </h1>
           <form
             className="flex gap-4 w-fit mb-4"
             onSubmit={(e) => [
@@ -113,7 +117,9 @@ const CheckoutConfirmPage = ({ setOpen }) => {
         )}
       </div>
       <div className="flex flex-col w-full">
-        <h1 className="mb-8 heading-1 text-red-500 text-sm md:text-base">Cart Items</h1>
+        <h1 className="mb-8 heading-1 text-red-500 text-sm md:text-base">
+          Cart Items
+        </h1>
         <div className="grid grid-cols-[5fr_2fr_3fr_2fr] mb-8">
           <span className="list-head">product</span>
           <span className="list-head">price</span>

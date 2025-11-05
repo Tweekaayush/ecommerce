@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CheckoutSteps from "../components/CheckoutSteps";
 import {
   CreditCard,
@@ -8,13 +8,17 @@ import {
 } from "lucide-react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { saveShippingAddress } from "../features/cart.slice";
+import { getCartItems, saveShippingAddress } from "../features/cart.slice";
 import { placeOrder } from "../features/order.slice";
 import Skeleton from "../components/Skeleton";
+import CouponModal from "../components/CouponModal";
+import { getCoupons } from "../features/user.slice";
 
 const CheckoutLayout = () => {
+  const ref = useRef(null);
   const dispatch = useDispatch();
   const [step, setStep] = useState(1);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const {
     loading: cartLoading,
@@ -31,7 +35,7 @@ const CheckoutLayout = () => {
   const checkoutSteps = [
     {
       name: "Cart",
-      icon: <ShoppingCart className="w-5 h-5"/>,
+      icon: <ShoppingCart className="w-5 h-5" />,
       button: "Continue",
       link: "/checkout",
       func: function () {
@@ -41,7 +45,7 @@ const CheckoutLayout = () => {
     {
       name: "Shipping Address",
       button: "Continue",
-      icon: <NotebookTabs className="w-5 h-5"/>,
+      icon: <NotebookTabs className="w-5 h-5" />,
       link: "/checkout/address",
       func: function () {
         if (
@@ -60,7 +64,7 @@ const CheckoutLayout = () => {
     {
       name: "Payment",
       button: "place order",
-      icon: <CreditCard className="w-5 h-5"/>,
+      icon: <CreditCard className="w-5 h-5" />,
       link: "/checkout/payment",
       func: function () {
         const order = {
@@ -90,8 +94,23 @@ const CheckoutLayout = () => {
       navigate("/checkout/payment");
     } else return;
   }, [step]);
+
+  const handleClickOutside = (e) => {
+    if (ref.current && !ref.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(getCoupons());
+    dispatch(getCartItems());
+    window.addEventListener("click", handleClickOutside, true);
+    return () => window.removeEventListener("click", handleClickOutside, true);
+  }, []);
+
   return (
     <section className="min-h-screen">
+      <CouponModal open={open} setOpen={setOpen} ref={ref}/>
       <div className="container h-full flex flex-col">
         <CheckoutSteps
           setStep={setStep}
@@ -99,7 +118,7 @@ const CheckoutLayout = () => {
           checkoutSteps={checkoutSteps}
         />
         <div className="grid grid-cols-[1fr] lg:grid-cols-[8fr_4fr] gap-4 mt-20 h-full">
-          <Outlet />
+          <Outlet context={setOpen} />
           <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
             <h1 className="heading-1 text-red-500 text-sm md:text-base mb-4">
               cart summary
@@ -109,7 +128,9 @@ const CheckoutLayout = () => {
               {!cartLoading ? (
                 <div className="flex">
                   <span className="text-xs">$</span>
-                  <p className="text-sm md:text-base ml-0.5 font-medium">{subTotal}</p>
+                  <p className="text-sm md:text-base ml-0.5 font-medium">
+                    {subTotal}
+                  </p>
                 </div>
               ) : (
                 <Skeleton classname="w-15 h-5" />
@@ -120,7 +141,10 @@ const CheckoutLayout = () => {
               {!cartLoading ? (
                 <div className="flex">
                   <span className="text-xs">$</span>
-                  <p className="text-sm md:text-base ml-0.5 font-medium">{discount}</p>:
+                  <p className="text-sm md:text-base ml-0.5 font-medium">
+                    {discount}
+                  </p>
+                  :
                 </div>
               ) : (
                 <Skeleton classname="w-15 h-5" />
@@ -131,7 +155,9 @@ const CheckoutLayout = () => {
               {!cartLoading ? (
                 <div className="flex">
                   <span className="text-xs">$</span>
-                  <p className="text-sm md:text-base ml-0.5 font-medium">{total}</p>
+                  <p className="text-sm md:text-base ml-0.5 font-medium">
+                    {total}
+                  </p>
                 </div>
               ) : (
                 <Skeleton classname="w-15 h-5" />
