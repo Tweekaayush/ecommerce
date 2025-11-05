@@ -1,8 +1,8 @@
 import React from "react";
 
-const FormInput = ({type, name, cls, value, handleChange, error}) => {
+const FormInput = ({type, name, cls='', value, handleChange, error, lblcls=''}) => {
   return (
-    <label htmlFor={name} className="form-label">
+    <label htmlFor={name} className={`form-label ${lblcls}`}>
       <input
         type={type}
         name={name}

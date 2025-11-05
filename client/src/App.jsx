@@ -16,6 +16,7 @@ import FailedPage from "./pages/FailedPage";
 import OrderPage from "./pages/OrderPage";
 import WishlistPage from "./pages/WishlistPage";
 import AccountLayout from "./layout/AccountLayout";
+import UpdateAddressPage from "./pages/UpdateAddressPage";
 
 const App = () => {
   return (
@@ -37,7 +38,7 @@ const App = () => {
             <Route element={<AccountLayout />}>
               <Route path="/account/profile" element={<></>} />
               <Route path="/account/privacy" element={<></>} />
-              <Route path="/account/address" element={<></>} />
+              <Route path="/account/address" element={<UpdateAddressPage />} />
               <Route path="/account/orders" element={<></>} />
             </Route>
           </Route>
