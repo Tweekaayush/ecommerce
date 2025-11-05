@@ -12,6 +12,6 @@ const router = express.Router();
 router.post("/create-checkout-session", protected, createCheckoutSession);
 router.post("/retry-payment", protected, retryPayment);
 router.post("/checkout-success", protected, checkoutSuccess);
-router.get("/key", protected, stripeKey);
+// router.get("/key", protected, stripeKey);
 
 module.exports = router;

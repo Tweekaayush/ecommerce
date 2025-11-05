@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import BASE_URL from "../constants/constants";
-import { loadStripe } from "@stripe/stripe-js";
 import { clearCartItems } from "./cart.slice";
 import { ORDER_API } from "../constants/constants";
 import { PAYMENT_API } from "../constants/constants";
@@ -22,12 +20,9 @@ export const getMyOrders = createAsyncThunk(
   "getMyOrders",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.get(
-        `${ORDER_API}/my-orders?page=${payload}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${ORDER_API}/my-orders?page=${payload}`, {
+        withCredentials: true,
+      });
 
       return res.data;
     } catch (error) {
@@ -70,12 +65,6 @@ export const placeOrder = createAsyncThunk(
   "placeOrder",
   async (payload, { rejectWithValue }) => {
     try {
-      const key = await axios.get(`${PAYMENT_API_API}/key`, {
-        withCredentials: true,
-      });
-
-      const stripe = await loadStripe(key.data.stripeKey);
-
       const res = await axios.post(
         `${PAYMENT_API}/create-checkout-session`,
         payload,
@@ -84,9 +73,7 @@ export const placeOrder = createAsyncThunk(
         }
       );
 
-      const result = stripe.redirectToCheckout({
-        sessionId: res.data.id,
-      });
+      window.location.href = res.data.session.url;
 
       return true;
     } catch (error) {
@@ -99,23 +86,11 @@ export const retryPayment = createAsyncThunk(
   "retryPayment",
   async (payload, { rejectWithValue }) => {
     try {
-      const key = await axios.get(`${PAYMENT_API}/key`, {
+      const res = await axios.post(`${PAYMENT_API}/retry-payment`, payload, {
         withCredentials: true,
       });
 
-      const stripe = await loadStripe(key.data.stripeKey);
-
-      const res = await axios.post(
-        `${BASE_URL}/payment/retry-payment`,
-        payload,
-        {
-          withCredentials: true,
-        }
-      );
-
-      const result = stripe.redirectToCheckout({
-        sessionId: res.data.id,
-      });
+      window.location.href = res.data.session.url;
 
       return true;
     } catch (error) {
@@ -128,13 +103,9 @@ export const validateOrder = createAsyncThunk(
   "validateOrder",
   async (payload, { dispatch, rejectWithValue }) => {
     try {
-      const res = await axios.post(
-        `${PAYMENT_API}/checkout-success`,
-        payload,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${PAYMENT_API}/checkout-success`, payload, {
+        withCredentials: true,
+      });
       dispatch(clearCartItems());
 
       return res.data;

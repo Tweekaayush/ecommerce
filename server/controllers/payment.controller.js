@@ -100,7 +100,7 @@ exports.createCheckoutSession = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    id: session.id,
+    session: session,
   });
 });
 exports.retryPayment = asyncHandler(async (req, res) => {
@@ -188,9 +188,11 @@ exports.retryPayment = asyncHandler(async (req, res) => {
 
   await order.save();
 
+  console.log(newSession);
+
   res.status(200).json({
     success: true,
-    id: newSession.id,
+    session: newSession,
   });
 });
 
@@ -255,9 +257,9 @@ exports.checkoutSuccess = asyncHandler(async (req, res) => {
   }
 });
 
-exports.stripeKey = asyncHandler(async (req, res) => {
-  res.status(200).json({
-    success: true,
-    stripeKey: process.env.REACT_APP_STRIPE_KEY,
-  });
-});
+// exports.stripeKey = asyncHandler(async (req, res) => {
+//   res.status(200).json({
+//     success: true,
+//     stripeKey: process.env.REACT_APP_STRIPE_KEY,
+//   });
+// });
