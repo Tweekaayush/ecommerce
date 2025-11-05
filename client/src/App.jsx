@@ -14,6 +14,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import SuccessPage from "./pages/SuccessPage";
 import FailedPage from "./pages/FailedPage";
 import OrderPage from "./pages/OrderPage";
+import WishlistPage from "./pages/WishlistPage";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/password/forget" element={<ForgotPasswordPage />} />
           <Route path="/password/reset" element={<ResetPasswordPage />} />
           <Route element={<PrivateRoute />}>
+            <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/order/:id" element={<OrderPage />} />
             <Route path="/success/:sessionId" element={<SuccessPage />} />
             <Route path="/failed" element={<FailedPage />} />
