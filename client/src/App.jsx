@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
 import HomePage from "./pages/HomePage";
@@ -26,8 +26,15 @@ import OrderListPage from "./pages/OrderListPage";
 import ProductListPage from "./pages/ProductListPage";
 import UpdateProductPage from "./pages/UpdateProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
+import { loadUser } from "./features/user.slice";
+import { useDispatch } from "react-redux";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
   return (
     <Suspense fallback={<></>}>
       <Routes>
