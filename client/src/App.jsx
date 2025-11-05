@@ -22,6 +22,7 @@ import UpdateProfilePage from "./pages/UpdateProfilePage";
 import MyOrdersPage from "./pages/MyOrdersPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import UserListPage from "./pages/UserListPage";
+import OrderListPage from "./pages/OrderListPage";
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
           <Route element={<AdminRoute />}>
             <Route path="/dashboard" element={<AdminDashboardPage />} />
             <Route path="/dashboard/user/list" element={<UserListPage />} />
+            <Route path="/dashboard/order/list" element={<OrderListPage />} />
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Route>
