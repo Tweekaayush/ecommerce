@@ -45,7 +45,7 @@ const App = () => {
             <Route path="/success/:sessionId" element={<SuccessPage />} />
             <Route path="/failed" element={<FailedPage />} />
             <Route element={<AccountLayout />}>
-              <Route path="/account/profile" element={<ProfilePage />} />
+              <Route path="/account" element={<ProfilePage />} />
               <Route path="/account/privacy" element={<UpdateProfilePage />} />
               <Route path="/account/address" element={<UpdateAddressPage />} />
               <Route path="/account/orders" element={<MyOrdersPage />} />

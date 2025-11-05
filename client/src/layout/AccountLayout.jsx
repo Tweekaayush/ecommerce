@@ -18,7 +18,7 @@ const AccountLayout = () => {
   const profileComponents = [
     {
       name: "profile",
-      link: "/account/profile",
+      link: "/account",
       icon: <User className="w-5 h-5" />,
     },
     {

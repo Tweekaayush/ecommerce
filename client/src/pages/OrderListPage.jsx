@@ -37,7 +37,7 @@ const OrderListPage = () => {
           Order List
         </h1>
         <div className="flex flex-col">
-          <div className="grid grid-cols-[4fr_2fr_2fr_4fr] gap-4 mb-8 text-center pb-2 border-b-1 border-gray-200">
+          <div className="grid grid-cols-[4fr_2fr_2fr_4fr] gap-4 mb-8 text-center pb-2 border-b border-gray-200">
             <span className="list-head">ID</span>
             <span className="list-head">Status</span>
             <span className="list-head">Amount</span>
@@ -50,7 +50,7 @@ const OrderListPage = () => {
                     <div
                       key={order?._id}
                       onClick={() => navigate(`/order/${order?._id}`)}
-                      className="grid grid-cols-[4fr_2fr_2fr_4fr] gap-4 items-center text-center py-7 px-2 bg-white nth-[odd]:bg-gray-100 nth-[odd]:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
+                      className="grid grid-cols-[4fr_2fr_2fr_4fr] gap-4 items-center text-center py-7 px-2 bg-white odd:bg-gray-100 odd:hover:bg-gray-200 hover:bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out"
                     >
                       <p className="list-body ellipses">{order?._id}</p>
                       <p className="list-body capitalize ellipses">
