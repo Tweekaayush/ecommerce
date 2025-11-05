@@ -15,6 +15,7 @@ import SuccessPage from "./pages/SuccessPage";
 import FailedPage from "./pages/FailedPage";
 import OrderPage from "./pages/OrderPage";
 import WishlistPage from "./pages/WishlistPage";
+import AccountLayout from "./layout/AccountLayout";
 
 const App = () => {
   return (
@@ -33,6 +34,12 @@ const App = () => {
             <Route path="/order/:id" element={<OrderPage />} />
             <Route path="/success/:sessionId" element={<SuccessPage />} />
             <Route path="/failed" element={<FailedPage />} />
+            <Route element={<AccountLayout />}>
+              <Route path="/account/profile" element={<></>} />
+              <Route path="/account/privacy" element={<></>} />
+              <Route path="/account/address" element={<></>} />
+              <Route path="/account/orders" element={<></>} />
+            </Route>
           </Route>
           <Route element={<AdminRoute />}></Route>
           <Route path="/*" element={<NotFoundPage />} />
