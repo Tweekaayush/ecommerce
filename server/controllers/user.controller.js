@@ -123,8 +123,10 @@ exports.addToWishlist = asyncHandler(async (req, res) => {
 
   user.wishlist.push({ product: product });
 
-  const updatedUser = await user.save();
-
+  let updatedUser = await user.save();
+  updatedUser = await updatedUser.populate({
+    path: "wishlist.product",
+  });
   res.json({
     success: true,
     wishlist: updatedUser.wishlist,
@@ -140,7 +142,11 @@ exports.removeFromWishlist = asyncHandler(async (req, res) => {
     (item) => item.product.toString() !== product
   );
 
-  const updatedUser = await user.save();
+  let updatedUser = await user.save();
+
+  updatedUser = await updatedUser.populate({
+    path: "wishlist.product",
+  });
 
   res.json({
     success: true,

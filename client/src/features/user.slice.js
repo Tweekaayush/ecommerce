@@ -193,6 +193,8 @@ export const removeFromWishlist = createAsyncThunk(
         }
       );
 
+      console.log(res.data)
+
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);

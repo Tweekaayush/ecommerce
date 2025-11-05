@@ -96,7 +96,7 @@ const AppLayout = () => {
     toast,
   ]);
   return (
-    <>
+    <di>
       <Navbar setCartOpen={setCartOpen} cartOpen={cartOpen} />
       <div
         className={`${
@@ -120,7 +120,7 @@ const AppLayout = () => {
         theme="colored"
         transition={Bounce}
       />
-    </>
+    </di>
   );
 };
 
