@@ -10,6 +10,7 @@ import BrowsePage from "./pages/BrowsePage";
 import ProductPage from "./pages/ProductPage";
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/password/reset" element={<ResetPasswordPage />} />
           <Route element={<PrivateRoute />}></Route>
           <Route element={<AdminRoute />}></Route>
+          <Route path="/*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Suspense>
