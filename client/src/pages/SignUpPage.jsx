@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import { signup } from "../features/user.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { LoaderCircle } from "lucide-react";
+import FormButton from "../components/FormButton";
+import FormLink from "../components/FormLink";
+import FormInput from "../components/FormInput";
 
 const SignUpPage = () => {
   const { state } = useLocation();
@@ -94,75 +97,44 @@ const SignUpPage = () => {
           <h1 className="heading-2 text-2xl mb-3.5">Sign Up</h1>
           <p className="body-text mb-7">Start your journey with us</p>
           <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
-            <label htmlFor="" className="form-label">
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="form-input"
-              />
-              <span>Name</span>
-              {formErrors.name && (
-                <p className="form-error-msg"> {formErrors.name} </p>
-              )}
-            </label>
-            <label htmlFor="" className="form-label">
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="form-input"
-              />
-              <span>email</span>
-              {formErrors.email && (
-                <p className="form-error-msg"> {formErrors.email} </p>
-              )}
-            </label>
-            <label htmlFor="" className="form-label">
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="form-input"
-              />
-              <span>password</span>
-              {formErrors.password && (
-                <p className="form-error-msg"> {formErrors.password} </p>
-              )}
-            </label>
-            <label htmlFor="" className="form-label">
-              <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className="form-input"
-              />
-              <span>confirm password</span>
-              {formErrors.confirmPassword && (
-                <p className="form-error-msg"> {formErrors.confirmPassword} </p>
-              )}
-            </label>
-            <button type="submit" className="button-2" disabled={loading}>
-              {loading ? (
-                <LoaderCircle className="mx-auto animate-spin" />
-              ) : (
-                "Register"
-              )}
-            </button>
-            <p className="body-text">
-              Already have an account?{" "}
-              <Link to="/login" className="text-blue-500">
-                Login
-              </Link>
-            </p>
+            <FormInput
+              type="text"
+              name="name"
+              cls="form-input"
+              value={formData.name}
+              handleChange={handleChange}
+              error={formErrors.name}
+            />
+            <FormInput
+              type="email"
+              name="email"
+              cls="form-input"
+              value={formData.email}
+              handleChange={handleChange}
+              error={formErrors.email}
+            />
+            <FormInput
+              type="password"
+              name="password"
+              cls="form-input"
+              value={formData.password}
+              handleChange={handleChange}
+              error={formErrors.password}
+            />
+            <FormInput
+              type="password"
+              name="confirmPassword"
+              cls="form-input"
+              value={formData.confirmPassword}
+              handleChange={handleChange}
+              error={formErrors.confirmPassword}
+            />
+            <FormButton loading={loading} value="Register" />
+            <FormLink
+              text="Already have an account?"
+              value="Login"
+              link="/login"
+            />
           </form>
         </div>
       </div>

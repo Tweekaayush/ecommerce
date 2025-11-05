@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoaderCircle } from "lucide-react";
 import { resetPassword } from "../features/user.slice";
+import FormButton from "../components/FormButton";
+import FormInput from "../components/FormInput";
 
 const ResetPasswordPage = () => {
   const { state, search } = useLocation();
@@ -85,41 +87,23 @@ const ResetPasswordPage = () => {
           <h1 className="heading-2 text-xl mb-3.5">Reset Password</h1>
           <p className="body-text mb-7">Make a new password.</p>
           <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
-            <label htmlFor="email" className="form-label">
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="form-input"
-              />
-              <span>password</span>
-              {formErrors.password && (
-                <p className="form-error-msg">{formErrors.password}</p>
-              )}
-            </label>
-            <label htmlFor="password" className="form-label">
-              <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className="form-input"
-              />
-              <span>confirmPassword</span>
-              {formErrors.confirmPassword && (
-                <p className="form-error-msg">{formErrors.confirmPassword}</p>
-              )}
-            </label>
-            <button className="button-2" disabled={loading}>
-              {loading ? (
-                <LoaderCircle className="mx-auto animate-spin" />
-              ) : (
-                "Reset"
-              )}
-            </button>
+            <FormInput
+              type="password"
+              name="password"
+              cls="form-input"
+              value={formData.password}
+              handleChange={handleChange}
+              error={formErrors.password}
+            />
+            <FormInput
+              type="password"
+              name="confirmPassword"
+              cls="form-input"
+              value={formData.confirmPassword}
+              handleChange={handleChange}
+              error={formErrors.confirmPassword}
+            />
+            <FormButton loading={loading} value="Reset" />
           </form>
         </div>
       </div>

@@ -13,7 +13,7 @@ const Cart = ({ cartOpen, setCartOpen }) => {
     <div
       className={`${
         cartOpen ? "translate-x-0" : "translate-x-full"
-      } fixed top-0 right-0 h-full w-full xs:w-[400px] z-[100] bg-white flex flex-col transition-all duration-300 ease-in-out`}
+      } fixed top-0 right-0 h-full w-full xs:w-[400px] z-100 bg-white flex flex-col transition-all duration-300 ease-in-out`}
     >
       <div className="flex items-center bg-black p-4">
         <h1 className="text-white uppercase font-semibold w-full tracking-wide">
