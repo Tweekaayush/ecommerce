@@ -36,21 +36,21 @@ const UpdateProfilePage = () => {
         <FormInput
           type="text"
           name="name"
-          onChange={handleChange}
+          handleChange={handleChange}
           value={formData.name}
           cls="form-input-2"
         />
         <FormInput
           type="email"
           name="email"
-          onChange={handleChange}
+          handleChange={handleChange}
           value={formData.email}
           cls="form-input-2"
         />
         <FormInput
           type="password"
           name="password"
-          onChange={handleChange}
+          handleChange={handleChange}
           value={formData.password}
           cls="form-input-2"
         />

@@ -44,7 +44,7 @@ const AddressForm = ({ submitFunction }) => {
       <FormInput
         type="text"
         name="address"
-        onChange={handleChange}
+        handleChange={handleChange}
         value={formData.address}
         cls="form-input-2"
         lblcls="col-span-2"
@@ -52,7 +52,7 @@ const AddressForm = ({ submitFunction }) => {
       <FormInput
         type="text"
         name="postalCode"
-        onChange={handleChange}
+        handleChange={handleChange}
         value={formData.postalCode}
         cls="form-input-2"
         lblcls="col-span-2"
@@ -60,7 +60,7 @@ const AddressForm = ({ submitFunction }) => {
       <FormInput
         type="text"
         name="city"
-        onChange={handleChange}
+        handleChange={handleChange}
         value={formData.country}
         cls="form-input-2"
         lblcls="col-span-1"
@@ -68,7 +68,7 @@ const AddressForm = ({ submitFunction }) => {
       <FormInput
         type="text"
         name="country"
-        onChange={handleChange}
+        handleChange={handleChange}
         value={formData.country}
         cls="form-input-2"
         lblcls="col-span-1"

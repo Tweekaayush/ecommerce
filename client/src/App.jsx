@@ -28,6 +28,10 @@ import UpdateProductPage from "./pages/UpdateProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import { loadUser } from "./features/user.slice";
 import { useDispatch } from "react-redux";
+import CheckoutLayout from "./layout/CheckoutLayout";
+import CheckoutPage from "./pages/CheckoutPage";
+import ShippingAddressPage from "./pages/ShippingAddressPage";
+import CheckoutConfirmPage from "./pages/CheckoutConfirmPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,6 +60,17 @@ const App = () => {
               <Route path="/account/privacy" element={<UpdateProfilePage />} />
               <Route path="/account/address" element={<UpdateAddressPage />} />
               <Route path="/account/orders" element={<MyOrdersPage />} />
+            </Route>
+            <Route element={<CheckoutLayout />}>
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route
+                path="/checkout/address"
+                element={<ShippingAddressPage />}
+              />
+              <Route
+                path="/checkout/payment"
+                element={<CheckoutConfirmPage />}
+              />
             </Route>
           </Route>
           <Route element={<AdminRoute />}>
