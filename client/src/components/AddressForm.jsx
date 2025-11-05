@@ -48,6 +48,7 @@ const AddressForm = ({ submitFunction }) => {
         value={formData.address}
         cls="form-input-2"
         lblcls="col-span-2"
+        title='address'
       />
       <FormInput
         type="text"
@@ -56,14 +57,16 @@ const AddressForm = ({ submitFunction }) => {
         value={formData.postalCode}
         cls="form-input-2"
         lblcls="col-span-2"
+        title='postal code'
       />
       <FormInput
         type="text"
         name="city"
         handleChange={handleChange}
-        value={formData.country}
+        value={formData.city}
         cls="form-input-2"
         lblcls="col-span-1"
+        title='city'
       />
       <FormInput
         type="text"
@@ -72,6 +75,7 @@ const AddressForm = ({ submitFunction }) => {
         value={formData.country}
         cls="form-input-2"
         lblcls="col-span-1"
+        title='country'
       />
       <FormButton loading={loading} value="Save Changes" />
     </form>

@@ -82,7 +82,7 @@ const SignUpPage = () => {
 
   useEffect(() => {
     if (_id) {
-      state ? navigate(state.previousURL) : navigate("/profile");
+      state ? navigate(state.previousURL) : navigate("/account");
     }
   }, [_id]);
 
@@ -104,6 +104,7 @@ const SignUpPage = () => {
               value={formData.name}
               handleChange={handleChange}
               error={formErrors.name}
+              title='name'
             />
             <FormInput
               type="email"
@@ -112,6 +113,7 @@ const SignUpPage = () => {
               value={formData.email}
               handleChange={handleChange}
               error={formErrors.email}
+              title='email'
             />
             <FormInput
               type="password"
@@ -120,6 +122,7 @@ const SignUpPage = () => {
               value={formData.password}
               handleChange={handleChange}
               error={formErrors.password}
+              title='password'
             />
             <FormInput
               type="password"
@@ -128,6 +131,7 @@ const SignUpPage = () => {
               value={formData.confirmPassword}
               handleChange={handleChange}
               error={formErrors.confirmPassword}
+              title='confirm password'
             />
             <FormButton loading={loading} value="Register" />
             <FormLink

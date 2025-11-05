@@ -38,7 +38,7 @@ const ForgotPasswordPage = () => {
 
   useEffect(() => {
     if (_id) {
-      state ? navigate(state.previousURL) : navigate("/profile");
+      state ? navigate(state.previousURL) : navigate("/account");
     }
   }, [_id]);
 
@@ -62,6 +62,7 @@ const ForgotPasswordPage = () => {
               value={email}
               handleChange={(e) => setEmail(e.target.value)}
               error={emailError}
+              title='email'
             />
             <FormButton loading={loading} value="send password reset link" />
           </form>

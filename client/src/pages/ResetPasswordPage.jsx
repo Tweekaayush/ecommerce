@@ -72,7 +72,7 @@ const ResetPasswordPage = () => {
 
   useEffect(() => {
     if (successMessage) {
-      navigate("/login");
+      navigate("/account");
     }
   }, [successMessage]);
 
@@ -94,6 +94,7 @@ const ResetPasswordPage = () => {
               value={formData.password}
               handleChange={handleChange}
               error={formErrors.password}
+              title="password"
             />
             <FormInput
               type="password"
@@ -102,6 +103,7 @@ const ResetPasswordPage = () => {
               value={formData.confirmPassword}
               handleChange={handleChange}
               error={formErrors.confirmPassword}
+              title="confirm password"
             />
             <FormButton loading={loading} value="Reset" />
           </form>

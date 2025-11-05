@@ -68,7 +68,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (_id) {
-      state ? navigate(state.previousURL) : navigate("/profile");
+      state ? navigate(state.previousURL) : navigate("/account");
     }
   }, [_id]);
 
@@ -89,6 +89,7 @@ const LoginPage = () => {
               value={formData.email}
               handleChange={handleChange}
               error={formErrors.email}
+              title='email'
             />
             <FormInput
               type="password"
@@ -97,6 +98,7 @@ const LoginPage = () => {
               value={formData.password}
               handleChange={handleChange}
               error={formErrors.password}
+              title='password'
             />
             <Link
               to="/password/forget"

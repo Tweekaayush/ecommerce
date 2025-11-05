@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormInput = ({type, name, cls='', value, handleChange, error, lblcls=''}) => {
+const FormInput = ({type, name, cls='', value, handleChange, error, lblcls='', title}) => {
   return (
     <label htmlFor={name} className={`form-label ${lblcls}`}>
       <input
@@ -11,7 +11,7 @@ const FormInput = ({type, name, cls='', value, handleChange, error, lblcls=''}) 
         onChange={handleChange}
         className={cls}
       />
-      <span>{name}</span>
+      <span>{title}</span>
       {error && (
         <p className="form-error-msg">{error}</p>
       )}
