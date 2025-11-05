@@ -25,6 +25,7 @@ import UserListPage from "./pages/UserListPage";
 import OrderListPage from "./pages/OrderListPage";
 import ProductListPage from "./pages/ProductListPage";
 import UpdateProductPage from "./pages/UpdateProductPage";
+import CreateProductPage from "./pages/CreateProductPage";
 
 const App = () => {
   return (
@@ -59,9 +60,13 @@ const App = () => {
               element={<ProductListPage />}
             />
             <Route
-                path="/dashboard/product/update/:id"
-                element={<UpdateProductPage />}
-              />
+              path="/dashboard/product/update/:id"
+              element={<UpdateProductPage />}
+            />
+            <Route
+              path="/dashboard/product/create"
+              element={<CreateProductPage />}
+            />
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Route>
