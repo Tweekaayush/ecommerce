@@ -18,6 +18,7 @@ import WishlistPage from "./pages/WishlistPage";
 import AccountLayout from "./layout/AccountLayout";
 import UpdateAddressPage from "./pages/UpdateAddressPage";
 import ProfilePage from "./pages/ProfilePage";
+import UpdateProfilePage from "./pages/UpdateProfilePage";
 
 const App = () => {
   return (
@@ -38,7 +39,7 @@ const App = () => {
             <Route path="/failed" element={<FailedPage />} />
             <Route element={<AccountLayout />}>
               <Route path="/account/profile" element={<ProfilePage />} />
-              <Route path="/account/privacy" element={<></>} />
+              <Route path="/account/privacy" element={<UpdateProfilePage/>} />
               <Route path="/account/address" element={<UpdateAddressPage />} />
               <Route path="/account/orders" element={<></>} />
             </Route>
