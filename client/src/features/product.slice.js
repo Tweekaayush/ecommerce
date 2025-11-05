@@ -6,7 +6,7 @@ import { PRODUCT_API } from "../constants/constants";
 import { REVIEW_API } from "../constants/constants";
 
 const initialState = {
-  loading: "",
+  loading: false,
   data: {
     products: [],
     featuredProducts: [],
