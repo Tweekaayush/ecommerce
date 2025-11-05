@@ -23,6 +23,7 @@ import MyOrdersPage from "./pages/MyOrdersPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import UserListPage from "./pages/UserListPage";
 import OrderListPage from "./pages/OrderListPage";
+import ProductListPage from "./pages/ProductListPage";
 
 const App = () => {
   return (
@@ -52,6 +53,10 @@ const App = () => {
             <Route path="/dashboard" element={<AdminDashboardPage />} />
             <Route path="/dashboard/user/list" element={<UserListPage />} />
             <Route path="/dashboard/order/list" element={<OrderListPage />} />
+            <Route
+              path="/dashboard/product/list"
+              element={<ProductListPage />}
+            />
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Route>
