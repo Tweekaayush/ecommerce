@@ -9,39 +9,7 @@ import {
 import { ChevronDown, LoaderCircle, TriangleAlert } from "lucide-react";
 import Skeleton from "../components/Skeleton";
 import { addDecimals } from "../utils/cartUtils";
-
-const OrderItem = (props) => {
-  const {
-    product: { _id, name, brand, image },
-    quantity,
-    price,
-  } = props;
-
-  return (
-    <div className="grid grid-cols-[5fr_2fr_3fr_2fr]  sm:grid-cols-[2fr_3fr_2fr_3fr_2fr] border border-gray-400 min-h-20">
-      <div className="hidden md:flex items-center h-full bg-gray-100">
-        <img
-          src={image}
-          alt={name}
-          className="w-full object-cover object-[50%_50%] mix-blend-multiply"
-        />
-      </div>
-      <div className="p-2">
-        <h1 className="text-base font-bold">{brand}</h1>
-        <h1 className="text-sm text-gray-700">{name}</h1>
-      </div>
-      <div className="flex py-2">
-        <span className="text-xs ">$</span>
-        <p className="text-sm ml-0.5 font-medium">{price}</p>
-      </div>
-      <div className="h-7 text-sm p-2">{quantity}</div>
-      <div className="flex py-2 pr-2">
-        <span className="text-xs ">$</span>
-        <p className="text-sm ml-0.5 font-medium">{price * quantity}</p>
-      </div>
-    </div>
-  );
-};
+import OrderItem from "../components/OrderItem";
 
 const OrderPage = () => {
   const [open, setOpen] = useState(false);
@@ -130,7 +98,7 @@ const OrderPage = () => {
 
           <div className="flex flex-col">
             <h1 className="heading-1 text-red-500 text-sm mb-8">Order Items</h1>
-            <div className="grid grid-cols-[5fr_2fr_3fr_2fr] gap-4 mb-8 pb-2 border border-b border-gray-200">
+            <div className="grid grid-cols-[5fr_2fr_3fr_2fr] gap-4 mb-8 pb-2 border-b border-gray-200">
               <span className="list-head">Product</span>
               <span className="list-head">price</span>
               <span className="list-head">Quantity</span>
@@ -139,7 +107,13 @@ const OrderPage = () => {
             <div className="flex flex-col gap-4">
               {!loading
                 ? products?.map((item) => {
-                    return <OrderItem key={item?.product?._id} {...item} />;
+                    return (
+                      <OrderItem
+                        key={item?.product?._id}
+                        {...item}
+                        {...item?.product}
+                      />
+                    );
                   })
                 : new Array(2).fill(0).map((_, i) => {
                     return <Skeleton classname="w-full h-30" key={i} />;

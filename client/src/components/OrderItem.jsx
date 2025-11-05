@@ -3,9 +3,7 @@ import { removeFromCart, updateQuantity } from "../features/cart.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { Trash } from "lucide-react";
 
-const OrderItem = (props) => {
-  const { update, ...item } = props;
-  const { _id, name, brand, image, quantity, price, countInStock } = item;
+const OrderItem = ({_id, name, brand, image, quantity, price, countInStock, update=false}) => {
   const [qty, setQty] = useState(quantity);
   const dispatch = useDispatch();
   const {

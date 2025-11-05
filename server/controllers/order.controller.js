@@ -62,6 +62,7 @@ exports.updateOrder = asyncHandler(async (req, res) => {
   }
   if (orderStatus === "delivered") {
     order.deliveredAt = new Date();
+    order.paymentStatus = 'paid'
   }
 
   await order.save();
