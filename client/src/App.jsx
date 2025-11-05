@@ -24,6 +24,7 @@ import AdminDashboardPage from "./pages/AdminDashboardPage";
 import UserListPage from "./pages/UserListPage";
 import OrderListPage from "./pages/OrderListPage";
 import ProductListPage from "./pages/ProductListPage";
+import UpdateProductPage from "./pages/UpdateProductPage";
 
 const App = () => {
   return (
@@ -57,6 +58,10 @@ const App = () => {
               path="/dashboard/product/list"
               element={<ProductListPage />}
             />
+            <Route
+                path="/dashboard/product/update/:id"
+                element={<UpdateProductPage />}
+              />
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Route>
