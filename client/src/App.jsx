@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import AppLayout from "./layout/AppLayout";
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <Suspense fallback={<></>}>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<></>} />
+        </Route>
+      </Routes>
+    </Suspense>
+  );
+};
 
-export default App
+export default App;

@@ -1,32 +1,31 @@
-import React, { useEffect } from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+// import Cart from "../Cart";
 import { Outlet } from "react-router-dom";
-import Cart from "../Cart";
-import { useState } from "react";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearUserError,
   clearUserSuccessMessage,
-} from "../../slices/user.slice";
+} from "../features/user.slice";
 import {
   clearProductError,
   clearProductSuccessMessage,
-} from "../../slices/product.slice";
+} from "../features/product.slice";
 import {
   clearOrderError,
   clearOrderSuccessMessage,
-} from "../../slices/order.slice";
+} from "../features/order.slice";
 import {
   clearCartErrors,
   clearCartItems,
   clearCartSuccessMessage,
-} from "../../slices/cart.slice";
+} from "../features/cart.slice";
 import {
   clearAdminError,
   clearAdminSuccessMessage,
-} from "../../slices/admin.slice";
+} from "../features/admin.slice";
 
 const AppLayout = () => {
   const dispatch = useDispatch();
@@ -105,7 +104,7 @@ const AppLayout = () => {
         } w-full h-screen fixed top-0 left-0 bg-black z-99 opacity-50`}
         onClick={() => setCartOpen(false)}
       ></div>
-      <Cart cartOpen={cartOpen} setCartOpen={setCartOpen} />
+      {/* <Cart cartOpen={cartOpen} setCartOpen={setCartOpen} /> */}
       <Outlet />
       <Footer />
       <ToastContainer
