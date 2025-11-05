@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-// import Cart from "../Cart";
 import { Outlet } from "react-router-dom";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +23,9 @@ import {
   clearAdminError,
   clearAdminSuccessMessage,
 } from "../features/admin.slice";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Cart from "../components/Cart";
 
 const AppLayout = () => {
   const dispatch = useDispatch();
@@ -104,7 +104,7 @@ const AppLayout = () => {
         } w-full h-screen fixed top-0 left-0 bg-black z-99 opacity-50`}
         onClick={() => setCartOpen(false)}
       ></div>
-      {/* <Cart cartOpen={cartOpen} setCartOpen={setCartOpen} /> */}
+      <Cart cartOpen={cartOpen} setCartOpen={setCartOpen} />
       <Outlet />
       <Footer />
       <ToastContainer
