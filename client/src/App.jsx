@@ -8,6 +8,8 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import BrowsePage from "./pages/BrowsePage";
 import ProductPage from "./pages/ProductPage";
+import PrivateRoute from "./routes/PrivateRoute";
+import AdminRoute from "./routes/AdminRoute";
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/password/forget" element={<ForgotPasswordPage />} />
           <Route path="/password/reset" element={<ResetPasswordPage />} />
+          <Route element={<PrivateRoute />}></Route>
+          <Route element={<AdminRoute />}></Route>
         </Route>
       </Routes>
     </Suspense>
