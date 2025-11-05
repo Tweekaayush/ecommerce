@@ -24,7 +24,7 @@ const CheckoutConfirmPage = ({ setOpen }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col pb-8 border-b border-dashed">
-        <h1 className="heading-1 text-red-500 text-sm mb-8">
+        <h1 className="heading-1 text-red-500 text-sm md:text-base mb-8">
           Shipping Address
         </h1>
         <div className="">
@@ -41,7 +41,7 @@ const CheckoutConfirmPage = ({ setOpen }) => {
       </div>
       <div className="flex pb-8 border-b border-dashed gap-8 flex-col md:flex-row">
         <div className="flex flex-col">
-          <h1 className="heading-1 text-red-500 text-sm mb-8">Coupon</h1>
+          <h1 className="heading-1 text-red-500 text-sm md:text-base mb-8">Coupon</h1>
           <form
             className="flex gap-4 w-fit mb-4"
             onSubmit={(e) => [
@@ -113,7 +113,7 @@ const CheckoutConfirmPage = ({ setOpen }) => {
         )}
       </div>
       <div className="flex flex-col w-full">
-        <h1 className="mb-8 heading-1 text-red-500 text-sm">Cart Items</h1>
+        <h1 className="mb-8 heading-1 text-red-500 text-sm md:text-base">Cart Items</h1>
         <div className="grid grid-cols-[5fr_2fr_3fr_2fr] mb-8">
           <span className="list-head">product</span>
           <span className="list-head">price</span>

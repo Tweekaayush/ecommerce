@@ -10,7 +10,7 @@ const CheckoutPage = () => {
   } = useSelector((state) => state.cart);
   return (
     <div className="flex flex-col w-full">
-      <h1 className="mb-8 heading-1 text-red-500 text-sm">Cart Items</h1>
+      <h1 className="mb-8 heading-1 text-red-500 text-sm md:text-base">Cart Items</h1>
       <div className="grid grid-cols-[5fr_2fr_3fr_2fr] mb-8">
         <span className="list-head">product</span>
         <span className="list-head">price</span>

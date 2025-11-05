@@ -28,11 +28,11 @@ const ShippingAddressPage = () => {
 
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 text-red-500 text-sm mb-7">Shipping Address</h1>
+      <h1 className="heading-1 text-red-500 text-sm md:text-base mb-7">Shipping Address</h1>
 
       <div className="mb-4">
         {!loading ? (
-          <p className="body-text">
+          <p className="body-text text-gray-700">
             {fullAddress?.address}, {fullAddress?.postalCode},
             <br />
             {fullAddress?.city}, {fullAddress?.country}

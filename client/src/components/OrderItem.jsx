@@ -31,7 +31,7 @@ const OrderItem = ({_id, name, brand, image, quantity, price, countInStock, upda
 
   return (
     <div className="grid grid-cols-[5fr_2fr_3fr_2fr]  sm:grid-cols-[2fr_3fr_2fr_3fr_2fr] border border-gray-400 min-h-20">
-      <div className="items-center w-full h-full bg-gray-100 hidden sm:flex">
+      <div className="items-center w-full aspect-square bg-gray-100 hidden sm:flex">
         <img
           src={image}
           alt={name}
@@ -39,8 +39,8 @@ const OrderItem = ({_id, name, brand, image, quantity, price, countInStock, upda
         />
       </div>
       <div className="p-2">
-        <h1 className="text-base font-bold">{brand}</h1>
-        <h1 className="text-sm text-gray-700">{name}</h1>
+        <h1 className="text-sm md:text-base font-bold">{brand}</h1>
+        <h1 className="text-xs md:text-sm text-gray-700">{name}</h1>
       </div>
       <div className="flex py-2">
         <span className="text-xs mt-0.5">$</span>

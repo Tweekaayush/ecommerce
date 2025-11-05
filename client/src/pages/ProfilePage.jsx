@@ -10,7 +10,7 @@ const ProfilePage = () => {
   } = useSelector((state) => state.user);
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 text-red-500 text-sm mb-12.5">Account</h1>
+      <h1 className="heading-1 text-red-500 text-sm md:text-base mb-12.5">Account</h1>
       {!loading ? (
         <div className="flex flex-col">
           <div className="grid grid-cols-[3fr_9fr] gap-4 p-4">

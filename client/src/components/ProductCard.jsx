@@ -57,12 +57,12 @@ const ProductCard = ({
         />
       </div>
       <div className="flex flex-col p-2 overflow-hidden relative">
-        <h1 className="text-sm xs:text-base font-bold ellipses">{brand}</h1>
-        <h1 className="text-xs xs:text-sm mb-1 ellipses text-gray-700">{name}</h1>
-        <Rating rating={rating} size={16} className="mb-3" />
+        <h1 className="text-base md:text-lg font-bold ellipses">{brand}</h1>
+        <h1 className="text-sm md:text-base mb-1 ellipses text-gray-700">{name}</h1>
+        <Rating rating={rating} size={18} className="mb-3" />
         <div className="flex items-start">
           <span className="text-xs mt-0.5 xs:mt-1">$</span>
-          <p className="text-md xs:text-lg font-semibold ml-0.5">{price}</p>
+          <p className="text-md md:text-lg font-semibold ml-0.5">{price}</p>
         </div>
         <div className="absolute bottom-0 right-0 flex gap-2 p-2 translate-y-full group-hover:translate-y-[0%] transition-all duration-300 ease-in-out">
           {wishlist ? (

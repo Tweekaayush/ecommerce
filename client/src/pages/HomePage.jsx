@@ -31,7 +31,7 @@ const HomePage = () => {
       <PromotionBanner />
       <section>
         <div className="container flex flex-col items-center">
-          <h1 className="heading-2 text-xl mb-7">Best Sellers</h1>
+          <h1 className="heading-2 text-xl md:text-2xl mb-7">Best Sellers</h1>
           <div className="grid grid-cols-[1fr_1fr] sm:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr] gap-4 w-full">
             {!loading
               ? bestSellingProducts.map((product) => {

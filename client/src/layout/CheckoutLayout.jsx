@@ -31,7 +31,7 @@ const CheckoutLayout = () => {
   const checkoutSteps = [
     {
       name: "Cart",
-      icon: <ShoppingCart />,
+      icon: <ShoppingCart className="w-5 h-5"/>,
       button: "Continue",
       link: "/checkout",
       func: function () {
@@ -41,7 +41,7 @@ const CheckoutLayout = () => {
     {
       name: "Shipping Address",
       button: "Continue",
-      icon: <NotebookTabs />,
+      icon: <NotebookTabs className="w-5 h-5"/>,
       link: "/checkout/address",
       func: function () {
         if (
@@ -60,7 +60,7 @@ const CheckoutLayout = () => {
     {
       name: "Payment",
       button: "place order",
-      icon: <CreditCard />,
+      icon: <CreditCard className="w-5 h-5"/>,
       link: "/checkout/payment",
       func: function () {
         const order = {
@@ -101,37 +101,37 @@ const CheckoutLayout = () => {
         <div className="grid grid-cols-[1fr] lg:grid-cols-[8fr_4fr] gap-4 mt-20 h-full">
           <Outlet />
           <div className="flex flex-col py-8 px-4 h-fit shadow-card max-w-[400px]">
-            <h1 className="heading-1 text-red-500 text-sm mb-4">
+            <h1 className="heading-1 text-red-500 text-sm md:text-base mb-4">
               cart summary
             </h1>
             <div className="flex justify-between mb-4">
-              <h4 className="heading-2 text-sm">Subtotal</h4>
+              <h4 className="heading-2 text-sm md:text-base">Subtotal</h4>
               {!cartLoading ? (
                 <div className="flex">
-                  <span className="text-xs ">$</span>
-                  <p className="text-sm ml-0.5 font-medium">{subTotal}</p>
+                  <span className="text-xs">$</span>
+                  <p className="text-sm md:text-base ml-0.5 font-medium">{subTotal}</p>
                 </div>
               ) : (
                 <Skeleton classname="w-15 h-5" />
               )}
             </div>
             <div className="flex justify-between mb-4">
-              <h4 className="heading-2 text-sm">Discount</h4>
+              <h4 className="heading-2 text-sm md:text-base">Discount</h4>
               {!cartLoading ? (
                 <div className="flex">
-                  <span className="text-xs ">$</span>
-                  <p className="text-sm ml-0.5 font-medium">{discount}</p>:
+                  <span className="text-xs">$</span>
+                  <p className="text-sm md:text-base ml-0.5 font-medium">{discount}</p>:
                 </div>
               ) : (
                 <Skeleton classname="w-15 h-5" />
               )}
             </div>
             <div className="flex justify-between mb-4 border-t pt-4 border-dashed">
-              <h4 className="heading-2 text-sm">Total</h4>
+              <h4 className="heading-2 text-sm md:text-base">Total</h4>
               {!cartLoading ? (
                 <div className="flex">
-                  <span className="text-xs ">$</span>
-                  <p className="text-sm ml-0.5 font-medium">{total}</p>
+                  <span className="text-xs">$</span>
+                  <p className="text-sm md:text-base ml-0.5 font-medium">{total}</p>
                 </div>
               ) : (
                 <Skeleton classname="w-15 h-5" />

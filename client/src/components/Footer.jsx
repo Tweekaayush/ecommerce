@@ -11,13 +11,10 @@ const Footer = () => {
               Primart
               <span className="text-red-500">.</span>
             </Link>
-            <p className="mb-6 body-text text-gray-400">
+            <p className="mb-6 body-text text-gray-400 text-base">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia
               eaque cumque, deleniti suscipit, quae deserunt ullam similique nam
-              hic totam blanditiis accusantium libero amet ad. Necessitatibus
-              rerum minima maxime, quibusdam numquam odit excepturi animi hic,
-              veritatis dignissimos quis vel eaque adipisci a nobis fuga
-              doloribus corrupti, praesentium pariatur amet. Velit?
+              hic totam blanditiis accusantium libero amet ad. 
             </p>
             <ul className="flex mb-4 gap-2">
               <li>
@@ -99,7 +96,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="py-5">
-          <p className="text-center text-gray-400 text-sm tracking-wider">
+          <p className="body-text text-gray-400">
             Copyright @ 2025. All Rights Reserved. -
             <a
               href="https://aayushdobriyal.vercel.app"

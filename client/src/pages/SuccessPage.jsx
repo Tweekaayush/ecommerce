@@ -26,11 +26,11 @@ const SuccessPage = () => {
   return (
     <section className="min-h-screen flex justify-center items-center">
       <div className="container flex flex-col items-center justify-center h-full">
-        <CircleCheckBig className="text-green-600 w-15 h-15" />
-        <h1 className="text-green-600 text-5xl tracking-wider font-extrabold mb-2">
+        <CircleCheckBig className="text-green-600 h-20 w-20 md:h-30 md:w-30 mb-4" />
+        <h1 className="text-green-600 text-2xl md:text-4xl tracking-wider font-extrabold mb-4">
           Thank You!
         </h1>
-        <p className="text-xl tracking-wider text-gray-700 mb-4">
+        <p className="body-text tracking-wider text-gray-700 mb-7">
           Your order has been placed successfully.
         </p>
         <div className="p-4 bg-gray-200 mb-4 rounded-sm flex gap-4">

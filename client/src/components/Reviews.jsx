@@ -48,7 +48,7 @@ const Reviews = () => {
 
   return (
     <div className="mt-4 md:mt-0">
-      <h1 className="heading-1 text-red-500 text-sm">Write review</h1>
+      <h1 className="heading-1 text-red-500 text-base mb-2.5">Write review</h1>
       <form className="flex flex-col" onSubmit={writeReview}>
         <div className="flex">
           {[...Array(5)].map((star, index) => {
@@ -64,7 +64,7 @@ const Reviews = () => {
                   className="form-input"
                 />
                 <Star
-                  size={18}
+                  size={20}
                   onMouseEnter={() => setHover(currentRating)}
                   onMouseLeave={() => setHover(null)}
                   fill={currentRating <= (hover || rating) ? "gold" : ""}
@@ -80,7 +80,7 @@ const Reviews = () => {
           name="review"
           value={review}
           onChange={(e) => setReview(e.target.value)}
-          className="p-4 border border-gray-500 rounded-sm my-2.5 outline-none"
+          className="p-4 border border-gray-500 rounded-sm my-2.5 outline-none text-base"
         />
         <p className="form-error-msg">{formErrors}</p>
         <input
@@ -100,8 +100,8 @@ const Reviews = () => {
                     <div>
                       <h1 className="heading-2 text-base">{r?.user?.name}</h1>
                       <div className="flex items-center gap-4">
-                        <Rating rating={r?.rating} size={18} />
-                        <p className="font-bold text-sm">
+                        <Rating rating={r?.rating} size={20} />
+                        <p className="font-bold text-base">
                           {r?.rating.toFixed(1)}
                         </p>
                       </div>
@@ -110,7 +110,7 @@ const Reviews = () => {
                       <Trash className="w-4 h-4 text-red-500 cursor-pointer" />
                     )}
                   </div>
-                  <p className="my-2.5 body-text">{r?.comment}</p>
+                  <p className="my-2.5 body-text text-gray-700">{r?.comment}</p>
                 </div>
               );
             })}

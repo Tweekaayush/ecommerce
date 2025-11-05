@@ -10,7 +10,7 @@ const UpdateAddressPage = () => {
   };
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 text-red-500 text-sm mb-12.5">Address</h1>
+      <h1 className="heading-1 text-red-500 text-sm md:text-base mb-12.5">Address</h1>
       <div className="">
         <AddressForm submitFunction={updateForm} />
       </div>

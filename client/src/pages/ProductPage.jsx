@@ -76,31 +76,31 @@ const ProductPage = () => {
             </div>
             <div className="flex flex-col pt-8 md:p-8">
               {!productLoading ? (
-                <h1 className="text-xl font-bold mb-2.5">{name}</h1>
+                <h1 className="text-lg md:text-2xl font-bold mb-2.5">{name}</h1>
               ) : (
                 <Skeleton classname="w-full h-8 mb-2" />
               )}
-              <div className="flex gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-8">
                 {!productLoading ? (
                   <Rating rating={rating} size={20} />
                 ) : (
                   <Skeleton classname="w-40 h-6 mb-2" />
                 )}
                 {!productLoading ? (
-                  <h1 className="text-sm">{numReviews} Reviews</h1>
+                  <h1 className="text-base">{numReviews} Reviews</h1>
                 ) : (
                   <Skeleton classname="w-30 h-6" />
                 )}
               </div>
               {!productLoading ? (
-                <h1 className="text-sm uppercase font-bold tracking-[2px] mb-4 text-black">
+                <h1 className="text-base uppercase font-bold tracking-[2px] mb-4 text-black">
                   description
                 </h1>
               ) : (
                 <Skeleton classname="w-50 h-6 mb-4" />
               )}
               {!productLoading ? (
-                <p className="body-text text-gray-1000 mb-7">{description}</p>
+                <p className="body-text text-gray-800 mb-7">{description}</p>
               ) : (
                 <Skeleton classname="w-full h-30 mb-2" />
               )}
@@ -134,7 +134,7 @@ const ProductPage = () => {
                   <p
                     className={`${
                       countInStock ? "text-green-500" : "text-red-500"
-                    } text-xl`}
+                    } text-lg tracking-wider`}
                   >
                     {countInStock ? "In Stock" : "Out of Stock"}
                   </p>
@@ -195,21 +195,21 @@ const ProductPage = () => {
         </div>
         <ProductSlider title={"Recommended"} products={recommendedProducts} />
         <div className="container mt-30">
-          <h1 className="heading-2 text-xl mb-8">Customer Reviews</h1>
+          <h1 className="heading-2 text-2xl mb-8">Customer Reviews</h1>
           <div className="w-full grid grid-cols-[1fr] md:grid-cols-[4fr_8fr] gap-4">
             <div className="shadow-card flex flex-col p-4 h-fit">
               {!productLoading ? (
-                <Rating rating={rating} size={16} className="mb-1" />
+                <Rating rating={rating} size={20} className="mb-1" />
               ) : (
                 <Skeleton classname="w-25 h-5 mb-2" />
               )}
               {!productLoading ? (
-                <h1 className="mb-4 font-bold text-sm">{rating} out of 5</h1>
+                <h1 className="mb-4 font-bold text-base">{rating} out of 5</h1>
               ) : (
                 <Skeleton classname="w-24 h-4 mb-8" />
               )}
               {!productLoading ? (
-                <p>{numReviews} total rating(s)</p>
+                <p className="body-text text-gray-700">{numReviews} total rating(s)</p>
               ) : (
                 <Skeleton classname="w-30 h-5 mb-2" />
               )}

@@ -64,7 +64,7 @@ const AccountLayout = () => {
                   onClick={() => navigate(p?.link)}
                 >
                   {p?.icon}
-                  <span className="capitalize hidden md:block">{p?.name}</span>
+                  <span className="capitalize hidden md:block text-base">{p?.name}</span>
                 </li>
               );
             })}
@@ -74,7 +74,7 @@ const AccountLayout = () => {
                 onClick={() => navigate("/dashboard")}
               >
                 <LayoutDashboard className="w-5 h-5" />
-                <span className="capitalize hidden md:block">dashboard</span>
+                <span className="capitalize hidden md:block text-base">dashboard</span>
               </li>
             )}
             <li
@@ -82,7 +82,7 @@ const AccountLayout = () => {
               onClick={() => dispatch(logout())}
             >
               <LogOut className="w-5 h-5" />
-              <span className="capitalize hidden md:block">logout</span>
+              <span className="capitalize hidden md:block text-base">logout</span>
             </li>
           </ul>
         </div>

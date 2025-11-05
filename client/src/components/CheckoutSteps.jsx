@@ -26,7 +26,7 @@ const CheckoutSteps = ({ step, checkoutSteps, setStep }) => {
             >
               {checkoutSteps[i].icon}
             </button>
-            <h1 className="heading-1 text-xs lg:text-sm text-gray-500 text-center">
+            <h1 className="heading-1 text-[10px] lg:text-xs text-gray-500 text-center">
               {checkoutSteps[i].name}
             </h1>
           </div>

@@ -31,7 +31,7 @@ const UpdateProfilePage = () => {
   };
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 text-red-500 text-sm mb-12.5">Privacy</h1>
+      <h1 className="heading-1 text-red-500 text-sm md:text-base mb-12.5">Privacy</h1>
       <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
         <FormInput
           type="text"

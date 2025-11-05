@@ -8,7 +8,7 @@ const Hero = () => {
     >
       <div className="container h-full grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] items-center">
         <div className="flex flex-col items-start">
-          <h1 className="heading-1 text-red-500 text-sm mb-3.5">Technology</h1>
+          <h1 className="heading-1 text-red-500 text-sm md:text-base mb-3.5">Technology</h1>
           <h1 className="heading-3 mb-7">for your convenience</h1>
           <p className="body-text text-gray-800 mb-7">
             Shop for electronic products with the latest technology,

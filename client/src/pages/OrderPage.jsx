@@ -86,7 +86,7 @@ const OrderPage = () => {
             </h1>
 
             {!loading ? (
-              <p className="body-text">
+              <p className="body-text text-gray-700">
                 {shippingAddress?.address}, {shippingAddress?.postalCode},
                 <br />
                 {shippingAddress?.city}, {shippingAddress?.country}
@@ -127,11 +127,11 @@ const OrderPage = () => {
               Order summary
             </h1>
             <div className="flex justify-between mb-4">
-              <h4 className="heading-2 text-sm">Subtotal</h4>
+              <h4 className="heading-2 text-sm md:text-base">Subtotal</h4>
               {!loading ? (
                 <div className="flex">
                   <span className="text-xs ">$</span>
-                  <p className="text-sm ml-0.5 font-medium">
+                  <p className="text-sm md:text-base ml-0.5 font-medium">
                     {addDecimals(
                       (totalAmount * 100) / (100 - discountPercentage)
                     )}
@@ -142,11 +142,11 @@ const OrderPage = () => {
               )}
             </div>
             <div className="flex justify-between mb-4 border-b border-dashed pb-4">
-              <h4 className="heading-2 text-sm">Discount</h4>
+              <h4 className="heading-2 text-sm md:text-base">Discount</h4>
               {!loading ? (
                 <div className="flex">
                   <span className="text-xs ">$</span>
-                  <p className="text-sm ml-0.5 font-medium">
+                  <p className="text-sm md:text-base ml-0.5 font-medium">
                     {Math.abs(
                       addDecimals(
                         totalAmount -
@@ -160,11 +160,11 @@ const OrderPage = () => {
               )}
             </div>
             <div className="flex justify-between mb-4">
-              <h4 className="heading-2 text-sm">Total</h4>
+              <h4 className="heading-2 text-sm md:text-base">Total</h4>
               {!loading ? (
                 <div className="flex">
                   <span className="text-xs ">$</span>
-                  <p className="text-sm ml-0.5 font-medium">{totalAmount}</p>
+                  <p className="text-sm md:text-base ml-0.5 font-medium">{totalAmount}</p>
                 </div>
               ) : (
                 <Skeleton classname="h-5 w-16" />

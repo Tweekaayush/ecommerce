@@ -28,7 +28,7 @@ const CartItem = (props) => {
         />
       </div>
       <div className="col-span-7 p-2 flex flex-col">
-        <h1 className="text-md font-bold">{brand}</h1>
+        <h1 className="text-base font-bold">{brand}</h1>
         <h1 className="text-sm ellipses">{name}</h1>
         <div className="flex w-fit bg-gray-100 mt-2 mb-1">
           <button

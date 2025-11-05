@@ -43,8 +43,8 @@ const BrowsePage = () => {
                   onClick={() => navigate(`/browse`)}
                   className={`${
                     activeCategory === ""
-                      ? "text-black border-black"
-                      : "border-gray-400 text-gray-500"
+                      ? "text-black border-gray-700"
+                      : "border-gray-400 text-gray-600"
                   } capitalize border-2 px-4 py-1 text-sm cursor-pointer`}
                 >
                   all
@@ -56,8 +56,8 @@ const BrowsePage = () => {
                       onClick={() => navigate(`/browse?category=${category}`)}
                       className={`${
                         activeCategory === category
-                          ? "text-black border-black"
-                          : "border-gray-400 text-gray-500"
+                          ? "text-black border-gray-700"
+                          : "border-gray-400 text-gray-600"
                       } capitalize border-2 px-4 py-1 text-sm cursor-pointer`}
                     >
                       {category}

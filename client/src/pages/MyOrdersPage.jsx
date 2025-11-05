@@ -19,7 +19,7 @@ const MyOrdersPage = () => {
   }, []);
   return (
     <div className="flex flex-col">
-      <h1 className="heading-1 text-red-500 text-sm mb-12.5">My Orders</h1>
+      <h1 className="heading-1 text-red-500 text-sm md:text-base mb-12.5">My Orders</h1>
       <div className="flex-1">
         <div className="grid grid-cols-[5fr_2fr_2fr_3fr] gap-4 mb-8 text-center pb-2 border-b border-gray-200">
           <span className="list-head">ID</span>

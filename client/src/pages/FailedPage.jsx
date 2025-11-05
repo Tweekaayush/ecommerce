@@ -16,11 +16,11 @@ const FailedPage = () => {
   return (
     <section className="min-h-screen flex justify-center items-center">
       <div className="container flex flex-col items-center justify-center h-full">
-        <CircleAlert className="text-red-600 w-15 h-15" />
-        <h1 className="text-red-600 text-5xl tracking-wider font-extrabold mb-2">
+        <CircleAlert className="text-red-600 h-20 w-20 md:h-30 md:w-30 mb-4" />
+        <h1 className="text-red-600 text-2xl md:text-4xl tracking-wider font-extrabold mb-4">
           Payment failed!
         </h1>
-        <p className="text-xl tracking-wider text-gray-700 mb-4">
+        <p className="body-text text-gray-700 mb-7">
           Something went wrong with your order's payment.
         </p>
         <button className="button-1" onClick={() => navigate("/browse")}>

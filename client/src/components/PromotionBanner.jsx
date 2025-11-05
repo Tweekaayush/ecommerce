@@ -9,11 +9,11 @@ const PromotionBanner = () => {
       <div className="container grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] items-center">
         <div className=""></div>
         <div className="flex flex-col items-start">
-          <div className="heading-1 text-red-500 text-sm mb-3.5">
+          <div className="heading-1 text-red-500 text-sm md:text-base mb-3.5">
             Minimalist Decor
           </div>
           <div className="heading-3 mb-7">that suits every style</div>
-          <p className="body-text mb-7">
+          <p className="body-text mb-7 text-gray-700">
             A variety of minimalist-style furniture products with modern and
             contemporary designs.
           </p>
